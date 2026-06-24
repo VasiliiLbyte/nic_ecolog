@@ -29,7 +29,8 @@ Element: `[data-chroma="true"]` at section bottom, height 176px.
 ## Content blocks
 
 - Two-column layout `[data-two-col]`: copy left, capability cards right
-- Capability cards: gradient dot icon, title, short description
+- Capability cards: **gradient squircle icon** (48×48, `border-radius: 14px`, brand mesh gradient) + **thin stroke SVG** (Lucide subset, 24×24, stroke 1.8px white) + title + short description
+- Icon source: `assets/icons/lab/` — homepage: `droplet`, `wind`, `mountain`, `trash-2`; lab page (`Ecolog-Lab.html`): + `audio-waveform`, `radiation`, `scan`, `flask-conical`, `layers`; inlined in v2, optimized via `npm run icons:optimize`
 - CTA: link to lab services / `#zayavka`
 - Mention: аккредитация, полный цикл отбора → протокол, сроки от 3 рабочих дней
 

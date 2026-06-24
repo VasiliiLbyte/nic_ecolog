@@ -35,6 +35,13 @@
   --blur-glass: blur(16px);
   --blur-overlay: blur(20px);
 
+  /* ---- Section rail (ghost — fixed right nav) ---- */
+  --rail-tick-w:         18px;
+  --rail-tick-w-active:  32px;
+  --rail-tick-h:         2px;
+  --grad-rail-fill:      linear-gradient(90deg, #139EA1, #1C6BA2);
+  --grad-rail-fill-dark: linear-gradient(90deg, #ADCF7A, #139EA1);
+
   /* ---- Motion ---- */
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
   --dur-fast: 0.25s;

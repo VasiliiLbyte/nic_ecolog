@@ -3,7 +3,28 @@
 **Audited:** `NIC Ecolog - Главная v2.dc.html`  
 **Checklist:** `design-system/CHECKLIST.md`  
 **Date:** 2026-06-24  
-**Status:** Documentation only — fixes are separate tasks.
+**Status:** Fixes implemented in v2 — see Resolution log below.
+
+---
+
+## Resolution log (2026-06-24)
+
+Implemented in `NIC Ecolog - Главная v2.dc.html` (source of truth) and browser-verified:
+
+| Was | Fix | Status |
+|-----|-----|--------|
+| Duplicate `id="kontakty"` (form column + footer) | Form column → `id="kontakty-info"`; footer is sole `#kontakty` (now matches rail `data-rail-dark`) | ✅ Closed |
+| Service modal had no dialog semantics | Added `role="dialog"`, `aria-modal="true"`, `aria-labelledby="eco-svc-title"`, `tabindex="-1"`; focus moves to close button on open, returns to trigger on close; Tab focus-trap | ✅ Closed |
+| No global `:focus-visible` | Added focus-ring rule (2px `#139EA1`, lime on dark) for links, buttons, `[data-svc]`, rail, inputs | ✅ Closed |
+| Mobile menu a11y | `aria-expanded`/`aria-controls` on burger; body scroll lock; focus-trap; focus to close on open; Escape closes | ✅ Closed |
+| Rail active state | `aria-current="true"` set on active rail item in `_updateRail` | ✅ Closed |
+| No skip-link | Added `К основному содержимому` skip-link as first focusable in `#eco-root` | ✅ Closed |
+| Form validation UX | `aria-live="assertive"` `role="alert"` error region, `aria-invalid` on bad fields, focus to first invalid, `inputmode="tel"`/`autocomplete` | ✅ Closed |
+| Privacy `href="#"` | Pointed to `/privacy` (real route to wire in production) | ✅ Closed |
+| ESG slogan / footer labels low contrast | Slogan `0.55→0.75`; footer eyebrows `0.45→0.62`; footer bottom `0.4/0.45→0.6` | ✅ Closed |
+| ESG donut non-brand hex | Re-mapped to brand ramp tints (lime → teal → ocean) preserving on-dark contrast | ✅ Closed |
+| Service cards inconsistent | Groups 02–04 now lead with brand gradient dot-badge like group 01 (all 22 unified) | ✅ Closed |
+| EN/RU divergence | v2 fully RU; `ui_kits/website/index.html` ESG slogans synced to RU. **Standalone** is a generated DC bundle — re-export from v2 rather than hand-editing the escaped blob | ⚠️ Standalone pending re-export |
 
 ---
 

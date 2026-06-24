@@ -32,10 +32,14 @@
 - Padding condenses 22px → 12px on scroll
 - Burger `[data-burger]` visible ≤1060px
 
-### Rail navigation (`[data-rail]`)
-- Fixed right, vertical section progress
-- Labels show on rail hover; active/past states via `.is-active` / `.is-past`
-- `[data-rail-dark]` sections toggle `.on-dark` on rail
+### Rail navigation (`[data-rail]`) — ghost rail
+- Fixed right (`right: 12px`), **no background** — thin ticks only in the gutter
+- Vertical hairline track (`[data-rail-track]`) at the edge, barely visible
+- Tick hierarchy: default 18×2px → past → active 32×2px + gradient fill scroll %
+- Labels **only** on rail `:hover` / `:focus-within` (never persistent — no content overlap)
+- `[data-rail-dark]` sections toggle `.on-dark` tick palette
+- Tokens: `--rail-tick-w`, `--rail-tick-w-active`, `--rail-tick-h` in `tokens/effects.css`
+- Specimen: `components/navigation/rail.card.html`
 - Hidden ≤1060px
 
 ### Preloader (`#eco-preloader`)

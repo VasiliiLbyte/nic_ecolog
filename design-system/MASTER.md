@@ -95,6 +95,7 @@ From `tokens/spacing.css`:
 - **Cards:** white, radius `--r-md` (20px) services / `--r-xl` (28px) projects, `--border`, `--shadow-card` on hover
 - **Buttons:** pill `--r-pill`, `--grad-brand`, `--shadow-btn`
 - **Header:** transparent over hero → glass (`--blur-glass`) + hairline on scroll
+- **Section rail:** ghost ticks at right edge, no capsule — labels on hover only; see `components/navigation/rail.card.html`
 - **Dark sections:** max 1–2 per page (lab, ESG, footer)
 - **Motifs (sparingly):** isolines, blueprint grid, ESG donut — never dominate
 - **Imagery placeholders:** `--placeholder` diagonal mint stripe until real photos
@@ -107,7 +108,8 @@ From `tokens/spacing.css`:
 Near-iconless by design. Allowed:
 - Gradient dot-badges (lime→teal) on service rows
 - Thin 1.8px stroke icons (burger, close, arrow `→`) in petrol
-- Lucide or similar thin-stroke set at 1.8px in petrol if needed — flag it
+- **Lab capability cards only:** gradient squircle 48×48 + white Lucide stroke 1.8px — source files in `assets/icons/lab/` (`droplet`, `wind`, `mountain`, `trash-2`); optimize with `npm run icons:optimize`
+- Lucide or similar thin-stroke set at 1.8px in petrol elsewhere if needed — flag it
 
 ---
 

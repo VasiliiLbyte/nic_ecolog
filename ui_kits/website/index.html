@@ -80,7 +80,7 @@
   .esg .ring{position:absolute;top:-28%;right:-12%;width:52vw;height:52vw;border-radius:50%;background:radial-gradient(circle,#ADCF7A 0%,rgba(173,207,122,0) 66%);filter:blur(95px);opacity:.3}
   .esg h2{font-weight:300;font-size:clamp(48px,6vw,90px);line-height:1.02}
   .esg .sub{margin-top:24px;max-width:520px;font-size:18px;line-height:1.65;color:rgba(255,255,255,.82)}
-  .esg .slog{margin-top:24px;font-family:var(--font-mono);font-size:12px;letter-spacing:.22em;color:rgba(255,255,255,.55)}
+  .esg .slog{margin-top:24px;font-family:var(--font-mono);font-size:12px;letter-spacing:.22em;color:rgba(255,255,255,.75)}
   /* CTA */
   .cta{padding:var(--section-pad-y) 0;background:var(--white)}
   .cta-card{display:flex;align-items:center;justify-content:space-between;gap:28px;flex-wrap:wrap;background:var(--grad-result);border-radius:var(--r-xl);padding:48px 52px;color:#fff}
@@ -89,9 +89,12 @@
   /* footer */
   footer{background:var(--navy);color:#fff;padding:80px 0 44px}
   .fgrid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:40px}
-  .fcol p.k{font-family:var(--font-mono);font-size:11px;letter-spacing:.18em;color:rgba(255,255,255,.45);margin-bottom:14px}
+  .fcol p.k{font-family:var(--font-mono);font-size:11px;letter-spacing:.18em;color:rgba(255,255,255,.62);margin-bottom:14px}
   .fcol a{display:block;font-size:14.5px;color:rgba(255,255,255,.8);text-decoration:none;padding:5px 0}
-  .fbar{display:flex;justify-content:space-between;align-items:center;margin-top:48px;padding-top:24px;border-top:1px solid rgba(255,255,255,.12);font-size:13px;color:rgba(255,255,255,.45)}
+  .fbar{display:flex;justify-content:space-between;align-items:center;margin-top:48px;padding-top:24px;border-top:1px solid rgba(255,255,255,.12);font-size:13px;color:rgba(255,255,255,.6)}
+  a:focus-visible,.btn:focus-visible{outline:2px solid var(--teal);outline-offset:2px;border-radius:8px}
+  .esg a:focus-visible,.cta-card a:focus-visible,footer a:focus-visible{outline-color:var(--lime)}
+  :focus:not(:focus-visible){outline:none}
 </style></head>
 <body>
   <header>
@@ -146,9 +149,9 @@
   </div></section>
 
   <section class="esg"><div class="ring"></div><div class="wrap">
-    <h2>ECO IS <span class="gtl">DATA</span></h2>
+    <h2>Экология — это <span class="gtl">данные</span></h2>
     <p class="sub">Экология — это измеримые величины, а не декларации. Каждое наше решение опирается на полевые данные, лабораторный анализ и воспроизводимые расчёты.</p>
-    <p class="slog">NO DATA — NO DECISION&nbsp;&nbsp;·&nbsp;&nbsp;SCIENCE FOR NATURE</p>
+    <p class="slog">НЕТ ДАННЫХ — НЕТ РЕШЕНИЯ&nbsp;&nbsp;·&nbsp;&nbsp;НАУКА ДЛЯ ПРИРОДЫ</p>
     <div style="margin-top:34px"><a class="btn btn-light" href="#">Услуги ESG <span>→</span></a></div>
   </div></section>
 
@@ -165,6 +168,6 @@
       <div class="fcol"><p class="k">УСЛУГИ</p><a href="#">Проектирование и документация</a><a href="#">Сопровождение предприятий</a><a href="#">Изыскания и исследования</a><a href="#">ESG и устойчивое развитие</a></div>
       <div class="fcol"><p class="k">КОНТАКТЫ</p><a href="tel:+78122400000" style="color:#fff;font-weight:500">+7 (812) 240-00-00</a><a href="mailto:info@nic-ecolog.ru">info@nic-ecolog.ru</a><a href="#">Санкт-Петербург</a></div>
     </div>
-    <div class="fbar"><span>© 2026 НИЦ «Эколог»</span><span class="mono" style="letter-spacing:.16em">SCIENCE FOR NATURE</span><span>nic-ecolog.ru</span></div>
+    <div class="fbar"><span>© 2026 НИЦ «Эколог»</span><span class="mono" style="letter-spacing:.16em">НАУКА ДЛЯ ПРИРОДЫ</span><span>nic-ecolog.ru</span></div>
   </div></footer>
 </body></html>

@@ -1,0 +1,60 @@
+<!-- @dsCard group="Components" viewport="960x520" subtitle="Ghost rail — ticks only, labels on hover" name="Section rail navigation" -->
+<!DOCTYPE html><html lang="ru"><head><meta charset="utf-8"><link rel="stylesheet" href="../../styles.css">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+  body{margin:0;font-family:var(--font-body);display:grid;grid-template-columns:1fr 1fr;min-height:100vh}
+  .panel{position:relative;padding:48px 48px 48px 40px;display:flex;align-items:center;justify-content:flex-end}
+  .panel--light{background:var(--bg);background-image:repeating-linear-gradient(0deg,transparent,transparent 39px,rgba(11,92,96,.06) 39px,rgba(11,92,96,.06) 40px),repeating-linear-gradient(90deg,transparent,transparent 39px,rgba(11,92,96,.06) 39px,rgba(11,92,96,.06) 40px)}
+  .panel--dark{background:var(--grad-lab)}
+  .eye{position:absolute;top:24px;left:32px;font-family:var(--font-mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--teal-deep)}
+  .panel--dark .eye{color:var(--lime)}
+  .hint{position:absolute;bottom:24px;left:32px;font-size:12px;color:var(--slate-4);max-width:280px;line-height:1.5}
+  .panel--dark .hint{color:rgba(255,255,255,.45)}
+  [data-rail]{position:relative;right:auto;top:auto;transform:none;pointer-events:auto}
+  [data-rail-shell]{position:relative;display:flex;flex-direction:column;gap:14px;align-items:flex-end;padding:0;background:transparent}
+  [data-rail-track]{position:absolute;top:8px;bottom:8px;right:0;width:1px;background:rgba(11,92,96,.14);pointer-events:none}
+  [data-rail].on-dark [data-rail-track]{background:rgba(255,255,255,.16)}
+  [data-rail-item]{display:flex;align-items:center;justify-content:flex-end;gap:0;text-decoration:none;cursor:pointer;padding:2px 0;position:relative;z-index:1}
+  [data-rail-label]{position:absolute;right:calc(100% + 10px);font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--teal-deep);white-space:nowrap;line-height:1;opacity:0;transform:translateX(6px);transition:opacity .3s ease,transform .3s ease;pointer-events:none}
+  [data-rail]:hover [data-rail-label],[data-rail]:focus-within [data-rail-label]{opacity:.72;transform:translateX(0);pointer-events:auto}
+  [data-rail].on-dark [data-rail-label]{color:#EAF3F2}
+  [data-rail-tick]{position:relative;display:block;width:var(--rail-tick-w);height:var(--rail-tick-h);border-radius:2px;background:rgba(11,92,96,.32);overflow:hidden;flex:0 0 auto}
+  [data-rail-fill]{position:absolute;left:0;top:0;height:100%;width:0%;border-radius:2px;background:var(--grad-rail-fill)}
+  [data-rail-item].is-active [data-rail-tick]{width:var(--rail-tick-w-active);background:rgba(11,92,96,.22)}
+  [data-rail-item].is-active [data-rail-fill]{width:62%}
+  [data-rail-item].is-past [data-rail-tick]{background:rgba(11,92,96,.5)}
+  [data-rail-item].is-past [data-rail-fill]{width:100%;background:rgba(11,92,96,.5)}
+  [data-rail].on-dark [data-rail-tick]{background:rgba(255,255,255,.38);filter:drop-shadow(0 0 1px rgba(0,0,0,.15))}
+  [data-rail].on-dark [data-rail-fill]{background:var(--grad-rail-fill-dark)}
+  [data-rail].on-dark [data-rail-item].is-active [data-rail-tick]{background:rgba(255,255,255,.25)}
+  [data-rail].on-dark [data-rail-item].is-past [data-rail-tick]{background:rgba(255,255,255,.55)}
+  [data-rail].on-dark [data-rail-item].is-past [data-rail-fill]{background:rgba(255,255,255,.55)}
+</style></head>
+<body>
+  <div class="panel panel--light">
+    <span class="eye">Light · hover для подписей</span>
+    <p class="hint">В покое — только тики 18×2px. Наведите на рельс.</p>
+    <nav data-rail aria-label="Рельс — светлая тема">
+      <div data-rail-shell>
+        <div data-rail-track aria-hidden="true"></div>
+        <a data-rail-item class="is-past" href="#"><span data-rail-label>Главная</span><span data-rail-tick><span data-rail-fill></span></span></a>
+        <a data-rail-item class="is-active" href="#"><span data-rail-label>О центре</span><span data-rail-tick><span data-rail-fill></span></span></a>
+        <a data-rail-item href="#"><span data-rail-label>Лаборатория</span><span data-rail-tick><span data-rail-fill></span></span></a>
+        <a data-rail-item href="#"><span data-rail-label>Услуги</span><span data-rail-tick><span data-rail-fill></span></span></a>
+      </div>
+    </nav>
+  </div>
+  <div class="panel panel--dark">
+    <span class="eye">Dark · active «Лаборатория»</span>
+    <p class="hint">Без фона и капсулы — не перекрывает контент.</p>
+    <nav data-rail class="on-dark" aria-label="Рельс — тёмная тема">
+      <div data-rail-shell>
+        <div data-rail-track aria-hidden="true"></div>
+        <a data-rail-item class="is-past" href="#"><span data-rail-label>Услуги</span><span data-rail-tick><span data-rail-fill></span></span></a>
+        <a data-rail-item class="is-active" href="#"><span data-rail-label>Лаборатория</span><span data-rail-tick><span data-rail-fill></span></span></a>
+        <a data-rail-item href="#"><span data-rail-label>ESG</span><span data-rail-tick><span data-rail-fill></span></span></a>
+        <a data-rail-item href="#"><span data-rail-label>Контакты</span><span data-rail-tick><span data-rail-fill></span></span></a>
+      </div>
+    </nav>
+  </div>
+</body></html>

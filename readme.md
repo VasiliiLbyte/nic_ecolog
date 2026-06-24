@@ -59,7 +59,8 @@ icon sets. Where marks appear: small **gradient dot-badges** (radial lime→teal
 1.8px stroke line-icons (burger, close, arrow `→`) in petrol. No emoji, no filled icon set. The one true
 brand symbol is the **fingerprint** (`assets/fingerprint-*.png`) — uniqueness + independent verification,
 echoing topographic isolines. If a UI needs a broader icon set, use a thin-stroke CDN set (e.g. Lucide,
-1.8px) in petrol — and flag it.
+1.8px) in petrol — and flag it. **Lab section exception:** four capability icons in `assets/icons/lab/`
+(Lucide: droplet, wind, mountain, trash-2) on gradient squircles — see `design-system/pages/laboratory.md`.
 
 ## INDEX
 - `styles.css` — entry point (link this). `@import`s everything below.
@@ -71,7 +72,7 @@ echoing topographic isolines. If a UI needs a broader icon set, use a thin-strok
 - `ui_kits/website/` — НИЦ «Эколог» website screens (homepage, service detail).
 - `design-system/` — MASTER, CHECKLIST, STACK, PROMPTS, page overrides.
 - `.cursor/skills/ui-ux-pro-max/` — UX intelligence layer (patterns, a11y; brand wins).
-- `assets/` — fingerprint logo (color / white).
+- `assets/` — fingerprint logo (color / white); `assets/icons/lab/` — Lucide lab capability SVG subset
 - `SKILL.md` — portable skill manifest.
 
 ## CAVEATS

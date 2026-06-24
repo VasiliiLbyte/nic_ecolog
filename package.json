@@ -1,0 +1,11 @@
+{
+  "name": "nic-ecolog",
+  "private": true,
+  "description": "НИЦ «Эколог» — design system and static prototypes",
+  "scripts": {
+    "icons:optimize": "svgo -f assets/icons/lab -o assets/icons/lab --config svgo.config.mjs"
+  },
+  "devDependencies": {
+    "svgo": "^3.3.2"
+  }
+}
