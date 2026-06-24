@@ -21,7 +21,7 @@ Read `design-system/MASTER.md` first, then `readme.md` and explore other files.
 - **Components:** `components/{buttons,badges,cards,section,forms}` — Button, Eyebrow, MetaPill, ServiceCard, ProjectCard, SectionHeader, DarkSection, ProcessSteps, RequestForm/Field. Each has `.jsx` + `.d.ts` + `.prompt.md`
 - **UI kit:** `ui_kits/website/index.html` (homepage) + `service.html` (service-detail)
 - **Interactive master:** `NIC Ecolog - Главная v2.dc.html` (22 services, rail nav, chromatogram, modals, motion)
-- **Process docs:** `design-system/`, `docs/DESIGN-WORKFLOW.md`
+- **Process docs:** `design-system/`, `design-system/DESIGN-WORKFLOW.md`
 
 If creating visual artifacts (slides, mocks, throwaway prototypes), copy assets out and create static HTML files for the user to view. If working on production code, copy assets and follow `design-system/STACK.md`.
 

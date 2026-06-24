@@ -3,7 +3,9 @@
   "private": true,
   "description": "НИЦ «Эколог» — design system and static prototypes",
   "scripts": {
-    "icons:optimize": "svgo -f assets/icons/lab -o assets/icons/lab --config svgo.config.mjs"
+    "icons:optimize": "svgo -f assets/icons/lab -o assets/icons/lab --config svgo.config.mjs",
+    "pages:build": "node scripts/build-pages.mjs",
+    "pages:preview": "npx --yes serve docs -p 8766"
   },
   "devDependencies": {
     "svgo": "^3.3.2"

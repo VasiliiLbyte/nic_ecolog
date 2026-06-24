@@ -44,9 +44,11 @@ input::placeholder,textarea::placeholder{color:#8AA0A0}
 [data-rail-track]{position:absolute;top:8px;bottom:8px;right:0;width:1px;background:rgba(11,92,96,0.14);pointer-events:none}
 [data-rail].on-dark [data-rail-track]{background:rgba(255,255,255,0.16)}
 [data-rail-item]{display:flex;align-items:center;justify-content:flex-end;gap:0;text-decoration:none;cursor:pointer;padding:2px 0;position:relative;z-index:1;pointer-events:auto}
-[data-rail-label]{position:absolute;right:calc(100% + 10px);font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--teal-deep);white-space:nowrap;line-height:1;opacity:0;transform:translateX(6px);transition:opacity 0.3s ease,transform 0.3s ease;pointer-events:none}
+[data-rail-label]{position:absolute;right:calc(100% + 8px);font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--teal-deep);white-space:nowrap;line-height:1;opacity:0;transform:translateX(6px);transition:opacity 0.3s ease,transform 0.3s ease;pointer-events:none}
+[data-rail-item].is-active [data-rail-label]{opacity:0.46;transform:translateX(0);font-size:9px;letter-spacing:0.12em}
 [data-rail]:hover [data-rail-label],[data-rail]:focus-within [data-rail-label]{opacity:0.72;transform:translateX(0);pointer-events:auto}
 [data-rail].on-dark [data-rail-label]{color:#EAF3F2}
+[data-rail].on-dark [data-rail-item].is-active [data-rail-label]{opacity:0.52;text-shadow:0 0 8px rgba(0,0,0,0.35)}
 [data-rail-tick]{position:relative;display:block;width:var(--rail-tick-w);height:var(--rail-tick-h);border-radius:2px;background:rgba(11,92,96,0.32);overflow:hidden;flex:0 0 auto;transition:width 0.35s var(--ease-out),background 0.3s ease}
 [data-rail-fill]{position:absolute;left:0;top:0;height:100%;width:0%;border-radius:2px;background:var(--grad-rail-fill);transition:width 0.18s linear}
 [data-rail-item].is-active [data-rail-tick]{width:var(--rail-tick-w-active);background:rgba(11,92,96,0.22)}
@@ -110,7 +112,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
     </a>
     <nav data-nav="true" aria-label="Основная навигация" style="display:flex;align-items:center;gap:30px">
       <a href="#uslugi" style="font-size:14.5px;font-weight:400;color:#2C4346;text-decoration:none;transition:color 0.2s" style-hover="color:#139EA1">Услуги</a>
-      <a href="#laboratoriya" style="font-size:14.5px;font-weight:400;color:#2C4346;text-decoration:none;transition:color 0.2s" style-hover="color:#139EA1">Лаборатория</a>
+      <a href="lab.html" style="font-size:14.5px;font-weight:400;color:#2C4346;text-decoration:none;transition:color 0.2s" style-hover="color:#139EA1">Лаборатория</a>
       <a href="#proekty" style="font-size:14.5px;font-weight:400;color:#2C4346;text-decoration:none;transition:color 0.2s" style-hover="color:#139EA1">Проекты</a>
       <a href="#o-centre" style="font-size:14.5px;font-weight:400;color:#2C4346;text-decoration:none;transition:color 0.2s" style-hover="color:#139EA1">О центре</a>
       <a href="#esg" style="font-size:14.5px;font-weight:400;color:#2C4346;text-decoration:none;transition:color 0.2s" style-hover="color:#139EA1">ESG</a>
@@ -149,8 +151,16 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
         <span data-rail-label="true">Проекты</span>
         <span data-rail-tick="true"><span data-rail-fill="true"></span></span>
       </a>
+      <a data-rail-item="true" data-rail-target="protsess" href="#protsess" aria-label="Перейти к разделу: Процесс">
+        <span data-rail-label="true">Процесс</span>
+        <span data-rail-tick="true"><span data-rail-fill="true"></span></span>
+      </a>
       <a data-rail-item="true" data-rail-target="esg" data-rail-dark="1" href="#esg" aria-label="Перейти к разделу: ESG">
         <span data-rail-label="true">ESG</span>
+        <span data-rail-tick="true"><span data-rail-fill="true"></span></span>
+      </a>
+      <a data-rail-item="true" data-rail-target="klienty" href="#klienty" aria-label="Перейти к разделу: Клиенты">
+        <span data-rail-label="true">Клиенты</span>
         <span data-rail-tick="true"><span data-rail-fill="true"></span></span>
       </a>
       <a data-rail-item="true" data-rail-target="zayavka" href="#zayavka" aria-label="Перейти к разделу: Заявка">
@@ -295,6 +305,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
               <span style="display:inline-flex;align-items:center;background:rgba(173,207,122,0.18);border:1px solid rgba(173,207,122,0.5);border-radius:999px;padding:10px 20px;font-size:14px;font-weight:500;color:#D9EBB8">Согласование</span>
             </div>
             <p data-rv="true" style="margin:34px 0 0;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.1em;color:rgba(255,255,255,0.55)">ЛАБОРАТОРИЯ ВНЕСЕНА В РЕЕСТР АККРЕДИТОВАННЫХ ЛИЦ</p>
+            <a data-rv="true" href="lab.html" style="display:inline-flex;align-items:center;gap:8px;margin-top:28px;font-size:15px;font-weight:500;color:#ADCF7A;text-decoration:none;transition:opacity 0.2s" style-hover="opacity:0.85">Страница лаборатории <span aria-hidden="true">→</span></a>
           </div>
           <div data-cols4="true" style="display:grid;grid-template-columns:repeat(2,1fr);gap:18px">
             <div data-rv="true" style="background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.16);border-radius:22px;padding:30px 28px;transition:background 0.3s ease" style-hover="background:rgba(255,255,255,0.12)">
@@ -536,7 +547,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
     </section>
 
     <!-- КАК МЫ РАБОТАЕМ -->
-    <section data-screen-label="Как мы работаем" data-sec="true" style="padding:130px 48px;background:#FFFFFF">
+    <section id="protsess" data-screen-label="Как мы работаем" data-sec="true" style="padding:130px 48px;background:#FFFFFF;scroll-margin-top:80px">
       <div style="max-width:1280px;margin:0 auto">
         <p data-rv="true" style="margin:0 0 18px;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:500;letter-spacing:0.22em;color:#139EA1;text-transform:uppercase">Процесс</p>
         <h2 data-rv="true" style="margin:0 0 72px;font-weight:300;font-size:clamp(34px,3.4vw,52px);line-height:1.12;letter-spacing:-0.01em;color:#13282B;max-width:700px">Как мы работаем</h2>
@@ -606,7 +617,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
     </section>
 
     <!-- КЛИЕНТЫ И ОТЗЫВЫ -->
-    <section data-screen-label="Клиенты и отзывы" data-sec="true" style="padding:130px 48px;background:#FFFFFF">
+    <section id="klienty" data-screen-label="Клиенты и отзывы" data-sec="true" style="padding:130px 48px;background:#FFFFFF;scroll-margin-top:80px">
       <div style="max-width:1280px;margin:0 auto">
         <p data-rv="true" style="margin:0 0 18px;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:500;letter-spacing:0.22em;color:#139EA1;text-transform:uppercase">Клиенты</p>
         <h2 data-rv="true" style="margin:0 0 56px;font-weight:300;font-size:clamp(34px,3.4vw,52px);line-height:1.12;letter-spacing:-0.01em;color:#13282B;max-width:760px">Нам доверяют объекты, где цена ошибки высока</h2>
@@ -727,7 +738,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
         <nav aria-label="Центр" style="display:flex;flex-direction:column;gap:12px">
           <p style="margin:0 0 6px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.18em;color:rgba(255,255,255,0.62)">ЦЕНТР</p>
           <a href="#o-centre" style="font-size:14.5px;color:rgba(255,255,255,0.8);text-decoration:none;transition:color 0.2s" style-hover="color:#ADCF7A">О центре</a>
-          <a href="#laboratoriya" style="font-size:14.5px;color:rgba(255,255,255,0.8);text-decoration:none;transition:color 0.2s" style-hover="color:#ADCF7A">Лаборатория «Аналитик Лаб»</a>
+          <a href="lab.html" style="font-size:14.5px;color:rgba(255,255,255,0.8);text-decoration:none;transition:color 0.2s" style-hover="color:#ADCF7A">Лаборатория «Аналитик Лаб»</a>
           <a href="#proekty" style="font-size:14.5px;color:rgba(255,255,255,0.8);text-decoration:none;transition:color 0.2s" style-hover="color:#ADCF7A">Проекты</a>
           <a href="#esg" style="font-size:14.5px;color:rgba(255,255,255,0.8);text-decoration:none;transition:color 0.2s" style-hover="color:#ADCF7A">ESG</a>
         </nav>
@@ -1029,18 +1040,29 @@ class Component extends DCLogic {
     }));
     this._updateRail = () => {
       if (!rail || !railData.length) return;
-      const ref = window.scrollY + window.innerHeight * 0.4;
+      const scrollY = window.scrollY;
+      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+      const ref = scrollY + window.innerHeight * 0.4;
       const tops = railData.map((d) => d.sec ? d.sec.getBoundingClientRect().top + window.scrollY : Infinity);
       let active = 0;
       for (let i = 0; i < railData.length; i++) {
         if (tops[i] !== Infinity && ref >= tops[i] - 1) active = i;
       }
+      const atBottom = scrollY >= maxScroll - 1;
+      if (atBottom) active = railData.length - 1;
       railData.forEach((d, i) => {
         let p = 0;
         if (i < active) p = 1;
-        else if (i === active && d.sec) {
-          const h = d.sec.offsetHeight || 1;
-          p = Math.max(0, Math.min(1, (ref - tops[i]) / h));
+        else if (i === active && tops[i] !== Infinity) {
+          if (atBottom && i === railData.length - 1) {
+            p = 1;
+          } else {
+            const start = tops[i];
+            const range = i < railData.length - 1
+              ? tops[i + 1] - start
+              : Math.max(1, maxScroll - start);
+            p = Math.max(0, Math.min(1, (scrollY - start) / range));
+          }
         }
         if (d.fill) d.fill.style.width = (p * 100).toFixed(1) + '%';
         d.el.classList.toggle('is-active', i === active);

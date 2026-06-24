@@ -17,9 +17,9 @@
 | 4 | Лаборатория | `#laboratoriya` | See `laboratory.md` |
 | 5 | Услуги | `#uslugi` | 22 cards, 4 groups — see `service.md` |
 | 6 | Проекты | `#proekty` | Portfolio grid `[data-proj]` |
-| 7 | Как мы работаем | — | Process steps `[data-steps]` |
+| 7 | Как мы работаем | `#protsess` | Process steps `[data-steps]` |
 | 8 | ESG | `#esg` | Dark gradient, data narrative |
-| 9 | Клиенты и отзывы | — | Logo wall `[data-logo-wall]` |
+| 9 | Клиенты и отзывы | `#klienty` | Logo wall `[data-logo-wall]` |
 | 10 | Форма заявки | `#zayavka` | `#eco-form` |
 | 11 | Подвал | `#kontakty` | Dark footer |
 
@@ -34,9 +34,10 @@
 
 ### Rail navigation (`[data-rail]`) — ghost rail
 - Fixed right (`right: 12px`), **no background** — thin ticks only in the gutter
+- **10 section ticks**, mirrors page order (incl. `#protsess`, `#klienty`)
 - Vertical hairline track (`[data-rail-track]`) at the edge, barely visible
 - Tick hierarchy: default 18×2px → past → active 32×2px + gradient fill scroll %
-- Labels **only** on rail `:hover` / `:focus-within` (never persistent — no content overlap)
+- Labels: active section faint always (`opacity ~0.46`); all labels on rail `:hover` / `:focus-within`
 - `[data-rail-dark]` sections toggle `.on-dark` tick palette
 - Tokens: `--rail-tick-w`, `--rail-tick-w-active`, `--rail-tick-h` in `tokens/effects.css`
 - Specimen: `components/navigation/rail.card.html`

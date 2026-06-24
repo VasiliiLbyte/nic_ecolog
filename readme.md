@@ -13,7 +13,7 @@ environmental engineering, consulting and laboratory center in St. Petersburg. T
 ## Sources
 - `NIC Ecolog - Главная v2.dc.html` — the approved homepage (master implementation, source of truth for the look).
 - `design-system/MASTER.md` — agent-facing design system (MASTER + `pages/` overrides).
-- `docs/DESIGN-WORKFLOW.md` — team workflow (UI UX Pro Max + brand hierarchy).
+- `design-system/DESIGN-WORKFLOW.md` — team workflow (UI UX Pro Max + brand hierarchy).
 - `НИЦ Эколог - Главная (standalone).html` — self-contained bundle the client approved.
 - `uploads/brandbook.pdf` (21 pp, image-only) — brand book: palette stops, logo, Stölzl type, isoline motif.
 - `uploads/Промпт_Claude_Design_НИЦ_Эколог.md` — original brief (structure, tone, palette).
@@ -74,6 +74,32 @@ echoing topographic isolines. If a UI needs a broader icon set, use a thin-strok
 - `.cursor/skills/ui-ux-pro-max/` — UX intelligence layer (patterns, a11y; brand wins).
 - `assets/` — fingerprint logo (color / white); `assets/icons/lab/` — Lucide lab capability SVG subset
 - `SKILL.md` — portable skill manifest.
+
+## Demo (GitHub Pages)
+
+Публичное демо для заказчика:
+
+**URL:** https://vasiliilbyte.github.io/nic_ecolog/
+
+| Страница | Путь |
+|----------|------|
+| Главная | `/` |
+| Лаборатория | `/lab.html` |
+
+### Локальная сборка
+
+```bash
+npm run pages:build
+npm run pages:preview
+```
+
+Превью: http://127.0.0.1:8766/
+
+### Деплой
+
+Push в `main` запускает [`.github/workflows/deploy-pages.yml`](.github/workflows/deploy-pages.yml) — артефакт собирается в `docs/` и публикуется на GitHub Pages.
+
+**Первый раз (один раз в GitHub):** Settings → Pages → Build and deployment → **Source: GitHub Actions**.
 
 ## CAVEATS
 - **Stölzl is the active display face** (brandbook face; full Cyrillic confirmed across Book/Regular/
