@@ -1,0 +1,170 @@
+<!-- @dsCard group="Website" viewport="1280x820" subtitle="НИЦ «Эколог» homepage — hero, services, portfolio, ESG, CTA" name="Homepage" -->
+<!-- @startingPoint section="Website" subtitle="НИЦ «Эколог» homepage recreation" viewport="1280x820" -->
+<!DOCTYPE html>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>НИЦ «Эколог» — главная</title>
+<link rel="stylesheet" href="../../styles.css">
+<style>
+  *{box-sizing:border-box}
+  body{margin:0;font-family:var(--font-body);background:var(--bg);color:var(--ink-2);font-size:16px;line-height:1.6}
+  h1,h2,h3,h4,p{margin:0}
+  ::selection{background:var(--selection)}
+  .wrap{max-width:var(--container);margin:0 auto;padding:0 var(--section-pad-x)}
+  .mono{font-family:var(--font-mono)}
+  .eye{font-family:var(--font-mono);font-size:var(--fs-label);font-weight:500;letter-spacing:var(--tracking-label);text-transform:uppercase;color:var(--teal-deep)}
+  .gt{background:var(--grad-text);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .gtl{background:var(--grad-text-l);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .btn{display:inline-flex;align-items:center;gap:10px;border-radius:var(--r-pill);font-size:16px;font-weight:500;line-height:1;text-decoration:none;border:1px solid transparent;cursor:pointer;padding:17px 30px;transition:transform .25s var(--ease-out),box-shadow .25s var(--ease-out)}
+  .btn:hover{transform:translateY(-2px)}
+  .btn-grad{color:#fff;background:var(--grad-brand);box-shadow:0 12px 28px -10px rgba(19,158,161,.55)}
+  .btn-ghost{color:var(--teal-deep);background:transparent;border-color:var(--line-strong)}
+  .btn-light{color:#fff;background:rgba(255,255,255,.10);border-color:rgba(255,255,255,.32)}
+  /* header */
+  header{position:absolute;top:0;left:0;right:0;z-index:20;display:flex;align-items:center;justify-content:space-between;gap:32px;padding:22px var(--section-pad-x)}
+  .logo{display:flex;align-items:center;gap:14px;text-decoration:none}
+  .logo img{height:42px;width:auto;display:block}
+  .logo b{font-size:21px;font-weight:600;color:var(--teal-deep);line-height:1.1}
+  .logo span{font-size:10px;color:var(--slate-3);display:block}
+  nav{display:flex;align-items:center;gap:30px}
+  nav a{font-size:14.5px;color:var(--slate-1);text-decoration:none}
+  nav a:hover{color:var(--teal)}
+  .hcta{display:flex;align-items:center;gap:24px}
+  .phone{font-size:15px;font-weight:500;color:var(--teal-deep);text-decoration:none}
+  /* hero */
+  .hero{position:relative;min-height:92vh;display:flex;flex-direction:column;justify-content:center;overflow:hidden;background:var(--bg);padding:170px var(--section-pad-x) 64px}
+  .mesh{position:absolute;inset:0;pointer-events:none}
+  .blob{position:absolute;border-radius:50%;filter:blur(80px)}
+  .b1{top:-22%;left:-14%;width:56vw;height:56vw;background:radial-gradient(circle,#ADCF7A 0%,rgba(173,207,122,0) 68%);opacity:.62}
+  .b2{top:-30%;right:-10%;width:62vw;height:62vw;background:radial-gradient(circle,#1C6BA2 0%,rgba(28,107,162,0) 68%);opacity:.5}
+  .b3{top:8%;left:32%;width:44vw;height:44vw;background:radial-gradient(circle,#139EA1 0%,rgba(19,158,161,0) 66%);opacity:.42}
+  .iso{position:absolute;inset:0;background:repeating-radial-gradient(ellipse 90% 120% at 78% -10%,rgba(11,92,96,.05) 0 1px,transparent 1px 42px)}
+  .fade{position:absolute;left:0;right:0;bottom:0;height:34%;background:var(--grad-hero-fade)}
+  .hero-in{position:relative;max-width:1280px;margin:0 auto;width:100%}
+  h1.hero-t{font-weight:300;font-size:var(--fs-hero);line-height:var(--lh-tight);letter-spacing:var(--tracking-display);color:var(--ink);max-width:1180px;text-wrap:balance;margin-top:28px}
+  .lead{margin-top:30px;font-size:18px;color:var(--slate-2);max-width:620px;line-height:1.65}
+  .cta-row{display:flex;align-items:center;gap:18px;margin-top:42px;flex-wrap:wrap}
+  .trust{margin-top:56px;font-family:var(--font-mono);font-size:12.5px;color:var(--slate-3);letter-spacing:.04em}
+  /* section */
+  section.sec{padding:var(--section-pad-y) 0;background:var(--white)}
+  .sec-head h2{font-weight:300;font-size:var(--fs-h2);line-height:var(--lh-display);letter-spacing:-.01em;color:var(--ink);max-width:760px;margin-top:20px}
+  .sec-desc{display:flex;justify-content:flex-end;margin-top:24px}
+  .sec-desc p{max-width:460px;font-size:18px;line-height:1.65;color:var(--slate-2)}
+  /* numbers */
+  .nums{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:64px;border-top:1px solid var(--line)}
+  .num{padding:30px 24px 0;border-right:1px solid var(--line)}
+  .num:last-child{border-right:0}
+  .num .v{font-weight:300;font-size:56px;color:var(--teal-deep);line-height:1}
+  .num .l{margin-top:12px;font-size:14.5px;color:var(--slate-3)}
+  /* services */
+  .grp{display:flex;align-items:baseline;gap:18px;margin:54px 0 22px;border-top:1px solid var(--line);padding-top:22px}
+  .grp .n{font-family:var(--font-mono);font-size:13px;color:var(--teal)}
+  .grp h3{font-size:24px;font-weight:400;color:var(--ink)}
+  .grp .meta{margin-left:auto;font-size:14px;color:var(--slate-4);max-width:240px;text-align:right}
+  .svc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
+  .svc{border:1px solid var(--line);border-radius:var(--r-md);padding:26px 26px 22px;background:var(--white);transition:border-color .25s,box-shadow .25s,transform .25s var(--ease-out)}
+  .svc:hover{border-color:rgba(19,158,161,.35);box-shadow:var(--shadow-card);transform:translateY(-2px)}
+  .svc .h{display:flex;align-items:center;gap:12px}
+  .dot{width:10px;height:10px;border-radius:50%;flex:0 0 auto}
+  .svc h4{font-size:18px;font-weight:500;color:var(--ink)}
+  .svc p{margin-top:10px;font-size:14.5px;color:var(--slate-3);line-height:1.5}
+  /* portfolio */
+  .proj-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:48px}
+  .proj{border:1px solid var(--line);border-radius:var(--r-xl);overflow:hidden;background:var(--white)}
+  .proj .img{height:230px;background:var(--placeholder)}
+  .proj .body{padding:30px 34px 34px}
+  .proj .tag{font-family:var(--font-mono);font-size:11px;letter-spacing:.18em;color:var(--teal);text-transform:uppercase}
+  .proj h3{margin-top:10px;font-size:27px;font-weight:400;color:var(--ink)}
+  .proj p{margin-top:10px;font-size:15px;color:var(--slate-3);line-height:1.65}
+  /* ESG dark */
+  .esg{position:relative;padding:var(--section-pad-y-lg) 0;background:var(--grad-esg);color:#fff;overflow:hidden}
+  .esg .ring{position:absolute;top:-28%;right:-12%;width:52vw;height:52vw;border-radius:50%;background:radial-gradient(circle,#ADCF7A 0%,rgba(173,207,122,0) 66%);filter:blur(95px);opacity:.3}
+  .esg h2{font-weight:300;font-size:clamp(48px,6vw,90px);line-height:1.02}
+  .esg .sub{margin-top:24px;max-width:520px;font-size:18px;line-height:1.65;color:rgba(255,255,255,.82)}
+  .esg .slog{margin-top:24px;font-family:var(--font-mono);font-size:12px;letter-spacing:.22em;color:rgba(255,255,255,.55)}
+  /* CTA */
+  .cta{padding:var(--section-pad-y) 0;background:var(--white)}
+  .cta-card{display:flex;align-items:center;justify-content:space-between;gap:28px;flex-wrap:wrap;background:var(--grad-result);border-radius:var(--r-xl);padding:48px 52px;color:#fff}
+  .cta-card h3{font-weight:300;font-size:clamp(26px,2.6vw,38px)}
+  .cta-card p{margin-top:8px;font-size:15.5px;color:rgba(255,255,255,.85)}
+  /* footer */
+  footer{background:var(--navy);color:#fff;padding:80px 0 44px}
+  .fgrid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:40px}
+  .fcol p.k{font-family:var(--font-mono);font-size:11px;letter-spacing:.18em;color:rgba(255,255,255,.45);margin-bottom:14px}
+  .fcol a{display:block;font-size:14.5px;color:rgba(255,255,255,.8);text-decoration:none;padding:5px 0}
+  .fbar{display:flex;justify-content:space-between;align-items:center;margin-top:48px;padding-top:24px;border-top:1px solid rgba(255,255,255,.12);font-size:13px;color:rgba(255,255,255,.45)}
+</style></head>
+<body>
+  <header>
+    <a class="logo" href="#"><img src="../../assets/fingerprint-color.png" alt="Эколог"><span><b>Эколог</b><span>независимый исследовательский центр</span></span></a>
+    <nav><a href="#">Услуги</a><a href="#">Лаборатория</a><a href="#">Проекты</a><a href="#">О центре</a><a href="#">ESG</a><a href="#">Контакты</a></nav>
+    <div class="hcta"><a class="phone" href="tel:+78122400000">+7 (812) 240-00-00</a><a class="btn btn-grad" style="padding:12px 24px;font-size:14px" href="#">Заказать исследование</a></div>
+  </header>
+
+  <section class="hero">
+    <div class="mesh"><div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div><div class="iso"></div><div class="fade"></div></div>
+    <div class="hero-in">
+      <span class="eye">Независимый исследовательский центр · Санкт-Петербург</span>
+      <h1 class="hero-t">Превращаем <span class="gt">данные</span> и исследования в понятные эффективные <span class="gt">решения</span></h1>
+      <p class="lead">Экологический инжиниринг и консалтинг: изыскания, собственная аккредитованная лаборатория, разрешительная документация и ESG. Научно обоснованно. Без бюрократии.</p>
+      <div class="cta-row"><a class="btn btn-grad" href="#">Заказать исследование <span>→</span></a><a class="btn btn-ghost" href="#">Услуги</a></div>
+      <p class="trust">14 лет · собственная аккредитованная лаборатория · проекты уровня Лахта Центра</p>
+    </div>
+  </section>
+
+  <section class="sec"><div class="wrap">
+    <div class="sec-head"><span class="eye">О центре</span><h2>Наука + экология + прикладные решения</h2>
+      <div class="sec-desc"><p>Помогаем бизнесу и регионам принимать научно обоснованные экологические решения. Говорим прямо, считаем точно, показываем реальную картину.</p></div></div>
+    <div class="nums">
+      <div class="num"><div class="v">14</div><div class="l">лет в экологическом инжиниринге</div></div>
+      <div class="num"><div class="v">500+</div><div class="l">реализованных проектов</div></div>
+      <div class="num"><div class="v">1 200+</div><div class="l">обследованных объектов</div></div>
+      <div class="num"><div class="v">98%</div><div class="l">согласований без замечаний</div></div>
+    </div>
+  </div></section>
+
+  <section class="sec" style="background:var(--bg)"><div class="wrap">
+    <div class="sec-head"><span class="eye">Услуги</span><h2>Полный спектр экологического инжиниринга</h2>
+      <div class="sec-desc"><p>От разового проекта до полного экологического сопровождения предприятия. Наведите на карточку, чтобы увидеть состав работ.</p></div></div>
+    <div class="grp"><span class="n">01</span><h3>Проектирование и документация</h3><span class="meta">разрешительная документация под ключ</span></div>
+    <div class="svc-grid">
+      <div class="svc"><div class="h"><span class="dot" style="background:radial-gradient(circle,#ADCF7A,#4CB272);box-shadow:0 0 12px #ADCF7Aaa"></span><h4>НДВ</h4></div><p>Нормативы допустимых выбросов</p></div>
+      <div class="svc"><div class="h"><span class="dot" style="background:radial-gradient(circle,#4CB272,#139EA1);box-shadow:0 0 12px #4CB272aa"></span><h4>НДС</h4></div><p>Нормативы допустимых сбросов</p></div>
+      <div class="svc"><div class="h"><span class="dot" style="background:radial-gradient(circle,#139EA1,#1C6BA2);box-shadow:0 0 12px #139EA1aa"></span><h4>ПНООЛР</h4></div><p>Нормативы образования отходов и лимиты на размещение</p></div>
+      <div class="svc"><div class="h"><span class="dot" style="background:radial-gradient(circle,#ADCF7A,#139EA1);box-shadow:0 0 12px #ADCF7Aaa"></span><h4>СЗЗ</h4></div><p>Проект санитарно-защитной зоны</p></div>
+      <div class="svc"><div class="h"><span class="dot" style="background:radial-gradient(circle,#1C6BA2,#0B5C60);box-shadow:0 0 12px #1C6BA2aa"></span><h4>КЭР</h4></div><p>Комплексное экологическое разрешение</p></div>
+      <div class="svc"><div class="h"><span class="dot" style="background:radial-gradient(circle,#4CB272,#1C6BA2);box-shadow:0 0 12px #4CB272aa"></span><h4>ОВОС</h4></div><p>Оценка воздействия на окружающую среду</p></div>
+    </div>
+  </div></section>
+
+  <section class="sec"><div class="wrap">
+    <div class="sec-head"><span class="eye">Портфель</span><h2>Объекты, которым нужна точность</h2>
+      <div class="sec-desc"><p>Работаем с объектами федерального масштаба — от небоскрёбов до портовых акваторий и театров.</p></div></div>
+    <div class="proj-grid">
+      <div class="proj"><div class="img"></div><div class="body"><span class="tag">Экологическое сопровождение</span><h3>Лахта Центр</h3><p>Полный цикл экологического контроля при строительстве самого высокого здания Европы.</p></div></div>
+      <div class="proj"><div class="img"></div><div class="body"><span class="tag">Проект СЗЗ · Измерения</span><h3>Мариинский театр</h3><p>Санитарно-защитная зона и натурные измерения для объекта культурного значения в плотной городской среде.</p></div></div>
+    </div>
+  </div></section>
+
+  <section class="esg"><div class="ring"></div><div class="wrap">
+    <h2>ECO IS <span class="gtl">DATA</span></h2>
+    <p class="sub">Экология — это измеримые величины, а не декларации. Каждое наше решение опирается на полевые данные, лабораторный анализ и воспроизводимые расчёты.</p>
+    <p class="slog">NO DATA — NO DECISION&nbsp;&nbsp;·&nbsp;&nbsp;SCIENCE FOR NATURE</p>
+    <div style="margin-top:34px"><a class="btn btn-light" href="#">Услуги ESG <span>→</span></a></div>
+  </div></section>
+
+  <section class="cta"><div class="wrap">
+    <div class="cta-card">
+      <div><h3>Обсудим вашу задачу?</h3><p>Вернёмся с планом работ и оценкой в течение рабочего дня.</p></div>
+      <div style="display:flex;align-items:center;gap:18px;flex-wrap:wrap"><a class="btn" style="background:#fff;color:var(--teal-deep)" href="#">Оставить заявку</a><a class="phone" style="color:#fff" href="tel:+78122400000">+7 (812) 240-00-00</a></div>
+    </div>
+  </div></section>
+
+  <footer><div class="wrap">
+    <div class="fgrid">
+      <div class="fcol"><a class="logo" href="#" style="margin-bottom:16px"><img src="../../assets/fingerprint-white.png" alt="Эколог" style="height:36px"><span><b style="color:#fff">Эколог</b><span style="color:rgba(255,255,255,.6)">независимый исследовательский центр</span></span></a><p style="font-size:14.5px;color:rgba(255,255,255,.6);max-width:300px;line-height:1.7">Наука + экология + прикладные решения. Надёжность и экспертиза без бюрократии.</p></div>
+      <div class="fcol"><p class="k">УСЛУГИ</p><a href="#">Проектирование и документация</a><a href="#">Сопровождение предприятий</a><a href="#">Изыскания и исследования</a><a href="#">ESG и устойчивое развитие</a></div>
+      <div class="fcol"><p class="k">КОНТАКТЫ</p><a href="tel:+78122400000" style="color:#fff;font-weight:500">+7 (812) 240-00-00</a><a href="mailto:info@nic-ecolog.ru">info@nic-ecolog.ru</a><a href="#">Санкт-Петербург</a></div>
+    </div>
+    <div class="fbar"><span>© 2026 НИЦ «Эколог»</span><span class="mono" style="letter-spacing:.16em">SCIENCE FOR NATURE</span><span>nic-ecolog.ru</span></div>
+  </div></footer>
+</body></html>

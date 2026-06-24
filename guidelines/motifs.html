@@ -1,0 +1,17 @@
+<!-- @dsCard group="Brand" viewport="700x200" subtitle="Gradient mesh · isolines · blueprint · placeholder" name="Graphic motifs" -->
+<!DOCTYPE html><html><head><meta charset="utf-8"><link rel="stylesheet" href="../styles.css">
+<style>body{margin:0;font-family:var(--font-body);background:var(--white)}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;padding:22px}
+.t{height:128px;border-radius:16px;position:relative;overflow:hidden;border:1px solid var(--line)}
+.lab{position:absolute;left:10px;bottom:9px;font-family:var(--font-mono);font-size:10px;color:var(--slate-3);z-index:2}
+.mesh{background:radial-gradient(60% 70% at 20% 20%,#ADCF7A88,transparent 60%),radial-gradient(60% 70% at 80% 30%,#1C6BA288,transparent 60%),radial-gradient(70% 70% at 60% 90%,#139EA188,transparent 60%),var(--bg)}
+.iso{background:repeating-radial-gradient(ellipse 90% 120% at 70% -10%,rgba(11,92,96,0.10) 0 1px,transparent 1px 22px),var(--bg)}
+.blue{background:linear-gradient(rgba(11,92,96,0.10) 1px,transparent 1px),linear-gradient(90deg,rgba(11,92,96,0.10) 1px,transparent 1px);background-size:22px 22px,22px 22px;background-color:var(--bg)}
+.ph{background:var(--placeholder)}
+.lab.on{color:rgba(255,255,255,0.85)}</style></head>
+<body><div class="grid">
+  <div class="t mesh"><span class="lab on">gradient mesh</span></div>
+  <div class="t iso"><span class="lab">isolines</span></div>
+  <div class="t blue"><span class="lab">blueprint grid</span></div>
+  <div class="t ph"><span class="lab">image slot</span></div>
+</div></body></html>

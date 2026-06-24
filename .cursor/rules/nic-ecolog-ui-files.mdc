@@ -1,0 +1,31 @@
+---
+description: HTML, JSX, and CSS standards for НИЦ «Эколог» UI files
+globs: "**/*.{html,jsx,css}"
+alwaysApply: false
+---
+
+# UI file standards
+
+## Tokens
+
+- Link or import `styles.css` (or `@import tokens/*.css`)
+- Use `--teal`, `--ink`, `--grad-brand`, `--font-display`, `--section-pad-x`, etc.
+- Shadows: accent-tinted (`--shadow-btn`, `--shadow-card`) — never neutral gray
+
+## Typography
+
+- Headings: Stölzl / `--font-display`, weight 300 for large display
+- Body: Onest / `--font-body`
+- Eyebrows, labels, data: JetBrains Mono, uppercase, `--tracking-label`
+
+## Interaction
+
+- `cursor: pointer` on clickable cards and controls
+- Transitions 150–300ms, easing `--ease-out`
+- `:focus-visible` outline on interactive elements
+- `prefers-reduced-motion` must disable decorative animation
+
+## Components
+
+Prefer existing primitives in `components/` before inventing new patterns.
+Match `guidelines/*.html` specimen cards for spacing and radii.

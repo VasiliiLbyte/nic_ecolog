@@ -1,0 +1,55 @@
+/* COLORS — НИЦ «Эколог»
+   Brand mesh runs lime → green → teal → ocean → deep blue.
+   Base ramp values are the accepted site values; brandbook stops noted in comments. */
+:root {
+  /* ---- Brand mesh ramp ---- */
+  --lime:        #ADCF7A;   /* brandbook lime ~#9CCB3B */
+  --lime-bright: #9CCB3B;
+  --green:       #4CB272;   /* brandbook ~#4CAE7A */
+  --teal:        #139EA1;   /* primary brand accent */
+  --teal-deep:   #0B5C60;   /* deep petrol — text-on-light accent */
+  --teal-darker: #0A3D42;   /* lab dark surface base */
+  --ocean:       #1C6BA2;   /* brandbook ~#1E6FB0 */
+  --blue:        #14496F;
+  --blue-deep:   #122E54;   /* brandbook ~#18386B */
+  --navy:        #06141C;   /* darkest section base */
+
+  /* ---- Ink & neutrals (cool-leaning) ---- */
+  --ink:        #13282B;    /* primary heading ink */
+  --ink-2:      #16282B;    /* body base */
+  --slate-1:    #2C4346;    /* strong body on light */
+  --slate-2:    #3E5557;    /* body */
+  --slate-3:    #51696B;    /* muted / secondary */
+  --slate-4:    #7A8E8E;    /* labels, captions */
+  --slate-5:    #8AA0A0;    /* placeholder text */
+
+  /* ---- Surfaces ---- */
+  --white:      #FFFFFF;
+  --bg:         #F7FBF9;    /* page light bg (mint-white) */
+  --bg-2:       #F4F8F7;    /* alt light bg / input fill */
+  --surface-stripe-a: #E0EDE8;  /* image placeholder stripe */
+  --surface-stripe-b: #EAF4EF;
+
+  /* ---- Hairlines (petrol-tinted, never pure black) ---- */
+  --line:       rgba(11,92,96,0.12);
+  --line-strong:rgba(11,92,96,0.22);
+  --line-soft:  rgba(11,92,96,0.08);
+  --line-on-dark: rgba(255,255,255,0.14);
+
+  /* ===== Semantic aliases ===== */
+  --color-accent:        var(--teal);
+  --color-accent-ink:    var(--teal-deep);
+  --color-accent-lime:   var(--lime);
+  --text-strong:         var(--ink);
+  --text-body:           var(--slate-2);
+  --text-muted:          var(--slate-3);
+  --text-label:          var(--slate-4);
+  --text-on-dark:        rgba(255,255,255,0.92);
+  --text-on-dark-muted:  rgba(255,255,255,0.62);
+  --surface-page:        var(--bg);
+  --surface-card:        var(--white);
+  --surface-dark:        var(--navy);
+  --surface-lab:         var(--teal-darker);
+  --border-card:         var(--line);
+  --selection:           rgba(173,207,122,0.45);
+}

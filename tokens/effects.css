@@ -1,0 +1,42 @@
+/* EFFECTS — radii, borders, shadows, gradients, blur — НИЦ «Эколог» */
+:root {
+  /* ---- Radii ---- */
+  --r-xs: 12px;    /* small buttons, burger */
+  --r-sm: 16px;
+  --r-md: 20px;    /* service cards */
+  --r-lg: 24px;    /* result / info cards */
+  --r-xl: 28px;    /* CTA blocks, project cards */
+  --r-pill: 999px; /* buttons, chips, badges */
+
+  /* ---- Borders ---- */
+  --border: 1px solid var(--line);
+  --border-strong: 1px solid var(--line-strong);
+
+  /* ---- Shadows (cool, accent-tinted — never neutral gray) ---- */
+  --shadow-btn:    0 12px 28px rgba(19,158,161,0.35);
+  --shadow-btn-hi: 0 20px 46px -16px rgba(28,107,162,0.70);
+  --shadow-card:   0 18px 50px -28px rgba(11,40,42,0.45);
+  --shadow-pop:    0 14px 32px rgba(0,0,0,0.20);
+  --shadow-header: 0 10px 40px -24px rgba(11,40,42,0.50);
+
+  /* ---- Brand gradients ---- */
+  --grad-brand:  linear-gradient(105deg, #139EA1, #1C6BA2);                 /* primary button / accent fill */
+  --grad-text:   linear-gradient(100deg, #139EA1, #4CAE7A 50%, #9CCB3B);    /* gradient text on light */
+  --grad-text-l: linear-gradient(100deg, #9BE7DD, #C7EC9C);                 /* gradient text on dark */
+  --grad-esg:    linear-gradient(130deg, #122E54 0%, #1C6BA2 55%, #0B5C60 100%); /* ESG / data section */
+  --grad-lab:    linear-gradient(125deg, #0A3D42, #0B5C60 55%, #122E54);    /* lab dark section */
+  --grad-result: linear-gradient(135deg, #0B5C60, #14496F);                 /* result / contact card */
+  --grad-hero-fade: linear-gradient(180deg, rgba(255,255,255,0), #FFFFFF);  /* hero bottom fade */
+
+  /* Image placeholder fill (diagonal stripe) */
+  --placeholder: repeating-linear-gradient(45deg, #E0EDE8 0 14px, #EAF4EF 14px 28px);
+
+  /* ---- Blur (glass header / overlays) ---- */
+  --blur-glass: blur(16px);
+  --blur-overlay: blur(20px);
+
+  /* ---- Motion ---- */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-fast: 0.25s;
+  --dur-reveal: 0.9s;
+}

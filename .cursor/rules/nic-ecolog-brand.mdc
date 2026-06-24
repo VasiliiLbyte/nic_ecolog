@@ -1,0 +1,28 @@
+---
+description: НИЦ «Эколог» brand hierarchy and design-system workflow for all UI work
+alwaysApply: true
+---
+
+# НИЦ «Эколог» — brand authority
+
+## Rule priority (strict)
+
+1. `design-system/MASTER.md`
+2. `design-system/pages/<page>.md` when building a named page
+3. `readme.md`, `tokens/`, `styles.css`
+4. `NIC Ecolog - Главная v2.dc.html` — interactive reference
+5. `.cursor/skills/ui-ux-pro-max/` — UX patterns, a11y, anti-patterns only. **Never replace brand colors, fonts, or Russian B2B tone.**
+
+## Non-negotiables
+
+- Language: Russian, Cyrillic
+- No emoji
+- Voice: precise, scientific, peer B2B — no greenwashing hype
+- Lead differentiators: «Аналитик Лаб» + project portfolio
+- Use CSS custom properties from `tokens/` — avoid hardcoded hex in new code
+
+## Workflow before completing UI tasks
+
+1. Read `design-system/MASTER.md` (+ page override if exists)
+2. For UX questions, use ui-ux-pro-max skill or `search.py`
+3. Run `design-system/CHECKLIST.md` before marking done

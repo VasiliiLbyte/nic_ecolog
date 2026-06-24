@@ -1,0 +1,29 @@
+---
+description: DC runtime conventions for .dc.html interactive prototypes
+globs: "**/*.dc.html"
+alwaysApply: false
+---
+
+# DC file conventions
+
+## Runtime
+
+- `support.js` provides DCLogic / React bindings — do not break `<x-dc>` structure
+- Interactive logic lives in `<script type="text/x-dc" data-dc-script>` class extending `DCLogic`
+- Template bindings: `{{ variable }}`, `onClick="{{ handler }}"`, `<sc-if test="{{ flag }}">`
+
+## Preserve data hooks
+
+Do not rename without updating JS:
+- `[data-rv]` scroll reveal, `[data-count]` counters, `[data-svc]` / `[data-svc-id]` services
+- `[data-rail]` / `[data-rail-item]` section nav, `[data-chroma]` lab chromatogram
+- `[data-anim]`, `[data-sec]`, `[data-nav]`, `[data-burger]`, `[data-proj]`, `[data-steps]`
+
+## Master file
+
+`NIC Ecolog - Главная v2.dc.html` is the homepage source of truth.
+v1 (`NIC Ecolog - Главная.dc.html`) is legacy — do not sync back to v1.
+
+## Assets
+
+Relative paths: `./assets/`, `./support.js`, `./image-slot.js`

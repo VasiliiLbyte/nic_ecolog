@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>НИЦ Эколог — герой с анимацией (демо)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@200;300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  html{scroll-behavior:smooth}
+  body{margin:0;background:#F7FBF9;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;font-family:'Onest',-apple-system,'Segoe UI',sans-serif;color:#16282B}
+  *{box-sizing:border-box}
+  h1{font-family:'Onest',-apple-system,sans-serif}
+  ::selection{background:rgba(173,207,122,0.45)}
+  @keyframes wordUp{from{opacity:0;transform:translateY(105%)}to{opacity:1;transform:translateY(0)}}
+  @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+  .demo-tag{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);z-index:50;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.12em;color:#0B5C60;background:rgba(255,255,255,0.82);border:1px solid rgba(11,92,96,0.18);border-radius:999px;padding:8px 16px;backdrop-filter:blur(6px)}
+  @media (max-width:720px){
+    .hero{padding-left:24px !important;padding-right:24px !important}
+    .cta-row{flex-direction:column !important;align-items:stretch !important}
+  }
+  @media (prefers-reduced-motion: reduce){ .hero *{animation-duration:0.01ms !important} }
+</style>
+</head>
+<body>
+<section class="hero" style="position:relative;min-height:100vh;display:flex;flex-direction:column;justify-content:center;overflow:hidden;background:#F7FBF9;padding:150px 48px 72px">
+
+  <!-- ФОН: живой canvas mesh-градиент -->
+  <canvas id="bg" aria-hidden="true" style="position:absolute;inset:0;width:100%;height:100%;display:block;filter:blur(34px) saturate(1.04);transform:scale(1.12);transform-origin:center"></canvas>
+
+  <!-- наложения -->
+  <div aria-hidden="true" style="position:absolute;inset:0;pointer-events:none">
+    <div style="position:absolute;inset:0;background:repeating-radial-gradient(ellipse 90% 120% at 78% -10%,rgba(11,92,96,0.05) 0px,rgba(11,92,96,0.05) 1px,transparent 1px,transparent 42px)"></div>
+    <div style="position:absolute;inset:0;mix-blend-mode:soft-light;opacity:0.5;background-image:url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E&quot;)"></div>
+    <div style="position:absolute;left:0;top:0;bottom:0;width:62%;background:linear-gradient(90deg,rgba(247,251,249,0.92) 0%,rgba(247,251,249,0.6) 38%,rgba(247,251,249,0) 100%)"></div>
+    <div style="position:absolute;left:0;right:0;bottom:0;height:36%;background:linear-gradient(180deg,rgba(247,251,249,0),#F7FBF9)"></div>
+  </div>
+
+  <!-- КОНТЕНТ -->
+  <div style="position:relative;max-width:1280px;margin:0 auto;width:100%">
+    <p style="margin:0 0 28px;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:500;letter-spacing:0.22em;color:#0B5C60;text-transform:uppercase;animation:fadeIn 1s ease 0.1s both">Независимый исследовательский центр · Санкт-Петербург</p>
+    <h1 style="margin:0;font-weight:300;font-size:clamp(44px,6.3vw,92px);line-height:1.04;letter-spacing:-0.015em;color:#13282B;max-width:1180px;text-wrap:balance">
+      <span style="display:block;overflow:hidden;padding-bottom:0.08em;margin-bottom:-0.08em"><span style="display:inline-block;animation:wordUp 0.9s cubic-bezier(0.22,1,0.36,1) 0.15s both">Превращаем <span style="font-weight:400;background:linear-gradient(92deg,#4CB272,#139EA1 55%,#1C6BA2);-webkit-background-clip:text;background-clip:text;color:transparent">данные</span></span></span>
+      <span style="display:block;overflow:hidden;padding-bottom:0.08em;margin-bottom:-0.08em"><span style="display:inline-block;animation:wordUp 0.9s cubic-bezier(0.22,1,0.36,1) 0.3s both">и исследования в понятные</span></span>
+      <span style="display:block;overflow:hidden;padding-bottom:0.12em"><span style="display:inline-block;animation:wordUp 0.9s cubic-bezier(0.22,1,0.36,1) 0.45s both">эффективные <span style="font-weight:400;background:linear-gradient(92deg,#139EA1,#1C6BA2);-webkit-background-clip:text;background-clip:text;color:transparent">решения</span></span></span>
+    </h1>
+    <p style="margin:30px 0 0;font-size:18px;font-weight:400;color:#3E5557;max-width:620px;line-height:1.65;animation:fadeIn 1s ease 0.7s both">Экологический инжиниринг и консалтинг: изыскания, собственная аккредитованная лаборатория, разрешительная документация и ESG. Научно обоснованно. Без бюрократии.</p>
+    <div class="cta-row" style="display:flex;align-items:center;gap:18px;margin-top:42px;flex-wrap:wrap;animation:fadeIn 1s ease 0.85s both">
+      <a href="#" style="display:inline-flex;align-items:center;gap:10px;background:linear-gradient(105deg,#139EA1,#1C6BA2);color:#FFFFFF;font-size:16px;font-weight:500;text-decoration:none;padding:18px 38px;border-radius:999px;box-shadow:0 14px 34px rgba(19,158,161,0.28)">Заказать исследование <span aria-hidden="true">→</span></a>
+      <a href="#" style="display:inline-flex;align-items:center;gap:10px;border:1px solid rgba(11,92,96,0.35);color:#0B5C60;font-size:16px;font-weight:500;text-decoration:none;padding:17px 36px;border-radius:999px;background:rgba(255,255,255,0.5)">Услуги</a>
+    </div>
+    <p style="margin:56px 0 0;font-family:'JetBrains Mono',monospace;font-size:12.5px;color:#51696B;letter-spacing:0.04em;animation:fadeIn 1s ease 1s both">14 лет в экологическом инжиниринге&nbsp;&nbsp;·&nbsp;&nbsp;аккредитованная лаборатория «Аналитик Лаб»&nbsp;&nbsp;·&nbsp;&nbsp;Лахта Центр, порты, МОЭК, Мариинский театр</p>
+  </div>
+
+  <div class="demo-tag">демо · живой canvas mesh-градиент · без видеофайла</div>
+</section>
+
+<script>
+(function(){
+  var cv = document.getElementById('bg');
+  var ctx = cv.getContext('2d');
+  var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var w=0, h=0;
+  var blobs = [
+    { x:0.52, y:0.50, r:0.40, c:'#1E74A4', a:0.78, ax:0.13, ay:0.11, sp:0.45, ph:0.0 },
+    { x:0.44, y:0.58, r:0.34, c:'#139EA1', a:0.66, ax:0.17, ay:0.13, sp:0.38, ph:1.1 },
+    { x:0.63, y:0.43, r:0.30, c:'#4CB272', a:0.55, ax:0.16, ay:0.17, sp:0.55, ph:2.3 },
+    { x:0.33, y:0.40, r:0.26, c:'#ADCF7A', a:0.50, ax:0.19, ay:0.15, sp:0.47, ph:3.4 },
+    { x:0.72, y:0.62, r:0.27, c:'#9CC766', a:0.42, ax:0.17, ay:0.18, sp:0.62, ph:4.6 },
+    { x:0.56, y:0.34, r:0.42, c:'#1C6BA2', a:0.40, ax:0.12, ay:0.14, sp:0.33, ph:5.7 },
+    { x:0.24, y:0.66, r:0.24, c:'#137E83', a:0.38, ax:0.16, ay:0.14, sp:0.50, ph:0.8 }
+  ];
+  function hexA(hex,a){ var n=parseInt(hex.slice(1),16); return 'rgba('+((n>>16)&255)+','+((n>>8)&255)+','+(n&255)+','+a+')'; }
+  function measure(){
+    var host = cv.parentElement; var rect = host.getBoundingClientRect();
+    var scale = 7;
+    var nw = Math.max(80, Math.round(rect.width/scale));
+    var nh = Math.max(80, Math.round(rect.height/scale));
+    if(nw!==w || nh!==h){ cv.width=nw; cv.height=nh; w=nw; h=nh; }
+  }
+  function draw(tSec){
+    var W=cv.width, H=cv.height;
+    ctx.globalCompositeOperation='source-over';
+    ctx.fillStyle='#F4F9F6'; ctx.fillRect(0,0,W,H);
+    var speed=0.85;
+    for(var i=0;i<blobs.length;i++){
+      var b=blobs[i], t=tSec*speed;
+      var cx=(b.x + b.ax*Math.sin(t*b.sp+b.ph))*W;
+      var cy=(b.y + b.ay*Math.cos(t*b.sp*0.9+b.ph))*H;
+      var r =b.r*W*(1 + 0.16*Math.sin(t*b.sp*0.7+b.ph));
+      var g=ctx.createRadialGradient(cx,cy,0,cx,cy,r);
+      g.addColorStop(0, hexA(b.c,b.a)); g.addColorStop(1, hexA(b.c,0));
+      ctx.fillStyle=g; ctx.beginPath(); ctx.arc(cx,cy,r,0,Math.PI*2); ctx.fill();
+    }
+  }
+  var start = performance.now();
+  function loop(){ measure(); draw(reduced?0:(performance.now()-start)/1000); if(!reduced) requestAnimationFrame(loop); }
+  measure();
+  if(reduced){ draw(0); } else { requestAnimationFrame(loop); }
+  window.addEventListener('resize', measure);
+})();
+</script>
+</body>
+</html>

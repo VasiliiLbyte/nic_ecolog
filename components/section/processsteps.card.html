@@ -1,0 +1,17 @@
+<!-- @dsCard group="Components" viewport="700x240" subtitle="Numbered timeline with gradient connector" name="ProcessSteps" -->
+<!DOCTYPE html><html><head><meta charset="utf-8"><link rel="stylesheet" href="../../styles.css">
+<style>body{margin:0;font-family:var(--font-body);background:var(--white);padding:34px 30px}
+.steps{position:relative;display:grid;grid-template-columns:repeat(5,1fr);gap:26px}
+.line{position:absolute;top:5px;left:0;right:0;height:1px;background:linear-gradient(90deg,#ADCF7A,#4CB272,#139EA1,#1C6BA2,#0B5C60);opacity:.45}
+.st{position:relative;padding-top:30px}
+.node{position:absolute;top:0;left:0;width:11px;height:11px;border-radius:50%}
+.n{margin:0 0 8px;font-family:var(--font-mono);font-size:12px;color:var(--slate-4)}
+h3{margin:0 0 8px;font-size:16px;font-weight:500;color:var(--ink)}
+p{margin:0;font-size:13.5px;color:var(--slate-3);line-height:1.6}</style></head>
+<body><div class="steps"><div class="line"></div>
+  <div class="st"><span class="node" style="background:#ADCF7A;box-shadow:0 0 0 4px #ADCF7A40"></span><p class="n">01</p><h3>Заявка и оценка</h3><p>Отвечаем в течение рабочего дня, фиксируем объём и сроки.</p></div>
+  <div class="st"><span class="node" style="background:#4CB272;box-shadow:0 0 0 4px #4CB27240"></span><p class="n">02</p><h3>Исходные данные</h3><p>Запрашиваем документы, выезжаем на объект.</p></div>
+  <div class="st"><span class="node" style="background:#139EA1;box-shadow:0 0 0 4px #139EA140"></span><p class="n">03</p><h3>Лаборатория</h3><p>Полевые работы, отбор и анализ проб, расчёты.</p></div>
+  <div class="st"><span class="node" style="background:#1C6BA2;box-shadow:0 0 0 4px #1C6BA240"></span><p class="n">04</p><h3>Согласование</h3><p>Сопровождаем документацию до утверждения.</p></div>
+  <div class="st"><span class="node" style="background:#0B5C60;box-shadow:0 0 0 4px #0B5C6040"></span><p class="n">05</p><h3>Результат</h3><p>Комплект документов и защита от рисков.</p></div>
+</div></body></html>

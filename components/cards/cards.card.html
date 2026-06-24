@@ -1,0 +1,23 @@
+<!-- @dsCard group="Components" viewport="700x320" subtitle="Service tile + portfolio project card" name="ServiceCard & ProjectCard" -->
+<!DOCTYPE html><html><head><meta charset="utf-8"><link rel="stylesheet" href="../../styles.css">
+<style>body{margin:0;font-family:var(--font-body);background:var(--bg);padding:24px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:start}
+.svc{border:1px solid var(--line);border-radius:var(--r-md);padding:26px 26px 22px;background:var(--white)}
+.svc .h{display:flex;align-items:center;gap:12px}
+.dot{width:10px;height:10px;border-radius:50%;background:radial-gradient(circle,#ADCF7A,#4CB272);box-shadow:0 0 12px #ADCF7Aaa}
+.svc h4{margin:0;font-size:18px;font-weight:500;color:var(--ink)}
+.svc p{margin:10px 0 0;font-size:14.5px;color:var(--slate-3);line-height:1.5}
+.proj{border:1px solid var(--line);border-radius:var(--r-xl);overflow:hidden;background:var(--white);grid-row:span 2}
+.proj .img{height:150px;background:var(--placeholder)}
+.proj .body{padding:24px 26px 26px}
+.proj .tag{margin:0 0 10px;font-family:var(--font-mono);font-size:11px;letter-spacing:0.18em;color:var(--teal);text-transform:uppercase}
+.proj h3{margin:0 0 8px;font-size:24px;font-weight:400;color:var(--ink)}
+.proj .r{margin:0;font-size:15px;color:var(--slate-3);line-height:1.6}</style></head>
+<body><div class="grid">
+  <div class="proj">
+    <div class="img"></div>
+    <div class="body"><p class="tag">Эколог. сопровождение</p><h3>Лахта Центр</h3><p class="r">Полный цикл экологического контроля при строительстве.</p></div>
+  </div>
+  <div class="svc"><div class="h"><span class="dot"></span><h4>НДВ</h4></div><p>Нормативы допустимых выбросов</p></div>
+  <div class="svc"><div class="h"><span class="dot" style="background:radial-gradient(circle,#139EA1,#1C6BA2);box-shadow:0 0 12px #139EA1aa"></span><h4>СЗЗ</h4></div><p>Проект санитарно-защитной зоны</p></div>
+</div></body></html>

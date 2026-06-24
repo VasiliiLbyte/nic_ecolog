@@ -1,0 +1,32 @@
+/* SPACING & LAYOUT — НИЦ «Эколог»
+   8-pt base. Sections breathe (120–140px vertical). Generous horizontal gutters. */
+:root {
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-14: 56px;
+  --space-16: 64px;
+  --space-20: 80px;
+  --space-28: 112px;
+
+  /* Section rhythm */
+  --section-pad-y:  120px;   /* default section vertical padding */
+  --section-pad-y-lg: 140px; /* feature / dark sections */
+  --section-pad-x:  48px;    /* desktop gutter */
+  --section-pad-x-sm: 24px;  /* mobile gutter */
+
+  /* Container */
+  --container:      1240px;
+  --container-text: 1180px;
+  --container-narrow: 760px;
+
+  /* Grid gaps */
+  --gap-card: 16px;
+  --gap-col:  56px;
+}

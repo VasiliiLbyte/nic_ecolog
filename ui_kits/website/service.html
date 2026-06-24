@@ -1,0 +1,105 @@
+<!-- @dsCard group="Website" viewport="1280x900" subtitle="Service detail — СЗЗ · facts, scope, result, related" name="Service detail" -->
+<!-- @startingPoint section="Website" subtitle="НИЦ «Эколог» service-detail page" viewport="1280x900" -->
+<!DOCTYPE html>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>НИЦ «Эколог» — Проект СЗЗ</title>
+<link rel="stylesheet" href="../../styles.css">
+<style>
+  *{box-sizing:border-box}
+  body{margin:0;font-family:var(--font-body);background:var(--bg);color:var(--ink-2);font-size:16px;line-height:1.6}
+  h1,h2,h3,h4,p{margin:0}
+  ::selection{background:var(--selection)}
+  a{color:inherit}
+  .mono{font-family:var(--font-mono)}
+  /* breadcrumb bar */
+  .bar{position:sticky;top:0;z-index:5;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:16px var(--section-pad-x);background:rgba(247,251,249,.92);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+  .crumbs{display:flex;align-items:center;gap:14px;min-width:0}
+  .crumbs img{height:34px;width:auto;display:block;flex:0 0 auto}
+  .crumbs .c{font-family:var(--font-mono);font-size:12px;letter-spacing:.1em;color:var(--slate-3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .crumbs .c b{color:var(--teal-deep);font-weight:500}
+  .back{display:inline-flex;align-items:center;gap:10px;border:1px solid var(--line-strong);border-radius:var(--r-pill);background:var(--white);color:var(--teal-deep);font-size:14px;font-weight:500;padding:10px 22px;cursor:pointer;text-decoration:none;flex:0 0 auto}
+  /* head */
+  .head{max-width:var(--container-text);margin:0 auto;width:100%;padding:64px var(--section-pad-x) 0}
+  .eye{font-family:var(--font-mono);font-size:12px;font-weight:500;letter-spacing:.22em;color:var(--teal);text-transform:uppercase}
+  h1{margin-top:16px;font-family:var(--font-display);font-weight:300;font-size:clamp(34px,4.4vw,62px);line-height:1.08;letter-spacing:-.01em;color:var(--ink);max-width:900px;text-wrap:balance}
+  .lead{margin-top:24px;font-size:18px;line-height:1.7;color:var(--slate-2);max-width:720px}
+  .facts{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:28px}
+  .pill{display:inline-flex;align-items:center;gap:8px;background:var(--white);border:1px solid var(--line-strong);border-radius:var(--r-pill);padding:10px 20px;font-size:14px;color:var(--slate-1)}
+  .pill .k{font-family:var(--font-mono);font-size:11px;letter-spacing:.12em;color:var(--slate-4)}
+  /* body grid */
+  .grid{max-width:var(--container-text);margin:0 auto;width:100%;padding:0 var(--section-pad-x);display:grid;grid-template-columns:1.1fr .9fr;gap:56px;margin-top:64px;align-items:start}
+  .grid h2{font-weight:400;font-size:26px;color:var(--ink);margin-bottom:28px}
+  .steps{display:flex;flex-direction:column}
+  .step{display:flex;gap:22px;padding:20px 0;border-top:1px solid var(--line)}
+  .step .n{font-family:var(--font-mono);font-size:13px;color:var(--teal);padding-top:2px;flex:0 0 auto}
+  .step p{font-size:16px;line-height:1.65;color:var(--slate-1)}
+  .aside{display:flex;flex-direction:column;gap:18px}
+  .card-res{background:var(--grad-result);border-radius:var(--r-lg);padding:34px 36px;color:#fff}
+  .card-res .k{font-family:var(--font-mono);font-size:11px;letter-spacing:.18em;color:var(--lime);margin-bottom:10px}
+  .card-res p{font-size:17px;line-height:1.65;color:rgba(255,255,255,.92)}
+  .card-why{background:var(--white);border:1px solid var(--line);border-radius:var(--r-lg);padding:34px 36px}
+  .card-why .k{font-family:var(--font-mono);font-size:11px;letter-spacing:.18em;color:var(--teal);margin-bottom:10px}
+  .card-why p{font-size:15.5px;line-height:1.65;color:var(--slate-1)}
+  /* related */
+  .rel{max-width:var(--container-text);margin:0 auto;width:100%;padding:0 var(--section-pad-x);margin-top:64px}
+  .rel h3{font-weight:400;font-size:20px;color:var(--ink);margin-bottom:18px}
+  .chips{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+  .chip{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line-strong);border-radius:var(--r-pill);background:var(--white);color:var(--teal-deep);font-size:14.5px;font-weight:500;padding:12px 24px;cursor:pointer;text-decoration:none}
+  .chip:hover{border-color:var(--teal);background:rgba(19,158,161,.06)}
+  /* cta */
+  .cta{max-width:var(--container-text);margin:0 auto;width:100%;padding:0 var(--section-pad-x);margin:72px auto 100px}
+  .cta-card{display:flex;align-items:center;justify-content:space-between;gap:28px;flex-wrap:wrap;background:var(--grad-brand);border-radius:var(--r-xl);padding:44px 48px;color:#fff}
+  .cta-card h3{font-family:var(--font-display);font-weight:300;font-size:clamp(24px,2.4vw,34px)}
+  .cta-card p{margin-top:8px;font-size:15.5px;color:rgba(255,255,255,.85)}
+  .cta-btn{background:#fff;color:var(--teal-deep);border-radius:var(--r-pill);font-size:16px;font-weight:500;padding:16px 34px;text-decoration:none;border:none;cursor:pointer}
+</style></head>
+<body>
+  <div class="bar">
+    <div class="crumbs"><img src="../../assets/fingerprint-color.png" alt="Эколог"><span class="c">ГЛАВНАЯ · УСЛУГИ · <b>Проект СЗЗ</b></span></div>
+    <a class="back" href="index.html">← Назад к услугам</a>
+  </div>
+
+  <div class="head">
+    <p class="eye">Проектирование и документация</p>
+    <h1>Проект санитарно-защитной зоны</h1>
+    <p class="lead">Установление границ СЗЗ с натурными измерениями нашей лаборатории. Снимаем избыточные ограничения и обосновываем сокращение зоны там, где это подтверждают данные.</p>
+    <div class="facts">
+      <span class="pill"><span class="k">СРОК</span> 2–4 месяца</span>
+      <span class="pill"><span class="k">КОМУ</span> промышленные и коммунальные объекты</span>
+      <span class="pill"><span class="k">РЕЗУЛЬТАТ</span> утверждённая СЗЗ</span>
+    </div>
+  </div>
+
+  <div class="grid">
+    <div>
+      <h2>Что входит в работу</h2>
+      <div class="steps">
+        <div class="step"><span class="n">01</span><p>Анализ исходных данных, инвентаризация источников выбросов и шума на площадке.</p></div>
+        <div class="step"><span class="n">02</span><p>Расчёт рассеивания загрязняющих веществ и акустического воздействия на границе зоны.</p></div>
+        <div class="step"><span class="n">03</span><p>Натурные измерения качества воздуха и уровней шума силами лаборатории «Аналитик Лаб».</p></div>
+        <div class="step"><span class="n">04</span><p>Разработка проекта СЗЗ, обоснование расчётной и окончательной границы зоны.</p></div>
+        <div class="step"><span class="n">05</span><p>Сопровождение в Роспотребнадзоре до получения санитарно-эпидемиологического заключения.</p></div>
+      </div>
+    </div>
+    <div class="aside">
+      <div class="card-res"><p class="k">РЕЗУЛЬТАТ</p><p>Утверждённый проект СЗЗ и СЭЗ Роспотребнадзора — законные границы зоны и снятые ограничения на использование территории.</p></div>
+      <div class="card-why"><p class="k">ПОЧЕМУ МЫ</p><p>Изыскания, лаборатория и документация — одна команда. Измерения выполняет собственная аккредитованная лаборатория «Аналитик Лаб», поэтому данные не теряются на стыках подрядчиков.</p></div>
+    </div>
+  </div>
+
+  <div class="rel">
+    <h3>Смежные услуги</h3>
+    <div class="chips">
+      <a class="chip" href="#">Измерения для ПЭК и СЗЗ <span>→</span></a>
+      <a class="chip" href="#">НДВ — нормативы выбросов <span>→</span></a>
+      <a class="chip" href="#">ОВОС <span>→</span></a>
+    </div>
+  </div>
+
+  <div class="cta">
+    <div class="cta-card">
+      <div><h3>Обсудим вашу задачу?</h3><p>Вернёмся с планом работ и оценкой в течение рабочего дня.</p></div>
+      <a class="cta-btn" href="index.html#zayavka">Оставить заявку</a>
+    </div>
+  </div>
+</body></html>
