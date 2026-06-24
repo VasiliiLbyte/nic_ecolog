@@ -51,9 +51,28 @@ From lab section, emphasize service ids: `lab`, `nds`, `izm`, `iei`, `pek`
 
 ---
 
-## Standalone lab page
+## Standalone lab page (`Ecolog-Lab.html` → `lab.html`)
+
+**Structure (simplified, aligned with homepage v2):**
+
+1. **Dark hero** `#lab` — mirrors homepage `#laboratoriya`: `--grad-lab`, isoline grid, blob accents, static chromatogram (`[data-chroma="true"]`, no scroll animation on standalone)
+2. **Light process** `#process` — five vertical steps (01–05): изыскания → отбор → анализ → обработка → документация
+3. **Light accred** `#accred` — stats grid
+4. **Light domains** `#domains` — nine `.srv` cards with squircle icons (no decorative rings)
+5. **Light quality** `#quality` — equipment / QC stats (not a third dark band)
+6. **Dark CTA** `#lab-contact` — form + contacts (second dark band; footer is separate)
+
+**Removed from standalone (do not reintroduce without explicit request):**
+- Custom cursor (`#cur-glow`, `#cur-dot`)
+- 620vh scroll-jacking hero with horizontal `.lab-card` track
+- WebGL mesh backgrounds (`cvLab`, `cvQual`)
+- Top scroll progress bar `#prog`
+
+**Tokens:** `tokens/colors.css`, `tokens/effects.css` linked in `<head>`.
+
+**Navigation:** header links to `index.html#…`; lab anchors `#lab`, `#process`, `#lab-contact`. Footer includes `#process`.
 
 When building full lab site (not homepage section):
 - Reuse `#laboratoriya` visual language and chromatogram motif
 - Expand: methods list, accreditations, equipment, turnaround table
-- Keep dark hero or dark band + light content below — max 2 dark bands per page per MASTER
+- Keep **max 2 dark bands** per page per MASTER (hero + contact CTA)
