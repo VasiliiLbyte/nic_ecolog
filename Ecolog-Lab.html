@@ -47,53 +47,39 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
 .btn-grad:hover{transform:translateY(-2px);box-shadow:var(--shadow-btn-hi);}
 .grad-text{background:var(--grad-text);-webkit-background-clip:text;background-clip:text;color:transparent;}
 .grad-text-l{background:var(--grad-text-l);-webkit-background-clip:text;background-clip:text;color:transparent;}
-/* header */
-.hdr{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:22px 48px;transition:background .35s ease,box-shadow .35s ease,padding .35s ease,border-color .35s ease;border-bottom:1px solid transparent;}
-.hdr.solid{background:rgba(247,251,249,.88);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:var(--shadow-header);border-bottom:1px solid var(--line);padding:14px 48px;}
-.hdr .logo{display:flex;align-items:center;gap:12px;text-decoration:none;}
-.hdr .logo img{height:36px;}
-.hdr .brand{line-height:1.05;}
-.hdr .brand b{font-size:20px;font-weight:600;}
-.hdr .brand span{font-size:9px;letter-spacing:.12em;text-transform:uppercase;opacity:.7;display:block;}
-.hdr nav{display:flex;align-items:center;gap:26px;}
-.hdr nav a{font-size:14px;text-decoration:none;transition:color .3s;cursor:pointer;position:relative;}
-.hdr nav a::after{content:"";position:absolute;left:0;right:0;bottom:-7px;height:2px;background:currentColor;border-radius:2px;transform:scaleX(0);transform-origin:left;transition:transform .35s cubic-bezier(.16,1,.3,1);}
-.hdr nav a:hover::after,.hdr nav a.active::after{transform:scaleX(1);}
-.hdr .cta{display:flex;align-items:center;gap:18px;}
-.hdr .phone{font-size:14px;font-weight:500;white-space:nowrap;}
-.hdr .mini{padding:11px 17px;font-size:13.5px;}
-.hdr .brand b,.hdr nav a{color:#fff;}
-.hdr .brand span{color:rgba(255,255,255,.72);}
-.hdr nav a.active{color:#fff;}
-.hdr .phone{color:#fff;}
-.hdr.solid .brand b{color:var(--teal-deep);}
-.hdr.solid .brand span{color:var(--slate-3);}
-.hdr.solid nav a{color:var(--slate-2);}
-.hdr.solid nav a:hover,.hdr.solid nav a.active{color:var(--teal-deep);}
-.hdr.solid .phone{color:var(--ink);}
-.hdr.solid .mini{color:#fff;}
-.burger{display:none;flex-direction:column;justify-content:center;align-items:center;gap:5px;width:42px;height:42px;border:0;background:none;cursor:pointer;padding:0;}
-.burger span{display:block;width:22px;height:2px;border-radius:2px;background:#fff;transition:transform .35s ease,opacity .25s ease,background .4s ease;}
-.hdr.solid .burger span{background:var(--ink);}
-.burger.open span{background:#fff;}
-.burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
-.burger.open span:nth-child(2){opacity:0;}
-.burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
-@media(max-width:1060px){.hdr nav,.hdr .phone{display:none;}.burger{display:flex;}.hdr{padding-left:24px;padding-right:24px;}.hdr.solid{padding-left:24px;padding-right:24px;}}
-@media(max-width:720px){.hdr .mini{display:none;}.hdr{padding:14px 24px;gap:12px;}.hdr.solid{padding:12px 24px;}.sec{padding:80px 0;}#lab{padding:100px 24px 110px;}.lab-chips{max-width:100%;}#totop{right:16px;bottom:max(16px,env(safe-area-inset-bottom));}}
-@media(max-width:400px){.hdr .brand span{font-size:8px;letter-spacing:.08em;}}
-/* mobile menu */
-.mmenu{position:fixed;inset:0;z-index:80;background:var(--grad-lab);display:flex;flex-direction:column;justify-content:center;padding:90px 36px 44px;opacity:0;visibility:hidden;transition:opacity .4s ease;}
+/* header — как #eco-header на главной */
+.hdr{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;gap:32px;padding:22px 48px;background:transparent;border-bottom:1px solid transparent;transition:background .35s ease,padding .35s ease,border-color .35s ease,backdrop-filter .35s ease;}
+.hdr.frosted{background:rgba(255,255,255,.88);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom-color:rgba(11,92,96,.12);}
+.hdr.compact{padding-top:12px;padding-bottom:12px;}
+.hdr .logo{display:flex;align-items:center;gap:14px;text-decoration:none;flex:0 0 auto;}
+.hdr .logo img{height:42px;width:auto;display:block;}
+.hdr .brand{display:flex;flex-direction:column;line-height:1.1;}
+.hdr .brand-title{font-size:21px;font-weight:600;color:#0B5C60;letter-spacing:.01em;}
+.hdr .brand-sub{font-size:10px;font-weight:400;color:#51696B;letter-spacing:.04em;}
+.hdr nav{display:flex;align-items:center;gap:30px;}
+.hdr nav a{font-size:14.5px;font-weight:400;color:#2C4346;text-decoration:none;transition:color .2s;}
+.hdr nav a:hover,.hdr nav a.active{color:#139EA1;}
+.hdr .hdr-actions{display:flex;align-items:center;gap:24px;flex:0 0 auto;}
+.hdr .phone{font-size:15px;font-weight:500;color:#0B5C60;text-decoration:none;font-variant-numeric:tabular-nums;white-space:nowrap;}
+.hdr .head-cta{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(105deg,#139EA1,#1C6BA2);color:#fff;font-size:14px;font-weight:500;text-decoration:none;padding:12px 24px;border-radius:999px;transition:transform .25s ease,box-shadow .25s ease;white-space:nowrap;}
+.hdr .head-cta:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(19,158,161,.35);}
+.burger{display:none;align-items:center;justify-content:center;width:44px;height:44px;border:1px solid rgba(11,92,96,.25);border-radius:12px;background:rgba(255,255,255,.75);cursor:pointer;padding:0;flex:0 0 auto;}
+@media(max-width:1060px){.hdr nav,.hdr .phone{display:none;}.burger{display:flex;}.hdr{padding-left:24px;padding-right:24px;}.hdr.frosted{padding-left:24px;padding-right:24px;}}
+@media(max-width:720px){.hdr .head-cta{display:none;}.hdr{padding:14px 24px;gap:16px;}.hdr.frosted{padding:14px 24px;}.hdr.compact{padding-top:12px;padding-bottom:12px;}.sec{padding:80px 0;}#lab{padding:100px 24px 110px;}.lab-chips{max-width:100%;}#totop{right:16px;bottom:max(16px,env(safe-area-inset-bottom));}}
+@media(max-width:400px){.hdr .brand-sub{font-size:9px;letter-spacing:.03em;}}
+/* mobile menu — как #eco-menu на главной */
+.mmenu{position:fixed;inset:0;z-index:180;background:rgba(247,251,249,.97);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);display:flex;flex-direction:column;padding:22px 24px 36px;opacity:0;visibility:hidden;transition:opacity .25s ease;outline:none;}
 .mmenu.open{opacity:1;visibility:visible;}
 body.menu-open{overflow:hidden;}
-body.menu-open .hdr{z-index:85;}
-body.menu-open .burger span{background:#fff;}
-.mmenu nav{display:flex;flex-direction:column;}
-.mmenu nav a{font-size:clamp(26px,7vw,38px);font-weight:300;letter-spacing:-.01em;color:#fff;text-decoration:none;padding:14px 0;min-height:44px;display:flex;align-items:center;border-bottom:1px solid var(--line-on-dark);transition:color .3s,padding-left .3s;}
-.mmenu nav a:hover{color:var(--lime);padding-left:10px;}
-.mm-foot{margin-top:auto;padding-top:30px;display:flex;flex-direction:column;gap:18px;}
-.mm-foot .phone{font-size:22px;color:#fff;font-weight:500;text-decoration:none;}
-.mm-foot .btn{align-self:flex-start;}
+body.menu-open .hdr{z-index:185;}
+.mm-top{display:flex;align-items:center;justify-content:space-between;}
+.mm-brand{font-size:20px;font-weight:600;color:#0B5C60;}
+.mm-close{display:flex;align-items:center;justify-content:center;width:44px;height:44px;border:1px solid rgba(11,92,96,.25);border-radius:12px;background:#fff;cursor:pointer;padding:0;}
+.mmenu nav{display:flex;flex-direction:column;gap:6px;margin-top:48px;}
+.mmenu nav a{font-size:30px;font-weight:300;color:#13282B;text-decoration:none;padding:14px 0;min-height:44px;display:flex;align-items:center;border-bottom:1px solid rgba(11,92,96,.1);}
+.mm-foot{margin-top:auto;display:flex;flex-direction:column;gap:16px;}
+.mm-foot .phone{font-size:19px;font-weight:500;color:#0B5C60;text-decoration:none;}
+.mm-foot .head-cta{display:inline-flex;align-items:center;justify-content:center;gap:10px;background:linear-gradient(105deg,#139EA1,#1C6BA2);color:#fff;font-size:16px;font-weight:500;text-decoration:none;padding:18px 38px;border-radius:999px;}
 /* reveal */
 .reveal{opacity:0;transform:translateY(26px);transition:opacity .8s ease,transform .9s cubic-bezier(.16,1,.3,1);}
 .reveal.in{opacity:1;transform:none;}
@@ -185,9 +171,15 @@ body.menu-open .burger span{background:#fff;}
 </head>
 <body>
 
-<header class="hdr" id="hdr">
-<a class="logo" href="index.html"><img id="hdr-logo" src="assets/fingerprint-color.png" alt="Эколог"><span class="brand"><b>Эколог</b><span>независимый исследовательский центр</span></span></a>
-<nav>
+<header class="hdr frosted" id="hdr">
+<a class="logo" href="index.html" aria-label="Эколог — на главную">
+<img src="assets/fingerprint-color.png" alt="">
+<span class="brand">
+<span class="brand-title">Эколог</span>
+<span class="brand-sub">независимый исследовательский центр</span>
+</span>
+</a>
+<nav aria-label="Основная навигация">
 <a href="index.html#uslugi">Услуги</a>
 <a href="#lab" class="active">Лаборатория</a>
 <a href="index.html#proekty">Проекты</a>
@@ -195,15 +187,23 @@ body.menu-open .burger span{background:#fff;}
 <a href="index.html#esg">ESG</a>
 <a href="#lab-contact">Контакты</a>
 </nav>
-<div class="cta">
-<span class="phone">+7 (812) 240-00-00</span>
-<a class="btn btn-grad mini" href="#lab-contact">Запросить КП</a>
-<button class="burger" id="burger" type="button" aria-label="Меню" aria-expanded="false" aria-controls="mmenu"><span></span><span></span><span></span></button>
+<div class="hdr-actions">
+<a class="phone" href="tel:+78122400000">+7 (812) 240-00-00</a>
+<a class="head-cta" href="#lab-contact">Заказать исследование</a>
+<button class="burger" id="burger" type="button" aria-label="Открыть меню" aria-expanded="false" aria-controls="mmenu">
+<svg width="20" height="14" viewBox="0 0 20 14" aria-hidden="true"><g stroke="#0B5C60" stroke-width="1.8" stroke-linecap="round"><line x1="1" y1="1" x2="19" y2="1"></line><line x1="1" y1="7" x2="19" y2="7"></line><line x1="1" y1="13" x2="19" y2="13"></line></g></svg>
+</button>
 </div>
 </header>
 
-<div class="mmenu" id="mmenu">
-<nav>
+<div class="mmenu" id="mmenu" role="dialog" aria-modal="true" aria-label="Меню навигации" tabindex="-1">
+<div class="mm-top">
+<span class="mm-brand">Эколог</span>
+<button type="button" class="mm-close" id="mm-close" aria-label="Закрыть меню">
+<svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><g stroke="#0B5C60" stroke-width="1.8" stroke-linecap="round"><line x1="2" y1="2" x2="14" y2="14"></line><line x1="14" y1="2" x2="2" y2="14"></line></g></svg>
+</button>
+</div>
+<nav aria-label="Мобильная навигация">
 <a href="index.html#uslugi">Услуги</a>
 <a href="#lab">Лаборатория</a>
 <a href="index.html#proekty">Проекты</a>
@@ -212,8 +212,8 @@ body.menu-open .burger span{background:#fff;}
 <a href="#lab-contact">Контакты</a>
 </nav>
 <div class="mm-foot">
-<a class="phone" href="tel:+78124499348">+7 (812) 449-93-48</a>
-<a class="btn btn-grad" href="#lab-contact">Запросить КП <span aria-hidden="true" style="font-size:18px;">&rarr;</span></a>
+<a class="phone" href="tel:+78122400000">+7 (812) 240-00-00</a>
+<a class="head-cta" href="#lab-contact">Заказать исследование</a>
 </div>
 </div>
 
@@ -471,12 +471,15 @@ body.menu-open .burger span{background:#fff;}
 (function(){
 var reduced=window.matchMedia&&window.matchMedia('(prefers-reduced-motion:reduce)').matches;
 
-// Header solid after hero
+// Header — как на главной: frosted над тёмным героем, compact при скролле
 var hdr=document.getElementById('hdr');
 function onHdrScroll(){
  var lab=document.getElementById('lab');
- var h=lab?(lab.offsetTop+lab.offsetHeight-100):window.innerHeight*.85;
- hdr.classList.toggle('solid',window.scrollY>h);
+ var labEnd=lab?(lab.offsetTop+lab.offsetHeight-80):0;
+ var inDarkHero=lab&&window.scrollY<labEnd;
+ var scrolled=window.scrollY>40;
+ hdr.classList.toggle('frosted',inDarkHero||scrolled);
+ hdr.classList.toggle('compact',scrolled&&!inDarkHero);
 }
 window.addEventListener('scroll',onHdrScroll,{passive:true});
 onHdrScroll();
@@ -515,8 +518,14 @@ onScroll();
 function closeMenu(){
  var m=document.getElementById('mmenu'),b=document.getElementById('burger');
  if(m)m.classList.remove('open');
- if(b){b.classList.remove('open');b.setAttribute('aria-expanded','false');}
+ if(b)b.setAttribute('aria-expanded','false');
  document.body.classList.remove('menu-open');
+}
+function openMenu(){
+ var m=document.getElementById('mmenu'),b=document.getElementById('burger');
+ if(m)m.classList.add('open');
+ if(b)b.setAttribute('aria-expanded','true');
+ document.body.classList.add('menu-open');
 }
 [].slice.call(document.querySelectorAll('a[href^="#"]')).forEach(function(a){
  a.addEventListener('click',function(e){
@@ -532,13 +541,12 @@ function closeMenu(){
 });
 if(totop)totop.addEventListener('click',function(){window.scrollTo({top:0,behavior:reduced?'auto':'smooth'});});
 var burger=document.getElementById('burger');
+var mmClose=document.getElementById('mm-close');
 if(burger)burger.addEventListener('click',function(){
  var m=document.getElementById('mmenu');
- var open=m.classList.toggle('open');
- burger.classList.toggle('open',open);
- burger.setAttribute('aria-expanded',open?'true':'false');
- document.body.classList.toggle('menu-open',open);
+ if(m.classList.contains('open'))closeMenu();else openMenu();
 });
+if(mmClose)mmClose.addEventListener('click',closeMenu);
 })();
 </script>
 </body>
