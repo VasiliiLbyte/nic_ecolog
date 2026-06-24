@@ -68,7 +68,9 @@ From lab section, emphasize service ids: `lab`, `nds`, `izm`, `iei`, `pek`
 - WebGL mesh backgrounds (`cvLab`, `cvQual`)
 - Top scroll progress bar `#prog`
 
-**Tokens:** `tokens/colors.css`, `tokens/effects.css` linked in `<head>`.
+**Tokens:** `tokens/colors.css`, `tokens/effects.css`, `tokens/responsive.css` linked in `<head>`.
+
+**Mobile breakpoints (aligned with CHECKLIST):** ≤1060px burger + 2-col srv/footer; ≤720px pad-x 24px, hide header CTA, 1-col srv, hero `padding-top` ~100px; ≤560px footer 1-col. See `design-system/pages/mobile.md`.
 
 **Navigation:** header links to `index.html#…`; lab anchors `#lab`, `#process`, `#lab-contact`. Footer includes `#process`.
 

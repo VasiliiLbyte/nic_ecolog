@@ -5,9 +5,11 @@
   "scripts": {
     "icons:optimize": "svgo -f assets/icons/lab -o assets/icons/lab --config svgo.config.mjs",
     "pages:build": "node scripts/build-pages.mjs",
-    "pages:preview": "npx --yes serve docs -p 8766"
+    "pages:preview": "npx --yes serve docs -p 8766",
+    "mobile:audit": "node scripts/mobile-audit.mjs"
   },
   "devDependencies": {
+    "playwright": "^1.49.1",
     "svgo": "^3.3.2"
   }
 }

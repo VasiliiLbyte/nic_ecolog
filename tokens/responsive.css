@@ -1,0 +1,15 @@
+/* RESPONSIVE — shared breakpoints for НИЦ «Эколог»
+   Test viewports: 375 / 768 / 1024 / 1440 (CHECKLIST) */
+@import url('./spacing.css');
+
+:root {
+  --bp-nav: 1060px;
+  --bp-mobile: 720px;
+  --bp-narrow: 480px;
+}
+
+@media (max-width: 720px) {
+  :root {
+    --section-pad-x: var(--section-pad-x-sm);
+  }
+}

@@ -17,8 +17,9 @@
 <style>
 @import url('./tokens/colors.css');
 @import url('./tokens/effects.css');
-html{scroll-behavior:smooth}
-body{margin:0;background:#FFFFFF;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+@import url('./tokens/responsive.css');
+html{scroll-behavior:smooth;overflow-x:clip}
+body{margin:0;background:#FFFFFF;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-x:clip}
 *{box-sizing:border-box}
 /* Brand display face — Stölzl (full Cyrillic); Onest stays the body face */
 @font-face{font-family:'Stolzl';src:url('./assets/Stolzl-Book.woff2') format('woff2');font-weight:300;font-style:normal;font-display:swap}
@@ -70,6 +71,7 @@ input::placeholder,textarea::placeholder{color:#8AA0A0}
 a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible,[data-svc]:focus-visible,[data-rail-item]:focus-visible,[tabindex]:focus-visible{outline:2px solid #139EA1;outline-offset:2px;border-radius:8px}
 [data-rail].on-dark [data-rail-item]:focus-visible,.on-dark a:focus-visible,.on-dark button:focus-visible{outline-color:#ADCF7A}
 :focus:not(:focus-visible){outline:none}
+#eco-menu nav a{padding:14px 0;min-height:44px;display:flex;align-items:center}
 /* Skip-link «К основному содержимому» */
 [data-skip]{position:absolute;left:16px;top:-60px;z-index:300;background:#FFFFFF;color:#0B5C60;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;text-decoration:none;padding:12px 18px;border-radius:10px;box-shadow:0 12px 28px rgba(11,92,96,0.2);transition:top 0.2s ease}
 [data-skip]:focus{top:16px}
@@ -85,11 +87,26 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
   [data-logo-wall]{grid-template-columns:repeat(2,1fr) !important}
 }
 @media (max-width:720px){
-  [data-sec]{padding-left:24px !important;padding-right:24px !important}
+  [data-sec]{padding-left:24px !important;padding-right:24px !important;padding-top:80px !important;padding-bottom:80px !important}
+  #top{padding-top:120px !important;padding-bottom:48px !important;min-height:auto !important}
+  #top h1{font-size:clamp(32px,9vw,44px) !important;line-height:1.08 !important}
+  #top [data-hero-meta]{font-size:11px !important;line-height:1.55 !important;letter-spacing:0.02em !important}
   [data-head-cta]{display:none !important}
+  #eco-header{padding-left:16px !important;padding-right:16px !important;gap:16px !important}
   [data-cols4]{grid-template-columns:1fr !important}
   [data-steps]{grid-template-columns:1fr !important}
   [data-cta-row]{flex-direction:column !important;align-items:stretch !important}
+  [data-cta-row] a{width:100% !important;justify-content:center !important;box-sizing:border-box}
+  [data-logo-wall] > div{word-break:break-word}
+  #kontakty [data-cols4]{grid-template-columns:1fr 1fr !important;gap:32px !important}
+  #zayavka [data-two-col]{grid-template-columns:1fr !important}
+  #zayavka #kontakty-info,#zayavka #eco-form{padding:40px 28px !important}
+}
+@media (max-width:480px){
+  #kontakty [data-cols4]{grid-template-columns:1fr !important}
+}
+@media (hover:none){
+  [data-svc] [data-desc]{max-height:88px;opacity:1}
 }
 @media (prefers-reduced-motion: reduce){
   *{animation-duration:0.01ms !important;animation-iteration-count:1 !important;transition-duration:0.01ms !important}
@@ -200,7 +217,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
           <a href="#zayavka" style="display:inline-flex;align-items:center;gap:10px;background:linear-gradient(105deg,#139EA1,#1C6BA2);color:#FFFFFF;font-size:16px;font-weight:500;text-decoration:none;padding:18px 38px;border-radius:999px;box-shadow:0 14px 34px rgba(19,158,161,0.28);transition:transform 0.25s ease,box-shadow 0.25s ease" style-hover="transform:translateY(-3px);box-shadow:0 20px 44px rgba(19,158,161,0.4)">Заказать исследование <span aria-hidden="true">→</span></a>
           <a href="#uslugi" style="display:inline-flex;align-items:center;gap:10px;border:1px solid rgba(11,92,96,0.35);color:#0B5C60;font-size:16px;font-weight:500;text-decoration:none;padding:17px 36px;border-radius:999px;background:rgba(255,255,255,0.5);transition:background 0.25s ease,border-color 0.25s ease" style-hover="background:rgba(11,92,96,0.07);border-color:#0B5C60">Услуги</a>
         </div>
-        <p style="margin:56px 0 0;font-family:'JetBrains Mono',monospace;font-size:12.5px;color:#51696B;letter-spacing:0.04em;animation:fadeIn 1s ease 1s both">14 лет в экологическом инжиниринге&nbsp;&nbsp;·&nbsp;&nbsp;аккредитованная лаборатория «Аналитик Лаб»&nbsp;&nbsp;·&nbsp;&nbsp;Лахта Центр, порты, МОЭК, Мариинский театр</p>
+        <p data-hero-meta="true" style="margin:56px 0 0;font-family:'JetBrains Mono',monospace;font-size:12.5px;color:#51696B;letter-spacing:0.04em;animation:fadeIn 1s ease 1s both">14 лет в экологическом инжиниринге&nbsp;&nbsp;·&nbsp;&nbsp;аккредитованная лаборатория «Аналитик Лаб»&nbsp;&nbsp;·&nbsp;&nbsp;Лахта Центр, порты, МОЭК, Мариинский театр</p>
       </div>
     </section>
 
@@ -842,7 +859,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
         </button>
       </div>
       <nav aria-label="Мобильная навигация" style="display:flex;flex-direction:column;gap:6px;margin-top:48px">
-        <a href="#uslugi" onClick="{{ closeMenu }}" style="font-size:30px;font-weight:300;color:#13282B;text-decoration:none;padding:10px 0;border-bottom:1px solid rgba(11,92,96,0.1)">Услуги</a>
+        <a href="#uslugi" onClick="{{ closeMenu }}" style="font-size:30px;font-weight:300;color:#13282B;text-decoration:none;padding:14px 0;min-height:44px;display:flex;align-items:center;border-bottom:1px solid rgba(11,92,96,0.1)">Услуги</a>
         <a href="#laboratoriya" onClick="{{ closeMenu }}" style="font-size:30px;font-weight:300;color:#13282B;text-decoration:none;padding:10px 0;border-bottom:1px solid rgba(11,92,96,0.1)">Лаборатория</a>
         <a href="#proekty" onClick="{{ closeMenu }}" style="font-size:30px;font-weight:300;color:#13282B;text-decoration:none;padding:10px 0;border-bottom:1px solid rgba(11,92,96,0.1)">Проекты</a>
         <a href="#o-centre" onClick="{{ closeMenu }}" style="font-size:30px;font-weight:300;color:#13282B;text-decoration:none;padding:10px 0;border-bottom:1px solid rgba(11,92,96,0.1)">О центре</a>
