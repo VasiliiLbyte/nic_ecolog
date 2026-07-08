@@ -36,7 +36,8 @@ Fixed full-viewport modal, z-index 170, `overscroll-behavior: contain`.
 | Lead | `{{ svcLead }}` |
 | Facts | СРОК: `{{ svcTerm }}` · КОМУ: `{{ svcWho }}` |
 | Result card | `{{ svcResult }}` |
-| Includes | Numbered list `{{ svcIncludes }}` (01, 02, …) |
+| Includes | Vertical timeline `{{ svcIncludes }}` — `[data-svc-steps]` / `[data-svc-step]` with gradient nodes (01, 02, …) |
+| Aside | Sticky on desktop: `{{ svcResult }}` + `{{ svcWhyUs }}` in `[data-svc-aside]` |
 | Related | `{{ svcRelated }}` — opens sibling service |
 | CTA | Close + «Оставить заявку» → scroll to `#zayavka` |
 
@@ -54,10 +55,20 @@ Fixed full-viewport modal, z-index 170, `overscroll-behavior: contain`.
 Each entry must include:
 - `lead` — outcome-led paragraph
 - `term`, `who`, `result`
-- `includes[]` — 4–5 concrete bullets
+- `includes[]` — 4–6 concrete bullets (НДВ has 6 after client review); long lists use vertical timeline + sticky aside
 - `related[]` — 2–3 service ids
 
 Highlight lab «Аналитик Лаб» where measurements are in-house (НДС, СЗЗ, ПЭК, ИЭИ, lab).
+
+---
+
+## Steps timeline (overlay)
+
+- Wrapper: `[data-svc-steps]`; each item: `[data-svc-step]` with `[data-svc-step-n]` + `[data-svc-step-text]`
+- Vertical gradient line between nodes (pattern from `#protsess`, rotated vertical)
+- Last step has `border-bottom` to close the list visually
+- Desktop: `[data-svc-aside]` is `position: sticky; top: 24px` — balances long step lists (e.g. НДВ)
+- ≤1060px: sticky off, step padding `16px`, single column via `[data-two-col]`
 
 ---
 

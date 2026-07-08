@@ -42,6 +42,22 @@ input::placeholder,textarea::placeholder{color:#8AA0A0}
 [data-svc]:hover [data-desc],[data-svc]:focus-within [data-desc]{max-height:280px;opacity:1}
 [data-proj] [data-pimg]{transition:transform 0.9s cubic-bezier(0.22,1,0.36,1)}
 [data-proj]:hover [data-pimg]{transform:scale(1.045)}
+/* Service overlay — steps timeline + sticky aside */
+#eco-svc-page [data-svc-aside]{position:sticky;top:24px;align-self:start}
+[data-svc-steps]{display:flex;flex-direction:column}
+[data-svc-step]{position:relative;display:flex;gap:20px;padding:18px 0 18px 28px;border-top:1px solid rgba(11,92,96,0.12)}
+[data-svc-step]:last-child{border-bottom:1px solid rgba(11,92,96,0.12)}
+[data-svc-step]::before{content:'';position:absolute;left:0;top:22px;width:11px;height:11px;border-radius:50%;background:var(--svc-node,#139EA1);box-shadow:0 0 0 4px var(--svc-node-glow,rgba(19,158,161,0.25));z-index:1}
+[data-svc-step]:not(:last-child)::after{content:'';position:absolute;left:5px;top:33px;bottom:0;width:1px;background:linear-gradient(180deg,var(--svc-line-from,#ADCF7A),var(--svc-line-to,#139EA1));opacity:0.45}
+[data-svc-step]:nth-child(1){--svc-node:#ADCF7A;--svc-node-glow:rgba(173,207,122,0.25);--svc-line-from:#ADCF7A;--svc-line-to:#4CB272}
+[data-svc-step]:nth-child(2){--svc-node:#4CB272;--svc-node-glow:rgba(76,178,114,0.25);--svc-line-from:#4CB272;--svc-line-to:#139EA1}
+[data-svc-step]:nth-child(3){--svc-node:#139EA1;--svc-node-glow:rgba(19,158,161,0.25);--svc-line-from:#139EA1;--svc-line-to:#1C6BA2}
+[data-svc-step]:nth-child(4){--svc-node:#1C6BA2;--svc-node-glow:rgba(28,107,162,0.25);--svc-line-from:#1C6BA2;--svc-line-to:#0B5C60}
+[data-svc-step]:nth-child(5){--svc-node:#0B5C60;--svc-node-glow:rgba(11,92,96,0.25);--svc-line-from:#0B5C60;--svc-line-to:#139EA1}
+[data-svc-step]:nth-child(6){--svc-node:#139EA1;--svc-node-glow:rgba(19,158,161,0.25);--svc-line-from:#139EA1;--svc-line-to:#1C6BA2}
+[data-svc-step]:nth-child(n+7){--svc-node:#0B5C60;--svc-node-glow:rgba(11,92,96,0.25);--svc-line-from:#0B5C60;--svc-line-to:#139EA1}
+[data-svc-step-n]{font-family:'JetBrains Mono',monospace;font-size:12px;color:#7A8E8E;padding-top:2px;flex:0 0 auto;min-width:2ch}
+[data-svc-step-text]{margin:0;font-size:16px;line-height:1.65;color:#2C4346}
 /* Рельс-навигация по секциям — ghost rail */
 [data-rail]{position:fixed;top:50%;right:12px;transform:translateY(-50%);z-index:90;pointer-events:none}
 [data-rail-shell]{position:relative;display:flex;flex-direction:column;gap:14px;align-items:flex-end;padding:0;background:transparent;border:none;box-shadow:none}
@@ -85,6 +101,10 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
   [data-steps]{grid-template-columns:repeat(2,1fr) !important}
   [data-proj-grid]>*{grid-column:1 / -1 !important}
   [data-logo-wall]{grid-template-columns:repeat(2,1fr) !important}
+  #eco-svc-page [data-svc-aside]{position:static}
+  [data-svc-step]{padding:16px 0 16px 28px}
+  [data-svc-step]::before{top:20px}
+  [data-svc-step]:not(:last-child)::after{top:31px}
 }
 @media (max-width:720px){
   [data-sec]{padding-left:24px !important;padding-right:24px !important;padding-top:80px !important;padding-bottom:80px !important}
@@ -810,16 +830,16 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
         <div data-two-col="true" style="display:grid;grid-template-columns:1.1fr 0.9fr;gap:56px;margin-top:64px;align-items:start">
           <div>
             <h2 style="margin:0 0 28px;font-weight:400;font-size:26px;color:#13282B">Что входит в работу</h2>
-            <div style="display:flex;flex-direction:column">
+            <div data-svc-steps="true">
               <sc-for list="{{ svcIncludes }}" as="step" hint-placeholder-count="4">
-                <div style="display:flex;gap:22px;padding:20px 0;border-top:1px solid rgba(11,92,96,0.12)">
-                  <span style="font-family:'JetBrains Mono',monospace;font-size:13px;color:#139EA1;padding-top:2px;flex:0 0 auto">{{ step.n }}</span>
-                  <p style="margin:0;font-size:16px;line-height:1.65;color:#2C4346">{{ step.text }}</p>
+                <div data-svc-step="true">
+                  <span data-svc-step-n="true">{{ step.n }}</span>
+                  <p data-svc-step-text="true">{{ step.text }}</p>
                 </div>
               </sc-for>
             </div>
           </div>
-          <div style="display:flex;flex-direction:column;gap:18px">
+          <div data-svc-aside="true" style="display:flex;flex-direction:column;gap:18px">
             <div style="background:linear-gradient(135deg,#0B5C60,#14496F);border-radius:24px;padding:34px 36px;color:#FFFFFF">
               <p style="margin:0 0 10px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.18em;color:#ADCF7A">РЕЗУЛЬТАТ</p>
               <p style="margin:0;font-size:17px;line-height:1.65;color:rgba(255,255,255,0.92)">{{ svcResult }}</p>
