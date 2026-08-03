@@ -43,7 +43,8 @@ Fixed full-viewport modal, z-index 170, `overscroll-behavior: contain`.
 
 **Behavior:**
 - `openService(id)` sets `body overflow: hidden`, scrolls overlay top
-- `closeService()` on Escape or close button
+- `closeService()` on Escape or close button («Назад к услугам»)
+- Logo and breadcrumb **ГЛАВНАЯ** call `goHome()` — close overlay and scroll to `#top`
 - `goForm()` closes modal then scrolls to form
 
 **Static reference:** `ui_kits/website/service.html` (СЗЗ example)
