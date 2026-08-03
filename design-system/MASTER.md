@@ -77,6 +77,7 @@ Neutrals are **cool slate**, never warm gray.
 | Labels / data | JetBrains Mono (`--font-mono`) | 400/500, uppercase eyebrows |
 
 Scale: `--fs-hero`, `--fs-h2`, `--fs-lead`, `--fs-label` from `tokens/typography.css`.
+For new type, prefer the fluid scale `--fluid-text-*` from `tokens/fluid.css` (h2 → `--fluid-text-4`, hero → `--fluid-text-6`) — smooth scaling without breakpoint jumps.
 
 ---
 
@@ -142,11 +143,15 @@ Near-iconless by design. Allowed:
 | Path | Purpose |
 |------|---------|
 | `styles.css` | Token entry point |
-| `tokens/` | fonts, colors, typography, spacing, effects |
+| `tokens/` | reset, fonts, colors, typography, spacing, **fluid**, effects |
+| `tokens/fluid.css` | Fluid type/space scales (`--fluid-text-*`, `--fluid-space-*`, Utopia clamp()) |
+| `tokens/reset.css` | Modern accessible CSS reset |
 | `components/` | React primitives + `.prompt.md` per component |
 | `guidelines/` | Brand specimen cards |
 | `ui_kits/website/` | Static homepage + service detail recreation |
 | `NIC Ecolog - Главная v2.dc.html` | Full interactive master (22 services, modals, motion) |
+| `design-system/references/` | Curated best-practice library (design, mobile, content, a11y/perf, inspiration) |
+| `design-system/MOBILE-PLAYBOOK.md` | Forward-looking mobile-adaptation practices |
 | `design-system/CHECKLIST.md` | Pre-delivery QA |
 | `design-system/STACK.md` | Production stack guidance |
 | `design-system/PROMPTS.md` | Team prompt templates |

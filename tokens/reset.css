@@ -1,0 +1,61 @@
+/* MODERN RESET — НИЦ «Эколог»
+   Accessible, cross-device baseline. Lineage: Andy Bell's "modern CSS reset" +
+   Josh Comeau's "custom CSS reset" (see design-system/references/design-and-css.md).
+
+   Kept MINIMAL and non-breaking: it normalises box model, form inheritance, media
+   defaults, tap behaviour and reduced-motion — it does NOT impose typography, colour or
+   spacing (those live in the token files and the brand layer). Safe to @import first.
+
+   Why: consistent rendering on iOS/Android (the mobile-adaptation goal), no surprise
+   overflow from media/tables, keyboard-safe scroll offsets, and one central
+   prefers-reduced-motion guard. */
+
+/* Predictable sizing everywhere */
+*, *::before, *::after { box-sizing: border-box; }
+
+/* Remove default margins; let the layer/tokens own spacing */
+* { margin: 0; }
+
+html {
+  /* Prevent iOS text auto-inflation in landscape; keep author sizes */
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  /* Anchor targets clear the fixed header (pages also set scroll-margin-top per section) */
+  scroll-padding-top: 80px;
+}
+
+body {
+  min-height: 100dvh;         /* dynamic viewport — correct on mobile with URL bar */
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Media: never overflow their container; sensible display */
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Forms inherit type instead of the UA default */
+input, button, textarea, select { font: inherit; color: inherit; }
+
+/* Avoid long words breaking layout on narrow screens */
+h1, h2, h3, h4, p { overflow-wrap: break-word; }
+
+/* Remove the tap flash on iOS/Android for our own :active/hover styling */
+a, button, [role="button"], input, label, select, textarea {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Respect users who ask for less motion — one central guard.
+   Page-level rules may add more (e.g. neutralising reveal transforms). */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

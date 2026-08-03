@@ -64,8 +64,11 @@ echoing topographic isolines. If a UI needs a broader icon set, use a thin-strok
 
 ## INDEX
 - `styles.css` — entry point (link this). `@import`s everything below.
-- `tokens/` — `fonts.css`, `colors.css`, `typography.css`, `spacing.css`, `effects.css`.
+- `tokens/` — `reset.css`, `fonts.css`, `colors.css`, `typography.css`, `spacing.css`, `fluid.css`, `effects.css`.
+  - `fluid.css` — fluid type/space on `clamp()` (Utopia); `reset.css` — modern accessible reset.
 - `guidelines/` — foundation specimen cards (Colors, Type, Spacing, Brand).
+- `design-system/references/` — curated best-practice library (design & CSS, mobile, content, a11y/perf, inspiration).
+- `design-system/MOBILE-PLAYBOOK.md` — forward-looking mobile-adaptation practices.
 - `components/` — reusable primitives: `buttons/`, `badges/`, `cards/`, `section/`, `forms/`.
   - `section/` holds SectionHeader, **DarkSection** (Lab/ESG/Contact band), **ProcessSteps** (numbered timeline).
   - `forms/` holds **RequestForm** + the labelled **Field** primitive.

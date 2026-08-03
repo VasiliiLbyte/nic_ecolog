@@ -1,8 +1,10 @@
 /* НИЦ «Эколог» — Design System
    Single entry point. Consumers link THIS file.
    Keep this file as @import lines only — no rules here. */
+@import "tokens/reset.css";
 @import "tokens/fonts.css";
 @import "tokens/colors.css";
 @import "tokens/typography.css";
 @import "tokens/spacing.css";
+@import "tokens/fluid.css";
 @import "tokens/effects.css";

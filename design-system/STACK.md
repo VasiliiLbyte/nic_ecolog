@@ -11,16 +11,20 @@ Production stack is **not yet chosen**. Default to the current prototype stack u
 | Layer | Source |
 |-------|--------|
 | Tokens | `styles.css` → `tokens/*.css` |
+| Reset | `tokens/reset.css` (modern accessible baseline) |
+| Fluid scales | `tokens/fluid.css` (`--fluid-text-*`, `--fluid-space-*`, Utopia clamp()) |
 | Interactive master | `NIC Ecolog - Главная v2.dc.html` |
 | DC runtime | `support.js`, `image-slot.js` |
 | Components (reference) | `components/*.jsx` + `.prompt.md` |
 | Static kit | `ui_kits/website/index.html`, `service.html` |
+| Best-practice refs | `design-system/references/`, `design-system/MOBILE-PLAYBOOK.md` |
 
 **Rules:**
 - Link `styles.css` or duplicate token values as CSS custom properties
 - Prefer semantic HTML + minimal inline styles in DC files (match v2 conventions)
 - Reuse `data-*` hooks for scroll, rail, services, reveal animations
 - Do not introduce Tailwind in DC files unless migrating a specific page
+- Prefer `--fluid-*` tokens over ad-hoc `clamp()` for new type/spacing
 
 **Pro Max stack search:**
 ```bash
