@@ -76,7 +76,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
 .hdr .head-cta:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(19,158,161,.35);}
 .burger{display:none;align-items:center;justify-content:center;width:44px;height:44px;border:1px solid rgba(11,92,96,.25);border-radius:12px;background:rgba(255,255,255,.75);cursor:pointer;padding:0;flex:0 0 auto;}
 @media(max-width:1060px){.hdr nav,.hdr .phone{display:none;}.burger{display:flex;}.hdr{padding-left:24px;padding-right:24px;}.hdr.frosted{padding-left:24px;padding-right:24px;}}
-@media(max-width:720px){.hdr .head-cta{display:none;}.hdr{padding:14px 24px;gap:16px;}.hdr.frosted{padding:14px 24px;}.hdr.compact{padding-top:12px;padding-bottom:12px;}.sec{padding:80px 0;}#lab{padding:calc(116px + env(safe-area-inset-top)) 24px 96px;}.lab-chips{max-width:100%;flex-direction:column;align-items:flex-start;gap:10px;}.lab-chips>span[aria-hidden]{transform:rotate(90deg);margin-left:22px;}#totop{right:16px;bottom:max(16px,env(safe-area-inset-bottom));}}
+@media(max-width:720px){.hdr .head-cta{display:none;}.hdr{padding:14px 24px;gap:16px;}.hdr.frosted{padding:14px 24px;}.hdr.compact{padding-top:12px;padding-bottom:12px;}.sec{padding:80px 0;}#lab{padding:calc(116px + env(safe-area-inset-top)) 24px 96px;}#totop{right:16px;bottom:max(16px,env(safe-area-inset-bottom));}}
 @media(max-width:400px){.hdr .brand-sub{font-size:9px;letter-spacing:.03em;}}
 /* mobile menu — как #eco-menu на главной */
 .mmenu{position:fixed;inset:0;z-index:180;background:rgba(247,251,249,.97);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);display:flex;flex-direction:column;padding:22px 24px 36px;opacity:0;visibility:hidden;transition:opacity .25s ease;outline:none;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;}
@@ -121,7 +121,7 @@ body.menu-open .hdr{z-index:185;}
 .lab-cta-link{display:inline-flex;align-items:center;gap:8px;margin-top:0;font-size:15px;font-weight:500;color:var(--lime);text-decoration:none;transition:opacity .2s;}
 .lab-cta-link:hover{opacity:.85;}
 @media(max-width:1060px){#lab{padding:110px 24px 130px;}.lab-two-col{grid-template-columns:1fr;gap:48px;}}
-@media(max-width:720px){.lab-cta-row{flex-direction:column;gap:12px;}#lab h1{font-size:clamp(29px,8vw,42px) !important;}}
+@media(max-width:720px){.lab-cta-row{flex-direction:column;gap:12px;align-items:stretch;margin-top:32px;}#lab h1{font-size:clamp(29px,8vw,42px) !important;}.lab-chips{max-width:100%;flex-direction:column;align-items:stretch;gap:0;}.lab-chip{width:100%;justify-content:center;text-align:center;box-sizing:border-box;padding:14px 20px;font-size:15px;}.lab-chips>span[aria-hidden]{font-size:0;display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;margin:0;padding:9px 0;transform:none;}.lab-chips>span[aria-hidden]::before{content:"";width:2px;height:14px;border-radius:2px;background:rgba(255,255,255,.3);}.lab-chips>span[aria-hidden]::after{content:"";width:7px;height:7px;margin-top:-4px;border-right:2px solid rgba(255,255,255,.45);border-bottom:2px solid rgba(255,255,255,.45);transform:rotate(45deg);}.lab-cta-link{justify-content:center;width:100%;box-sizing:border-box;padding:16px 22px;border-radius:999px;font-size:15px;transition:transform .25s ease,box-shadow .25s ease,opacity .2s ease;}.lab-cta-link[href="#process"]{border:1px solid rgba(173,207,122,.5);background:rgba(173,207,122,.1);color:#D9EBB8;}.lab-cta-link[href="#lab-contact"]{background:var(--lime);border:1px solid transparent;color:#0A3D42;font-weight:600;box-shadow:0 12px 28px rgba(173,207,122,.28);}.lab-cta-link[href="#lab-contact"] span{color:#0A3D42;}.lab-cta-link:active{transform:translateY(1px);opacity:1;}}
 @media(max-width:560px){.lab-cap-grid{grid-template-columns:1fr;}}
 /* process */
 #process{background:var(--bg);}
@@ -437,8 +437,8 @@ body.menu-open .hdr{z-index:185;}
 </div>
 <form class="form reveal" id="lab-form" novalidate>
 <div class="fld"><label for="lab-name">Имя</label><input type="text" id="lab-name" name="name" placeholder="Как к вам обращаться" required></div>
-<div class="fld"><label for="lab-contact-field">Телефон или e-mail</label><input type="text" id="lab-contact-field" name="contact" placeholder="Для ответа с КП" required></div>
-<div class="fld"><label for="lab-task">Что нужно исследовать</label><textarea id="lab-task" name="task" placeholder="Например: анализ сточной воды по 12 показателям, выезд на объект в Колпино" required></textarea></div>
+<div class="fld"><label for="lab-contact-field">Телефон или e-mail</label><input type="text" id="lab-contact-field" name="contact" placeholder="Для отв��та с КП" required></div>
+<div class="fld"><label for="lab-task">Что нужно исследовать</label><textarea id="lab-task" name="task" placeholder="Например: анализ сточ��ой воды по 12 показателям, выезд на объект в Колпино" required></textarea></div>
 <button type="submit" class="btn btn-grad" style="width:100%;justify-content:center;">Получить предложение &rarr;</button>
 <div class="note">Нажимая кнопку, вы соглашаетесь с политикой обработки персональных данных.</div>
 </form>
