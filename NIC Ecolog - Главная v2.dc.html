@@ -62,6 +62,11 @@ html{hanging-punctuation:first last;hyphens:manual}
 .btn-primary>span[aria-hidden]{display:inline-block;transition:transform 0.25s ease}
 .btn-primary:hover>span[aria-hidden]{transform:translateX(4px)}
 .btn-primary:active{transform:translateY(0) scale(0.98)!important}
+[data-lab-link]>span[aria-hidden]{display:inline-block;transition:transform 0.25s ease}
+[data-lab-link]::after{content:"";position:absolute;left:0;bottom:-6px;height:2px;width:100%;background:currentColor;border-radius:2px;transform:scaleX(0);transform-origin:left;transition:transform 0.32s cubic-bezier(0.22,1,0.36,1);opacity:0.55}
+[data-lab-link]:hover{color:#C7E29B}
+[data-lab-link]:hover>span[aria-hidden]{transform:translateX(5px)}
+[data-lab-link]:hover::after{transform:scaleX(1)}
 input::placeholder,textarea::placeholder{color:#6E8385}
 @keyframes blobA{0%{transform:translate(0,0) scale(1)}33%{transform:translate(7%,-9%) scale(1.14)}66%{transform:translate(-6%,7%) scale(0.92)}100%{transform:translate(0,0) scale(1)}}
 @keyframes blobB{0%{transform:translate(0,0) scale(1)}40%{transform:translate(-8%,6%) scale(1.1)}70%{transform:translate(5%,-5%) scale(0.95)}100%{transform:translate(0,0) scale(1)}}
@@ -177,6 +182,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
   [data-flow-arrow]::before{content:"";width:2px;height:14px;border-radius:2px;background:rgba(255,255,255,0.3)}
   [data-flow-arrow]::after{content:"";width:7px;height:7px;margin-top:-4px;border-right:2px solid rgba(255,255,255,0.45);border-bottom:2px solid rgba(255,255,255,0.45);transform:rotate(45deg)}
   [data-lab-link]{justify-content:center !important;width:100% !important;box-sizing:border-box;padding:15px 22px !important;border-radius:999px;border:1px solid rgba(173,207,122,0.5);background:rgba(173,207,122,0.1);margin-top:24px !important}
+  [data-lab-link]::after{display:none !important}
 }
 @media (max-width:480px){
   #kontakty [data-cols4]{grid-template-columns:1fr !important}
@@ -430,17 +436,17 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
             <p data-rv="true" style="margin:0 0 18px;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:500;letter-spacing:0.22em;color:#ADCF7A;text-transform:uppercase">Собственная аккредитованная лаборатория</p>
             <h2 data-rv="true" style="margin:0;font-weight:300;font-size:clamp(38px,4vw,62px);line-height:1.08;letter-spacing:-0.01em;color:#FFFFFF">«Аналитик Лаб» — лаборатория в составе центра</h2>
             <p data-rv="true" style="margin:26px 0 0;font-size:17px;line-height:1.7;color:rgba(255,255,255,0.78);max-width:540px">Редкость для рынка: отбор и анализ проб, изыскания, документация и согласование — в одной команде и по одному адресу. Без субподряда, без потери качества данных и сроков.</p>
-            <div data-rv="true" data-flow="true" style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:36px">
-              <span style="display:inline-flex;align-items:center;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.22);border-radius:999px;padding:10px 20px;font-size:14px;font-weight:500">Изыскания</span>
-              <span aria-hidden="true" data-flow-arrow="true" style="color:rgba(255,255,255,0.5)">→</span>
-              <span style="display:inline-flex;align-items:center;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.22);border-radius:999px;padding:10px 20px;font-size:14px;font-weight:500">Лабораторный анализ</span>
-              <span aria-hidden="true" data-flow-arrow="true" style="color:rgba(255,255,255,0.5)">→</span>
-              <span style="display:inline-flex;align-items:center;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.22);border-radius:999px;padding:10px 20px;font-size:14px;font-weight:500">Документация</span>
-              <span aria-hidden="true" data-flow-arrow="true" style="color:rgba(255,255,255,0.5)">→</span>
-              <span style="display:inline-flex;align-items:center;background:rgba(173,207,122,0.18);border:1px solid rgba(173,207,122,0.5);border-radius:999px;padding:10px 20px;font-size:14px;font-weight:500;color:#D9EBB8">Согласование</span>
+            <div data-rv="true" data-flow="true" style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:36px">
+              <span style="display:inline-flex;align-items:center;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.22);border-radius:999px;padding:9px 16px;font-size:13.5px;font-weight:500;white-space:nowrap">Изыскания</span>
+              <span aria-hidden="true" data-flow-arrow="true" style="color:rgba(173,207,122,0.65);font-size:15px;line-height:1">→</span>
+              <span style="display:inline-flex;align-items:center;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.22);border-radius:999px;padding:9px 16px;font-size:13.5px;font-weight:500;white-space:nowrap">Лабораторный анализ</span>
+              <span aria-hidden="true" data-flow-arrow="true" style="color:rgba(173,207,122,0.65);font-size:15px;line-height:1">→</span>
+              <span style="display:inline-flex;align-items:center;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.22);border-radius:999px;padding:9px 16px;font-size:13.5px;font-weight:500;white-space:nowrap">Документация</span>
+              <span aria-hidden="true" data-flow-arrow="true" style="color:rgba(173,207,122,0.65);font-size:15px;line-height:1">→</span>
+              <span style="display:inline-flex;align-items:center;background:rgba(173,207,122,0.18);border:1px solid rgba(173,207,122,0.5);border-radius:999px;padding:9px 16px;font-size:13.5px;font-weight:500;white-space:nowrap;color:#D9EBB8">Согласование</span>
             </div>
             <p data-rv="true" style="margin:34px 0 0;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.1em;color:rgba(255,255,255,0.55)">ЛАБОРАТОРИЯ ВНЕСЕНА В РЕЕСТР АККРЕДИТОВАННЫХ ЛИЦ</p>
-            <a data-rv="true" data-lab-link="true" href="lab.html" style="display:inline-flex;align-items:center;gap:8px;margin-top:28px;font-size:15px;font-weight:500;color:#ADCF7A;text-decoration:none;transition:opacity 0.2s" style-hover="opacity:0.85">Страница лаборатории <span aria-hidden="true">→</span></a>
+            <a data-rv="true" data-lab-link="true" href="lab.html" style="position:relative;display:inline-flex;align-items:center;gap:8px;margin-top:28px;font-size:15px;font-weight:500;color:#ADCF7A;text-decoration:none;transition:color 0.25s ease">Страница лаборатории <span aria-hidden="true">→</span></a>
           </div>
           <div data-cols4="true" style="display:grid;grid-template-columns:repeat(2,1fr);gap:18px">
             <div data-rv="true" style="background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.16);border-radius:22px;padding:30px 28px;transition:background 0.3s ease" style-hover="background:rgba(255,255,255,0.12)">
@@ -513,7 +519,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
             <div data-svc="true" data-rv="true" tabindex="0" style="border:1px solid rgba(11,92,96,0.14);border-radius:20px;padding:26px 26px 22px;background:#FFFFFF;cursor:pointer;transition:border-color 0.3s ease,transform 0.3s ease,box-shadow 0.3s ease" style-hover="border-color:#139EA1;transform:translateY(-4px);box-shadow:0 18px 40px rgba(11,92,96,0.1)">
               <div style="display:flex;align-items:center;gap:12px"><span aria-hidden="true" style="width:10px;height:10px;border-radius:50%;background:radial-gradient(circle,#ADCF7A,#139EA1);box-shadow:0 0 12px rgba(173,207,122,0.8)"></span><span style="font-size:26px;font-weight:500;color:#0B5C60;letter-spacing:0.02em" data-svc-id="szz">СЗЗ</span></div>
               <p style="margin:10px 0 0;font-size:14.5px;color:#51696B">Проект санитарно-защитной зоны</p>
-              <div data-desc="true"><p style="margin:14px 0 0;font-size:14px;color:#3E5557;line-height:1.6">Проект СЗЗ с натурными измерениями нашей лаборатории — без привлечения подрядчиков.</p><p style="margin:12px 0 0;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.14em;color:#139EA1">СТРАНИЦА УСЛУГИ →</p></div>
+              <div data-desc="true"><p style="margin:14px 0 0;font-size:14px;color:#3E5557;line-height:1.6">Проект СЗЗ с ��атурными измерениями нашей лаборатории — без привлечения подрядчиков.</p><p style="margin:12px 0 0;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.14em;color:#139EA1">СТРАНИЦА УСЛУГИ →</p></div>
             </div>
             <div data-svc="true" data-rv="true" tabindex="0" style="border:1px solid rgba(11,92,96,0.14);border-radius:20px;padding:26px 26px 22px;background:#FFFFFF;cursor:pointer;transition:border-color 0.3s ease,transform 0.3s ease,box-shadow 0.3s ease" style-hover="border-color:#139EA1;transform:translateY(-4px);box-shadow:0 18px 40px rgba(11,92,96,0.1)">
               <div style="display:flex;align-items:center;gap:12px"><span aria-hidden="true" style="width:10px;height:10px;border-radius:50%;background:radial-gradient(circle,#1C6BA2,#0B5C60);box-shadow:0 0 12px rgba(28,107,162,0.8)"></span><span style="font-size:26px;font-weight:500;color:#0B5C60;letter-spacing:0.02em" data-svc-id="ker">КЭР</span></div>
