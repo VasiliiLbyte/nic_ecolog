@@ -30,6 +30,10 @@ const privacyHtml = `<!DOCTYPE html>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Политика конфиденциальности — НИЦ «Эколог»</title>
+  <meta name="description" content="Политика конфиденциальности НИЦ «Эколог».">
+  <link rel="canonical" href="https://nic-ecolog.ru/privacy.html">
+  <meta name="robots" content="noindex, follow">
+  <link rel="icon" type="image/png" href="assets/fingerprint-color.png">
   <style>
     body{margin:0;font-family:var(--font-body, 'Onest', sans-serif);background:#F7FBF9;color:#13282B;padding:48px 24px}
     .wrap{max-width:720px;margin:0 auto}
@@ -64,5 +68,30 @@ copyDir('assets', 'assets');
 
 writeFileSync(join(out, '.nojekyll'), '');
 writeFileSync(join(out, 'privacy.html'), privacyHtml);
+
+// --- SEO: custom domain, robots, sitemap ---
+const SITE = 'https://nic-ecolog.ru';
+const lastmod = new Date().toISOString().slice(0, 10);
+const sitemapPages = [
+  { loc: `${SITE}/`, priority: '1.0' },
+  { loc: `${SITE}/lab.html`, priority: '0.8' },
+  { loc: `${SITE}/privacy.html`, priority: '0.3' },
+];
+
+writeFileSync(join(out, 'CNAME'), 'nic-ecolog.ru\n');
+
+writeFileSync(join(out, 'robots.txt'), `User-agent: *\nAllow: /\n\nSitemap: ${SITE}/sitemap.xml\n`);
+
+const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${sitemapPages
+  .map(
+    (p) =>
+      `  <url>\n    <loc>${p.loc}</loc>\n    <lastmod>${lastmod}</lastmod>\n    <changefreq>monthly</changefreq>\n    <priority>${p.priority}</priority>\n  </url>`
+  )
+  .join('\n')}
+</urlset>
+`;
+writeFileSync(join(out, 'sitemap.xml'), sitemap);
 
 console.log('Built GitHub Pages artifact → docs/');
