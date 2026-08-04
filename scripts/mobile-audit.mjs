@@ -20,6 +20,12 @@ const PAGES = [
   { path: '/lab.html', slug: 'lab', shots: ['hero', 'services', 'form'] },
 ];
 
+/** Sections where clipped content must be caught even with overflow-x: clip */
+const CLIP_CHECK_SECTIONS = {
+  home: ['#top', '#laboratoriya', '#uslugi', '#zayavka', '#kontakty'],
+  lab: ['#lab', '#process', '#domains', '#lab-contact', '.ft'],
+};
+
 function waitForServer(url, timeoutMs = 30000) {
   const start = Date.now();
   return new Promise((resolve, reject) => {
@@ -69,6 +75,66 @@ async function assertNoOverflow(page, label) {
   }
 }
 
+/**
+ * Detects content clipped by overflow:hidden/clip when scrollWidth stays equal
+ * to viewport (common on #lab / #laboratoriya).
+ */
+async function assertNoVisualClip(page, label, sectionSelectors) {
+  const offenders = await page.evaluate((sels) => {
+    const vw = window.innerWidth;
+    const hits = [];
+    const roots = sels
+      .map((s) => document.querySelector(s))
+      .filter(Boolean);
+
+    const skip = (el) => {
+      if (!el || el.nodeType !== 1) return true;
+      if (el.getAttribute('aria-hidden') === 'true') return true;
+      if (el.hasAttribute('data-chroma')) return true;
+      const tag = el.tagName;
+      if (tag === 'SVG' || tag === 'PATH' || tag === 'LINE' || tag === 'CIRCLE' || tag === 'DEFS' || tag === 'G' || tag === 'STOP') {
+        return true;
+      }
+      const st = getComputedStyle(el);
+      if (st.position === 'fixed') return true;
+      if (st.visibility === 'hidden' || st.display === 'none' || Number(st.opacity) === 0) return true;
+      return false;
+    };
+
+    for (const root of roots) {
+      const nodes = root.querySelectorAll('h1,h2,h3,p,a,span,li,label,button,input,textarea');
+      for (const el of nodes) {
+        if (skip(el)) continue;
+        if (el.closest('[aria-hidden="true"]')) continue;
+        // Prefer leaf-ish text nodes; skip empty wrappers
+        if (!(el.textContent || '').trim() && el.tagName !== 'INPUT' && el.tagName !== 'TEXTAREA') continue;
+        const r = el.getBoundingClientRect();
+        if (r.width < 2 || r.height < 2) continue;
+        // Tolerate subpixel / scrollbar rounding
+        if (r.right > vw + 2) {
+          const text = (el.textContent || el.getAttribute('placeholder') || '').trim().slice(0, 48).replace(/\s+/g, ' ');
+          hits.push({
+            tag: el.tagName.toLowerCase(),
+            right: Math.round(r.right * 10) / 10,
+            vw,
+            text,
+          });
+          if (hits.length >= 8) return hits;
+        }
+      }
+    }
+    return hits;
+  }, sectionSelectors);
+
+  if (offenders.length) {
+    const sample = offenders
+      .slice(0, 3)
+      .map((o) => `<${o.tag}> right=${o.right}>${o.vw} "${o.text}"`)
+      .join('; ');
+    throw new Error(`${label}: visual clip ${sample}`);
+  }
+}
+
 async function run() {
   mkdirSync(outDir, { recursive: true });
 
@@ -92,6 +158,7 @@ async function run() {
         const label = `${pg.slug}@${vp.name}`;
         try {
           await assertNoOverflow(page, label);
+          await assertNoVisualClip(page, label, CLIP_CHECK_SECTIONS[pg.slug] || []);
         } catch (err) {
           failures.push(err.message);
           await page.screenshot({

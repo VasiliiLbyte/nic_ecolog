@@ -49,18 +49,22 @@ Tokens: `tokens/responsive.css` (imports `spacing.css`, switches `--section-pad-
 - Meta line `[data-hero-meta]`: 11px, relaxed line-height
 - CTA row `[data-cta-row]`: column stack, links `width: 100%`
 
-### Lab `#lab`
+### Lab `#lab` / homepage `#laboratoriya`
 
-- `padding-top`: ~**100px** at ≤720px
-- `.lab-cta-row`: column stack (no inline `margin-left` on second link)
-- `.lab-chips`: `max-width: 100%`, `flex-wrap`
+- `padding-top`: ~**100–116px** at ≤720px (fixed header + safe area)
+- H1: `clamp(29px, 8vw, 42px)` on ≤720px
+- Capability grid: **2 колонки**, на ≤560 → **1 колонка** (v0)
+- Process chips: вертикальный степпер с шевронами (не поворот стрелок)
+- CTA: pill-кнопки на мобиле (ghost + filled)
+- `.lab-chips` / меню: скролл на низких экранах (`max-height:720`)
 
 ---
 
 ## Sections
 
 - Vertical padding at ≤720px: **80px** (was 120–130px inline)
-- Services grid (lab): **3 → 2 → 1** columns at default / 1060 / 720
+- Services grid (lab `.srv-grid`): **3 → 2 → 1** columns at default / 1060 / 720
+- Lab capability cards: 2-col → 1-col at ≤560
 - Footer grid: **4 → 2 → 1** (home: 1060 / 720+480; lab: 1060 / 560)
 
 ---
@@ -84,5 +88,9 @@ Tokens: `tokens/responsive.css` (imports `spacing.css`, switches `--section-pad-
 npm run pages:build
 npm run mobile:audit
 ```
+
+Audit checks:
+1. `documentElement.scrollWidth` vs viewport (classic overflow)
+2. **Visual clip** — content `getBoundingClientRect().right` past viewport inside key sections (catches `overflow: hidden` / `overflow-x: clip` cases)
 
 Screenshots: `screenshots/mobile-audit/`. CI: `.github/workflows/mobile-audit.yml`.
