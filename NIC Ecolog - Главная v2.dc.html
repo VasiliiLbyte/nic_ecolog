@@ -131,7 +131,13 @@ input::placeholder,textarea::placeholder{color:#6E8385}
 a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible,[data-svc]:focus-visible,[data-rail-item]:focus-visible,[tabindex]:focus-visible{outline:2px solid #139EA1;outline-offset:2px;border-radius:8px}
 [data-rail].on-dark [data-rail-item]:focus-visible,.on-dark a:focus-visible,.on-dark button:focus-visible{outline-color:#ADCF7A}
 :focus:not(:focus-visible){outline:none}
+#eco-menu{overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
 #eco-menu nav a{padding:14px 0;min-height:44px;display:flex;align-items:center}
+@media (max-height:720px){
+  #eco-menu nav{margin-top:28px !important;gap:0 !important}
+  #eco-menu nav a{font-size:24px !important;padding:11px 0 !important;min-height:0}
+  #eco-menu>div:last-child{margin-top:24px !important}
+}
 /* Skip-link «К основному содержимому» */
 [data-skip]{position:absolute;left:16px;top:-60px;z-index:300;background:#FFFFFF;color:#0B5C60;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;text-decoration:none;padding:12px 18px;border-radius:10px;box-shadow:0 12px 28px rgba(11,92,96,0.2);transition:top 0.2s ease}
 [data-skip]:focus{top:16px}
@@ -161,7 +167,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
   [data-steps]{grid-template-columns:1fr !important}
   [data-cta-row]{flex-direction:column !important;align-items:stretch !important}
   [data-cta-row] a{width:100% !important;justify-content:center !important;box-sizing:border-box}
-  [data-logo-wall] > div{word-break:break-word}
+  [data-logo-wall] > div{word-break:normal;overflow-wrap:break-word;hyphens:none;font-size:13px !important;padding:26px 12px !important;letter-spacing:0.05em !important}
   #kontakty [data-cols4]{grid-template-columns:1fr 1fr !important;gap:32px !important}
   #zayavka [data-two-col]{grid-template-columns:1fr !important}
   #zayavka #kontakty-info,#zayavka #eco-form{padding:40px 28px !important}
