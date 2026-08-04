@@ -28,7 +28,18 @@ body{margin:0;background:#FFFFFF;-webkit-font-smoothing:antialiased;text-renderi
 @font-face{font-family:'Stolzl';src:url('./assets/Stolzl-Bold.woff2') format('woff2');font-weight:600 700;font-style:normal;font-display:swap}
 h1,h2,h3,h4{font-family:'Stolzl','Onest',-apple-system,'Segoe UI',sans-serif}
 ::selection{background:rgba(173,207,122,0.45)}
-input::placeholder,textarea::placeholder{color:#8AA0A0}
+/* --- Полировка: типографика, аффорданс ссылок, кнопки --- */
+h2,h3{text-wrap:balance}
+p{text-wrap:pretty}
+html{hanging-punctuation:first last;hyphens:manual}
+[data-svc] [data-desc]>p:last-child{display:inline-block;position:relative}
+[data-svc] [data-desc]>p:last-child::after{content:"";position:absolute;left:0;bottom:-2px;width:100%;height:1px;background:currentColor;transform:scaleX(0);transform-origin:left;transition:transform 0.3s ease}
+[data-svc]:hover [data-desc]>p:last-child::after,[data-svc]:focus-within [data-desc]>p:last-child::after{transform:scaleX(1)}
+.btn-primary{transition:transform 0.25s ease,box-shadow 0.25s ease}
+.btn-primary>span[aria-hidden]{display:inline-block;transition:transform 0.25s ease}
+.btn-primary:hover>span[aria-hidden]{transform:translateX(4px)}
+.btn-primary:active{transform:translateY(0) scale(0.98)!important}
+input::placeholder,textarea::placeholder{color:#6E8385}
 @keyframes blobA{0%{transform:translate(0,0) scale(1)}33%{transform:translate(7%,-9%) scale(1.14)}66%{transform:translate(-6%,7%) scale(0.92)}100%{transform:translate(0,0) scale(1)}}
 @keyframes blobB{0%{transform:translate(0,0) scale(1)}40%{transform:translate(-8%,6%) scale(1.1)}70%{transform:translate(5%,-5%) scale(0.95)}100%{transform:translate(0,0) scale(1)}}
 @keyframes blobC{0%{transform:translate(0,0) scale(1)}50%{transform:translate(6%,8%) scale(1.18)}100%{transform:translate(0,0) scale(1)}}
@@ -40,6 +51,16 @@ input::placeholder,textarea::placeholder{color:#8AA0A0}
 [data-anim="on"] [data-rv].rv-on{opacity:1;transform:translateY(0)}
 [data-svc] [data-desc]{max-height:0;opacity:0;overflow:hidden;transition:max-height 0.45s ease,opacity 0.35s ease}
 [data-svc]:hover [data-desc],[data-svc]:focus-within [data-desc]{max-height:280px;opacity:1}
+/* Услуги — зонирование групп фоном (variant A): чередующиеся full-bleed полосы */
+.svc-zone{position:relative;padding-block:56px}
+.svc-zone>*{position:relative}
+.svc-zone--tint::before{content:"";position:absolute;top:0;bottom:0;left:50%;margin-left:-50vw;width:100vw;background:#EAF2EF;pointer-events:none}
+@media (max-width:720px){
+  .svc-zone{padding-block:40px}
+  .svc-zone>div:first-child{flex-wrap:wrap;gap:6px 16px}
+  .svc-zone>div:first-child>h3{font-size:22px}
+  .svc-zone>div:first-child>span:last-child{flex-basis:100%;margin-left:0}
+}
 [data-proj] [data-pimg]{transition:transform 0.9s cubic-bezier(0.22,1,0.36,1)}
 [data-proj]:hover [data-pimg]{transform:scale(1.045)}
 /* Service overlay — steps timeline + sticky aside */
@@ -56,7 +77,7 @@ input::placeholder,textarea::placeholder{color:#8AA0A0}
 [data-svc-step]:nth-child(5){--svc-node:#0B5C60;--svc-node-glow:rgba(11,92,96,0.25);--svc-line-from:#0B5C60;--svc-line-to:#139EA1}
 [data-svc-step]:nth-child(6){--svc-node:#139EA1;--svc-node-glow:rgba(19,158,161,0.25);--svc-line-from:#139EA1;--svc-line-to:#1C6BA2}
 [data-svc-step]:nth-child(n+7){--svc-node:#0B5C60;--svc-node-glow:rgba(11,92,96,0.25);--svc-line-from:#0B5C60;--svc-line-to:#139EA1}
-[data-svc-step-n]{font-family:'JetBrains Mono',monospace;font-size:12px;color:#7A8E8E;padding-top:2px;flex:0 0 auto;min-width:2ch}
+[data-svc-step-n]{font-family:'JetBrains Mono',monospace;font-size:12px;color:#647A7C;padding-top:2px;flex:0 0 auto;min-width:2ch}
 [data-svc-step-text]{margin:0;font-size:16px;line-height:1.65;color:#2C4346}
 /* Рельс-навигация по секциям — ghost rail */
 [data-rail]{position:fixed;top:50%;right:12px;transform:translateY(-50%);z-index:90;pointer-events:none}
@@ -159,8 +180,8 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
       <a href="#kontakty" style="font-size:14.5px;font-weight:400;color:#2C4346;text-decoration:none;transition:color 0.2s" style-hover="color:#139EA1">Контакты</a>
     </nav>
     <div style="display:flex;align-items:center;gap:24px;flex:0 0 auto">
-      <a data-head-phone="true" href="tel:+78122400000" style="font-size:15px;font-weight:500;color:#0B5C60;text-decoration:none;font-variant-numeric:tabular-nums">+7 (812) 240-00-00</a>
-      <a data-head-cta="true" href="#zayavka" style="display:inline-flex;align-items:center;gap:8px;background:linear-gradient(105deg,#139EA1,#1C6BA2);color:#FFFFFF;font-size:14px;font-weight:500;text-decoration:none;padding:12px 24px;border-radius:999px;transition:transform 0.25s ease,box-shadow 0.25s ease" style-hover="transform:translateY(-2px);box-shadow:0 12px 28px rgba(19,158,161,0.35)">Заказать исследование</a>
+      <a data-head-phone="true" href="tel:+78122400000" style="font-size:15px;font-weight:500;color:#0B5C60;text-decoration:none;font-variant-numeric:tabular-nums">+7&nbsp;(812)&nbsp;240-00-00</a>
+      <a class="btn-primary" data-head-cta="true" href="#zayavka" style="display:inline-flex;align-items:center;gap:8px;background:linear-gradient(105deg,#139EA1,#1C6BA2);color:#FFFFFF;font-size:14px;font-weight:500;text-decoration:none;padding:12px 24px;border-radius:999px;transition:transform 0.25s ease,box-shadow 0.25s ease" style-hover="transform:translateY(-2px);box-shadow:0 12px 28px rgba(19,158,161,0.35)">Заказать исследование</a>
       <button data-burger="true" type="button" aria-label="Открыть меню" aria-haspopup="dialog" aria-expanded="{{ menuExpanded }}" aria-controls="eco-menu" onClick="{{ toggleMenu }}" style="display:none;align-items:center;justify-content:center;width:44px;height:44px;border:1px solid rgba(11,92,96,0.25);border-radius:12px;background:rgba(255,255,255,0.75);cursor:pointer;flex:0 0 auto">
         <svg width="20" height="14" viewBox="0 0 20 14" aria-hidden="true"><g stroke="#0B5C60" stroke-width="1.8" stroke-linecap="round"><line x1="1" y1="1" x2="19" y2="1"></line><line x1="1" y1="7" x2="19" y2="7"></line><line x1="1" y1="13" x2="19" y2="13"></line></g></svg>
       </button>
@@ -234,7 +255,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
         </h1>
         <p style="margin:30px 0 0;font-size:18px;font-weight:400;color:#3E5557;max-width:620px;line-height:1.65;animation:fadeIn 1s ease 0.7s both">Экологический инжиниринг и консалтинг: изыскания, собственная аккредитованная лаборатория, разрешительная документация и ESG. Научно обоснованно. Без бюрократии.</p>
         <div data-cta-row="true" style="display:flex;align-items:center;gap:18px;margin-top:42px;flex-wrap:wrap;animation:fadeIn 1s ease 0.85s both">
-          <a href="#zayavka" style="display:inline-flex;align-items:center;gap:10px;background:linear-gradient(105deg,#139EA1,#1C6BA2);color:#FFFFFF;font-size:16px;font-weight:500;text-decoration:none;padding:18px 38px;border-radius:999px;box-shadow:0 14px 34px rgba(19,158,161,0.28);transition:transform 0.25s ease,box-shadow 0.25s ease" style-hover="transform:translateY(-3px);box-shadow:0 20px 44px rgba(19,158,161,0.4)">Заказать исследование <span aria-hidden="true">→</span></a>
+          <a class="btn-primary" href="#zayavka" style="display:inline-flex;align-items:center;gap:10px;background:linear-gradient(105deg,#139EA1,#1C6BA2);color:#FFFFFF;font-size:16px;font-weight:500;text-decoration:none;padding:18px 38px;border-radius:999px;box-shadow:0 14px 34px rgba(19,158,161,0.28);transition:transform 0.25s ease,box-shadow 0.25s ease" style-hover="transform:translateY(-3px);box-shadow:0 20px 44px rgba(19,158,161,0.4)">Заказать исследование <span aria-hidden="true">→</span></a>
           <a href="#uslugi" style="display:inline-flex;align-items:center;gap:10px;border:1px solid rgba(11,92,96,0.35);color:#0B5C60;font-size:16px;font-weight:500;text-decoration:none;padding:17px 36px;border-radius:999px;background:rgba(255,255,255,0.5);transition:background 0.25s ease,border-color 0.25s ease" style-hover="background:rgba(11,92,96,0.07);border-color:#0B5C60">Услуги</a>
         </div>
         <p data-hero-meta="true" style="margin:56px 0 0;font-family:'JetBrains Mono',monospace;font-size:12.5px;color:#51696B;letter-spacing:0.04em;animation:fadeIn 1s ease 1s both">14 лет в экологическом инжиниринге&nbsp;&nbsp;·&nbsp;&nbsp;аккредитованная лаборатория «Аналитик Лаб»&nbsp;&nbsp;·&nbsp;&nbsp;Лахта Центр, порты, МОЭК, Мариинский театр</p>
@@ -432,11 +453,11 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
         </div>
 
         <!-- 01 Проектирование и документация -->
-        <div style="margin-bottom:72px">
-          <div data-rv="true" style="display:flex;align-items:baseline;gap:20px;border-bottom:1px solid rgba(11,92,96,0.14);padding-bottom:18px;margin-bottom:28px">
-            <span style="font-family:'JetBrains Mono',monospace;font-size:13px;color:#139EA1">01</span>
-            <h3 style="margin:0;font-size:24px;font-weight:400;color:#13282B">Проектирование и документация</h3>
-            <span style="margin-left:auto;font-size:14px;color:#7A8E8E">разрешительная документация под ключ</span>
+        <div class="svc-zone svc-zone--tint" style="margin-bottom:0">
+          <div data-rv="true" style="display:flex;align-items:baseline;gap:22px;border-width:0 0 2px;border-style:solid;border-image:linear-gradient(90deg,#ADCF7A 0%,#139EA1 55%,#1C6BA2 100%) 1;padding-bottom:20px;margin-bottom:32px">
+            <span style="font-family:'JetBrains Mono',monospace;font-size:22px;font-weight:600;letter-spacing:0.02em;line-height:1;background:linear-gradient(120deg,#ADCF7A,#139EA1 55%,#1C6BA2);-webkit-background-clip:text;background-clip:text;color:transparent">01</span>
+            <h3 style="margin:0;font-size:26px;font-weight:500;color:#13282B;letter-spacing:-0.01em">Проектирование и документация</h3>
+            <span style="margin-left:auto;font-size:14px;color:#647A7C;align-self:center">разрешительная документация под ключ</span>
           </div>
           <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px">
             <div data-svc="true" data-rv="true" tabindex="0" style="border:1px solid rgba(11,92,96,0.14);border-radius:20px;padding:26px 26px 22px;background:#FFFFFF;cursor:pointer;transition:border-color 0.3s ease,transform 0.3s ease,box-shadow 0.3s ease" style-hover="border-color:#139EA1;transform:translateY(-4px);box-shadow:0 18px 40px rgba(11,92,96,0.1)">
@@ -488,11 +509,11 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
         </div>
 
         <!-- 02 Сопровождение -->
-        <div style="margin-bottom:72px">
-          <div data-rv="true" style="display:flex;align-items:baseline;gap:20px;border-bottom:1px solid rgba(11,92,96,0.14);padding-bottom:18px;margin-bottom:28px">
-            <span style="font-family:'JetBrains Mono',monospace;font-size:13px;color:#139EA1">02</span>
-            <h3 style="margin:0;font-size:24px;font-weight:400;color:#13282B">Экологическое сопровождение предприятий</h3>
-            <span style="margin-left:auto;font-size:14px;color:#7A8E8E">текущая отчётность и контроль</span>
+        <div class="svc-zone" style="margin-bottom:0">
+          <div data-rv="true" style="display:flex;align-items:baseline;gap:22px;border-width:0 0 2px;border-style:solid;border-image:linear-gradient(90deg,#ADCF7A 0%,#139EA1 55%,#1C6BA2 100%) 1;padding-bottom:20px;margin-bottom:32px">
+            <span style="font-family:'JetBrains Mono',monospace;font-size:22px;font-weight:600;letter-spacing:0.02em;line-height:1;background:linear-gradient(120deg,#ADCF7A,#139EA1 55%,#1C6BA2);-webkit-background-clip:text;background-clip:text;color:transparent">02</span>
+            <h3 style="margin:0;font-size:26px;font-weight:500;color:#13282B;letter-spacing:-0.01em">Экологическое сопровождение предприятий</h3>
+            <span style="margin-left:auto;font-size:14px;color:#647A7C;align-self:center">текущая отчётность и контроль</span>
           </div>
           <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px">
             <div data-svc="true" data-rv="true" tabindex="0" style="border:1px solid rgba(11,92,96,0.14);border-radius:20px;padding:26px 26px 22px;background:#FFFFFF;cursor:pointer;transition:border-color 0.3s ease,transform 0.3s ease,box-shadow 0.3s ease" style-hover="border-color:#139EA1;transform:translateY(-4px);box-shadow:0 18px 40px rgba(11,92,96,0.1)">
@@ -515,11 +536,11 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
         </div>
 
         <!-- 03 Изыскания -->
-        <div style="margin-bottom:72px">
-          <div data-rv="true" style="display:flex;align-items:baseline;gap:20px;border-bottom:1px solid rgba(11,92,96,0.14);padding-bottom:18px;margin-bottom:28px">
-            <span style="font-family:'JetBrains Mono',monospace;font-size:13px;color:#139EA1">03</span>
-            <h3 style="margin:0;font-size:24px;font-weight:400;color:#13282B">Изыскания и лабораторные исследования</h3>
-            <span style="margin-left:auto;font-size:14px;color:#7A8E8E">полевые работы + «Аналитик Лаб»</span>
+        <div class="svc-zone svc-zone--tint" style="margin-bottom:0">
+          <div data-rv="true" style="display:flex;align-items:baseline;gap:22px;border-width:0 0 2px;border-style:solid;border-image:linear-gradient(90deg,#ADCF7A 0%,#139EA1 55%,#1C6BA2 100%) 1;padding-bottom:20px;margin-bottom:32px">
+            <span style="font-family:'JetBrains Mono',monospace;font-size:22px;font-weight:600;letter-spacing:0.02em;line-height:1;background:linear-gradient(120deg,#ADCF7A,#139EA1 55%,#1C6BA2);-webkit-background-clip:text;background-clip:text;color:transparent">03</span>
+            <h3 style="margin:0;font-size:26px;font-weight:500;color:#13282B;letter-spacing:-0.01em">Изыскания и лабораторные исследования</h3>
+            <span style="margin-left:auto;font-size:14px;color:#647A7C;align-self:center">полевые работы + «Аналитик Лаб»</span>
           </div>
           <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px">
             <div data-svc="true" data-rv="true" tabindex="0" style="border:1px solid rgba(11,92,96,0.14);border-radius:20px;padding:26px 26px 22px;background:#FFFFFF;cursor:pointer;transition:border-color 0.3s ease,transform 0.3s ease,box-shadow 0.3s ease" style-hover="border-color:#139EA1;transform:translateY(-4px);box-shadow:0 18px 40px rgba(11,92,96,0.1)">
@@ -538,11 +559,11 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
         </div>
 
         <!-- 04 ESG -->
-        <div>
-          <div data-rv="true" style="display:flex;align-items:baseline;gap:20px;border-bottom:1px solid rgba(11,92,96,0.14);padding-bottom:18px;margin-bottom:28px">
-            <span style="font-family:'JetBrains Mono',monospace;font-size:13px;color:#139EA1">04</span>
-            <h3 style="margin:0;font-size:24px;font-weight:400;color:#13282B">ESG и устойчивое развитие</h3>
-            <span style="margin-left:auto;font-size:14px;color:#7A8E8E">научный подход к нефинансовым данным</span>
+        <div class="svc-zone" style="margin-bottom:0">
+          <div data-rv="true" style="display:flex;align-items:baseline;gap:22px;border-width:0 0 2px;border-style:solid;border-image:linear-gradient(90deg,#ADCF7A 0%,#139EA1 55%,#1C6BA2 100%) 1;padding-bottom:20px;margin-bottom:32px">
+            <span style="font-family:'JetBrains Mono',monospace;font-size:22px;font-weight:600;letter-spacing:0.02em;line-height:1;background:linear-gradient(120deg,#ADCF7A,#139EA1 55%,#1C6BA2);-webkit-background-clip:text;background-clip:text;color:transparent">04</span>
+            <h3 style="margin:0;font-size:26px;font-weight:500;color:#13282B;letter-spacing:-0.01em">ESG и устойчивое развитие</h3>
+            <span style="margin-left:auto;font-size:14px;color:#647A7C;align-self:center">научный подход к нефинансовым данным</span>
           </div>
           <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px">
             <div data-svc="true" data-rv="true" tabindex="0" style="border:1px solid rgba(11,92,96,0.14);border-radius:20px;padding:26px 26px 22px;background:#FFFFFF;cursor:pointer;transition:border-color 0.3s ease,transform 0.3s ease,box-shadow 0.3s ease" style-hover="border-color:#139EA1;transform:translateY(-4px);box-shadow:0 18px 40px rgba(11,92,96,0.1)">
@@ -573,7 +594,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
           <p data-rv="true" style="margin:0;font-size:17px;color:#3E5557;max-width:460px;justify-self:end">Работаем с объектами федерального масштаба — от небоскрёбов до портовых акваторий и театров.</p>
         </div>
         <div data-proj-grid="true" style="display:grid;grid-template-columns:repeat(12,1fr);gap:20px">
-          <article data-proj="true" data-rv="true" style="grid-column:span 7;background:#FFFFFF;border-radius:26px;overflow:hidden;box-shadow:0 2px 10px rgba(11,92,96,0.05);transition:box-shadow 0.4s ease" style-hover="box-shadow:0 24px 56px rgba(11,92,96,0.13)">
+          <article data-proj="true" data-rv="true" style="grid-column:span 7;background:#FFFFFF;border-radius:26px;overflow:hidden;box-shadow:0 2px 10px rgba(11,92,96,0.05);transition:transform 0.4s cubic-bezier(0.22,1,0.36,1),box-shadow 0.4s ease" style-hover="transform:translateY(-4px);box-shadow:0 24px 56px rgba(11,92,96,0.13)">
             <div style="height:300px;overflow:hidden;position:relative">
               <div data-pimg="true" style="position:absolute;inset:0;background:repeating-linear-gradient(45deg,#E0EDE8 0 14px,#EAF4EF 14px 28px)">
                 <image-slot id="proj-lahta" shape="rect" fit="cover" src="./assets/projects/project-lahta.jpg" placeholder="Лахта Центр" style="position:absolute;inset:0;width:100%;height:100%"></image-slot>
@@ -585,7 +606,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
               <p style="margin:0;font-size:15px;color:#51696B;line-height:1.65">Полный цикл экологического контроля при строительстве самого высокого небоскрёба Европы: мониторинг, измерения, отчётность на всех этапах.</p>
             </div>
           </article>
-          <article data-proj="true" data-rv="true" style="grid-column:span 5;background:#FFFFFF;border-radius:26px;overflow:hidden;box-shadow:0 2px 10px rgba(11,92,96,0.05);transition:box-shadow 0.4s ease" style-hover="box-shadow:0 24px 56px rgba(11,92,96,0.13)">
+          <article data-proj="true" data-rv="true" style="grid-column:span 5;background:#FFFFFF;border-radius:26px;overflow:hidden;box-shadow:0 2px 10px rgba(11,92,96,0.05);transition:transform 0.4s cubic-bezier(0.22,1,0.36,1),box-shadow 0.4s ease" style-hover="transform:translateY(-4px);box-shadow:0 24px 56px rgba(11,92,96,0.13)">
             <div style="height:300px;overflow:hidden;position:relative">
               <div data-pimg="true" style="position:absolute;inset:0;background:repeating-linear-gradient(45deg,#E0EDE8 0 14px,#EAF4EF 14px 28px)">
                 <image-slot id="proj-mariinsky" shape="rect" fit="cover" src="./assets/projects/project-mariinsky.jpg" placeholder="Мариинский театр" style="position:absolute;inset:0;width:100%;height:100%"></image-slot>
@@ -597,7 +618,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
               <p style="margin:0;font-size:15px;color:#51696B;line-height:1.65">Санитарно-защитная зона и натурные измерения для объекта культурного значения в плотной городской среде.</p>
             </div>
           </article>
-          <article data-proj="true" data-rv="true" style="grid-column:span 5;background:#FFFFFF;border-radius:26px;overflow:hidden;box-shadow:0 2px 10px rgba(11,92,96,0.05);transition:box-shadow 0.4s ease" style-hover="box-shadow:0 24px 56px rgba(11,92,96,0.13)">
+          <article data-proj="true" data-rv="true" style="grid-column:span 5;background:#FFFFFF;border-radius:26px;overflow:hidden;box-shadow:0 2px 10px rgba(11,92,96,0.05);transition:transform 0.4s cubic-bezier(0.22,1,0.36,1),box-shadow 0.4s ease" style-hover="transform:translateY(-4px);box-shadow:0 24px 56px rgba(11,92,96,0.13)">
             <div style="height:260px;overflow:hidden;position:relative">
               <div data-pimg="true" style="position:absolute;inset:0;background:repeating-linear-gradient(45deg,#E0EDE8 0 14px,#EAF4EF 14px 28px)">
                 <image-slot id="proj-port" shape="rect" fit="cover" src="./assets/projects/project-port.jpg" placeholder="Большой порт СПб" style="position:absolute;inset:0;width:100%;height:100%"></image-slot>
@@ -609,7 +630,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
               <p style="margin:0;font-size:15px;color:#51696B;line-height:1.65">Инженерно-экологические изыскания и мониторинг акватории при развитии портовой инфраструктуры.</p>
             </div>
           </article>
-          <article data-proj="true" data-rv="true" style="grid-column:span 7;background:#FFFFFF;border-radius:26px;overflow:hidden;box-shadow:0 2px 10px rgba(11,92,96,0.05);transition:box-shadow 0.4s ease" style-hover="box-shadow:0 24px 56px rgba(11,92,96,0.13)">
+          <article data-proj="true" data-rv="true" style="grid-column:span 7;background:#FFFFFF;border-radius:26px;overflow:hidden;box-shadow:0 2px 10px rgba(11,92,96,0.05);transition:transform 0.4s cubic-bezier(0.22,1,0.36,1),box-shadow 0.4s ease" style-hover="transform:translateY(-4px);box-shadow:0 24px 56px rgba(11,92,96,0.13)">
             <div style="height:260px;overflow:hidden;position:relative">
               <div data-pimg="true" style="position:absolute;inset:0;background:repeating-linear-gradient(45deg,#E0EDE8 0 14px,#EAF4EF 14px 28px)">
                 <image-slot id="proj-moek" shape="rect" fit="cover" src="./assets/projects/project-moek.jpg" placeholder="МОЭК" style="position:absolute;inset:0;width:100%;height:100%"></image-slot>
@@ -633,27 +654,27 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
         <div data-steps="true" style="display:grid;grid-template-columns:repeat(5,1fr);gap:36px;position:relative">
           <div aria-hidden="true" style="position:absolute;top:5px;left:0;right:0;height:1px;background:linear-gradient(90deg,#ADCF7A,#4CB272,#139EA1,#1C6BA2,#0B5C60);opacity:0.45"></div>
           <div data-rv="true" style="position:relative;padding-top:32px" style-before="content:'';position:absolute;top:0;left:0;width:11px;height:11px;border-radius:50%;background:#ADCF7A;box-shadow:0 0 0 4px rgba(173,207,122,0.25)">
-            <p style="margin:0 0 10px;font-family:'JetBrains Mono',monospace;font-size:12px;color:#7A8E8E">01</p>
+            <p style="margin:0 0 10px;font-family:'JetBrains Mono',monospace;font-size:12px;color:#647A7C">01</p>
             <h3 style="margin:0 0 10px;font-size:18px;font-weight:500;color:#13282B">Заявка и оценка задачи</h3>
             <p style="margin:0;font-size:14.5px;color:#51696B;line-height:1.65">Отвечаем в течение рабочего дня, фиксируем объём, сроки и стоимость.</p>
           </div>
           <div data-rv="true" style="position:relative;padding-top:32px" style-before="content:'';position:absolute;top:0;left:0;width:11px;height:11px;border-radius:50%;background:#4CB272;box-shadow:0 0 0 4px rgba(76,178,114,0.25)">
-            <p style="margin:0 0 10px;font-family:'JetBrains Mono',monospace;font-size:12px;color:#7A8E8E">02</p>
+            <p style="margin:0 0 10px;font-family:'JetBrains Mono',monospace;font-size:12px;color:#647A7C">02</p>
             <h3 style="margin:0 0 10px;font-size:18px;font-weight:500;color:#13282B">Исходные данные</h3>
             <p style="margin:0;font-size:14.5px;color:#51696B;line-height:1.65">Запрашиваем документы, при необходимости выезжаем на объект.</p>
           </div>
           <div data-rv="true" style="position:relative;padding-top:32px" style-before="content:'';position:absolute;top:0;left:0;width:11px;height:11px;border-radius:50%;background:#139EA1;box-shadow:0 0 0 4px rgba(19,158,161,0.25)">
-            <p style="margin:0 0 10px;font-family:'JetBrains Mono',monospace;font-size:12px;color:#7A8E8E">03</p>
+            <p style="margin:0 0 10px;font-family:'JetBrains Mono',monospace;font-size:12px;color:#647A7C">03</p>
             <h3 style="margin:0 0 10px;font-size:18px;font-weight:500;color:#13282B">Эксперты и лаборатория</h3>
             <p style="margin:0;font-size:14.5px;color:#51696B;line-height:1.65">Полевые работы, отбор и анализ проб, расчёты и моделирование.</p>
           </div>
           <div data-rv="true" style="position:relative;padding-top:32px" style-before="content:'';position:absolute;top:0;left:0;width:11px;height:11px;border-radius:50%;background:#1C6BA2;box-shadow:0 0 0 4px rgba(28,107,162,0.25)">
-            <p style="margin:0 0 10px;font-family:'JetBrains Mono',monospace;font-size:12px;color:#7A8E8E">04</p>
+            <p style="margin:0 0 10px;font-family:'JetBrains Mono',monospace;font-size:12px;color:#647A7C">04</p>
             <h3 style="margin:0 0 10px;font-size:18px;font-weight:500;color:#13282B">Согласование</h3>
             <p style="margin:0;font-size:14.5px;color:#51696B;line-height:1.65">Сопровождаем документацию в надзорных органах до утверждения.</p>
           </div>
           <div data-rv="true" style="position:relative;padding-top:32px" style-before="content:'';position:absolute;top:0;left:0;width:11px;height:11px;border-radius:50%;background:#0B5C60;box-shadow:0 0 0 4px rgba(11,92,96,0.25)">
-            <p style="margin:0 0 10px;font-family:'JetBrains Mono',monospace;font-size:12px;color:#7A8E8E">05</p>
+            <p style="margin:0 0 10px;font-family:'JetBrains Mono',monospace;font-size:12px;color:#647A7C">05</p>
             <h3 style="margin:0 0 10px;font-size:18px;font-weight:500;color:#13282B">Результат</h3>
             <p style="margin:0;font-size:14.5px;color:#51696B;line-height:1.65">Комплект документов и защита от штрафов, предписаний и рисков.</p>
           </div>
@@ -723,14 +744,14 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
             <blockquote style="margin:0;font-size:17.5px;line-height:1.7;color:#2C4346;font-weight:300">«Сопровождают наш комплекс четвёртый год: отчётность сдаётся в срок, проверки проходим без замечаний. Видно, что люди считают, а не пересказывают нормативы.»</blockquote>
             <figcaption style="margin-top:24px">
               <span style="display:block;font-size:15px;font-weight:500;color:#13282B">Марина К.</span>
-              <span style="display:block;margin-top:4px;font-family:'JetBrains Mono',monospace;font-size:11.5px;letter-spacing:0.08em;color:#7A8E8E">ГЛАВНЫЙ ЭКОЛОГ ПРОИЗВОДСТВЕННОГО КОМПЛЕКСА</span>
+              <span style="display:block;margin-top:4px;font-family:'JetBrains Mono',monospace;font-size:11.5px;letter-spacing:0.08em;color:#647A7C">ГЛАВНЫЙ ЭКОЛОГ ПРОИЗВОДСТВЕННОГО КОМПЛЕКСА</span>
             </figcaption>
           </figure>
           <figure data-rv="true" style="margin:0;background:#F4F8F7;border-radius:24px;padding:40px 42px">
             <blockquote style="margin:0;font-size:17.5px;line-height:1.7;color:#2C4346;font-weight:300">«Сложный объект и сжатые сроки экспертизы. То, что изыскания и лаборатория — одна команда, заметно ускорило проект: никаких потерь на стыках подрядчиков.»</blockquote>
             <figcaption style="margin-top:24px">
               <span style="display:block;font-size:15px;font-weight:500;color:#13282B">Дмитрий В.</span>
-              <span style="display:block;margin-top:4px;font-family:'JetBrains Mono',monospace;font-size:11.5px;letter-spacing:0.08em;color:#7A8E8E">РУКОВОДИТЕЛЬ ПРОЕКТА, ДЕВЕЛОПМЕНТ</span>
+              <span style="display:block;margin-top:4px;font-family:'JetBrains Mono',monospace;font-size:11.5px;letter-spacing:0.08em;color:#647A7C">РУКОВОДИТЕЛЬ ПРОЕКТА, ДЕВЕЛОПМЕНТ</span>
             </figcaption>
           </figure>
         </div>
@@ -781,7 +802,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
             </span>
           </a>
         </div>
-        <p data-rv="true" style="margin:24px 0 0;font-size:13px;color:#7A8E8E">Актуальные версии документов публикуются по мере обновления аккредитаций.</p>
+        <p data-rv="true" style="margin:24px 0 0;font-size:13px;color:#647A7C">Актуальные версии документов публикуются по мере обновления аккредитаций.</p>
       </div>
     </section>
 
@@ -800,7 +821,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
             <div style="display:flex;flex-direction:column;gap:22px">
               <div>
                 <p style="margin:0 0 4px;font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:0.18em;color:rgba(255,255,255,0.5)">ТЕЛЕФОН</p>
-                <a href="tel:+78122400000" style="font-size:20px;font-weight:500;color:#FFFFFF;text-decoration:none">+7 (812) 240-00-00</a>
+                <a href="tel:+78122400000" style="font-size:20px;font-weight:500;color:#FFFFFF;text-decoration:none">+7&nbsp;(812)&nbsp;240-00-00</a>
               </div>
               <div>
                 <p style="margin:0 0 4px;font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:0.18em;color:rgba(255,255,255,0.5)">ПОЧТА</p>
@@ -815,20 +836,20 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
           <form id="eco-form" style="padding:56px 52px;display:flex;flex-direction:column;gap:18px">
             <div id="eco-form-fields" style="display:flex;flex-direction:column;gap:18px">
               <div style="display:flex;flex-direction:column;gap:8px">
-                <label for="f-name" style="font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:0.18em;color:#7A8E8E">ИМЯ</label>
+                <label for="f-name" style="font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:0.18em;color:#647A7C">ИМЯ</label>
                 <input id="f-name" name="name" type="text" required="required" autocomplete="name" aria-required="true" placeholder="Как к вам обращаться" style="background:#F4F8F7;border:1px solid rgba(11,92,96,0.12);border-radius:14px;padding:16px 18px;font-family:'Onest',sans-serif;font-size:15px;color:#16282B;outline:none;transition:border-color 0.2s ease,box-shadow 0.2s ease" style-focus="border-color:#139EA1;box-shadow:0 0 0 3px rgba(19,158,161,0.15)">
               </div>
               <div style="display:flex;flex-direction:column;gap:8px">
-                <label for="f-phone" style="font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:0.18em;color:#7A8E8E">ТЕЛЕФОН</label>
+                <label for="f-phone" style="font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:0.18em;color:#647A7C">ТЕЛЕФОН</label>
                 <input id="f-phone" name="phone" type="tel" required="required" inputmode="tel" autocomplete="tel" aria-required="true" placeholder="+7 (___) ___-__-__" style="background:#F4F8F7;border:1px solid rgba(11,92,96,0.12);border-radius:14px;padding:16px 18px;font-family:'Onest',sans-serif;font-size:15px;color:#16282B;outline:none;transition:border-color 0.2s ease,box-shadow 0.2s ease" style-focus="border-color:#139EA1;box-shadow:0 0 0 3px rgba(19,158,161,0.15)">
               </div>
               <div style="display:flex;flex-direction:column;gap:8px">
-                <label for="f-task" style="font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:0.18em;color:#7A8E8E">ЗАДАЧА</label>
+                <label for="f-task" style="font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:0.18em;color:#647A7C">ЗАДАЧА</label>
                 <textarea id="f-task" name="task" rows="4" placeholder="Например: нужен проект СЗЗ для производственной площадки" style="background:#F4F8F7;border:1px solid rgba(11,92,96,0.12);border-radius:14px;padding:16px 18px;font-family:'Onest',sans-serif;font-size:15px;color:#16282B;outline:none;resize:vertical;transition:border-color 0.2s ease,box-shadow 0.2s ease" style-focus="border-color:#139EA1;box-shadow:0 0 0 3px rgba(19,158,161,0.15)"></textarea>
               </div>
               <p id="eco-form-error" role="alert" aria-live="assertive" style="display:none;margin:0;font-size:13px;line-height:1.5;color:#B23B3B;background:rgba(178,59,59,0.08);border:1px solid rgba(178,59,59,0.28);border-radius:12px;padding:12px 14px"></p>
-              <button type="submit" style="margin-top:6px;background:linear-gradient(105deg,#139EA1,#1C6BA2);color:#FFFFFF;font-family:'Onest',sans-serif;font-size:16px;font-weight:500;border:none;border-radius:999px;padding:18px 38px;cursor:pointer;transition:transform 0.25s ease,box-shadow 0.25s ease" style-hover="transform:translateY(-2px);box-shadow:0 16px 36px rgba(19,158,161,0.35)">Отправить заявку</button>
-              <p style="margin:0;font-size:12px;color:#8AA0A0;line-height:1.6">Нажимая кнопку, вы соглашаетесь с <a href="/privacy" style="color:#139EA1">политикой конфиденциальности</a>.</p>
+              <button type="submit" class="btn-primary" style="margin-top:6px;background:linear-gradient(105deg,#139EA1,#1C6BA2);color:#FFFFFF;font-family:'Onest',sans-serif;font-size:16px;font-weight:500;border:none;border-radius:999px;padding:18px 38px;cursor:pointer;transition:transform 0.25s ease,box-shadow 0.25s ease" style-hover="transform:translateY(-2px);box-shadow:0 16px 36px rgba(19,158,161,0.35)">Отправить заявку</button>
+              <p style="margin:0;font-size:12px;color:#6E8385;line-height:1.6">Нажимая кнопку, вы соглашаетесь с <a href="/privacy" style="color:#139EA1">политикой конфиденциальности</a>.</p>
             </div>
             <div id="eco-form-ok" style="display:none;flex-direction:column;justify-content:center;gap:14px;min-height:380px">
               <span aria-hidden="true" style="width:56px;height:56px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#ADCF7A,#4CB272);display:flex;align-items:center;justify-content:center;color:#FFFFFF;font-size:26px">✓</span>
@@ -871,7 +892,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
         </nav>
         <div style="display:flex;flex-direction:column;gap:12px">
           <p style="margin:0 0 6px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.18em;color:rgba(255,255,255,0.62)">КОНТАКТЫ</p>
-          <a href="tel:+78122400000" style="font-size:15px;font-weight:500;color:#FFFFFF;text-decoration:none">+7 (812) 240-00-00</a>
+          <a href="tel:+78122400000" style="font-size:15px;font-weight:500;color:#FFFFFF;text-decoration:none">+7&nbsp;(812)&nbsp;240-00-00</a>
           <a href="mailto:info@nic-ecolog.ru" style="font-size:14.5px;color:rgba(255,255,255,0.8);text-decoration:none">info@nic-ecolog.ru</a>
           <p style="margin:0;font-size:14.5px;color:rgba(255,255,255,0.6);line-height:1.6">Санкт-Петербург</p>
         </div>
@@ -919,8 +940,8 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
           <p style="margin:16px 0 0;font-size:18px;line-height:1.7;color:#3E5557;max-width:720px">{{ svcLead2 }}</p>
         </sc-if>
         <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:28px">
-          <span style="display:inline-flex;align-items:center;gap:8px;background:#FFFFFF;border:1px solid rgba(11,92,96,0.16);border-radius:999px;padding:10px 20px;font-size:14px;color:#2C4346"><span style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.12em;color:#7A8E8E">СРОК</span> {{ svcTerm }}</span>
-          <span style="display:inline-flex;align-items:center;gap:8px;background:#FFFFFF;border:1px solid rgba(11,92,96,0.16);border-radius:999px;padding:10px 20px;font-size:14px;color:#2C4346"><span style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.12em;color:#7A8E8E">КОМУ</span> {{ svcWho }}</span>
+          <span style="display:inline-flex;align-items:center;gap:8px;background:#FFFFFF;border:1px solid rgba(11,92,96,0.16);border-radius:999px;padding:10px 20px;font-size:14px;color:#2C4346"><span style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.12em;color:#647A7C">СРОК</span> {{ svcTerm }}</span>
+          <span style="display:inline-flex;align-items:center;gap:8px;background:#FFFFFF;border:1px solid rgba(11,92,96,0.16);border-radius:999px;padding:10px 20px;font-size:14px;color:#2C4346"><span style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.12em;color:#647A7C">КОМУ</span> {{ svcWho }}</span>
         </div>
         <div data-two-col="true" style="display:grid;grid-template-columns:1.1fr 0.9fr;gap:56px;margin-top:64px;align-items:start">
           <div>
@@ -959,8 +980,8 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
             <p style="margin:0;font-size:15.5px;color:rgba(255,255,255,0.85)">Вернёмся с планом работ и оценкой в течение рабочего дня.</p>
           </div>
           <div style="display:flex;align-items:center;gap:18px;flex-wrap:wrap">
-            <button type="button" onClick="{{ goForm }}" style="display:inline-flex;align-items:center;gap:10px;background:#FFFFFF;border:none;border-radius:999px;color:#0B5C60;font-family:'Onest',sans-serif;font-size:16px;font-weight:500;padding:17px 36px;cursor:pointer;transition:transform 0.25s ease,box-shadow 0.25s ease" style-hover="transform:translateY(-2px);box-shadow:0 14px 32px rgba(0,0,0,0.2)">Оставить заявку</button>
-            <a href="tel:+78122400000" style="font-size:17px;font-weight:500;color:#FFFFFF;text-decoration:none">+7 (812) 240-00-00</a>
+            <button type="button" class="btn-primary" onClick="{{ goForm }}" style="display:inline-flex;align-items:center;gap:10px;background:#FFFFFF;border:none;border-radius:999px;color:#0B5C60;font-family:'Onest',sans-serif;font-size:16px;font-weight:500;padding:17px 36px;cursor:pointer;transition:transform 0.25s ease,box-shadow 0.25s ease" style-hover="transform:translateY(-2px);box-shadow:0 14px 32px rgba(0,0,0,0.2)">Оставить заявку</button>
+            <a href="tel:+78122400000" style="font-size:17px;font-weight:500;color:#FFFFFF;text-decoration:none">+7&nbsp;(812)&nbsp;240-00-00</a>
           </div>
         </div>
       </div>
@@ -987,8 +1008,8 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
         <a href="#kontakty" onClick="{{ closeMenu }}" style="font-size:30px;font-weight:300;color:#13282B;text-decoration:none;padding:10px 0;border-bottom:1px solid rgba(11,92,96,0.1)">Контакты</a>
       </nav>
       <div style="margin-top:auto;display:flex;flex-direction:column;gap:16px">
-        <a href="tel:+78122400000" style="font-size:19px;font-weight:500;color:#0B5C60;text-decoration:none">+7 (812) 240-00-00</a>
-        <a href="#zayavka" onClick="{{ closeMenu }}" style="display:inline-flex;align-items:center;justify-content:center;gap:10px;background:linear-gradient(105deg,#139EA1,#1C6BA2);color:#FFFFFF;font-size:16px;font-weight:500;text-decoration:none;padding:18px 38px;border-radius:999px">Заказать исследование</a>
+        <a href="tel:+78122400000" style="font-size:19px;font-weight:500;color:#0B5C60;text-decoration:none">+7&nbsp;(812)&nbsp;240-00-00</a>
+        <a class="btn-primary" href="#zayavka" onClick="{{ closeMenu }}" style="display:inline-flex;align-items:center;justify-content:center;gap:10px;background:linear-gradient(105deg,#139EA1,#1C6BA2);color:#FFFFFF;font-size:16px;font-weight:500;text-decoration:none;padding:18px 38px;border-radius:999px">Заказать исследование</a>
       </div>
     </div>
   </sc-if>

@@ -20,8 +20,8 @@
   --slate-1:    #2C4346;    /* strong body on light */
   --slate-2:    #3E5557;    /* body */
   --slate-3:    #51696B;    /* muted / secondary */
-  --slate-4:    #7A8E8E;    /* labels, captions */
-  --slate-5:    #8AA0A0;    /* placeholder text */
+  --slate-4:    #647A7C;    /* labels, captions — AA on light (~4.6:1) */
+  --slate-5:    #6E8385;    /* placeholder text (~4:1) */
 
   /* ---- Surfaces ---- */
   --white:      #FFFFFF;
