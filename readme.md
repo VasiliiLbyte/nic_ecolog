@@ -78,16 +78,21 @@ echoing topographic isolines. If a UI needs a broader icon set, use a thin-strok
 - `assets/` — fingerprint logo (color / white); `assets/icons/lab/` — Lucide lab capability SVG subset
 - `SKILL.md` — portable skill manifest.
 
-## Demo (GitHub Pages)
+## Production (GitHub Pages)
 
-Публичное демо для заказчика:
-
-**URL:** https://vasiliilbyte.github.io/nic_ecolog/
+**Продакшен-домен:** https://nic-ecolog.ru/  
+**Запасной URL:** https://vasiliilbyte.github.io/nic_ecolog/
 
 | Страница | Путь |
 |----------|------|
 | Главная | `/` |
 | Лаборатория | `/lab.html` |
+
+Сборка кладёт в артефакт `CNAME` (`nic-ecolog.ru`), `robots.txt`, `sitemap.xml`.
+
+### Перенос домена с Cloudflare
+
+Пошагово (DNS A/CNAME, серое облако, HTTPS): [`design-system/GITHUB-PAGES-DOMAIN.md`](design-system/GITHUB-PAGES-DOMAIN.md).
 
 ### Локальная сборка
 
@@ -102,7 +107,7 @@ npm run pages:preview
 
 Push в `main` запускает [`.github/workflows/deploy-pages.yml`](.github/workflows/deploy-pages.yml) — артефакт собирается в `docs/` и публикуется на GitHub Pages.
 
-**Первый раз (один раз в GitHub):** Settings → Pages → Build and deployment → **Source: GitHub Actions**.
+**Первый раз (один раз в GitHub):** Settings → Pages → Build and deployment → **Source: GitHub Actions**; Custom domain → `nic-ecolog.ru`; после DNS — **Enforce HTTPS**.
 
 ## CAVEATS
 - **Stölzl is the active display face** (brandbook face; full Cyrillic confirmed across Book/Regular/
