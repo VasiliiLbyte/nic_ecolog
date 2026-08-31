@@ -68,6 +68,7 @@ copyDir('assets', 'assets');
 
 writeFileSync(join(out, '.nojekyll'), '');
 writeFileSync(join(out, 'privacy.html'), privacyHtml);
+cpSync(join(root, 'yandex_23287c8f5d0b434c.html'), join(out, 'yandex_23287c8f5d0b434c.html'));
 
 // --- SEO: custom domain, robots, sitemap ---
 const SITE = 'https://nic-ecolog.ru';
