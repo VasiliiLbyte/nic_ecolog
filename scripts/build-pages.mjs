@@ -1,9 +1,12 @@
 import { cpSync, existsSync, mkdirSync, readFileSync, rmSync, unlinkSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { loadWave1Briefs, WAVE1_SLUGS } from './lib/parse-brief.mjs';
+import { renderHubPage, renderServicePage, WAVE1_SITEMAP_URLS } from './lib/service-page-template.mjs';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const out = join(root, 'docs');
+const seoGeoRoot = process.env.SEO_GEO_ROOT ?? join(root, '..', 'seo_geo');
 
 const HOME_SRC = 'NIC Ecolog - Главная v2.dc.html';
 const LAB_SRC = 'Ecolog-Lab.html';
@@ -90,7 +93,6 @@ copyDir('tokens', 'tokens');
 copyDir('assets', 'assets');
 if (existsSync(join(root, 'api'))) {
   copyDir('api', 'api');
-  // Do not publish local SMTP secrets into the build artifact
   const builtConfig = join(out, 'api', 'config.php');
   if (existsSync(builtConfig)) unlinkSync(builtConfig);
 }
@@ -99,6 +101,24 @@ writeFileSync(join(out, '.nojekyll'), '');
 writeFileSync(join(out, 'privacy.html'), injectMetrika(privacyHtml));
 cpSync(join(root, 'yandex_23287c8f5d0b434c.html'), join(out, 'yandex_23287c8f5d0b434c.html'));
 
+// --- Wave-1 service pages (NIC-004 Phase A) ---
+const wave1Briefs = loadWave1Briefs(seoGeoRoot);
+mkdirSync(join(out, 'uslugi'), { recursive: true });
+
+for (const brief of wave1Briefs) {
+  const dir = join(out, 'uslugi', brief.slug);
+  mkdirSync(dir, { recursive: true });
+  writeFileSync(
+    join(dir, 'index.html'),
+    injectMetrika(renderServicePage(brief, { depth: 2 }))
+  );
+}
+
+writeFileSync(
+  join(out, 'uslugi', 'index.html'),
+  injectMetrika(renderHubPage(wave1Briefs))
+);
+
 // --- SEO: custom domain, robots, sitemap ---
 const SITE = 'https://nic-ecolog.ru';
 const lastmod = new Date().toISOString().slice(0, 10);
@@ -106,6 +126,10 @@ const sitemapPages = [
   { loc: `${SITE}/`, priority: '1.0' },
   { loc: `${SITE}/lab.html`, priority: '0.8' },
   { loc: `${SITE}/privacy.html`, priority: '0.3' },
+  ...WAVE1_SITEMAP_URLS.map(({ path, priority }) => ({
+    loc: `${SITE}${path}`,
+    priority,
+  })),
 ];
 
 writeFileSync(join(out, 'CNAME'), 'nic-ecolog.ru\n');
@@ -124,4 +148,4 @@ ${sitemapPages
 `;
 writeFileSync(join(out, 'sitemap.xml'), sitemap);
 
-console.log('Built GitHub Pages artifact → docs/');
+console.log(`Built GitHub Pages artifact → docs/ (+ ${WAVE1_SLUGS.length + 1} uslugi pages from ${seoGeoRoot})`);

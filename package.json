@@ -6,6 +6,7 @@
     "icons:optimize": "svgo -f assets/icons/lab -o assets/icons/lab --config svgo.config.mjs",
     "pages:build": "node scripts/build-pages.mjs",
     "pages:preview": "npx --yes serve docs -p 8766",
+    "pages:qa-wave1": "node scripts/qa-wave1.mjs",
     "mobile:audit": "node scripts/mobile-audit.mjs",
     "content:export": "python3 scripts/export-site-copy-docx.py",
     "content:export:xlsx": "python3 scripts/export-site-copy-xlsx.py"
