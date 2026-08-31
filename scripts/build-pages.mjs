@@ -1,4 +1,4 @@
-import { cpSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { cpSync, existsSync, mkdirSync, readFileSync, rmSync, unlinkSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -7,6 +7,29 @@ const out = join(root, 'docs');
 
 const HOME_SRC = 'NIC Ecolog - Главная v2.dc.html';
 const LAB_SRC = 'Ecolog-Lab.html';
+const METRIKA_ID = '112117233';
+
+const METRIKA_SNIPPET = `<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+    (function(m,e,t,r,i,k,a){
+        m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=${METRIKA_ID}', 'ym');
+
+    ym(${METRIKA_ID}, 'init', {ssr:true, webvisor:true, clickmap:true, accurateTrackBounce:true, trackLinks:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/${METRIKA_ID}" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->`;
+
+function injectMetrika(html) {
+  if (html.includes(`metrika/tag.js?id=${METRIKA_ID}`)) return html;
+  if (html.includes('</head>')) {
+    return html.replace('</head>', `${METRIKA_SNIPPET}\n</head>`);
+  }
+  return html.replace('</body>', `${METRIKA_SNIPPET}\n</body>`);
+}
 
 function copyDir(src, dest) {
   cpSync(join(root, src), join(out, src), { recursive: true });
@@ -56,8 +79,8 @@ const privacyHtml = `<!DOCTYPE html>
 rmSync(out, { recursive: true, force: true });
 mkdirSync(out, { recursive: true });
 
-writeFileSync(join(out, 'index.html'), patchHome(readFileSync(join(root, HOME_SRC), 'utf8')));
-writeFileSync(join(out, 'lab.html'), patchLab(readFileSync(join(root, LAB_SRC), 'utf8')));
+writeFileSync(join(out, 'index.html'), injectMetrika(patchHome(readFileSync(join(root, HOME_SRC), 'utf8'))));
+writeFileSync(join(out, 'lab.html'), injectMetrika(patchLab(readFileSync(join(root, LAB_SRC), 'utf8'))));
 
 for (const file of ['support.js', 'image-slot.js']) {
   cpSync(join(root, file), join(out, file));
@@ -65,9 +88,13 @@ for (const file of ['support.js', 'image-slot.js']) {
 
 copyDir('tokens', 'tokens');
 copyDir('assets', 'assets');
+copyDir('api', 'api');
+// Do not publish local SMTP secrets into the build artifact
+const builtConfig = join(out, 'api', 'config.php');
+if (existsSync(builtConfig)) unlinkSync(builtConfig);
 
 writeFileSync(join(out, '.nojekyll'), '');
-writeFileSync(join(out, 'privacy.html'), privacyHtml);
+writeFileSync(join(out, 'privacy.html'), injectMetrika(privacyHtml));
 cpSync(join(root, 'yandex_23287c8f5d0b434c.html'), join(out, 'yandex_23287c8f5d0b434c.html'));
 
 // --- SEO: custom domain, robots, sitemap ---
