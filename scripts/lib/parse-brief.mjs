@@ -33,6 +33,15 @@ export const NEUTRAL_INTRO = {
     'Материалы ОВОС для проектируемых объектов: честная оценка воздействия, альтернативы и общественные обсуждения.',
 };
 
+function cleanMetaValue(val) {
+  return val
+    .replace(/`/g, '')
+    .replace(/\\\s*\|/g, ' |')
+    .replace(/\\/g, '')
+    .replace(/\s{2,}/g, ' ')
+    .trim();
+}
+
 function parseMetaTable(section) {
   const meta = {};
   for (const line of section.split('\n')) {
@@ -43,7 +52,7 @@ function parseMetaTable(section) {
       .filter(Boolean);
     if (cells.length < 2 || cells[0] === 'Поле') continue;
     const key = cells[0].toLowerCase();
-    const val = cells[1];
+    const val = cleanMetaValue(cells.slice(1).join(' | '));
     if (key === 'url') meta.url = val;
     else if (key === 'canonical') meta.canonical = val;
     else if (key === 'h1') meta.h1 = val;
