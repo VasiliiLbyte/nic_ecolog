@@ -88,10 +88,12 @@ for (const file of ['support.js', 'image-slot.js']) {
 
 copyDir('tokens', 'tokens');
 copyDir('assets', 'assets');
-copyDir('api', 'api');
-// Do not publish local SMTP secrets into the build artifact
-const builtConfig = join(out, 'api', 'config.php');
-if (existsSync(builtConfig)) unlinkSync(builtConfig);
+if (existsSync(join(root, 'api'))) {
+  copyDir('api', 'api');
+  // Do not publish local SMTP secrets into the build artifact
+  const builtConfig = join(out, 'api', 'config.php');
+  if (existsSync(builtConfig)) unlinkSync(builtConfig);
+}
 
 writeFileSync(join(out, '.nojekyll'), '');
 writeFileSync(join(out, 'privacy.html'), injectMetrika(privacyHtml));
