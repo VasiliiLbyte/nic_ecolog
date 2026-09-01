@@ -1378,7 +1378,7 @@ class Component extends DCLogic {
       [nameEl, phoneEl].forEach((el) => {
         if (el) el.addEventListener('input', () => { if (el.value.trim()) markInvalid(el, false); });
       });
-      form.addEventListener('submit', (e) => {
+      form.addEventListener('submit', async (e) => {
         e.preventDefault();
         const errors = [];
         const nameOk = nameEl && nameEl.value.trim().length > 1;
@@ -1398,10 +1398,36 @@ class Component extends DCLogic {
           return;
         }
         if (errBox) { errBox.style.display = 'none'; errBox.textContent = ''; }
-        const fields = document.getElementById('eco-form-fields');
-        const ok = document.getElementById('eco-form-ok');
-        if (fields) fields.style.display = 'none';
-        if (ok) ok.style.display = 'flex';
+        const taskEl = document.getElementById('f-task');
+        const submitBtn = form.querySelector('button[type="submit"]');
+        if (submitBtn) { submitBtn.disabled = true; submitBtn.style.opacity = '0.7'; }
+        try {
+          const res = await fetch('/api/send.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              name: nameEl.value.trim(),
+              phone: phoneEl.value.trim(),
+              task: taskEl ? taskEl.value.trim() : '',
+              source: 'home',
+              website: ''
+            })
+          });
+          const payload = await res.json().catch(() => ({ ok: false }));
+          if (!res.ok || !payload.ok) {
+            throw new Error('send_failed');
+          }
+          const fields = document.getElementById('eco-form-fields');
+          const ok = document.getElementById('eco-form-ok');
+          if (fields) fields.style.display = 'none';
+          if (ok) ok.style.display = 'flex';
+        } catch (err) {
+          if (errBox) {
+            errBox.textContent = 'Не удалось отправить заявку. Позвоните +7 (812) 449-93-48 или напишите на sale@nic-ecolog.ru.';
+            errBox.style.display = 'block';
+          }
+          if (submitBtn) { submitBtn.disabled = false; submitBtn.style.opacity = ''; }
+        }
       });
     }
   }

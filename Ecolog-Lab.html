@@ -562,6 +562,37 @@ if(burger)burger.addEventListener('click',function(){
  if(m.classList.contains('open'))closeMenu();else openMenu();
 });
 if(mmClose)mmClose.addEventListener('click',closeMenu);
+
+var labForm=document.getElementById('lab-form');
+if(labForm){
+ labForm.addEventListener('submit',function(e){
+  e.preventDefault();
+  var nameEl=document.getElementById('lab-name');
+  var contactEl=document.getElementById('lab-contact-field');
+  var taskEl=document.getElementById('lab-task');
+  var name=(nameEl&&nameEl.value||'').trim();
+  var contact=(contactEl&&contactEl.value||'').trim();
+  var task=(taskEl&&taskEl.value||'').trim();
+  if(name.length<2||!contact){
+   alert('Заполните имя и контакт для ответа.');
+   return;
+  }
+  var btn=labForm.querySelector('button[type="submit"]');
+  if(btn){btn.disabled=true;btn.style.opacity='0.7';}
+  fetch('/api/send.php',{
+   method:'POST',
+   headers:{'Content-Type':'application/json'},
+   body:JSON.stringify({name:name,contact:contact,task:task,source:'lab',website:''})
+  }).then(function(r){return r.json().then(function(j){return {ok:r.ok&&j&&j.ok};});})
+  .then(function(res){
+   if(!res.ok)throw new Error('fail');
+   labForm.innerHTML='<p style="margin:0;font-size:18px;font-weight:500;color:#13282B;">Заявка отправлена</p><p style="margin:12px 0 0;font-size:14.5px;color:#51696B;line-height:1.6;">Свяжемся с вами в течение рабочего дня.</p>';
+  }).catch(function(){
+   alert('Не удалось отправить. Позвоните +7 (812) 449-93-48 или напишите на sale@nic-ecolog.ru.');
+   if(btn){btn.disabled=false;btn.style.opacity='';}
+  });
+ });
+}
 })();
 </script>
 </body>
