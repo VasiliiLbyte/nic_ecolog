@@ -18,25 +18,25 @@ function pageStyles() {
   body{margin:0;font-family:var(--font-body,'Onest',sans-serif);background:var(--bg,#F7FBF9);color:var(--ink-2,#51696B);font-size:16px;line-height:1.6}
   h1,h2,h3,p{margin:0}
   a{color:inherit}
-  .mono{font-family:var(--font-mono,'JetBrains Mono',monospace)}
+  .mono{font-family:var(--font-mono,'Stolzl','Onest',sans-serif)}
   .bar{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px 24px;background:rgba(247,251,249,.94);backdrop-filter:blur(14px);border-bottom:1px solid var(--line,#E2EBE8);flex-wrap:wrap}
   .bar-left{display:flex;align-items:center;gap:16px;min-width:0;flex:1}
   .bar-left img{height:34px;width:auto;display:block;flex:0 0 auto}
-  .crumbs{font-family:var(--font-mono,'JetBrains Mono',monospace);font-size:11px;letter-spacing:.08em;color:var(--slate-3,#7A9496);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .crumbs{font-family:var(--font-mono,'Stolzl','Onest',sans-serif);font-size:11px;letter-spacing:.08em;color:var(--slate-3,#7A9496);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .crumbs b{color:var(--teal-deep,#0F6B6D);font-weight:500}
   .bar-nav{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
   .bar-nav a{font-size:14px;color:var(--teal-deep,#0F6B6D);text-decoration:none;font-weight:500}
   .bar-nav a:hover{text-decoration:underline}
-  .btn-cta{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(105deg,#139EA1,#1C6BA2);color:#fff;font-size:14px;font-weight:500;text-decoration:none;padding:10px 20px;border-radius:999px;white-space:nowrap}
+  .btn-cta{display:inline-flex;align-items:center;gap:8px;background:#1C6BA2;color:#fff;font-size:14px;font-weight:500;text-decoration:none;padding:10px 20px;border-radius:4px;white-space:nowrap}
   .wrap{max-width:960px;margin:0 auto;padding:48px 24px 80px}
-  .eye{font-family:var(--font-mono,'JetBrains Mono',monospace);font-size:11px;font-weight:500;letter-spacing:.18em;color:var(--teal,#139EA1);text-transform:uppercase;margin-bottom:12px}
+  .eye{font-family:var(--font-mono,'Stolzl','Onest',sans-serif);font-size:11px;font-weight:500;letter-spacing:.18em;color:var(--teal,#139EA1);text-transform:uppercase;margin-bottom:12px}
   h1{font-family:var(--font-display,'Stolzl',sans-serif);font-weight:300;font-size:clamp(28px,4vw,48px);line-height:1.12;color:var(--ink,#13282B);margin-top:8px;text-wrap:balance}
   .lead{margin-top:20px;font-size:17px;line-height:1.7;color:var(--slate-2,#3D5557);max-width:720px}
   .lead p+p{margin-top:12px}
   h2{font-weight:400;font-size:22px;color:var(--ink,#13282B);margin:48px 0 20px}
   .steps{display:flex;flex-direction:column;border-top:1px solid var(--line,#E2EBE8)}
   .step{display:flex;gap:18px;padding:18px 0;border-bottom:1px solid var(--line,#E2EBE8)}
-  .step .n{font-family:var(--font-mono,'JetBrains Mono',monospace);font-size:13px;color:var(--teal,#139EA1);padding-top:2px;flex:0 0 auto;min-width:28px}
+  .step .n{font-family:var(--font-mono,'Stolzl','Onest',sans-serif);font-size:13px;color:var(--teal,#139EA1);padding-top:2px;flex:0 0 auto;min-width:28px}
   .step p{font-size:15px;line-height:1.65;color:var(--slate-1,#3D5557)}
   .chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:8px}
   .chip{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line-strong,#C5D6D2);border-radius:999px;background:#fff;color:var(--teal-deep,#0F6B6D);font-size:14px;font-weight:500;padding:10px 18px;text-decoration:none}
@@ -45,7 +45,7 @@ function pageStyles() {
   .cta{margin-top:56px;background:linear-gradient(105deg,#139EA1,#1C6BA2);border-radius:20px;padding:36px 32px;color:#fff;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}
   .cta h3{font-family:var(--font-display,'Stolzl',sans-serif);font-weight:300;font-size:clamp(22px,2.5vw,28px)}
   .cta p{margin-top:6px;font-size:15px;color:rgba(255,255,255,.88)}
-  .cta-btn{background:#fff;color:var(--teal-deep,#0F6B6D);border-radius:999px;font-size:15px;font-weight:500;padding:14px 28px;text-decoration:none;display:inline-block}
+  .cta-btn{background:#fff;color:var(--teal-deep,#0F6B6D);border-radius:4px;font-size:15px;font-weight:500;padding:14px 28px;text-decoration:none;display:inline-block}
   .hub-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px;margin-top:24px}
   .hub-card{border:1px solid var(--line,#E2EBE8);border-radius:16px;padding:24px;background:#fff;text-decoration:none;color:inherit;display:block;transition:border-color .2s,box-shadow .2s}
   a.hub-card:hover{border-color:var(--teal,#139EA1);box-shadow:0 8px 24px rgba(19,158,161,.1)}
@@ -73,7 +73,7 @@ function headBlock({ title, description, canonical, depth, schema }) {
 <meta name="description" content="${esc(description)}">
 <link rel="canonical" href="${esc(canonical)}">
 <meta name="robots" content="index, follow">
-<link rel="icon" type="image/png" href="${prefix}assets/fingerprint-color.png">
+<link rel="icon" type="image/png" href="${prefix}assets/favicon-512.png">
 <link rel="stylesheet" href="${prefix}tokens/reset.css">
 <link rel="stylesheet" href="${prefix}tokens/fonts.css">
 <link rel="stylesheet" href="${prefix}tokens/colors.css">
@@ -92,7 +92,7 @@ function chromeBar({ depth, crumbCurrent, homeHref = '/' }) {
   const uslugiHref = depth === 1 ? './' : `${prefix}uslugi/`;
   return `<header class="bar">
   <div class="bar-left">
-    <a href="${homeHref}"><img src="${prefix}assets/fingerprint-color.png" alt="НИЦ «Эколог»"></a>
+    <a href="${homeHref}"><img src="${prefix}assets/logo_ecolog.svg" alt="НИЦ «Эколог»"></a>
     <span class="crumbs">ГЛАВНАЯ · <a href="${uslugiHref}" style="color:inherit;text-decoration:none">УСЛУГИ</a>${crumbCurrent ? ` · <b>${esc(crumbCurrent)}</b>` : ''}</span>
   </div>
   <nav class="bar-nav" aria-label="Навигация">

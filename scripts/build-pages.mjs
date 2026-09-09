@@ -59,7 +59,7 @@ const privacyHtml = `<!DOCTYPE html>
   <meta name="description" content="Политика конфиденциальности НИЦ «Эколог».">
   <link rel="canonical" href="https://nic-ecolog.ru/privacy.html">
   <meta name="robots" content="noindex, follow">
-  <link rel="icon" type="image/png" href="assets/fingerprint-color.png">
+  <link rel="icon" type="image/png" href="assets/favicon-512.png">
   <style>
     body{margin:0;font-family:var(--font-body, 'Onest', sans-serif);background:#F7FBF9;color:#13282B;padding:48px 24px}
     .wrap{max-width:720px;margin:0 auto}
@@ -70,7 +70,7 @@ const privacyHtml = `<!DOCTYPE html>
 </head>
 <body>
   <div class="wrap">
-    <p style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#139EA1;margin-bottom:24px">Демо-версия</p>
+    <p style="font-family:'Stolzl','Onest',sans-serif;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#139EA1;margin-bottom:24px">Демо-версия</p>
     <h1>Политика конфиденциальности</h1>
     <p>Это демонстрационная страница для превью сайта. Полный текст политики будет опубликован на production-домене.</p>
     <p><a href="index.html">← На главную</a></p>

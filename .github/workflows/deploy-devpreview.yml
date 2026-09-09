@@ -1,0 +1,71 @@
+name: Deploy devpreview (reg.ru)
+
+# Превью-стенд devpreview.nic-ecolog.ru на хостинге reg.ru.
+# Логика: push в ветку разработки → GitHub Actions собирает сайт, готовит
+# приватный (noindex, без Метрики) бандл и заливает его по FTP в докрут
+# поддомена. Прод (nic-ecolog.ru) этот workflow НЕ трогает.
+#
+# Требуемые секреты репозитория (Settings → Secrets and variables → Actions):
+#   DEVPREVIEW_FTP_SERVER    — FTP-хост reg.ru (например ftp.nic-ecolog.ru или адрес сервера)
+#   DEVPREVIEW_FTP_USERNAME  — FTP-логин
+#   DEVPREVIEW_FTP_PASSWORD  — FTP-пароль
+#   DEVPREVIEW_FTP_DIR       — путь к докруту поддомена, ОБЯЗАТЕЛЬНО со слэшем в конце
+#                              (например /devpreview.nic-ecolog.ru/ или /www/devpreview.nic-ecolog.ru/)
+#   SEO_GEO_TOKEN            — (необязательно) PAT с доступом на чтение репозитория
+#                              VasiliiLbyte/seo_geo, чтобы собрать страницы услуг.
+#                              Без него услуги пропускаются, остальной сайт собирается.
+
+on:
+  push:
+    branches: [feat/nic-004-build]
+  workflow_dispatch:
+
+concurrency:
+  group: devpreview
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    env:
+      SEO_GEO_TOKEN: ${{ secrets.SEO_GEO_TOKEN }}
+    steps:
+      - name: Checkout site
+        uses: actions/checkout@v4
+
+      - name: Checkout seo_geo (optional — service pages)
+        if: env.SEO_GEO_TOKEN != ''
+        continue-on-error: true
+        uses: actions/checkout@v4
+        with:
+          repository: VasiliiLbyte/seo_geo
+          token: ${{ secrets.SEO_GEO_TOKEN }}
+          path: seo_geo
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      # Сборка — чистый Node без зависимостей, npm install не нужен.
+      - name: Build static site
+        run: |
+          if [ -d seo_geo ]; then export SEO_GEO_ROOT="$GITHUB_WORKSPACE/seo_geo"; fi
+          npm run pages:build
+
+      - name: Make devpreview bundle (noindex, no Metrika)
+        run: node scripts/make-devpreview.mjs devpreview_dist
+
+      - name: Deploy to reg.ru via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.DEVPREVIEW_FTP_SERVER }}
+          username: ${{ secrets.DEVPREVIEW_FTP_USERNAME }}
+          password: ${{ secrets.DEVPREVIEW_FTP_PASSWORD }}
+          server-dir: ${{ secrets.DEVPREVIEW_FTP_DIR }}
+          local-dir: ./devpreview_dist/
+          protocol: ftps
+          # reg.ru обычно поддерживает FTPS (FTP over TLS). Если деплой падает на
+          # соединении — поменяйте protocol на ftp.
+          exclude: |
+            **/.git*
+            **/.git*/**

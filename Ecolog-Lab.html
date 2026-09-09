@@ -19,14 +19,13 @@
 <meta name="twitter:title" content="Лаборатория «Аналитик Лаб» — НИЦ «Эколог»">
 <meta name="twitter:description" content="Аккредитованная экологическая лаборатория. Полный цикл от пробы до протокола.">
 <meta name="twitter:image" content="https://nic-ecolog.ru/assets/hero-mesh-poster.jpg">
-<link rel="icon" type="image/png" href="assets/fingerprint-color.png">
-<link rel="apple-touch-icon" href="assets/fingerprint-color.png">
+<link rel="icon" type="image/png" href="assets/favicon-512.png"><link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"Organization","@id":"https://nic-ecolog.ru/lab.html#lab","name":"Аналитик Лаб","alternateName":"Лаборатория «Аналитик Лаб»","url":"https://nic-ecolog.ru/lab.html","logo":"https://nic-ecolog.ru/assets/fingerprint-color.png","image":"https://nic-ecolog.ru/assets/hero-mesh-poster.jpg","description":"Аккредитованная экологическая лаборатория: анализ воды, воздуха, почвы, отходов, физических факторов и радиации. Полный цикл от отбора пробы до протокола.","parentOrganization":{"@type":"Organization","name":"НИЦ «Эколог»","url":"https://nic-ecolog.ru/"},"areaServed":"RU","telephone":"+7-812-449-93-48","email":"info@nic-ecolog.ru","address":{"@type":"PostalAddress","addressLocality":"Санкт-Петербург","addressCountry":"RU"}}
+{"@context":"https://schema.org","@type":"Organization","@id":"https://nic-ecolog.ru/lab.html#lab","name":"Аналитик Лаб","alternateName":"Лаборатория «Аналитик Лаб»","url":"https://nic-ecolog.ru/lab.html","logo":"https://nic-ecolog.ru/assets/favicon-512.png","image":"https://nic-ecolog.ru/assets/hero-mesh-poster.jpg","description":"Аккредитованная экологическая лаборатория: анализ воды, воздуха, почвы, отходов, физических факторов и радиации. Полный цикл от отбора пробы до протокола.","parentOrganization":{"@type":"Organization","name":"НИЦ «Эколог»","url":"https://nic-ecolog.ru/"},"areaServed":"RU","telephone":"+7-812-449-93-48","email":"info@nic-ecolog.ru","address":{"@type":"PostalAddress","addressLocality":"Санкт-Петербург","addressCountry":"RU"}}
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Onest:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@300;400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="tokens/colors.css">
 <link rel="stylesheet" href="tokens/effects.css">
 <link rel="stylesheet" href="tokens/responsive.css">
@@ -51,11 +50,11 @@ html{hanging-punctuation:first last;hyphens:manual;}
 @media(prefers-reduced-motion:reduce){.btn span[aria-hidden],.head-cta span[aria-hidden],.lab-cta-link span[aria-hidden]{transition:none;}}
 a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{outline:2px solid var(--teal);outline-offset:3px;}
 .wrap{max-width:1280px;margin:0 auto;padding:0 var(--section-pad-x,48px);}
-.eyebrow{display:inline-flex;align-items:center;gap:13px;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;}
+.eyebrow{display:inline-flex;align-items:center;gap:13px;font-family:'Stolzl','Onest',sans-serif;font-size:12px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;}
 .eyebrow .ln{width:30px;height:1px;display:inline-block;}
-.btn{border:0;cursor:pointer;display:inline-flex;align-items:center;gap:10px;padding:17px 28px;border-radius:999px;font-family:inherit;font-size:16px;font-weight:600;text-decoration:none;white-space:nowrap;transition:transform .25s ease,box-shadow .25s ease;}
-.btn-grad{color:#fff;background:var(--grad-brand);box-shadow:var(--shadow-btn);}
-.btn-grad:hover{transform:translateY(-2px);box-shadow:var(--shadow-btn-hi);}
+.btn{border:0;cursor:pointer;display:inline-flex;align-items:center;gap:10px;padding:17px 28px;border-radius:4px;font-family:inherit;font-size:16px;font-weight:600;text-decoration:none;white-space:nowrap;transition:transform .25s ease,background .25s ease;}
+.btn-grad{color:#fff;background:#1C6BA2;}
+.btn-grad:hover{transform:translateY(-2px);background:#155A8A;}
 .grad-text{background:var(--grad-text);-webkit-background-clip:text;background-clip:text;color:transparent;}
 .grad-text-l{background:var(--grad-text-l);-webkit-background-clip:text;background-clip:text;color:transparent;}
 /* header — как #eco-header на главной */
@@ -72,7 +71,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
 .hdr nav a:hover,.hdr nav a.active{color:#139EA1;}
 .hdr .hdr-actions{display:flex;align-items:center;gap:24px;flex:0 0 auto;}
 .hdr .phone{font-size:15px;font-weight:500;color:#0B5C60;text-decoration:none;font-variant-numeric:tabular-nums;white-space:nowrap;}
-.hdr .head-cta{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(105deg,#139EA1,#1C6BA2);color:#fff;font-size:14px;font-weight:500;text-decoration:none;padding:12px 24px;border-radius:999px;transition:transform .25s ease,box-shadow .25s ease;white-space:nowrap;}
+.hdr .head-cta{display:inline-flex;align-items:center;gap:8px;background:#1C6BA2;color:#fff;font-size:14px;font-weight:500;text-decoration:none;padding:12px 24px;border-radius:4px;transition:transform .25s ease,background .25s ease;white-space:nowrap;}
 .hdr .head-cta:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(19,158,161,.35);}
 .burger{display:none;align-items:center;justify-content:center;width:44px;height:44px;border:1px solid rgba(11,92,96,.25);border-radius:12px;background:rgba(255,255,255,.75);cursor:pointer;padding:0;flex:0 0 auto;}
 @media(max-width:1060px){.hdr nav,.hdr .phone{display:none;}.burger{display:flex;}.hdr{padding-left:24px;padding-right:24px;}.hdr.frosted{padding-left:24px;padding-right:24px;}}
@@ -91,7 +90,7 @@ body.menu-open .hdr{z-index:185;}
 .mmenu nav a{font-size:30px;font-weight:300;color:#13282B;text-decoration:none;padding:14px 0;min-height:44px;display:flex;align-items:center;border-bottom:1px solid rgba(11,92,96,.1);}
 .mm-foot{margin-top:auto;display:flex;flex-direction:column;gap:16px;}
 .mm-foot .phone{font-size:19px;font-weight:500;color:#0B5C60;text-decoration:none;}
-.mm-foot .head-cta{display:inline-flex;align-items:center;justify-content:center;gap:10px;background:linear-gradient(105deg,#139EA1,#1C6BA2);color:#fff;font-size:16px;font-weight:500;text-decoration:none;padding:18px 38px;border-radius:999px;}
+.mm-foot .head-cta{display:inline-flex;align-items:center;justify-content:center;gap:10px;background:#1C6BA2;color:#fff;font-size:16px;font-weight:500;text-decoration:none;padding:18px 38px;border-radius:4px;}
 /* reveal */
 .reveal{opacity:0;transform:translateY(26px);transition:opacity .8s ease,transform .9s cubic-bezier(.16,1,.3,1);}
 .reveal.in{opacity:1;transform:none;}
@@ -121,13 +120,13 @@ body.menu-open .hdr{z-index:185;}
 .lab-cta-link{display:inline-flex;align-items:center;gap:8px;margin-top:0;font-size:15px;font-weight:500;color:var(--lime);text-decoration:none;transition:opacity .2s;}
 .lab-cta-link:hover{opacity:.85;}
 @media(max-width:1060px){#lab{padding:110px 24px 130px;}.lab-two-col{grid-template-columns:1fr;gap:48px;}}
-@media(max-width:720px){.lab-cta-row{flex-direction:column;gap:12px;align-items:stretch;margin-top:32px;}#lab h1{font-size:clamp(29px,8vw,42px) !important;}.lab-chips{max-width:100%;flex-direction:column;align-items:stretch;gap:0;}.lab-chip{width:100%;justify-content:center;text-align:center;box-sizing:border-box;padding:14px 20px;font-size:15px;}.lab-chips>span[aria-hidden]{font-size:0;display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;margin:0;padding:9px 0;transform:none;}.lab-chips>span[aria-hidden]::before{content:"";width:2px;height:14px;border-radius:2px;background:rgba(255,255,255,.3);}.lab-chips>span[aria-hidden]::after{content:"";width:7px;height:7px;margin-top:-4px;border-right:2px solid rgba(255,255,255,.45);border-bottom:2px solid rgba(255,255,255,.45);transform:rotate(45deg);}.lab-cta-link{justify-content:center;width:100%;box-sizing:border-box;padding:16px 22px;border-radius:999px;font-size:15px;transition:transform .25s ease,box-shadow .25s ease,opacity .2s ease;}.lab-cta-link[href="#process"]{border:1px solid rgba(173,207,122,.5);background:rgba(173,207,122,.1);color:#D9EBB8;}.lab-cta-link[href="#lab-contact"]{background:var(--lime);border:1px solid transparent;color:#0A3D42;font-weight:600;box-shadow:0 12px 28px rgba(173,207,122,.28);}.lab-cta-link[href="#lab-contact"] span{color:#0A3D42;}.lab-cta-link:active{transform:translateY(1px);opacity:1;}}
+@media(max-width:720px){.lab-cta-row{flex-direction:column;gap:12px;align-items:stretch;margin-top:32px;}#lab h1{font-size:clamp(29px,8vw,42px) !important;}.lab-chips{max-width:100%;flex-direction:column;align-items:stretch;gap:0;}.lab-chip{width:100%;justify-content:center;text-align:center;box-sizing:border-box;padding:14px 20px;font-size:15px;}.lab-chips>span[aria-hidden]{font-size:0;display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;margin:0;padding:9px 0;transform:none;}.lab-chips>span[aria-hidden]::before{content:"";width:2px;height:14px;border-radius:2px;background:rgba(255,255,255,.3);}.lab-chips>span[aria-hidden]::after{content:"";width:7px;height:7px;margin-top:-4px;border-right:2px solid rgba(255,255,255,.45);border-bottom:2px solid rgba(255,255,255,.45);transform:rotate(45deg);}.lab-cta-link{justify-content:center;width:100%;box-sizing:border-box;padding:16px 22px;border-radius:4px;font-size:15px;transition:transform .25s ease,box-shadow .25s ease,opacity .2s ease;}.lab-cta-link[href="#process"]{border:1px solid rgba(173,207,122,.5);background:rgba(173,207,122,.1);color:#D9EBB8;}.lab-cta-link[href="#lab-contact"]{background:var(--lime);border:1px solid transparent;color:#0A3D42;font-weight:600;box-shadow:0 12px 28px rgba(173,207,122,.28);}.lab-cta-link[href="#lab-contact"] span{color:#0A3D42;}.lab-cta-link:active{transform:translateY(1px);opacity:1;}}
 @media(max-width:560px){.lab-cap-grid{grid-template-columns:1fr;}}
 /* process */
 #process{background:var(--bg);}
 .process-list{margin-top:56px;border-top:1px solid var(--line);}
 .process-step{display:grid;grid-template-columns:72px 1fr;gap:28px;padding:36px 0;border-bottom:1px solid var(--line);align-items:start;}
-.process-step .pn{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:500;color:var(--teal);padding-top:4px;}
+.process-step .pn{font-family:'Stolzl','Onest',sans-serif;font-size:13px;font-weight:500;color:var(--teal);padding-top:4px;}
 .process-step h3{font-size:22px;font-weight:500;letter-spacing:-.01em;color:var(--ink);}
 .process-step .desc{margin-top:12px;font-size:16px;line-height:1.65;color:var(--slate-2);max-width:640px;}
 .process-badge{display:inline-flex;align-items:center;gap:9px;margin-top:18px;padding:9px 15px;border-radius:999px;background:var(--bg-2);border:1px solid var(--line);}
@@ -158,10 +157,10 @@ body.menu-open .hdr{z-index:185;}
 .sec-dark .lead{color:rgba(255,255,255,.72);}
 .ct-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:56px;margin-top:56px;}
 .ct-info .row{margin-bottom:26px;}
-.ct-info .k{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.5);}
+.ct-info .k{font-family:'Stolzl','Onest',sans-serif;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.5);}
 .ct-info .v{font-size:21px;margin-top:8px;color:#fff;}
 .form{background:linear-gradient(160deg,rgba(255,255,255,.1),rgba(255,255,255,.03));border:1px solid rgba(255,255,255,.16);border-radius:26px;padding:38px;backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);}
-.form label{display:block;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.6);margin-bottom:9px;}
+.form label{display:block;font-family:'Stolzl','Onest',sans-serif;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.6);margin-bottom:9px;}
 .form .fld{margin-bottom:22px;}
 .form input,.form textarea{width:100%;font-family:inherit;font-size:16px;color:#fff;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.18);border-radius:14px;padding:15px 16px;outline:none;transition:border-color .3s,background .3s;}
 .form input::placeholder,.form textarea::placeholder{color:rgba(255,255,255,.4);}
@@ -174,7 +173,7 @@ body.menu-open .hdr{z-index:185;}
 .ft-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:40px;}
 @media(max-width:1060px){.ft-grid{grid-template-columns:1fr 1fr;gap:30px;}}
 @media(max-width:560px){.ft-grid{grid-template-columns:1fr;}}
-.ft h4{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:18px;}
+.ft h4{font-family:'Stolzl','Onest',sans-serif;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:18px;}
 .ft a,.ft p{font-size:14.5px;color:rgba(255,255,255,.75);text-decoration:none;line-height:2;display:block;}
 .ft a:hover{color:#fff;}
 .ft .bot{display:flex;justify-content:space-between;align-items:center;margin-top:54px;padding-top:24px;border-top:1px solid rgba(255,255,255,.1);font-size:13px;color:rgba(255,255,255,.5);flex-wrap:wrap;gap:12px;}
@@ -182,17 +181,13 @@ body.menu-open .hdr{z-index:185;}
 #totop.show{opacity:1;transform:none;pointer-events:auto;}
 #totop:hover{background:var(--grad-brand);border-color:transparent;}
 </style>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"ProfessionalService","name":"НИЦ «Эколог» — независимый исследовательский центр","alternateName":"Аналитик Лаб","url":"https://nic-ecolog.ru/","description":"Экологический инжиниринг и консалтинг: изыскания, собственная аккредитованная лаборатория, разрешительная документация (НДВ, НДС, ПНООЛР, СЗЗ, КЭР, ОВОС, ПЭК) и ESG.","image":"https://nic-ecolog.ru/assets/fingerprint-color.png","logo":"https://nic-ecolog.ru/assets/fingerprint-color.png","areaServed":"RU","address":{"@type":"PostalAddress","addressLocality":"Санкт-Петербург","addressCountry":"RU"},"knowsAbout":["Экологический инжиниринг","Инженерно-экологические изыскания","Аккредитованная лаборатория","Разрешительная документация","ESG"],"slogan":"Наука + экология + прикладные решения"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"ProfessionalService","name":"НИЦ «Эколог» — независимый исследовательский центр","alternateName":"Аналитик Лаб","url":"https://nic-ecolog.ru/","description":"Экологический инжиниринг и консалтинг: изыскания, собственная аккредитованная лаборатория, разрешительная документация (НДВ, НДС, ПНООЛР, СЗЗ, КЭР, ОВОС, ПЭК) и ESG.","image":"https://nic-ecolog.ru/assets/favicon-512.png","logo":"https://nic-ecolog.ru/assets/favicon-512.png","areaServed":"RU","address":{"@type":"PostalAddress","addressLocality":"Санкт-Петербург","addressCountry":"RU"},"knowsAbout":["Экологический инжиниринг","Инженерно-экологические изыскания","Аккредитованная лаборатория","Разрешительная документация","ESG"],"slogan":"Наука + экология + прикладные решения"}</script>
 </head>
 <body>
 
 <header class="hdr frosted" id="hdr">
 <a class="logo" href="index.html" aria-label="Эколог — на главную">
-<img src="assets/fingerprint-color.png" alt="">
-<span class="brand">
-<span class="brand-title">Эколог</span>
-<span class="brand-sub">независимый исследовательский центр</span>
-</span>
+<img src="assets/logo_ecolog.svg" alt="НИЦ Эколог" style="height:42px;width:auto;display:block">
 </a>
 <nav aria-label="Основная навигация">
 <a href="index.html#uslugi">Услуги</a>
@@ -259,8 +254,8 @@ body.menu-open .hdr{z-index:185;}
 <line x1="0" y1="120" x2="1200" y2="120" stroke="rgba(255,255,255,.16)" stroke-width="1"></line>
 <path id="eco-chroma-path" d="M0,120 L80,120 C100,120 104,86 116,86 C128,86 132,120 152,120 L206,120 C230,120 236,30 252,30 C268,30 274,120 296,120 L316,120 C332,120 338,64 350,64 C362,64 368,120 386,120 L470,120 C500,120 508,10 524,10 C540,10 548,120 576,120 L626,120 C648,120 654,70 668,70 C682,70 688,120 708,120 L786,120 C808,120 816,42 830,42 C844,42 852,120 872,120 L958,120 C978,120 984,88 1000,88 C1016,88 1022,120 1040,120 L1086,120 C1102,120 1108,58 1120,58 C1132,58 1138,120 1158,120 L1200,120" fill="none" stroke="url(#chromaStroke)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="filter:drop-shadow(0 0 6px rgba(19,158,161,.45))"></path>
 </svg>
-<span style="position:absolute;left:2px;bottom:8px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.18em;color:rgba(255,255,255,.38)">ОТКЛИК</span>
-<span style="position:absolute;right:2px;bottom:8px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.18em;color:rgba(255,255,255,.38)">ВРЕМЯ &rarr;</span>
+<span style="position:absolute;left:2px;bottom:8px;font-family:'Stolzl','Onest',sans-serif;font-size:10px;letter-spacing:.18em;color:rgba(255,255,255,.38)">ОТКЛИК</span>
+<span style="position:absolute;right:2px;bottom:8px;font-family:'Stolzl','Onest',sans-serif;font-size:10px;letter-spacing:.18em;color:rgba(255,255,255,.38)">ВРЕМЯ &rarr;</span>
 </div>
 <div class="lab-inner">
 <div class="lab-two-col">
@@ -277,7 +272,7 @@ body.menu-open .hdr{z-index:185;}
 <span aria-hidden="true" style="color:rgba(255,255,255,.5)">&rarr;</span>
 <span class="lab-chip lab-chip-accent">Согласование</span>
 </div>
-<p class="reveal" style="margin:34px 0 0;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.1em;color:rgba(255,255,255,.55)">ЛАБОРАТОРИЯ ВНЕСЕНА В РЕЕСТР АККРЕДИТОВАННЫХ ЛИЦ</p>
+<p class="reveal" style="margin:34px 0 0;font-family:'Stolzl','Onest',sans-serif;font-size:12px;letter-spacing:.1em;color:rgba(255,255,255,.55)">ЛАБОРАТОРИЯ ВНЕСЕНА В РЕЕСТР АККРЕДИТОВАННЫХ ЛИЦ</p>
 <div class="lab-cta-row reveal">
 <a class="lab-cta-link" href="#process">Полный цикл работ <span aria-hidden="true">&rarr;</span></a>
 <a class="lab-cta-link" href="#lab-contact">Запросить КП <span aria-hidden="true">&rarr;</span></a>
@@ -377,7 +372,7 @@ body.menu-open .hdr{z-index:185;}
 <p class="lead reveal" style="margin-top:24px;">Лаборатория аккредитована в национальной системе и работает по актуальным методикам. Аккредитация подтверждена на 5 лет; область регулярно расширяется &mdash; последними добавлены измерения по металлам и физическим факторам.</p>
 <div class="stats reveal" style="margin-top:64px;">
 <div class="stat"><div class="num"><span class="count" data-to="5">5</span> лет</div><div class="lbl">срок действия аккредитации после ребрендинга и переаттестации</div></div>
-<div class="stat"><div class="num" style="font-size:clamp(22px,2.2vw,34px);letter-spacing:0.02em;font-family:var(--font-mono,'JetBrains Mono',monospace);">RA.RU.516478</div><div class="lbl">аттестат аккредитации в национальной системе, от 25.12.2025. <a href="assets/docs/attestat-akkreditacii.pdf" download style="color:var(--teal-deep);">Скачать PDF</a></div></div>
+<div class="stat"><div class="num" style="font-size:clamp(22px,2.2vw,34px);letter-spacing:0.02em;font-family:var(--font-mono,'Stolzl','Onest',sans-serif);">RA.RU.516478</div><div class="lbl">аттестат аккредитации в национальной системе, от 25.12.2025. <a href="assets/docs/attestat-akkreditacii.pdf" download style="color:var(--teal-deep);">Скачать PDF</a></div></div>
 <div class="stat"><div class="num"><span class="count" data-to="9">9</span></div><div class="lbl">направлений исследований &mdash; от воды до радиации</div></div>
 <div class="stat"><div class="num">1 <span style="font-weight:300;">день</span></div><div class="lbl">срочный выезд на объект для отбора проб</div></div>
 </div>
@@ -450,7 +445,7 @@ body.menu-open .hdr{z-index:185;}
 <div class="wrap">
 <div class="ft-grid">
 <div>
-<div class="logo" style="display:flex;align-items:center;gap:12px;margin-bottom:18px;"><img src="assets/fingerprint-color.png" alt="" style="height:40px;"><div style="line-height:1.1;"><b style="font-size:21px;">Эколог</b><span style="display:block;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.6);">независимый исследовательский центр</span></div></div>
+<div class="logo" style="display:flex;align-items:center;gap:12px;margin-bottom:18px;"><img src="assets/logo_ecolog.svg" alt="НИЦ Эколог" style="height:40px;"></div>
 <p style="max-width:300px;line-height:1.6;">Наука + экология + прикладные решения. Надёжность и экспертиза без бюрократии.</p>
 </div>
 <div>

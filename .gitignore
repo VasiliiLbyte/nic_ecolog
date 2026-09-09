@@ -7,3 +7,16 @@ __pycache__/
 node_modules/
 /docs/
 api/config.php
+
+# local preview / deploy artifacts
+/devpreview_dist/
+/devpreview-nic-ecolog*.zip
+/devpreview-home.png
+# local agent / tooling dirs
+/.zed/
+/.playwright-mcp/
+# local design sources & snapshots (not part of the repo)
+/_docs_myedits_20260901/
+/backup/
+/Сайт-2/
+/oxvat-3-brand-demo.html

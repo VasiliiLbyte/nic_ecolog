@@ -185,5 +185,16 @@ export function parseBrief(slug, seoGeoRoot) {
 }
 
 export function loadWave1Briefs(seoGeoRoot) {
-  return WAVE1_SLUGS.map((slug) => parseBrief(slug, seoGeoRoot));
+  // Брифы услуг лежат в соседнем репозитории seo_geo. Если его нет (например, в
+  // CI без токена доступа) — не падаем, а пропускаем услуги с предупреждением:
+  // главная и лаборатория соберутся в любом случае.
+  const briefs = [];
+  for (const slug of WAVE1_SLUGS) {
+    try {
+      briefs.push(parseBrief(slug, seoGeoRoot));
+    } catch (err) {
+      console.warn(`[build] пропущен бриф услуги «${slug}» (нет исходника в ${seoGeoRoot}): ${err.code || err.message}`);
+    }
+  }
+  return briefs;
 }
