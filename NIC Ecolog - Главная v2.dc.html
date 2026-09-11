@@ -74,6 +74,7 @@ input::placeholder,textarea::placeholder{color:#6E8385}
 @keyframes wordUp{from{opacity:0;transform:translateY(105%)}to{opacity:1;transform:translateY(0)}}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
 @keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes svcFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
 @keyframes drawPrint{from{stroke-dashoffset:100}to{stroke-dashoffset:0}}
 [data-anim="on"] [data-rv]{opacity:0;transform:translateY(30px);transition:opacity 0.9s ease,transform 0.9s cubic-bezier(0.22,1,0.36,1)}
 [data-anim="on"] [data-rv].rv-on{opacity:1;transform:translateY(0)}
@@ -148,6 +149,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
 [data-skip]:focus{top:16px}
 @media (max-width:1060px){
   [data-svc-illustration]{display:none !important}
+  #uslugi [data-svc-head]{min-height:auto !important}
   [data-nav]{display:none !important}
   [data-head-phone]{display:none !important}
   [data-burger]{display:flex !important}
@@ -199,16 +201,13 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
   [data-anim="on"] [data-rv]{opacity:1;transform:none}
   [data-rail-tick],[data-rail-fill],[data-rail-label],[data-rail-shell]{transition:none !important}
 }
-/* ESG donut — плоский SVG: draw-in по появлению секции + мягкое парение */
-[data-esg-svg]{filter:drop-shadow(0 20px 38px rgba(0,0,0,0.32))}
+/* ESG donut — лаконичное тонкое кольцо (флэт-цвета из легенды), draw-in по появлению */
+[data-esg-svg]{filter:drop-shadow(0 10px 24px rgba(0,0,0,0.16))}
 [data-esg-svg] circle{transform-box:view-box;transform-origin:150px 150px}
-[data-esg-donut-wrap]{animation:esgFloat 6.5s ease-in-out infinite}
-@keyframes esgFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
 @keyframes esgDraw{from{stroke-dashoffset:var(--len)}to{stroke-dashoffset:0}}
 [data-anim="on"] [data-esg-svg] .seg{stroke-dashoffset:var(--len)}
-[data-rv].rv-on [data-esg-svg] .seg{animation:esgDraw 1.15s cubic-bezier(0.33,1,0.68,1) forwards;animation-delay:var(--d,0s)}
+[data-rv].rv-on [data-esg-svg] .seg{animation:esgDraw 1.2s cubic-bezier(0.33,1,0.68,1) forwards;animation-delay:var(--d,0s)}
 @media (prefers-reduced-motion:reduce){
-  [data-esg-donut-wrap]{animation:none}
   [data-anim="on"] [data-esg-svg] .seg{stroke-dashoffset:0}
   [data-rv].rv-on [data-esg-svg] .seg{animation:none}
 }
@@ -463,16 +462,17 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
     </section>
 
     <!-- УСЛУГИ -->
-    <section id="uslugi" data-screen-label="Услуги" data-sec="true" style="padding:130px 48px;background:#FFFFFF;scroll-margin-top:80px">
-      <div style="max-width:1280px;margin:0 auto">
-        <div data-two-col="true" style="display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:end;margin-bottom:72px">
-          <div>
+    <section id="uslugi" data-screen-label="Услуги" data-sec="true" style="position:relative;overflow:hidden;padding:130px 48px;background:#FFFFFF;scroll-margin-top:80px">
+      <div aria-hidden="true" style="position:absolute;inset:0;pointer-events:none;z-index:0">
+        <div style="position:absolute;top:-8%;left:-4%;width:min(680px,56vw);height:min(680px,56vw);border-radius:50%;background:radial-gradient(circle at 44% 44%,rgba(76,178,114,0.5) 0%,rgba(173,207,122,0.32) 38%,rgba(76,178,114,0) 70%);filter:blur(58px)"></div>
+      </div>
+      <img data-svc-illustration="true" src="./assets/services-illustration.webp" alt="" aria-hidden="true" style="position:absolute;z-index:0;top:64px;right:clamp(-80px,-4vw,-12px);width:clamp(320px,33vw,500px);height:auto;pointer-events:none;filter:drop-shadow(0 34px 62px rgba(11,92,96,0.2));animation:svcFloat 7.5s ease-in-out infinite">
+      <div style="position:relative;z-index:1;max-width:1280px;margin:0 auto">
+        <div data-svc-head="true" style="display:flex;align-items:center;min-height:clamp(300px,32vw,420px);margin-bottom:72px">
+          <div style="max-width:560px">
             <p data-rv="true" style="margin:0 0 18px;font-family:'Stolzl','Onest',sans-serif;font-size:12px;font-weight:500;letter-spacing:0.22em;color:#139EA1;text-transform:uppercase">Услуги</p>
             <h2 data-rv="true" style="margin:0;font-weight:300;font-size:clamp(34px,3.4vw,52px);line-height:1.12;letter-spacing:-0.01em;color:#13282B">Полный спектр экологического инжиниринга</h2>
-          </div>
-          <div style="display:flex;flex-direction:column;align-items:flex-end;gap:24px;justify-self:end">
-            <img data-svc-illustration="true" data-rv="true" src="./assets/services-illustration.webp" alt="" aria-hidden="true" style="display:block;width:100%;max-width:300px;height:auto">
-            <p data-rv="true" style="margin:0;font-size:17px;color:#3E5557;max-width:460px">От разового проекта до полного экологического сопровождения предприятия. Наведите на карточку, чтобы увидеть состав работ.</p>
+            <p data-rv="true" style="margin:26px 0 0;font-size:17px;color:#3E5557;max-width:460px">От разового проекта до полного экологического сопровождения предприятия. Наведите на карточку, чтобы увидеть состав работ.</p>
           </div>
         </div>
 
@@ -724,20 +724,14 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
           <div data-rv="true" style="display:flex;flex-direction:column;align-items:center;gap:36px">
             <div data-esg-donut-wrap="true" style="position:relative;width:300px;height:300px">
               <svg data-esg-svg="true" viewBox="0 0 300 300" width="300" height="300" aria-hidden="true" style="display:block;overflow:visible">
-                <defs>
-                  <linearGradient id="esg-g3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5AA2F2"></stop><stop offset="1" stop-color="#134F9E"></stop></linearGradient>
-                  <linearGradient id="esg-g2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#63D6C8"></stop><stop offset="1" stop-color="#1A7D6F"></stop></linearGradient>
-                  <linearGradient id="esg-g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#C2E08F"></stop><stop offset="1" stop-color="#6BA83D"></stop></linearGradient>
-                </defs>
-                <circle cx="150" cy="150" r="96" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="36"></circle>
-                <circle class="seg" cx="150" cy="150" r="96" fill="none" stroke="url(#esg-g3)" stroke-width="36" style="--len:414.23;--d:0s;stroke-dasharray:414.23 603.186;transform:rotate(-90deg)"></circle>
-                <circle class="seg" cx="150" cy="150" r="96" fill="none" stroke="url(#esg-g2)" stroke-width="36" style="--len:100.57;--d:0.5s;stroke-dasharray:100.57 603.186;transform:rotate(162deg)"></circle>
-                <circle class="seg" cx="150" cy="150" r="96" fill="none" stroke="url(#esg-g1)" stroke-width="36" style="--len:64.38;--d:0.85s;stroke-dasharray:64.38 603.186;transform:rotate(226.8deg)"></circle>
-                <circle class="gloss" cx="150" cy="150" r="96" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="36" stroke-linecap="round" stroke-dasharray="18 603.186" style="transform:rotate(-108deg);filter:blur(3px);opacity:0.2"></circle>
+                <circle cx="150" cy="150" r="112" fill="none" stroke="rgba(255,255,255,0.09)" stroke-width="20"></circle>
+                <circle class="seg" cx="150" cy="150" r="112" fill="none" stroke="#7FB2DE" stroke-width="20" style="--len:484.6;--d:0s;stroke-dasharray:484.6 703.72;transform:rotate(-90deg)"></circle>
+                <circle class="seg" cx="150" cy="150" r="112" fill="none" stroke="#45C3BD" stroke-width="20" style="--len:118.67;--d:0.5s;stroke-dasharray:118.67 703.72;transform:rotate(162deg)"></circle>
+                <circle class="seg" cx="150" cy="150" r="112" fill="none" stroke="#ADCF7A" stroke-width="20" style="--len:76.45;--d:0.85s;stroke-dasharray:76.45 703.72;transform:rotate(226.8deg)"></circle>
               </svg>
               <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center">
                 <span style="font-family:'Stolzl','Onest',sans-serif;font-size:11px;letter-spacing:0.2em;color:rgba(255,255,255,0.65)">ОХВАТ 3</span>
-                <span style="font-size:40px;font-weight:200;line-height:1.1">до 70%</span>
+                <span style="font-size:44px;font-weight:200;line-height:1.1">до 70%</span>
               </div>
             </div>
             <div style="display:flex;flex-direction:column;gap:12px;width:100%;max-width:340px">
