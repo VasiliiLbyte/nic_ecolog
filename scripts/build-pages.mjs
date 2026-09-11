@@ -60,6 +60,7 @@ const privacyHtml = `<!DOCTYPE html>
   <link rel="canonical" href="https://nic-ecolog.ru/privacy.html">
   <meta name="robots" content="noindex, follow">
   <link rel="icon" type="image/png" href="assets/favicon-512.png">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
   <style>
     body{margin:0;font-family:var(--font-body, 'Onest', sans-serif);background:#F7FBF9;color:#13282B;padding:48px 24px}
     .wrap{max-width:720px;margin:0 auto}

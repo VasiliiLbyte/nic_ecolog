@@ -84,6 +84,9 @@ function parseIntro(raw, slug) {
     const trimmed = block.trim();
     if (!trimmed || trimmed.startsWith('>')) continue;
     if (trimmed.startsWith('- ')) break;
+    // Markdown horizontal-rule separators (---, ___, ———) used by brief authors
+    // to visually divide sections must not leak through as a literal "<p>---</p>".
+    if (/^[-_—]{3,}$/.test(trimmed)) continue;
     paragraphs.push(trimmed);
   }
   return paragraphs;

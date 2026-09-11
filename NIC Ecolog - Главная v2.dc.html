@@ -229,6 +229,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
       <a href="#proekty" style="font-size:14.5px;font-weight:400;color:#2C4346;text-decoration:none;transition:color 0.2s" style-hover="color:#139EA1">Проекты</a>
       <a href="#o-centre" style="font-size:14.5px;font-weight:400;color:#2C4346;text-decoration:none;transition:color 0.2s" style-hover="color:#139EA1">О центре</a>
       <a href="#esg" style="font-size:14.5px;font-weight:400;color:#2C4346;text-decoration:none;transition:color 0.2s" style-hover="color:#139EA1">ESG</a>
+      <a href="#litsenzii" style="font-size:14.5px;font-weight:400;color:#2C4346;text-decoration:none;transition:color 0.2s" style-hover="color:#139EA1">Лицензии</a>
       <a href="#kontakty" style="font-size:14.5px;font-weight:400;color:#2C4346;text-decoration:none;transition:color 0.2s" style-hover="color:#139EA1">Контакты</a>
     </nav>
     <div style="display:flex;align-items:center;gap:24px;flex:0 0 auto">
@@ -779,16 +780,16 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
           <div style="display:flex;align-items:center;justify-content:center;padding:36px 20px;border-right:1px solid rgba(11,92,96,0.12);border-bottom:1px solid rgba(11,92,96,0.12);font-size:16px;font-weight:500;letter-spacing:0.08em;color:#51696B;text-transform:uppercase;text-align:center">МОЭК</div>
           <div style="display:flex;align-items:center;justify-content:center;padding:36px 20px;border-right:1px solid rgba(11,92,96,0.12);border-bottom:1px solid rgba(11,92,96,0.12);font-size:16px;font-weight:500;letter-spacing:0.08em;color:#51696B;text-transform:uppercase;text-align:center">Мариинский театр</div>
           <div style="display:flex;align-items:center;justify-content:center;padding:20px;border-right:1px solid rgba(11,92,96,0.12);border-bottom:1px solid rgba(11,92,96,0.12)">
-            <image-slot id="logo-1" shape="rect" fit="contain" placeholder="Логотип клиента" style="width:100%;height:64px"></image-slot>
+            <image-slot id="logo-1" shape="rect" fit="contain" placeholder="Логотип клиента" aria-label="Логотип клиента" style="width:100%;height:64px"></image-slot>
           </div>
           <div style="display:flex;align-items:center;justify-content:center;padding:20px;border-right:1px solid rgba(11,92,96,0.12);border-bottom:1px solid rgba(11,92,96,0.12)">
-            <image-slot id="logo-2" shape="rect" fit="contain" placeholder="Логотип клиента" style="width:100%;height:64px"></image-slot>
+            <image-slot id="logo-2" shape="rect" fit="contain" placeholder="Логотип клиента" aria-label="Логотип клиента" style="width:100%;height:64px"></image-slot>
           </div>
           <div style="display:flex;align-items:center;justify-content:center;padding:20px;border-right:1px solid rgba(11,92,96,0.12);border-bottom:1px solid rgba(11,92,96,0.12)">
-            <image-slot id="logo-3" shape="rect" fit="contain" placeholder="Логотип клиента" style="width:100%;height:64px"></image-slot>
+            <image-slot id="logo-3" shape="rect" fit="contain" placeholder="Логотип клиента" aria-label="Логотип клиента" style="width:100%;height:64px"></image-slot>
           </div>
           <div style="display:flex;align-items:center;justify-content:center;padding:20px;border-right:1px solid rgba(11,92,96,0.12);border-bottom:1px solid rgba(11,92,96,0.12)">
-            <image-slot id="logo-4" shape="rect" fit="contain" placeholder="Логотип клиента" style="width:100%;height:64px"></image-slot>
+            <image-slot id="logo-4" shape="rect" fit="contain" placeholder="Логотип клиента" aria-label="Логотип клиента" style="width:100%;height:64px"></image-slot>
           </div>
         </div>
         <div data-two-col="true" style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
@@ -915,12 +916,12 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
   </main>
 
   <!-- ПОДВАЛ -->
-  <footer id="kontakty" data-screen-label="Подвал" data-sec="true" style="background:#0A3236;scroll-margin-top:80px;color:#FFFFFF;padding:80px 48px 36px">
+  <footer id="kontakty" data-screen-label="Подвал" data-sec="true" style="background:#06141C;scroll-margin-top:80px;color:#FFFFFF;padding:80px 48px 36px">
     <div style="max-width:1280px;margin:0 auto">
       <div data-cols4="true" style="display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:48px;padding-bottom:56px;border-bottom:1px solid rgba(255,255,255,0.14)">
         <div>
           <div style="display:flex;align-items:center;gap:14px;margin-bottom:20px">
-            <img src="./assets/fingerprint-white.png" alt="" style="height:40px;width:auto;display:block">
+            <img src="./assets/fingerprint-white.png" alt="" aria-hidden="true" style="height:40px;width:auto;display:block">
             <span style="display:flex;flex-direction:column;line-height:1.1">
               <span style="font-size:20px;font-weight:600;color:#FFFFFF">Эколог</span>
               <span style="font-size:10px;color:rgba(255,255,255,0.6)">независимый исследовательский центр</span>
@@ -941,6 +942,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
           <a href="lab.html" style="font-size:14.5px;color:rgba(255,255,255,0.8);text-decoration:none;transition:color 0.2s" style-hover="color:#ADCF7A">Лаборатория «Аналитик Лаб»</a>
           <a href="#proekty" style="font-size:14.5px;color:rgba(255,255,255,0.8);text-decoration:none;transition:color 0.2s" style-hover="color:#ADCF7A">Проекты</a>
           <a href="#esg" style="font-size:14.5px;color:rgba(255,255,255,0.8);text-decoration:none;transition:color 0.2s" style-hover="color:#ADCF7A">ESG</a>
+          <a href="#litsenzii" style="font-size:14.5px;color:rgba(255,255,255,0.8);text-decoration:none;transition:color 0.2s" style-hover="color:#ADCF7A">Лицензии</a>
         </nav>
         <div style="display:flex;flex-direction:column;gap:12px">
           <p style="margin:0 0 6px;font-family:'Stolzl','Onest',sans-serif;font-size:11px;letter-spacing:0.18em;color:rgba(255,255,255,0.62)">КОНТАКТЫ</p>
