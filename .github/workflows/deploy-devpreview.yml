@@ -15,11 +15,9 @@ name: Deploy devpreview (reg.ru)
 #                              VasiliiLbyte/seo_geo, чтобы собрать страницы услуг.
 #                              Без него услуги пропускаются, остальной сайт собирается.
 
-# Пока только ручной запуск (Actions → этот workflow → Run workflow).
-# Авто-деплой по push включим позже — вернуть триггер:
-#   push:
-#     branches: [feat/nic-004-build]
 on:
+  push:
+    branches: [feat/nic-004-build]
   workflow_dispatch:
 
 concurrency:
