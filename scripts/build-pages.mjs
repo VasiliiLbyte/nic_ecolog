@@ -1,4 +1,5 @@
 import { cpSync, existsSync, mkdirSync, readFileSync, rmSync, unlinkSync, writeFileSync } from 'node:fs';
+import { execFileSync } from 'node:child_process';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { loadWave1Briefs, WAVE1_SLUGS } from './lib/parse-brief.mjs';
@@ -122,14 +123,38 @@ writeFileSync(
 
 // --- SEO: custom domain, robots, sitemap ---
 const SITE = 'https://nic-ecolog.ru';
-const lastmod = new Date().toISOString().slice(0, 10);
+const today = new Date().toISOString().slice(0, 10);
+
+// lastmod = date the page's sources last changed (git), not the build date.
+// Uncommitted or untracked sources count as changed today.
+function lastmodFor(files) {
+  const dates = files.map((file) => {
+    try {
+      const git = (...args) => execFileSync('git', ['-C', dirname(file), ...args, '--', file], { encoding: 'utf8' }).trim();
+      if (git('status', '--porcelain')) return today;
+      return git('log', '-1', '--format=%cs') || today;
+    } catch {
+      return today;
+    }
+  });
+  return dates.sort().at(-1);
+}
+
+const TEMPLATE_SRC = join(root, 'scripts', 'lib', 'service-page-template.mjs');
+const briefSrc = (slug) => join(seoGeoRoot, 'docs', 'briefs', 'nic', `uslugi-${slug}.md`);
+const uslugiSources = (path) => {
+  const slug = path.split('/').filter(Boolean)[1];
+  return slug ? [TEMPLATE_SRC, briefSrc(slug)] : [TEMPLATE_SRC, ...WAVE1_SLUGS.map(briefSrc)];
+};
+
+// privacy.html is noindex, so it stays out of the sitemap.
 const sitemapPages = [
-  { loc: `${SITE}/`, priority: '1.0' },
-  { loc: `${SITE}/lab.html`, priority: '0.8' },
-  { loc: `${SITE}/privacy.html`, priority: '0.3' },
+  { loc: `${SITE}/`, priority: '1.0', lastmod: lastmodFor([join(root, HOME_SRC)]) },
+  { loc: `${SITE}/lab.html`, priority: '0.8', lastmod: lastmodFor([join(root, LAB_SRC)]) },
   ...WAVE1_SITEMAP_URLS.map(({ path, priority }) => ({
     loc: `${SITE}${path}`,
     priority,
+    lastmod: lastmodFor(uslugiSources(path)),
   })),
 ];
 
@@ -142,7 +167,7 @@ const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 ${sitemapPages
   .map(
     (p) =>
-      `  <url>\n    <loc>${p.loc}</loc>\n    <lastmod>${lastmod}</lastmod>\n    <changefreq>monthly</changefreq>\n    <priority>${p.priority}</priority>\n  </url>`
+      `  <url>\n    <loc>${p.loc}</loc>\n    <lastmod>${p.lastmod}</lastmod>\n    <changefreq>monthly</changefreq>\n    <priority>${p.priority}</priority>\n  </url>`
   )
   .join('\n')}
 </urlset>

@@ -325,7 +325,7 @@ body.menu-open .hdr{z-index:185;}
 <div class="pn">01</div>
 <div>
 <h3>Изыскания</h3>
-<p class="desc">Полевые инженерно-экологические изыскания: маршрутные наблюдения, точки отбора, привязка по координатам.</p>
+<p class="desc">Полевые <a href="uslugi/iei/" style="color:inherit">инженерно-экологические изыскания</a>: маршрутные наблюдения, точки отбора, привязка по координатам.</p>
 <div class="process-badge"><span style="background:var(--ocean);"></span><em>ИЭИ &middot; полевой этап</em></div>
 </div>
 </article>
@@ -452,9 +452,9 @@ body.menu-open .hdr{z-index:185;}
 </div>
 <div>
 <h4>Услуги</h4>
-<a href="index.html#uslugi">Проектирование и документация</a>
-<a href="index.html#uslugi">Сопровождение предприятий</a>
-<a href="index.html#uslugi">Изыскания и исследования</a>
+<a href="uslugi/">Проектирование и документация</a>
+<a href="uslugi/">Сопровождение предприятий</a>
+<a href="uslugi/">Изыскания и исследования</a>
 <a href="index.html#esg">ESG и устойчивое развитие</a>
 </div>
 <div>
@@ -583,6 +583,7 @@ if(labForm){
   }).then(function(r){return r.json().then(function(j){return {ok:r.ok&&j&&j.ok};});})
   .then(function(res){
    if(!res.ok)throw new Error('fail');
+   if(typeof ym==='function')ym(112117233,'reachGoal','form_sent');
    labForm.innerHTML='<p style="margin:0;font-size:18px;font-weight:500;color:#13282B;">Заявка отправлена</p><p style="margin:12px 0 0;font-size:14.5px;color:#51696B;line-height:1.6;">Свяжемся с вами в течение рабочего дня.</p>';
   }).catch(function(){
    alert('Не удалось отправить. Позвоните +7 (812) 449-93-48 или напишите на sale@nic-ecolog.ru.');

@@ -3,7 +3,7 @@
  * Local QA for NIC-004 wave-1 pages (preview server on :8766).
  * Usage: npm run pages:preview &  node scripts/qa-wave1.mjs
  */
-import { readFileSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { chromium } from 'playwright';
@@ -81,6 +81,23 @@ async function main() {
       if (forbiddenHits.length) console.log('  - forbidden:', forbiddenHits.join(', '));
       if (!hasMetrika) console.log('  - missing metrika');
       if (!inSitemap) console.log('  - missing from sitemap');
+    }
+  }
+
+  // NIC-006: home and lab must link to the service pages; no dead document links.
+  for (const [file, min] of [['index.html', 8], ['lab.html', 2]]) {
+    const html = readFileSync(join(root, 'docs', file), 'utf8');
+    const links = new Set([...html.matchAll(/<a [^>]*href="(uslugi\/[^"]*)"/g)].map((m) => m[1]));
+    const deadLinks = [...links].filter((href) => !existsSync(join(root, 'docs', href, 'index.html')));
+    const deadDocs = [...html.matchAll(/href="(assets\/docs\/[^"]+\.pdf)"/g)]
+      .map((m) => m[1])
+      .filter((href) => !existsSync(join(root, 'docs', href)));
+    const ok = links.size >= min && deadLinks.length === 0 && deadDocs.length === 0;
+    console.log(`${ok ? 'OK' : 'FAIL'} ${file} uslugi-links=${links.size} (min ${min})`);
+    if (!ok) {
+      failed++;
+      if (deadLinks.length) console.log('  - dead uslugi links:', deadLinks.join(', '));
+      if (deadDocs.length) console.log('  - dead document links:', deadDocs.join(', '));
     }
   }
 
