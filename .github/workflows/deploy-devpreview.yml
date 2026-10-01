@@ -50,7 +50,8 @@ jobs:
       - name: Build static site
         run: |
           if [ -d seo_geo ]; then export SEO_GEO_ROOT="$GITHUB_WORKSPACE/seo_geo"; fi
-          npm run pages:build
+          # Превью показывает и черновики статей блога (status: draft). Прод собирается без них.
+          BLOG_DRAFTS=1 npm run pages:build
 
       - name: Make devpreview bundle (noindex, no Metrika)
         run: node scripts/make-devpreview.mjs devpreview_dist

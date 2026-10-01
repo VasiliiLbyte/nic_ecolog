@@ -1,6 +1,13 @@
 const SITE = 'https://nic-ecolog.ru';
 
-function esc(s) {
+// Site-wide switches set by build-pages.mjs. hasBlog adds «Блог» to nav and footer,
+// only when at least one article is built, so a build without articles stays unchanged.
+const siteOptions = { hasBlog: false };
+export function setSiteOptions(opts) {
+  Object.assign(siteOptions, opts);
+}
+
+export function esc(s) {
   return String(s)
     .replace(/&/g, '&amp;')
     .replace(/</g, '&lt;')
@@ -12,7 +19,7 @@ function assetPrefix(depth) {
   return depth === 1 ? '../' : '../../';
 }
 
-function pageStyles() {
+export function pageStyles() {
   return `
   *{box-sizing:border-box}
   body{margin:0;font-family:var(--font-body,'Onest',sans-serif);background:var(--bg,#F7FBF9);color:var(--ink-2,#51696B);font-size:16px;line-height:1.6}
@@ -20,12 +27,12 @@ function pageStyles() {
   h1,h2,h3,p{margin:0}
   a{color:inherit}
   .mono{font-family:var(--font-mono,'Stolzl','Onest',sans-serif)}
-  .bar{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px 24px;background:rgba(247,251,249,.94);backdrop-filter:blur(14px);border-bottom:1px solid var(--line,#E2EBE8);flex-wrap:wrap}
-  .bar-left{display:flex;align-items:center;gap:16px;min-width:0;flex:1 1 auto;overflow:hidden}
+  .bar{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px 24px;background:rgba(247,251,249,.94);backdrop-filter:blur(14px);border-bottom:1px solid var(--line,#E2EBE8);flex-wrap:nowrap}
+  .bar-left{display:flex;align-items:center;gap:16px;min-width:120px;flex:0 1 auto;overflow:hidden}
   .bar-left img{height:34px;width:auto;display:block;flex:0 0 auto}
   .crumbs{font-family:var(--font-mono,'Stolzl','Onest',sans-serif);font-size:11px;letter-spacing:.08em;color:var(--slate-3,#7A9496);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .crumbs b{color:var(--teal-deep,#0B5C60);font-weight:500}
-  .bar-nav{display:flex;align-items:center;gap:24px;flex-wrap:wrap;flex:1;justify-content:flex-end}
+  .bar-nav{display:flex;align-items:center;gap:18px;flex-wrap:nowrap;flex:0 0 auto;justify-content:flex-end}
   .bar-nav a:not(.btn-cta){font-size:14.5px;color:#2C4346;text-decoration:none;font-weight:400;transition:color .2s}
   .bar-nav a:not(.btn-cta):hover{color:var(--teal,#139EA1)}
   .bar-phone{font-size:14.5px;font-weight:500;color:var(--teal-deep,#0B5C60);text-decoration:none;font-variant-numeric:tabular-nums;white-space:nowrap}
@@ -80,10 +87,24 @@ function pageStyles() {
   .ft-bot{display:flex;justify-content:space-between;align-items:center;margin-top:54px;padding-top:24px;border-top:1px solid rgba(255,255,255,.1);font-size:13px;color:rgba(255,255,255,.5);flex-wrap:wrap;gap:12px}
   @media(max-width:900px){.ft-grid{grid-template-columns:1fr 1fr;gap:32px}}
   @media(max-width:640px){.bar{padding:12px 16px}.wrap{padding:32px 16px 64px}.ft-grid{grid-template-columns:1fr}}
+  .post-meta{margin-top:14px;font-size:14px;color:var(--slate-3,#7A9496)}
+  .post{margin-top:28px;max-width:760px;font-size:16.5px;line-height:1.75;color:var(--slate-1,#2C4346)}
+  .post p{margin:0 0 16px}
+  .post h2{margin:40px 0 16px}
+  .post h3{font-size:18px;font-weight:500;color:var(--ink,#13282B);margin:28px 0 12px}
+  .post ul,.post ol{margin:0 0 18px;padding-left:22px}
+  .post li{margin:6px 0}
+  .post a{color:var(--teal-deep,#0B5C60);text-underline-offset:3px}
+  .post strong{color:var(--ink,#13282B);font-weight:600}
+  .post .tbl{overflow-x:auto;margin:0 0 20px;-webkit-overflow-scrolling:touch}
+  .post table{border-collapse:collapse;width:100%;min-width:560px;font-size:14.5px;line-height:1.5;background:#fff}
+  .post th,.post td{border:1px solid var(--line,#E2EBE8);padding:10px 12px;text-align:left;vertical-align:top}
+  .post th{background:rgba(19,158,161,.07);color:var(--ink,#13282B);font-weight:500}
+  .post-date{font-size:13px;color:var(--slate-3,#7A9496);margin-top:10px}
   `;
 }
 
-function headBlock({ title, description, canonical, depth, schema }) {
+export function headBlock({ title, description, canonical, depth, schema, ogType = 'website' }) {
   const prefix = assetPrefix(depth);
   const schemaScript = schema
     ? `<script type="application/ld+json">${JSON.stringify(schema)}</script>`
@@ -98,7 +119,7 @@ function headBlock({ title, description, canonical, depth, schema }) {
 <meta name="description" content="${esc(description)}">
 <link rel="canonical" href="${esc(canonical)}">
 <meta name="robots" content="index, follow">
-<meta property="og:type" content="website">
+<meta property="og:type" content="${ogType}">
 <meta property="og:locale" content="ru_RU">
 <meta property="og:site_name" content="НИЦ «Эколог»">
 <meta property="og:title" content="${esc(title)}">
@@ -132,19 +153,20 @@ function navLinks({ uslugiHref, prefix, homeHref }) {
     { href: `${homeHref}#o-centre`, label: 'О центре' },
     { href: `${homeHref}#esg`, label: 'ESG' },
     { href: `${homeHref}#litsenzii`, label: 'Лицензии' },
+    ...(siteOptions.hasBlog ? [{ href: `${prefix}blog/`, label: 'Блог' }] : []),
     { href: `${homeHref}#kontakty`, label: 'Контакты' },
   ];
 }
 
-function chromeBar({ depth, crumbCurrent, homeHref = '/' }) {
+export function chromeBar({ depth, crumbCurrent, homeHref = '/', uslugiHref: uslugiOverride, crumbsHtml }) {
   const prefix = assetPrefix(depth);
-  const uslugiHref = depth === 1 ? './' : `${prefix}uslugi/`;
+  const uslugiHref = uslugiOverride ?? (depth === 1 ? './' : `${prefix}uslugi/`);
   const links = navLinks({ uslugiHref, prefix, homeHref });
   const navHtml = links.map((l) => `<a href="${l.href}">${l.label}</a>`).join('\n    ');
   return `<header class="bar">
   <div class="bar-left">
     <a href="${homeHref}"><img src="${prefix}assets/logo_ecolog.svg" alt="НИЦ Эколог"></a>
-    <span class="crumbs">ГЛАВНАЯ · <a href="${uslugiHref}" style="color:inherit;text-decoration:none">УСЛУГИ</a>${crumbCurrent ? ` · <b>${esc(crumbCurrent)}</b>` : ''}</span>
+    <span class="crumbs">${crumbsHtml ?? `ГЛАВНАЯ · <a href="${uslugiHref}" style="color:inherit;text-decoration:none">УСЛУГИ</a>${crumbCurrent ? ` · <b>${esc(crumbCurrent)}</b>` : ''}`}</span>
   </div>
   <nav class="bar-nav" aria-label="Навигация">
     ${navHtml}
@@ -172,7 +194,7 @@ function chromeBar({ depth, crumbCurrent, homeHref = '/' }) {
 </div>`;
 }
 
-function menuScript() {
+export function menuScript() {
   return `<script>(function(){
 var b=document.querySelector('[data-menu-open]'),c=document.querySelector('[data-menu-close]'),m=document.getElementById('mmenu');
 function open(){if(!m)return;m.classList.add('open');b&&b.setAttribute('aria-expanded','true');document.body.classList.add('menu-open');}
@@ -182,9 +204,9 @@ if(c)c.addEventListener('click',close);
 })();</script>`;
 }
 
-function footerBlock({ depth, homeHref = '/' }) {
+export function footerBlock({ depth, homeHref = '/', uslugiHref: uslugiOverride }) {
   const prefix = assetPrefix(depth);
-  const uslugiHref = depth === 1 ? './' : `${prefix}uslugi/`;
+  const uslugiHref = uslugiOverride ?? (depth === 1 ? './' : `${prefix}uslugi/`);
   const privacyHref = `${prefix}privacy.html`;
   return `<footer class="ft">
   <div class="ft-inner">
@@ -205,7 +227,8 @@ function footerBlock({ depth, homeHref = '/' }) {
         <a href="${homeHref}#o-centre">О центре</a>
         <a href="${prefix}lab.html">Лаборатория «Аналитик Лаб»</a>
         <a href="${homeHref}#proekty">Проекты</a>
-        <a href="${homeHref}#litsenzii">Лицензии</a>
+        <a href="${homeHref}#litsenzii">Лицензии</a>${siteOptions.hasBlog ? `
+        <a href="${prefix}blog/">Блог</a>` : ''}
       </div>
       <div>
         <h4>Контакты</h4>
@@ -222,7 +245,7 @@ function footerBlock({ depth, homeHref = '/' }) {
 </footer>`;
 }
 
-function ctaBlock(homeHref = '/') {
+export function ctaBlock(homeHref = '/') {
   return `<div class="cta">
   <div><h3>Обсудим вашу задачу?</h3><p>Оставьте заявку — мы свяжемся с вами.</p></div>
   <a class="cta-btn" href="${homeHref}#zayavka">Оставить заявку</a>
@@ -247,7 +270,16 @@ function relatedBlock(related) {
 /**
  * @param {import('./parse-brief.mjs').parseBrief extends (...args: any[]) => infer R ? R : never} brief
  */
-export function renderServicePage(brief, { depth = 2 } = {}) {
+function articlesBlock(articles) {
+  if (!articles?.length) return '';
+  const chips = articles
+    .map((a) => `<a class="chip" href="../../blog/${esc(a.slug)}/">${esc(a.h1)} <span aria-hidden="true">→</span></a>`)
+    .join('\n    ');
+  return `<h2>Статьи по теме</h2>
+  <div class="chips">${chips}</div>`;
+}
+
+export function renderServicePage(brief, { depth = 2, articles = [] } = {}) {
   const homeHref = depth === 1 ? '../index.html' : '../../index.html';
   const introHtml = brief.intro.map((p) => `<p>${esc(p)}</p>`).join('\n      ');
   const steps = brief.includes
@@ -272,7 +304,8 @@ ${chromeBar({ depth, crumbCurrent: brief.h1, homeHref })}
   <div class="lead">${introHtml}</div>
   <h2>Что входит в работу</h2>
   <div class="steps">${steps}</div>
-  ${relatedBlock(brief.related)}
+  ${relatedBlock(brief.related)}${articles.length ? `
+  ${articlesBlock(articles)}` : ''}
   ${ctaBlock(homeHref)}
 </main>
 ${footerBlock({ depth, homeHref })}

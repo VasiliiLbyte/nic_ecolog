@@ -9,7 +9,8 @@
     "pages:qa-wave1": "node scripts/qa-wave1.mjs",
     "mobile:audit": "node scripts/mobile-audit.mjs",
     "content:export": "python3 scripts/export-site-copy-docx.py",
-    "content:export:xlsx": "python3 scripts/export-site-copy-xlsx.py"
+    "content:export:xlsx": "python3 scripts/export-site-copy-xlsx.py",
+    "pages:qa-blog": "node scripts/qa-blog.mjs"
   },
   "devDependencies": {
     "playwright": "^1.49.1",

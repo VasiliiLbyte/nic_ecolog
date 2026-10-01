@@ -3,13 +3,21 @@ import { execFileSync } from 'node:child_process';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { loadWave1Briefs, WAVE1_SLUGS } from './lib/parse-brief.mjs';
-import { renderHubPage, renderServicePage, WAVE1_SITEMAP_URLS } from './lib/service-page-template.mjs';
+import { renderHubPage, renderServicePage, setSiteOptions, WAVE1_SITEMAP_URLS } from './lib/service-page-template.mjs';
+import { articlesByService, loadArticles, renderArticlePage, renderBlogHub } from './lib/blog-template.mjs';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const out = join(root, 'docs');
 const seoGeoRoot = process.env.SEO_GEO_ROOT ?? join(root, '..', 'seo_geo');
 
 const HOME_SRC = 'NIC Ecolog - Главная v2.dc.html';
+const BLOG_SRC = join(root, 'content', 'blog');
+
+// Blog (NIC-010): only status=published articles go into a production build.
+// BLOG_DRAFTS=1 also builds drafts — for local preview and devpreview only.
+const articles = loadArticles(BLOG_SRC, { includeDrafts: process.env.BLOG_DRAFTS === '1' });
+const hasBlog = articles.length > 0;
+setSiteOptions({ hasBlog });
 const LAB_SRC = 'Ecolog-Lab.html';
 const METRIKA_ID = '112117233';
 
@@ -39,16 +47,33 @@ function copyDir(src, dest) {
   cpSync(join(root, src), join(out, src), { recursive: true });
 }
 
+// Adds a «Блог» link right after the given «Лицензии» link (footer), only when the blog is built.
+function addBlogLink(html, anchor, link) {
+  if (!hasBlog) return html;
+  if (!html.includes(anchor)) throw new Error(`blog link anchor not found: ${anchor.slice(0, 60)}`);
+  return html.replace(anchor, `${anchor}\n${link}`);
+}
+
 function patchHome(html) {
-  return html.replaceAll('href="/privacy"', 'href="privacy.html"');
+  return addBlogLink(
+    html.replaceAll('href="/privacy"', 'href="privacy.html"'),
+    '<a href="#litsenzii" style="font-size:14.5px;color:rgba(255,255,255,0.8);text-decoration:none;transition:color 0.2s" style-hover="color:#ADCF7A">Лицензии</a>',
+    '          <a href="blog/" style="font-size:14.5px;color:rgba(255,255,255,0.8);text-decoration:none;transition:color 0.2s" style-hover="color:#ADCF7A">Блог</a>'
+  );
 }
 
 function patchLab(html) {
-  return html
+  const patched = html
     .replaceAll('НИЦ Эколог - Сайт (вау).html', 'index.html')
     .replaceAll('#services', '#uslugi')
     .replaceAll('#about', '#o-centre')
     .replaceAll('#portfolio', '#proekty');
+  // Footer column «Центр»: the last of three identical «Лицензии» links (header, mobile menu, footer).
+  if (!hasBlog) return patched;
+  const anchor = '<a href="index.html#litsenzii">Лицензии</a>';
+  const at = patched.lastIndexOf(anchor);
+  if (at < 0) throw new Error('lab footer anchor not found');
+  return `${patched.slice(0, at + anchor.length)}\n<a href="blog/">Блог</a>${patched.slice(at + anchor.length)}`;
 }
 
 const privacyHtml = `<!DOCTYPE html>
@@ -105,6 +130,7 @@ cpSync(join(root, 'yandex_23287c8f5d0b434c.html'), join(out, 'yandex_23287c8f5d0
 
 // --- Wave-1 service pages (NIC-004 Phase A) ---
 const wave1Briefs = loadWave1Briefs(seoGeoRoot);
+const blogByService = articlesByService(articles);
 mkdirSync(join(out, 'uslugi'), { recursive: true });
 
 for (const brief of wave1Briefs) {
@@ -112,7 +138,7 @@ for (const brief of wave1Briefs) {
   mkdirSync(dir, { recursive: true });
   writeFileSync(
     join(dir, 'index.html'),
-    injectMetrika(renderServicePage(brief, { depth: 2 }))
+    injectMetrika(renderServicePage(brief, { depth: 2, articles: blogByService[brief.slug] ?? [] }))
   );
 }
 
@@ -120,6 +146,16 @@ writeFileSync(
   join(out, 'uslugi', 'index.html'),
   injectMetrika(renderHubPage(wave1Briefs))
 );
+
+// --- Blog (NIC-010) ---
+if (hasBlog) {
+  mkdirSync(join(out, 'blog'), { recursive: true });
+  writeFileSync(join(out, 'blog', 'index.html'), injectMetrika(renderBlogHub(articles)));
+  for (const a of articles) {
+    mkdirSync(join(out, 'blog', a.slug), { recursive: true });
+    writeFileSync(join(out, 'blog', a.slug, 'index.html'), injectMetrika(renderArticlePage(a)));
+  }
+}
 
 // --- SEO: custom domain, robots, sitemap ---
 const SITE = 'https://nic-ecolog.ru';
@@ -141,6 +177,7 @@ function lastmodFor(files) {
 }
 
 const TEMPLATE_SRC = join(root, 'scripts', 'lib', 'service-page-template.mjs');
+const BLOG_TEMPLATE_SRC = join(root, 'scripts', 'lib', 'blog-template.mjs');
 const briefSrc = (slug) => join(seoGeoRoot, 'docs', 'briefs', 'nic', `uslugi-${slug}.md`);
 const uslugiSources = (path) => {
   const slug = path.split('/').filter(Boolean)[1];
@@ -156,6 +193,19 @@ const sitemapPages = [
     priority,
     lastmod: lastmodFor(uslugiSources(path)),
   })),
+  // Drafts never reach the sitemap, even in a BLOG_DRAFTS build.
+  ...(articles.some((a) => a.status === 'published')
+    ? [
+        {
+          loc: `${SITE}/blog/`,
+          priority: '0.7',
+          lastmod: lastmodFor([BLOG_TEMPLATE_SRC, ...articles.filter((a) => a.status === 'published').map((a) => a.file)]),
+        },
+      ]
+    : []),
+  ...articles
+    .filter((a) => a.status === 'published')
+    .map((a) => ({ loc: `${SITE}/blog/${a.slug}/`, priority: '0.6', lastmod: lastmodFor([BLOG_TEMPLATE_SRC, a.file]) })),
 ];
 
 writeFileSync(join(out, 'CNAME'), 'nic-ecolog.ru\n');
@@ -174,4 +224,6 @@ ${sitemapPages
 `;
 writeFileSync(join(out, 'sitemap.xml'), sitemap);
 
-console.log(`Built GitHub Pages artifact → docs/ (+ ${WAVE1_SLUGS.length + 1} uslugi pages from ${seoGeoRoot})`);
+console.log(
+  `Built GitHub Pages artifact → docs/ (+ ${WAVE1_SLUGS.length + 1} uslugi pages from ${seoGeoRoot}; blog: ${articles.length} article(s)${process.env.BLOG_DRAFTS === '1' ? ', drafts included' : ''})`
+);
