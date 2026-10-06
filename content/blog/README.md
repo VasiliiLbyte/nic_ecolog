@@ -17,6 +17,8 @@ date: 2026-10-01         # дата публикации (YYYY-MM-DD)
 updated: 2026-10-01      # дата последнего изменения
 services: [plata-nvos, autsorsing-ekologa]   # страницы /uslugi/{slug}/, с которыми связана статья
 source: seo_geo/nic-ecolog/stati/…           # черновик с факт-чеком (не публикуется)
+cover: kategorii-nvos-pp-636.webp             # необязательно: файл в assets/blog/, 1600×900
+cover_alt: Описание картинки                  # обязательно, если есть cover
 ---
 ```
 
@@ -31,6 +33,8 @@ source: seo_geo/nic-ecolog/stati/…           # черновик с факт-ч
 - таблицы, `**жирный**`, ссылки `[текст](/uslugi/…/)`.
 
 Заголовок H1 в тексте не пишут, он берётся из поля `h1`.
+
+Обложка (`cover`) показывается под датой статьи и в карточке на `/blog/`, идёт в `og:image` и в разметку `Article.image`. Файлы — `assets/blog/`, 1600×900, WebP до ~200 КБ. Требования к стилю — в `seo_geo/nic-ecolog/stati/tz_izobrazheniya_blog.md`.
 
 ## Черновики и публикация
 

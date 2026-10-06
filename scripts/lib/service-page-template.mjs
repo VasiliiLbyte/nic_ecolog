@@ -101,15 +101,18 @@ export function pageStyles() {
   .post th,.post td{border:1px solid var(--line,#E2EBE8);padding:10px 12px;text-align:left;vertical-align:top}
   .post th{background:rgba(19,158,161,.07);color:var(--ink,#13282B);font-weight:500}
   .post-date{font-size:13px;color:var(--slate-3,#7A9496);margin-top:10px}
+  .post-cover{margin:28px 0 0;max-width:960px}
+  .post-cover img{display:block;width:100%;height:auto;border-radius:16px}
+  .hub-card .cover{display:block;width:calc(100% + 48px);margin:-24px -24px 18px;height:auto;border-radius:16px 16px 0 0}
   `;
 }
 
-export function headBlock({ title, description, canonical, depth, schema, ogType = 'website' }) {
+export function headBlock({ title, description, canonical, depth, schema, ogType = 'website', ogImage: ogImageOverride }) {
   const prefix = assetPrefix(depth);
   const schemaScript = schema
     ? `<script type="application/ld+json">${JSON.stringify(schema)}</script>`
     : '';
-  const ogImage = `${SITE}/assets/hero-mesh-poster.jpg`;
+  const ogImage = ogImageOverride ?? `${SITE}/assets/hero-mesh-poster.jpg`;
   return `<!DOCTYPE html>
 <html lang="ru">
 <head>

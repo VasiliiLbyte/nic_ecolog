@@ -1,5 +1,5 @@
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
-import { join } from 'node:path';
+import { dirname, join } from 'node:path';
 import { renderMarkdown } from './markdown.mjs';
 import { chromeBar, ctaBlock, esc, footerBlock, headBlock, menuScript } from './service-page-template.mjs';
 
@@ -39,6 +39,11 @@ function parseFrontMatter(raw, file) {
   for (const s of meta.services ?? []) {
     if (!SERVICE_LABELS[s]) throw new Error(`${file}: unknown service "${s}"`);
   }
+  // Optional cover: a file under assets/blog/ (1600×900, webp/jpg) plus alt text.
+  if (meta.cover) {
+    if (!/^[a-z0-9-]+\.(webp|jpg|png)$/.test(meta.cover)) throw new Error(`${file}: cover must be a file name in assets/blog/`);
+    if (!meta.cover_alt) throw new Error(`${file}: cover_alt is required with cover`);
+  }
   return { ...meta, services: meta.services ?? [], updated: meta.updated || meta.date, body: m[2] };
 }
 
@@ -48,6 +53,12 @@ export function loadArticles(contentDir, { includeDrafts = false } = {}) {
   return readdirSync(contentDir)
     .filter((f) => f.endsWith('.md') && f !== 'README.md')
     .map((f) => ({ ...parseFrontMatter(readFileSync(join(contentDir, f), 'utf8'), f), file: join(contentDir, f) }))
+    .map((a) => {
+      if (a.cover && !existsSync(join(dirname(dirname(contentDir)), 'assets', 'blog', a.cover))) {
+        throw new Error(`${a.slug}: cover assets/blog/${a.cover} not found`);
+      }
+      return a;
+    })
     .filter((a) => includeDrafts || a.status === 'published')
     .sort((a, b) => b.date.localeCompare(a.date));
 }
@@ -83,6 +94,7 @@ export function renderArticlePage(a) {
         mainEntityOfPage: url,
         author: ORG,
         publisher: ORG,
+        ...(a.cover ? { image: `${SITE}/assets/blog/${a.cover}` } : {}),
       },
       breadcrumbs([
         ['Главная', `${SITE}/`],
@@ -95,7 +107,15 @@ export function renderArticlePage(a) {
     .map((s) => `<a class="chip" href="../../uslugi/${s}/">${esc(SERVICE_LABELS[s])} <span aria-hidden="true">→</span></a>`)
     .join('\n    ');
 
-  return `${headBlock({ title: a.title, description: a.description, canonical: url, depth: 2, schema, ogType: 'article' })}
+  return `${headBlock({
+    title: a.title,
+    description: a.description,
+    canonical: url,
+    depth: 2,
+    schema,
+    ogType: 'article',
+    ogImage: a.cover ? `${SITE}/assets/blog/${a.cover}` : undefined,
+  })}
 <body>
 ${chromeBar({
   depth: 2,
@@ -106,7 +126,8 @@ ${chromeBar({
 <main class="wrap">
   <p class="eye">Блог НИЦ «Эколог»</p>
   <h1>${esc(a.h1)}</h1>
-  <p class="post-meta"><time datetime="${a.date}">${ruDate(a.date)}</time>${a.updated !== a.date ? ` · обновлено <time datetime="${a.updated}">${ruDate(a.updated)}</time>` : ''}</p>
+  <p class="post-meta"><time datetime="${a.date}">${ruDate(a.date)}</time>${a.updated !== a.date ? ` · обновлено <time datetime="${a.updated}">${ruDate(a.updated)}</time>` : ''}</p>${a.cover ? `
+  <figure class="post-cover"><img src="../../assets/blog/${esc(a.cover)}" alt="${esc(a.cover_alt)}" width="1600" height="900" fetchpriority="high"></figure>` : ''}
   <article class="post">
 ${renderMarkdown(a.body)}
   </article>${services ? `
@@ -146,7 +167,8 @@ export function renderBlogHub(articles) {
   };
   const cards = articles
     .map(
-      (a) => `<a class="hub-card" href="./${a.slug}/">
+      (a) => `<a class="hub-card" href="./${a.slug}/">${a.cover ? `
+      <img class="cover" src="../assets/blog/${esc(a.cover)}" alt="" width="1600" height="900" loading="lazy">` : ''}
       <h3>${esc(a.h1)}</h3>
       <p>${esc(a.description)}</p>
       <p class="post-date"><time datetime="${a.date}">${ruDate(a.date)}</time></p>
