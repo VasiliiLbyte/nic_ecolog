@@ -160,6 +160,23 @@ const sitemapPages = [
 
 writeFileSync(join(out, 'CNAME'), 'nic-ecolog.ru\n');
 
+// NIC-011: one address for every page — https://nic-ecolog.ru without www and without index.html.
+// Apache on reg.ru reads .htaccess (nginx in front). http→https is already done by the hosting.
+// make-devpreview.mjs writes its own .htaccess for devpreview, so these rules never reach it.
+writeFileSync(
+  join(out, '.htaccess'),
+  `RewriteEngine On
+
+# www.nic-ecolog.ru → nic-ecolog.ru (same path and query)
+RewriteCond %{HTTP_HOST} ^www\\.nic-ecolog\\.ru$ [NC]
+RewriteRule ^(.*)$ https://nic-ecolog.ru/$1 [R=301,L]
+
+# /index.html and /dir/index.html → / and /dir/ (only when typed in the request, not for DirectoryIndex)
+RewriteCond %{THE_REQUEST} \\s/+((?:[^\\s?]*/)?)index\\.html[\\s?] [NC]
+RewriteRule ^ https://nic-ecolog.ru/%1 [R=301,L]
+`
+);
+
 writeFileSync(join(out, 'robots.txt'), `User-agent: *\nAllow: /\n\nSitemap: ${SITE}/sitemap.xml\n`);
 
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
