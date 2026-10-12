@@ -1,11 +1,11 @@
 /* TYPOGRAPHY — НИЦ «Эколог»
    Display: Onest Light (300) at large sizes, tight tracking, balanced wrap.
-   Body: Onest 400/500. Labels & data: JetBrains Mono, uppercase, wide tracking. */
+   Body: Onest 400/500. Labels & data: Stölzl, uppercase, wide tracking. */
 :root {
   /* Stölzl is the brandbook display face — active, full Cyrillic; Onest is the fallback. */
   --font-display: 'Stolzl', 'Onest', -apple-system, 'Segoe UI', sans-serif;
   --font-body:    'Onest', -apple-system, 'Segoe UI', sans-serif;
-  --font-mono:    'JetBrains Mono', ui-monospace, 'SFMono-Regular', monospace;
+  --font-mono:    'Stolzl', 'Onest', -apple-system, 'Segoe UI', sans-serif;
 
   /* Display weights — the brand leans LIGHT for big type */
   --fw-thin: 200;
