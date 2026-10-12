@@ -400,26 +400,32 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
 .f-data__motto{margin:0;font-family:'Stolzl','Onest',sans-serif;font-weight:500;font-size:16px;line-height:20px;color:var(--f-green-l)}
 .f-data__visual{flex:0 1 471px;display:flex;flex-direction:column;gap:32px}
 .f-donut{position:relative;width:100%;max-width:471px;aspect-ratio:471/444}
-/* Интерактивная 3D-диаграмма: картинка из макета разрезана на три слоя-сегмента (assets/figma/esg-donut-scope*.webp).
+/* Интерактивная 3D-диаграмма: картинка из макета разрезана на три слоя-сегмента (assets/figma/esg-donut-scope*.webp,
+   1400 px для 2x/3x и -sm 800 px для 1x — с запасом на наклон и выдвижение).
    Появление — сегменты собираются по очереди; бублик «дышит» и наклоняется за курсором;
-   наведение/тап на сегмент или строку легенды выдвигает сегмент и меняет подпись. */
+   наведение/тап на сегмент или строку легенды выдвигает сегмент и меняет подпись в отверстии бублика.
+   Без will-change: иначе браузер один раз растрирует слой (в т.ч. в масштабе 0.94 до появления) и потом мылит. */
 .f-donut__float{position:absolute;inset:0;animation:donutFloat 8s ease-in-out infinite}
 @keyframes donutFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
 .f-donut__stage{position:absolute;inset:0;transform:perspective(1100px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transition:transform 0.6s cubic-bezier(0.22,1,0.36,1);cursor:pointer}
-.f-donut__seg{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:contain;transition:transform 0.55s cubic-bezier(0.22,1,0.36,1),opacity 0.4s ease,filter 0.4s ease;will-change:transform}
+.f-donut__seg{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:contain;transition:transform 0.55s cubic-bezier(0.22,1,0.36,1),opacity 0.4s ease,filter 0.4s ease}
 [data-anim="on"] .f-donut:not(.is-in) .f-donut__seg{opacity:0;transform:translate(calc(var(--dx) * 14%),calc(var(--dy) * 14% - 12%)) scale(0.94)}
 .f-donut.is-in:not(.is-ready) .f-donut__seg{transition:transform 1.1s cubic-bezier(0.22,1,0.36,1) var(--d),opacity 0.8s ease var(--d)}
 .f-data__visual.has-active .f-donut__seg{opacity:0.62;filter:saturate(0.65)}
 .f-data__visual.has-active .f-donut__seg.is-active{z-index:2;opacity:1;filter:saturate(1.1) brightness(1.06) drop-shadow(0 16px 20px rgba(6,30,60,0.35));transform:translate(calc(var(--dx) * var(--lift)),calc(var(--dy) * var(--lift) - 2.4%))}
-.f-donut__label{transition:left 0.45s cubic-bezier(0.22,1,0.36,1),top 0.45s cubic-bezier(0.22,1,0.36,1),transform 0.45s cubic-bezier(0.22,1,0.36,1),opacity 0.25s ease;pointer-events:none;z-index:3}
-.f-donut__label.is-swap{opacity:0}
-.f-donut[data-active="2"] .f-donut__label,.f-donut[data-active="1"] .f-donut__label{left:50.4%;top:48.9%;transform:translate(-50%,-50%);text-align:center}
+/* Подпись — в центре отверстия (49.6% / 49.6% картинки, отверстие ≈30% × 26%): разрядка «ОХВАТ 3», тонкая цифра */
+.f-donut__label{position:absolute;left:49.6%;top:49.6%;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;color:#FFFFFF;text-shadow:0 1px 14px rgba(6,30,60,0.35);pointer-events:none;z-index:3;transition:opacity 0.25s ease}
+.f-donut__label.is-swap,[data-anim="on"] .f-donut:not(.is-in) .f-donut__label{opacity:0}
+.f-donut__name{margin-right:-0.2em;font-family:'Stolzl','Onest',sans-serif;font-size:10px;line-height:12px;font-weight:500;letter-spacing:0.2em;color:rgba(255,255,255,0.75)}
+.f-donut__val{display:flex;align-items:baseline;margin-top:4px;font-family:'Onest',sans-serif;font-weight:300;line-height:1;font-variant-numeric:tabular-nums}
+.f-donut__pre{margin-right:4px;font-size:13px;font-weight:400;color:rgba(255,255,255,0.8)}
+.f-donut__num{font-size:40px;letter-spacing:-0.03em}
+.f-donut__pct{margin-left:1px;font-size:18px;color:rgba(255,255,255,0.85)}
 .f-legend__row{appearance:none;margin:0;padding:0;border:0;background:none;font:inherit;color:inherit;text-align:left;cursor:pointer;transition:opacity 0.3s ease}
 .f-legend__row:focus-visible{outline:2px solid #ADCF7A;outline-offset:4px;border-radius:2px}
 .f-legend__sw{transition:transform 0.3s ease}
 .f-data__visual.has-active .f-legend__row:not(.is-active){opacity:0.5}
 .f-legend__row.is-active .f-legend__sw{transform:scale(1.25)}
-.f-donut__label{position:absolute;left:62.8%;top:58.6%;font-size:20px;line-height:28px;font-weight:600;color:#FFFFFF}
 .f-legend{display:grid;grid-template-columns:153px 129px 141px;gap:24px}
 .f-legend__row{display:flex;align-items:flex-start;gap:16px}
 .f-legend__sw{flex:0 0 auto;width:16px;height:16px}
@@ -619,7 +625,11 @@ a.f-doc:hover .f-doc__preview{border-color:var(--f-teal)}
   .f-data__content .f-btn{width:100%}
   .f-data__visual{gap:24px}
   .f-donut{max-width:350px}
-  .f-donut__label{left:43.4%;top:42.4%;font-size:15px;line-height:21px}
+  .f-donut__name{font-size:9px;line-height:11px}
+  .f-donut__val{margin-top:3px}
+  .f-donut__pre{margin-right:3px;font-size:11px}
+  .f-donut__num{font-size:28px}
+  .f-donut__pct{font-size:14px}
   .f-legend{grid-template-columns:113px 113px 92px;gap:16px}
   .f-legend__pct{font-size:14px;line-height:20px;font-weight:500;letter-spacing:0.02em;text-transform:uppercase}
   .f-br-d{display:none}
@@ -967,12 +977,12 @@ a.f-doc:hover .f-doc__preview{border-color:var(--f-teal)}
           <div class="f-donut" data-donut="true">
             <div class="f-donut__float">
               <div class="f-donut__stage" role="img" aria-label="Структура углеродного следа: охват 3 — до 70%, охват 2 — около 18%, охват 1 — около 12%">
-                <img class="f-donut__seg" data-seg="3" src="./assets/figma/esg-donut-scope3.webp" alt="" width="471" height="444" loading="lazy" decoding="async" style="--dx:0.64;--dy:0.77;--lift:1.6%;--d:0s">
-                <img class="f-donut__seg" data-seg="2" src="./assets/figma/esg-donut-scope2.webp" alt="" width="471" height="444" loading="lazy" decoding="async" style="--dx:-0.51;--dy:-0.86;--lift:3.4%;--d:0.16s">
-                <img class="f-donut__seg" data-seg="1" src="./assets/figma/esg-donut-scope1.webp" alt="" width="471" height="444" loading="lazy" decoding="async" style="--dx:-0.98;--dy:-0.21;--lift:3.4%;--d:0.32s">
+                <img class="f-donut__seg" data-seg="3" src="./assets/figma/esg-donut-scope3-sm.webp" srcset="./assets/figma/esg-donut-scope3-sm.webp 1x, ./assets/figma/esg-donut-scope3.webp 2x" alt="" width="471" height="444" loading="lazy" decoding="async" style="--dx:0.64;--dy:0.77;--lift:1.6%;--d:0s">
+                <img class="f-donut__seg" data-seg="2" src="./assets/figma/esg-donut-scope2-sm.webp" srcset="./assets/figma/esg-donut-scope2-sm.webp 1x, ./assets/figma/esg-donut-scope2.webp 2x" alt="" width="471" height="444" loading="lazy" decoding="async" style="--dx:-0.51;--dy:-0.86;--lift:3.4%;--d:0.16s">
+                <img class="f-donut__seg" data-seg="1" src="./assets/figma/esg-donut-scope1-sm.webp" srcset="./assets/figma/esg-donut-scope1-sm.webp 1x, ./assets/figma/esg-donut-scope1.webp 2x" alt="" width="471" height="444" loading="lazy" decoding="async" style="--dx:-0.98;--dy:-0.21;--lift:3.4%;--d:0.32s">
               </div>
+              <span class="f-donut__label" aria-hidden="true"><span class="f-donut__name" data-donut-name>ОХВАТ 3</span><span class="f-donut__val"><span class="f-donut__pre" data-donut-pre>до</span><span class="f-donut__num" data-donut-num>70</span><span class="f-donut__pct">%</span></span></span>
             </div>
-            <span class="f-donut__label" aria-hidden="true"><span data-donut-name>ОХВАТ 3</span><br><span data-donut-val>до 70%</span></span>
           </div>
           <div class="f-legend">
             <button type="button" class="f-legend__row" data-seg="3" aria-pressed="false"><span class="f-legend__sw" style="background:#2081C4" aria-hidden="true"></span><span><span class="f-legend__name">Охват 3<br>цепочка поставок<br>и жизненный цикл</span><span class="f-legend__pct">≈70%</span></span></button>
@@ -1586,8 +1596,9 @@ class Component extends DCLogic {
     const rows = Array.from(visual.querySelectorAll('.f-legend__row'));
     const label = donut.querySelector('.f-donut__label');
     const nameEl = donut.querySelector('[data-donut-name]');
-    const valEl = donut.querySelector('[data-donut-val]');
-    const TEXT = { 0: ['ОХВАТ 3', 'до 70%'], 3: ['ОХВАТ 3', 'до 70%'], 2: ['ОХВАТ 2', '≈18%'], 1: ['ОХВАТ 1', '≈12%'] };
+    const preEl = donut.querySelector('[data-donut-pre]');
+    const numEl = donut.querySelector('[data-donut-num]');
+    const TEXT = { 0: ['ОХВАТ 3', 'до', '70'], 3: ['ОХВАТ 3', 'до', '70'], 2: ['ОХВАТ 2', '≈', '18'], 1: ['ОХВАТ 1', '≈', '12'] };
     let active = 0;
     let pinned = 0;
     let swapTimer = 0;
@@ -1608,7 +1619,8 @@ class Component extends DCLogic {
       label.classList.add('is-swap');
       swapTimer = setTimeout(() => {
         nameEl.textContent = TEXT[seg][0];
-        valEl.textContent = TEXT[seg][1];
+        preEl.textContent = TEXT[seg][1];
+        numEl.textContent = TEXT[seg][2];
         label.classList.remove('is-swap');
       }, reduced ? 0 : 160);
     };
@@ -1697,9 +1709,8 @@ class Component extends DCLogic {
       const t0 = performance.now();
       const step = (t) => {
         const p = Math.min(1, (t - t0) / 1400);
-        if (!active) valEl.textContent = 'до ' + Math.round(70 * (1 - Math.pow(1 - p, 3))) + '%';
+        if (!active) numEl.textContent = String(Math.round(70 * (1 - Math.pow(1 - p, 3))));
         if (p < 1) requestAnimationFrame(step);
-        else if (!active) valEl.textContent = 'до 70%';
       };
       requestAnimationFrame(step);
     };
