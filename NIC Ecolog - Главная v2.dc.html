@@ -372,8 +372,8 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
 .f-proj{width:calc((100% - 16px) * 0.4141);display:flex;flex-direction:column;border-radius:8px;overflow:hidden;background:#FFFFFF}
 .f-proj--wide{width:calc((100% - 16px) * 0.5859)}
 .f-proj__img{height:238px;overflow:hidden}
-.f-proj__img img{display:block;width:100%;height:100%;object-fit:cover;transition:transform 0.9s cubic-bezier(0.22,1,0.36,1)}
-.f-proj:hover .f-proj__img img{transform:scale(1.04)}
+.f-proj__img img{display:block;width:100%;height:100%;object-fit:cover;transition:scale 0.9s cubic-bezier(0.22,1,0.36,1)}
+.f-proj:hover .f-proj__img img{scale:1.04}
 .f-proj__copy{display:flex;flex-direction:column;gap:8px;padding:16px}
 .f-proj__eyebrow{margin:0;font-size:10px;line-height:18px;letter-spacing:0.02em;text-transform:uppercase;color:var(--f-muted)}
 .f-proj__copy h3{margin:0;font-family:'Onest',sans-serif;font-size:16px;line-height:28px;font-weight:500;color:var(--f-heading)}
@@ -662,6 +662,93 @@ a.f-doc:hover .f-doc__preview{border-color:var(--f-teal)}
   .f-foot__bottom{flex-direction:column;align-items:flex-start;gap:16px;margin-top:24px;padding-top:24px}
   .f-foot__bottom div{flex-direction:column;gap:16px}
 }
+
+/* ==== Движение: медленно и тонко; без JS и при prefers-reduced-motion страница остаётся как в макете ====
+   1 — живая волна в герое, 2 — линия процесса, 3 — линии под цифрами, 4 — иконки лаборатории,
+   5 — проекты (параллакс + блик), 6 — нить через страницу, 7 — магнитные кнопки и успех формы.
+   Состояния «до анимации» — только под [data-anim="on"] (его ставит скрипт). */
+
+/* 1. Герой: WebGL-canvas с той же картинкой поверх CSS-фона, проявляется после первого кадра (только десктоп) */
+.f-hero__fx{position:absolute;inset:0;display:block;width:100%;height:100%;opacity:0;transition:opacity 1.4s ease;pointer-events:none}
+.f-hero__fx.is-on{opacity:1}
+
+/* 2. Как мы работаем: линия заполняется по прокрутке, точки шагов загораются по очереди */
+.f-step__marker span::after{content:"";position:absolute;inset:0;background:var(--line,var(--f-green-l));transform-origin:0 50%;transform:scaleX(var(--fill,1))}
+[data-anim="on"] .f-step__marker span{background:color-mix(in srgb,var(--line,var(--f-green-l)) 30%,transparent)}
+[data-anim="on"] .f-step__marker::before,[data-anim="on"] .f-step__marker::after{transition:transform 0.6s cubic-bezier(0.22,1,0.36,1),opacity 0.6s ease}
+[data-anim="on"] .f-step:not(.is-lit) .f-step__marker::before{opacity:0;transform:scale(0.4)}
+[data-anim="on"] .f-step:not(.is-lit) .f-step__marker::after{opacity:0.4;transform:scale(0.6)}
+[data-anim="on"] .f-step.is-lit .f-step__marker::after{animation:stepPing 1.2s ease-out}
+@keyframes stepPing{from{box-shadow:0 0 0 0 color-mix(in srgb,var(--dot) 70%,transparent)}to{box-shadow:0 0 0 14px color-mix(in srgb,var(--dot) 0%,transparent)}}
+[data-anim="on"] .f-step__num{transition:color 0.6s ease}
+[data-anim="on"] .f-step.is-lit .f-step__num{color:var(--f-teal)}
+
+/* 3. О центре: под цифрой прорисовывается линия в такт счётчику */
+.f-stat::after{content:"";position:absolute;top:0;left:0;width:min(220px,100%);height:1px;background:linear-gradient(90deg,var(--f-teal),var(--f-green-l));transform:scaleX(0);transform-origin:0 50%;transition:transform 1.5s cubic-bezier(0.33,1,0.68,1)}
+.f-stat.is-counted::after{transform:scaleX(1)}
+
+/* 4. Лаборатория: контур иконки прорисовывается, затем проявляется заливка; при наведении — свой микроцикл */
+.f-lab__card{position:relative;isolation:isolate}
+.f-lab__svg{display:block;width:26px;height:26px;overflow:visible}
+.f-lab__svg path{fill:#FFFFFF;stroke:#FFFFFF;stroke-width:0;stroke-linejoin:round}
+[data-anim="on"] .f-lab__svg path{fill-opacity:0;stroke-width:0.5;stroke-dasharray:1 1;stroke-dashoffset:1}
+[data-anim="on"] .f-lab__card.rv-on .f-lab__svg path{animation:labDraw 1.3s cubic-bezier(0.33,1,0.68,1) var(--ld,0.3s) forwards,labFill 0.6s ease calc(var(--ld,0.3s) + 0.9s) forwards}
+.f-lab__card:nth-child(2){--ld:0.42s}
+.f-lab__card:nth-child(3){--ld:0.54s}
+.f-lab__card:nth-child(4){--ld:0.66s}
+@keyframes labDraw{to{stroke-dashoffset:0}}
+@keyframes labFill{to{fill-opacity:1;stroke-opacity:0}}
+.f-lab__icon::after{content:"";position:absolute;inset:0;border-radius:50%;box-shadow:0 0 0 1px rgba(255,255,255,0.6);opacity:0;pointer-events:none}
+.f-lab__card::before{content:"";position:absolute;inset:0;z-index:-1;border-radius:inherit;background:rgba(255,255,255,0.06);opacity:0;transition:opacity 0.35s ease}
+.f-lab__svg--waste{transform-origin:50% 100%}
+@media (hover:hover) and (pointer:fine){
+  .f-lab__card:hover::before{opacity:1}
+  .f-lab__card:hover .f-lab__icon::after{animation:labPing 1.4s ease-out}
+  .f-lab__card:hover .f-lab__svg--water{animation:labBob 2.2s ease-in-out infinite}
+  .f-lab__card:hover .f-lab__svg--air{animation:labWind 2.6s ease-in-out infinite}
+  .f-lab__card:hover .f-lab__sun{animation:labSun 2.6s ease-in-out infinite}
+  .f-lab__card:hover .f-lab__svg--waste{animation:labTilt 2.6s ease-in-out infinite}
+}
+@keyframes labPing{from{opacity:0.8;transform:scale(1)}to{opacity:0;transform:scale(1.75)}}
+@keyframes labBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-2px)}}
+@keyframes labWind{0%,100%{transform:translateX(-1.5px)}50%{transform:translateX(1.5px)}}
+@keyframes labSun{0%,100%{transform:translateY(0)}50%{transform:translateY(-2.5px)}}
+@keyframes labTilt{0%,100%{transform:rotate(0deg)}50%{transform:rotate(-7deg)}}
+
+/* 5. Проекты: фото чуть плывёт относительно карточки при прокрутке; под курсором — мягкий блик */
+.f-proj__img{position:relative}
+[data-anim="on"] .f-proj__img img{height:calc(100% + 28px);margin-top:-14px;translate:0 var(--py,0px)}
+.f-proj__img::after{content:"";position:absolute;inset:0;background:radial-gradient(380px circle at var(--mx,50%) var(--my,50%),rgba(255,255,255,0.3),rgba(255,255,255,0) 70%);opacity:0;transition:opacity 0.5s ease;pointer-events:none}
+@media (hover:hover) and (pointer:fine){
+  .f-proj:hover .f-proj__img::after{opacity:1}
+}
+
+/* 6. Нить через страницу: тонкая линия в левом поле от «О центре» до заявки (рисует скрипт, только ≥1200 px) */
+.f-thread{position:fixed;top:0;left:0;z-index:90;display:none;width:80px;height:100vh;pointer-events:none}
+@media (min-width:1200px){
+  [data-anim="on"] .f-thread{display:block}
+}
+
+/* 7. Успех формы: отпечаток прорисовывается и тает, на его месте появляется галочка */
+.f-ok__mark{display:flex;align-items:center;justify-content:center;width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,#ADCF7A,#4CB272);animation:okIn 0.6s cubic-bezier(0.22,1,0.36,1) both}
+.f-ok__mark svg{display:block;width:48px;height:48px;overflow:visible}
+.f-ok__mark path{fill:none;stroke:#FFFFFF;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1 1;stroke-dashoffset:1}
+.f-ok__ridge{stroke-width:1.2;animation:okRidge 1.1s cubic-bezier(0.33,1,0.68,1) 0.15s forwards}
+.f-ok__ridge:nth-child(2){animation-delay:0.25s}
+.f-ok__ridge:nth-child(3){animation-delay:0.35s}
+.f-ok__check{stroke-width:2.4;animation:okDraw 0.5s cubic-bezier(0.33,1,0.68,1) 0.9s forwards}
+#eco-form-ok h3,#eco-form-ok p{animation:okText 0.7s cubic-bezier(0.22,1,0.36,1) 0.5s both}
+#eco-form-ok p{animation-delay:0.62s}
+@keyframes okIn{from{opacity:0;transform:scale(0.6)}to{opacity:1;transform:none}}
+@keyframes okRidge{0%{stroke-dashoffset:1;opacity:0.85}60%{stroke-dashoffset:0;opacity:0.85}100%{stroke-dashoffset:0;opacity:0}}
+@keyframes okDraw{to{stroke-dashoffset:0}}
+@keyframes okText{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+@media (max-width:720px){
+  .f-hero__fx{display:none}
+  .f-step__marker span::after{transform-origin:50% 0;transform:scaleY(var(--fill,1))}
+  .f-lab__svg{width:22px;height:22px}
+}
 </style>
 <script src="./image-slot.js" defer></script>
 </helmet>
@@ -696,6 +783,7 @@ a.f-doc:hover .f-doc__preview{border-color:var(--f-teal)}
   <main>
     <!-- ГЕРОЙ -->
     <section id="top" class="f-sec" data-screen-label="Герой" data-sec="true">
+      <canvas class="f-hero__fx" aria-hidden="true"></canvas>
       <div class="f-wrap">
         <p class="f-hero__eyebrow">Независимый исследовательский центр<span class="f-sep">&nbsp;&nbsp;|&nbsp;&nbsp;</span><br class="f-br-m">Санкт-Петербург</p>
         <h1 class="f-hero__title">
@@ -782,10 +870,10 @@ a.f-doc:hover .f-doc__preview{border-color:var(--f-teal)}
           <a class="f-btn f-btn--green" href="lab.html" data-rv="true">Страница лаборатории</a>
         </div>
         <div class="f-lab__grid">
-          <div class="f-lab__card" data-rv="true"><div class="f-lab__head"><span class="f-lab__icon" aria-hidden="true"><img src="./assets/figma/lab-water.svg" alt=""></span><h3>Вода</h3></div><p>Питьевая, природная, сточная — химический и микробиологический анализ</p></div>
-          <div class="f-lab__card" data-rv="true"><div class="f-lab__head"><span class="f-lab__icon" aria-hidden="true"><img src="./assets/figma/lab-air.svg" alt=""></span><h3>Воздух</h3></div><p>Атмосферный воздух, промвыбросы, воздух рабочей зоны</p></div>
-          <div class="f-lab__card" data-rv="true"><div class="f-lab__head"><span class="f-lab__icon f-lab__icon--green" aria-hidden="true"><img src="./assets/figma/lab-soil.svg" alt=""></span><h3>Почвы и грунты</h3></div><p>Загрязнения, агрохимия, оценка для изысканий и экспертизы</p></div>
-          <div class="f-lab__card" data-rv="true"><div class="f-lab__head"><span class="f-lab__icon f-lab__icon--green" aria-hidden="true"><img src="./assets/figma/lab-waste.svg" alt=""></span><h3>Отходы</h3></div><p>Определение класса опасности, морфология, паспортизация</p></div>
+          <div class="f-lab__card" data-rv="true"><div class="f-lab__head"><span class="f-lab__icon" aria-hidden="true"><svg class="f-lab__svg f-lab__svg--water" viewBox="0 0 20.42 25.8" aria-hidden="true"><path pathLength="1" d="M10.53 22.43a1 1 0 0 0 .51-.21.7.7 0 0 0 .18-.46q0-.32-.22-.48a.7.7 0 0 0-.53-.13 6 6 0 0 1-3.34-.94 4.7 4.7 0 0 1-2.28-3.48 1 1 0 0 0-.24-.52.6.6 0 0 0-.43-.17.6.6 0 0 0-.49.22q-.21.2-.12.64.56 3.03 2.8 4.34a7.4 7.4 0 0 0 4.16 1.19m-7.61.37A10.3 10.3 0 0 1 0 15.3q0-3.14 2.53-6.95Q5.06 4.55 10.21 0q5.15 4.54 7.68 8.35t2.53 6.95q0 4.49-2.92 7.49a9.7 9.7 0 0 1-7.29 3.01 9.7 9.7 0 0 1-7.29-3.01m13.56-1.02a9 9 0 0 0 2.48-6.47q0-2.66-2.21-6.02a41 41 0 0 0-6.54-7.32 41 41 0 0 0-6.54 7.32q-2.2 3.36-2.21 6.02 0 3.9 2.48 6.47a8.3 8.3 0 0 0 6.27 2.57q3.8 0 6.27-2.57"/></svg></span><h3>Вода</h3></div><p>Питьевая, природная, сточная — химический и микробиологический анализ</p></div>
+          <div class="f-lab__card" data-rv="true"><div class="f-lab__head"><span class="f-lab__icon" aria-hidden="true"><svg class="f-lab__svg f-lab__svg--air" viewBox="0 0 27.71 22.66" aria-hidden="true"><path pathLength="1" d="M13.12 22.66q-1.31 0-2.29-.84a3.6 3.6 0 0 1-1.24-2.08h1.52a2.1 2.1 0 0 0 2.01 1.46q.9 0 1.55-.64.64-.65.64-1.55t-.64-1.54a2 2 0 0 0-1.55-.64H0v-1.46h13.12q1.53 0 2.59 1.06a3.5 3.5 0 0 1 1.06 2.59q0 1.52-1.06 2.57a3.5 3.5 0 0 1-2.59 1.07M0 8.75V7.29h18.96q1.23 0 2.07-.84.84-.85.84-2.07a2.85 2.85 0 0 0-2.91-2.92q-1.07 0-1.82.62-.77.61-.99 1.57h-1.51a4.2 4.2 0 0 1 1.46-2.62A4.3 4.3 0 0 1 18.96 0q1.84 0 3.11 1.27a4.2 4.2 0 0 1 1.26 3.11q0 1.83-1.26 3.1a4.2 4.2 0 0 1-3.11 1.27zm24.06 11.27v-1.51a2.8 2.8 0 0 0 1.57-.99q.62-.75.62-1.82 0-1.22-.84-2.07a3 3 0 0 0-2.08-.84H0v-1.46h23.33a4.2 4.2 0 0 1 3.11 1.27 4.2 4.2 0 0 1 1.27 3.1q0 1.65-1.03 2.86a4.2 4.2 0 0 1-2.62 1.46"/></svg></span><h3>Воздух</h3></div><p>Атмосферный воздух, промвыбросы, воздух рабочей зоны</p></div>
+          <div class="f-lab__card" data-rv="true"><div class="f-lab__head"><span class="f-lab__icon f-lab__icon--green" aria-hidden="true"><svg class="f-lab__svg f-lab__svg--soil" viewBox="0 0 28.77 20.42" aria-hidden="true"><path pathLength="1" d="m0 20.42 4.19-8.05q.31-.58.85-.93.55-.33 1.22-.33.72 0 1.3.36.6.38.86 1.05l.76 1.79q.27.59 1 .53.74-.05.95-.62l3.05-9.74q.45-1.44 1.68-2.29a4.7 4.7 0 0 1 2.73-.84q1.47 0 2.69.82a4.3 4.3 0 0 1 1.68 2.23l5.81 16.02h-1.53L21.57 4.86a3 3 0 0 0-1.15-1.52 3.3 3.3 0 0 0-3.68.02q-.84.56-1.15 1.54l-3.06 9.73a2.5 2.5 0 0 1-2.39 1.72q-.74 0-1.37-.39a2.4 2.4 0 0 1-.94-1.08l-.82-1.96q-.22-.48-.77-.49a.8.8 0 0 0-.8.46l-3.85 7.53z"/><g class="f-lab__sun"><path pathLength="1" d="M6.31 7.18q-1.49 0-2.55-1.06A3.4 3.4 0 0 1 2.7 3.6q0-1.5 1.06-2.55A3.5 3.5 0 0 1 6.31 0q1.48 0 2.53 1.05A3.5 3.5 0 0 1 9.88 3.6q0 1.47-1.04 2.52a3.4 3.4 0 0 1-2.53 1.06m0-1.46q.9 0 1.5-.63.61-.63.61-1.51 0-.89-.61-1.51a2 2 0 0 0-1.5-.61q-.9 0-1.52.61-.63.61-.63 1.52 0 .87.63 1.5.62.63 1.52.63"/></g></svg></span><h3>Почвы и грунты</h3></div><p>Загрязнения, агрохимия, оценка для изысканий и экспертизы</p></div>
+          <div class="f-lab__card" data-rv="true"><div class="f-lab__head"><span class="f-lab__icon f-lab__icon--green" aria-hidden="true"><svg class="f-lab__svg f-lab__svg--waste" viewBox="0 0 20.42 23" aria-hidden="true"><path pathLength="1" d="M3.82 23q-.99 0-1.67-.69a2.3 2.3 0 0 1-.69-1.67V2.58H0V1.12h5.83V0h8.75v1.12h5.84v1.46h-1.46v18.06q0 1-.68 1.68-.67.68-1.68.68zM17.5 2.58H2.92v18.06q0 .4.25.65t.65.25H16.6q.34 0 .62-.28a1 1 0 0 0 .28-.62zM7.01 18.62h1.46V5.5H7.01zm4.94 0h1.46V5.5h-1.46z"/></svg></span><h3>Отходы</h3></div><p>Определение класса опасности, морфология, паспортизация</p></div>
         </div>
       </div>
     </section>
@@ -1085,7 +1173,7 @@ a.f-doc:hover .f-doc__preview{border-color:var(--f-teal)}
               </div>
             </div>
             <div id="eco-form-ok" style="display:none;flex-direction:column;justify-content:center;gap:14px;min-height:300px">
-              <span aria-hidden="true" style="width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,#ADCF7A,#4CB272);display:flex;align-items:center;justify-content:center;color:#FFFFFF;font-size:22px">✓</span>
+              <span class="f-ok__mark" aria-hidden="true"><svg viewBox="0 0 48 48"><path class="f-ok__ridge" pathLength="1" d="M19 30a5 5 0 0 1 10 0"/><path class="f-ok__ridge" pathLength="1" d="M15 31a9 9 0 0 1 18 0"/><path class="f-ok__ridge" pathLength="1" d="M11 32a13 13 0 0 1 26 0"/><path class="f-ok__check" pathLength="1" d="M15.5 24.5l6 6L33 19"/></svg></span>
               <h3 style="margin:0;font-size:20px;line-height:28px;font-weight:600;color:#0B5C60">Заявка отправлена</h3>
               <p style="margin:0;font-size:14px;line-height:20px;color:#444444">Свяжемся с вами в течение рабочего дня и вернёмся с планом работ.</p>
             </div>
@@ -1094,6 +1182,9 @@ a.f-doc:hover .f-doc__preview{border-color:var(--f-teal)}
       </div>
     </section>
   </main>
+
+  <!-- Нить через страницу (рисует _initThread) -->
+  <canvas class="f-thread" aria-hidden="true"></canvas>
 
   <!-- ПОДВАЛ -->
   <footer id="kontakty" data-screen-label="Подвал" data-sec="true">
@@ -1380,7 +1471,12 @@ class Component extends DCLogic {
     // --- Счётчики ---
     const counters = Array.from(document.querySelectorAll('[data-count]'));
     const fmt = (n) => n.toLocaleString('ru-RU');
+    const markCounted = (el) => {
+      const stat = el.closest('.f-stat');
+      if (stat) stat.classList.add('is-counted');
+    };
     const runCounter = (el) => {
+      markCounted(el);
       const target = parseFloat(el.getAttribute('data-count'));
       const t0 = performance.now();
       const dur = 1500;
@@ -1393,7 +1489,7 @@ class Component extends DCLogic {
       requestAnimationFrame(step);
     };
     if (reduced || !('IntersectionObserver' in window)) {
-      counters.forEach((el) => { el.textContent = fmt(parseFloat(el.getAttribute('data-count'))); });
+      counters.forEach((el) => { el.textContent = fmt(parseFloat(el.getAttribute('data-count'))); markCounted(el); });
     } else {
       this._ioCnt = new IntersectionObserver((entries) => {
         entries.forEach((e) => {
@@ -1408,6 +1504,9 @@ class Component extends DCLogic {
 
     // --- ESG: интерактивная 3D-диаграмма (сегменты — отдельные слои картинки из макета) ---
     this._initDonut(reduced);
+
+    // --- Движение: живая волна, линия процесса, проекты, нить, магнитные кнопки ---
+    this._initMotion(reduced);
 
     // --- Рельс-навигация по секциям ---
     const rail = document.querySelector('[data-rail]');
@@ -1587,6 +1686,315 @@ class Component extends DCLogic {
     }
   }
 
+  // Движение (только когда скрипт включил появление секций — без prefers-reduced-motion).
+  // Всё, что зависит от прокрутки, считается в одном кадре: сначала замеры, потом запись.
+  _initMotion(reduced) {
+    const root = document.getElementById('eco-root');
+    if (reduced || !root || root.getAttribute('data-anim') !== 'on') return;
+    const fine = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+    this._initHeroFx();
+
+    const stepsBox = document.querySelector('.f-steps');
+    const steps = stepsBox ? Array.from(stepsBox.querySelectorAll('.f-step')) : [];
+    const projBoxes = Array.from(document.querySelectorAll('.f-proj__img'));
+    const thread = this._initThread();
+    let raf = 0;
+    const frame = () => {
+      raf = 0;
+      const vh = window.innerHeight;
+      const writes = [];
+      // 2. Линия процесса: 0 — блок появился снизу (верх на 85% окна), 1 — низ блока поднялся до 70% окна.
+      // У каждого шага своя линия вправо (на мобильном — вниз); точка загорается, когда до неё дошла линия
+      if (stepsBox && steps.length) {
+        const r = stepsBox.getBoundingClientRect();
+        const p = Math.max(0, Math.min(1, (vh * 0.85 - r.top) / (r.height + vh * 0.15)));
+        const k = p * steps.length;
+        writes.push(() => steps.forEach((el, i) => {
+          el.style.setProperty('--fill', Math.max(0, Math.min(1, k - i)).toFixed(3));
+          el.classList.toggle('is-lit', p > 0.005 && k >= i);
+        }));
+      }
+      // 5. Проекты: фото смещается до ±14px относительно карточки
+      projBoxes.forEach((box) => {
+        const r = box.getBoundingClientRect();
+        if (r.bottom < -100 || r.top > vh + 100) return;
+        const c = Math.max(-1, Math.min(1, (r.top + r.height / 2 - vh / 2) / (vh / 2 + r.height / 2)));
+        writes.push(() => box.style.setProperty('--py', (c * 14).toFixed(1) + 'px'));
+      });
+      if (thread) writes.push(thread(vh));
+      writes.forEach((w) => w());
+    };
+    this._onMotion = () => { if (!raf) raf = requestAnimationFrame(frame); };
+    window.addEventListener('scroll', this._onMotion, { passive: true });
+    window.addEventListener('resize', this._onMotion, { passive: true });
+    window.addEventListener('load', this._onMotion);
+    this._onMotion();
+
+    if (!fine) return;
+    // 5. Блик на фото проекта идёт за курсором
+    document.querySelectorAll('.f-proj').forEach((card) => {
+      const box = card.querySelector('.f-proj__img');
+      if (!box) return;
+      card.addEventListener('pointermove', (e) => {
+        const r = box.getBoundingClientRect();
+        box.style.setProperty('--mx', Math.round(e.clientX - r.left) + 'px');
+        box.style.setProperty('--my', Math.round(e.clientY - r.top) + 'px');
+      });
+    });
+    // 7. Кнопки слегка тянутся за курсором (до 6px) и мягко возвращаются
+    document.querySelectorAll('#eco-root .f-btn').forEach((btn) => {
+      let armed = false;
+      btn.addEventListener('pointermove', (e) => {
+        if (e.pointerType !== 'mouse') return;
+        if (!armed) {
+          armed = true;
+          // своя запись transition: без задержки появления из data-rv и с плавным translate
+          btn.style.transition = 'translate 0.5s cubic-bezier(0.22,1,0.36,1) 0s,transform 0.2s ease 0s,box-shadow 0.2s ease 0s,background 0.2s ease 0s';
+        }
+        const r = btn.getBoundingClientRect();
+        const dx = Math.max(-6, Math.min(6, (e.clientX - r.left - r.width / 2) * 0.2));
+        const dy = Math.max(-4, Math.min(4, (e.clientY - r.top - r.height / 2) * 0.3));
+        btn.style.translate = dx.toFixed(1) + 'px ' + dy.toFixed(1) + 'px';
+      });
+      btn.addEventListener('pointerleave', () => { btn.style.translate = ''; });
+    });
+  }
+
+  // 1. Живая волна: картинка героя медленно течёт (деформация шумом), под курсором — мягкий свет и лёгкая линза.
+  // Рендер в CSS-пикселях (картинка мягкая, retina не нужна), только пока герой на экране и вкладка видима.
+  _initHeroFx() {
+    const hero = document.getElementById('top');
+    const cv = hero ? hero.querySelector('.f-hero__fx') : null;
+    if (!cv || !window.matchMedia('(min-width: 721px)').matches) return;
+    const gl = cv.getContext('webgl', { alpha: false, antialias: false, depth: false, stencil: false, powerPreference: 'low-power' });
+    if (!gl) return;
+    const VS = 'attribute vec2 p;varying vec2 uv;void main(){uv=p*.5+.5;gl_Position=vec4(p,0.,1.);}';
+    const FS = [
+      'precision highp float;',
+      'varying vec2 uv;uniform sampler2D tex;uniform vec2 res,img,mouse;uniform float time,hover;',
+      'float h(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}',
+      'float n(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);',
+      '  return mix(mix(h(i),h(i+vec2(1.,0.)),f.x),mix(h(i+vec2(0.,1.)),h(i+vec2(1.,1.)),f.x),f.y);}',
+      'float fbm(vec2 p){return n(p)*.6+n(p*2.03+3.1)*.3+n(p*4.01+7.7)*.1;}',
+      'void main(){',
+      '  float ar=res.x/res.y,ia=img.x/img.y;',
+      '  vec2 q=vec2(uv.x*ar,uv.y),m=vec2(mouse.x*ar,mouse.y);',
+      '  float t=time*.05,near=smoothstep(.7,0.,distance(q,m));',
+      '  vec2 w=vec2(fbm(q*1.2+vec2(t,-t*.6)),fbm(q*1.2+vec2(-t*.7,t)+5.2))-.5;',
+      '  vec2 st=uv+w*.028+(uv-mouse)*near*hover*.02;',
+      // background-size:cover; background-position:center
+      '  vec2 s=ar>ia?vec2(1.,ia/ar):vec2(ar/ia,1.);',
+      '  vec2 tc=(st-.5)*s+.5;',
+      // за краем картинки — зеркально, иначе CLAMP тянет крайние пиксели полосами
+      '  tc=1.-abs(1.-abs(tc));',
+      '  vec3 c=texture2D(tex,vec2(tc.x,1.-tc.y)).rgb;',
+      '  c+=hover*.06*near*near*vec3(.75,1.,.9);',
+      '  gl_FragColor=vec4(c,1.);',
+      '}'
+    ].join('\n');
+    const compile = (type, src) => {
+      const sh = gl.createShader(type);
+      gl.shaderSource(sh, src);
+      gl.compileShader(sh);
+      return gl.getShaderParameter(sh, gl.COMPILE_STATUS) ? sh : null;
+    };
+    const vs = compile(gl.VERTEX_SHADER, VS);
+    const fs = compile(gl.FRAGMENT_SHADER, FS);
+    if (!vs || !fs) return;
+    const prog = gl.createProgram();
+    gl.attachShader(prog, vs);
+    gl.attachShader(prog, fs);
+    gl.linkProgram(prog);
+    if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) return;
+    gl.useProgram(prog);
+    gl.bindBuffer(gl.ARRAY_BUFFER, gl.createBuffer());
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]), gl.STATIC_DRAW);
+    const loc = gl.getAttribLocation(prog, 'p');
+    gl.enableVertexAttribArray(loc);
+    gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+    const U = {};
+    ['res', 'img', 'mouse', 'time', 'hover'].forEach((k) => { U[k] = gl.getUniformLocation(prog, k); });
+
+    const m = { x: 0.5, y: 0.5, tx: 0.5, ty: 0.5, h: 0, th: 0 };
+    let raf = 0, ready = false, onScreen = true, lost = false;
+    const t0 = performance.now();
+    const size = () => {
+      const r = hero.getBoundingClientRect();
+      const k = Math.min(1, 1600 / Math.max(1, r.width));
+      const w = Math.max(1, Math.round(r.width * k));
+      const h = Math.max(1, Math.round(r.height * k));
+      if (cv.width !== w || cv.height !== h) { cv.width = w; cv.height = h; }
+      gl.viewport(0, 0, w, h);
+      gl.uniform2f(U.res, w, h);
+    };
+    const draw = (t) => {
+      raf = 0;
+      if (lost) return;
+      m.x += (m.tx - m.x) * 0.05;
+      m.y += (m.ty - m.y) * 0.05;
+      m.h += (m.th - m.h) * 0.04;
+      gl.uniform1f(U.time, (t - t0) / 1000);
+      gl.uniform2f(U.mouse, m.x, m.y);
+      gl.uniform1f(U.hover, m.h);
+      gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+      cv.classList.add('is-on');
+      if (onScreen && !document.hidden) raf = requestAnimationFrame(draw);
+    };
+    const run = () => { if (ready && !raf && !lost && onScreen && !document.hidden) raf = requestAnimationFrame(draw); };
+    const img = new Image();
+    img.onload = () => {
+      if (lost) return;
+      gl.bindTexture(gl.TEXTURE_2D, gl.createTexture());
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+      gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB, gl.RGB, gl.UNSIGNED_BYTE, img);
+      gl.uniform2f(U.img, img.naturalWidth, img.naturalHeight);
+      size();
+      ready = true;
+      run();
+    };
+    img.src = './assets/figma/hero-wave.webp';
+
+    const onMove = (e) => {
+      if (e.pointerType !== 'mouse') return;
+      const r = hero.getBoundingClientRect();
+      m.tx = (e.clientX - r.left) / r.width;
+      m.ty = 1 - (e.clientY - r.top) / r.height;
+      m.th = 1;
+    };
+    const onLeave = () => { m.th = 0; };
+    hero.addEventListener('pointermove', onMove);
+    hero.addEventListener('pointerleave', onLeave);
+    const io = 'IntersectionObserver' in window
+      ? new IntersectionObserver((es) => { onScreen = es[es.length - 1].isIntersecting; run(); })
+      : null;
+    if (io) io.observe(cv);
+    const ro = 'ResizeObserver' in window
+      ? new ResizeObserver(() => { if (ready && !lost) { size(); if (!raf) draw(performance.now()); } })
+      : null;
+    if (ro) ro.observe(hero);
+    document.addEventListener('visibilitychange', run);
+    cv.addEventListener('webglcontextlost', (e) => { e.preventDefault(); lost = true; cv.classList.remove('is-on'); });
+    this._stopHeroFx = () => {
+      lost = true;
+      if (raf) cancelAnimationFrame(raf);
+      if (io) io.disconnect();
+      if (ro) ro.disconnect();
+      document.removeEventListener('visibilitychange', run);
+      hero.removeEventListener('pointermove', onMove);
+      hero.removeEventListener('pointerleave', onLeave);
+    };
+  }
+
+  // 6. Нить: тонкая волнистая линия в левом поле (≥1200 px) от «О центре» до заявки. Прорисована до «курсора чтения»
+  // (55% высоты окна); узлы у подписей секций загораются, когда нить до них дошла; на тёмных секциях — светлая.
+  // Возвращает замер для общего кадра прокрутки: thread(vh) читает раскладку и отдаёт функцию отрисовки.
+  _initThread() {
+    const cv = document.querySelector('.f-thread');
+    const ctx = cv ? cv.getContext('2d') : null;
+    if (!ctx) return null;
+    const secs = ['o-centre', 'pochemu', 'laboratoriya', 'uslugi', 'proekty', 'protsess', 'esg', 'klienty', 'litsenzii', 'zayavka']
+      .map((id) => document.getElementById(id))
+      .filter(Boolean);
+    if (secs.length < 2) return null;
+    const dark = secs.filter((s) => s.id === 'laboratoriya' || s.id === 'esg');
+    const anchors = secs.map((s) => s.querySelector('.f-eyebrow, .f-data__title, .f-request') || s);
+    // позиция в документе по offsetTop — без учёта transform появления (data-rv сдвигает подписи на 30px)
+    const docTop = (el) => { let y = 0; for (let n = el; n; n = n.offsetParent) y += n.offsetTop; return y; };
+    const mq = window.matchMedia('(min-width: 1200px)');
+    const W = 80;
+    const C = {
+      track: 'rgba(11,92,96,0.14)', ring: 'rgba(11,92,96,0.32)', line: 'rgba(19,158,161,0.8)', glow: '19,158,161',
+      trackDark: 'rgba(255,255,255,0.22)', ringDark: 'rgba(255,255,255,0.45)', lineDark: 'rgba(173,207,122,0.9)', glowDark: '173,207,122'
+    };
+    let shownX = null;
+    return (vh) => {
+      if (!mq.matches) return () => {};
+      const sy = window.scrollY;
+      const vw = document.documentElement.clientWidth;
+      const x = (vw - Math.min(1064, vw - 96)) / 4; // середина левого поля
+      const nodes = anchors.map((a) => docTop(a) + Math.min(a.offsetHeight, 20) / 2 - sy);
+      const darkR = dark.map((s) => { const t = docTop(s) - sy; return [t, t + s.offsetHeight]; });
+      return () => {
+        const d = Math.min(2, window.devicePixelRatio || 1);
+        const H = vh;
+        if (cv.width !== W * d || cv.height !== Math.round(H * d)) { cv.width = W * d; cv.height = Math.round(H * d); }
+        if (shownX !== x) { shownX = x; cv.style.transform = 'translateX(' + (x - W / 2).toFixed(1) + 'px)'; }
+        ctx.setTransform(d, 0, 0, d, 0, 0);
+        ctx.clearRect(0, 0, W, H);
+        const y0 = nodes[0];
+        const y1 = nodes[nodes.length - 1];
+        const from = Math.max(-10, y0);
+        const to = Math.min(H + 10, y1);
+        if (to <= from) return;
+        const tip = Math.max(y0, Math.min(y1, H * 0.55));
+        const isDark = (y) => darkR.some((r) => y >= r[0] && y < r[1]);
+        const X = (y) => W / 2 + 4 * Math.sin(((y + sy) / 280) * Math.PI * 2);
+        // линия — отрезками по 4px, одинаковые подряд собираются в один путь (без наложений полупрозрачного)
+        ctx.lineWidth = 1;
+        ctx.lineCap = 'butt';
+        let style = null;
+        for (let y = from; y < to; y += 4) {
+          const ye = Math.min(to, y + 4);
+          const mid = (y + ye) / 2;
+          const dk = isDark(mid);
+          const st = mid <= tip ? (dk ? C.lineDark : C.line) : (dk ? C.trackDark : C.track);
+          if (st !== style) {
+            if (style) ctx.stroke();
+            style = st;
+            ctx.strokeStyle = st;
+            ctx.beginPath();
+            ctx.moveTo(X(y), y);
+          }
+          ctx.lineTo(X(ye), ye);
+        }
+        if (style) ctx.stroke();
+        // узлы: зазор вокруг, затем кольцо (ещё не дошли) или светящаяся точка (дошли)
+        nodes.forEach((ny) => {
+          if (ny < -10 || ny > H + 10) return;
+          const nx = X(ny);
+          const dk = isDark(ny);
+          ctx.save();
+          ctx.globalCompositeOperation = 'destination-out';
+          ctx.beginPath();
+          ctx.arc(nx, ny, 5.5, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.restore();
+          ctx.beginPath();
+          ctx.arc(nx, ny, 3.5, 0, Math.PI * 2);
+          if (tip >= ny - 0.5) {
+            ctx.fillStyle = dk ? C.lineDark : C.line;
+            ctx.shadowColor = ctx.fillStyle;
+            ctx.shadowBlur = 8;
+            ctx.fill();
+            ctx.shadowBlur = 0;
+          } else {
+            ctx.strokeStyle = dk ? C.ringDark : C.ring;
+            ctx.stroke();
+          }
+        });
+        // кончик нити — мягкое свечение
+        if (tip > y0 && tip < y1) {
+          const tx = X(tip);
+          const rgb = isDark(tip) ? C.glowDark : C.glow;
+          const g = ctx.createRadialGradient(tx, tip, 0, tx, tip, 12);
+          g.addColorStop(0, 'rgba(' + rgb + ',0.5)');
+          g.addColorStop(1, 'rgba(' + rgb + ',0)');
+          ctx.fillStyle = g;
+          ctx.beginPath();
+          ctx.arc(tx, tip, 12, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.fillStyle = 'rgb(' + rgb + ')';
+          ctx.beginPath();
+          ctx.arc(tx, tip, 2, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      };
+    };
+  }
+
   _initDonut(reduced) {
     const donut = document.querySelector('[data-donut]');
     const visual = donut && donut.closest('.f-data__visual');
@@ -1736,6 +2144,12 @@ class Component extends DCLogic {
     if (this._io) this._io.disconnect();
     if (this._ioCnt) this._ioCnt.disconnect();
     if (this._ioDonut) this._ioDonut.disconnect();
+    if (this._onMotion) {
+      window.removeEventListener('scroll', this._onMotion);
+      window.removeEventListener('resize', this._onMotion);
+      window.removeEventListener('load', this._onMotion);
+    }
+    if (this._stopHeroFx) this._stopHeroFx();
     document.body.style.overflow = '';
   }
 
