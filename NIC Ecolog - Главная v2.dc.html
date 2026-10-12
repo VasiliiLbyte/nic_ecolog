@@ -79,22 +79,65 @@ input::placeholder,textarea::placeholder{color:#6E8385}
 [data-anim="on"] [data-rv].rv-on{opacity:1;transform:translateY(0)}
 [data-svc] [data-desc]{max-height:0;opacity:0;overflow:hidden;transition:max-height 0.45s ease,opacity 0.35s ease}
 [data-svc]:hover [data-desc],[data-svc]:focus-within [data-desc]{max-height:280px;opacity:1}
-/* Service overlay — steps timeline + sticky aside */
-#eco-svc-page [data-svc-aside]{position:sticky;top:24px;align-self:start}
-[data-svc-steps]{display:flex;flex-direction:column}
-[data-svc-step]{position:relative;display:flex;gap:20px;padding:18px 0 18px 28px;border-top:1px solid rgba(11,92,96,0.12)}
-[data-svc-step]:last-child{border-bottom:1px solid rgba(11,92,96,0.12)}
-[data-svc-step]::before{content:'';position:absolute;left:0;top:22px;width:11px;height:11px;border-radius:50%;background:var(--svc-node,#139EA1);box-shadow:0 0 0 4px var(--svc-node-glow,rgba(19,158,161,0.25));z-index:1}
-[data-svc-step]:not(:last-child)::after{content:'';position:absolute;left:5px;top:33px;bottom:0;width:1px;background:linear-gradient(180deg,var(--svc-line-from,#ADCF7A),var(--svc-line-to,#139EA1));opacity:0.45}
-[data-svc-step]:nth-child(1){--svc-node:#ADCF7A;--svc-node-glow:rgba(173,207,122,0.25);--svc-line-from:#ADCF7A;--svc-line-to:#4CB272}
-[data-svc-step]:nth-child(2){--svc-node:#4CB272;--svc-node-glow:rgba(76,178,114,0.25);--svc-line-from:#4CB272;--svc-line-to:#139EA1}
-[data-svc-step]:nth-child(3){--svc-node:#139EA1;--svc-node-glow:rgba(19,158,161,0.25);--svc-line-from:#139EA1;--svc-line-to:#1C6BA2}
-[data-svc-step]:nth-child(4){--svc-node:#1C6BA2;--svc-node-glow:rgba(28,107,162,0.25);--svc-line-from:#1C6BA2;--svc-line-to:#0B5C60}
-[data-svc-step]:nth-child(5){--svc-node:#0B5C60;--svc-node-glow:rgba(11,92,96,0.25);--svc-line-from:#0B5C60;--svc-line-to:#139EA1}
-[data-svc-step]:nth-child(6){--svc-node:#139EA1;--svc-node-glow:rgba(19,158,161,0.25);--svc-line-from:#139EA1;--svc-line-to:#1C6BA2}
-[data-svc-step]:nth-child(n+7){--svc-node:#0B5C60;--svc-node-glow:rgba(11,92,96,0.25);--svc-line-from:#0B5C60;--svc-line-to:#139EA1}
-[data-svc-step-n]{font-family:'Stolzl','Onest',sans-serif;font-size:12px;color:#647A7C;padding-top:2px;flex:0 0 auto;min-width:2ch}
-[data-svc-step-text]{margin:0;font-size:16px;line-height:1.65;color:#2C4346}
+/* Оверлей услуги — по макету «Услуга — СЗЗ — Desktop» */
+#eco-svc-page{position:fixed;inset:0;z-index:170;background:#F3F7F7;overflow:auto;overscroll-behavior:contain;animation:fadeIn 0.25s ease both;outline:none;font-family:'Onest',sans-serif;color:#444444}
+.f-svcp__bar{position:sticky;top:0;z-index:5;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:33px 35px 33px 35px;background:#FFFFFF}
+.f-svcp__bar-left{display:flex;align-items:center;gap:49px;min-width:0}
+.f-svcp__logo{display:block;padding:0;border:0;background:transparent;cursor:pointer;line-height:0;flex:0 0 auto}
+.f-svcp__logo img{display:block;width:104px;height:35px}
+.f-svcp__crumbs{font-size:12px;line-height:18px;color:#444444;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.f-svcp__crumbs button{padding:0;border:0;background:transparent;font:inherit;color:inherit;cursor:pointer}
+.f-svcp__crumbs button:hover{color:#139EA1}
+.f-svcp__crumbs b{font-weight:400;color:#0B5C60}
+.f-svcp__body{max-width:1160px;margin:0 auto;padding:40px 48px 90px}
+.f-svcp__eyebrow{margin:0;font-size:12px;line-height:25px;letter-spacing:0.02em;text-transform:uppercase}
+.f-svcp__title{margin:24px 0 0;max-width:640px;font-family:'Onest',sans-serif;font-weight:600;font-size:50px;line-height:55px;color:#0B5C60;text-wrap:balance}
+.f-svcp__lead{margin:24px 0 0;max-width:540px;font-size:16px;line-height:23px}
+.f-svcp__lead+.f-svcp__lead{margin-top:12px}
+.f-svcp__facts{display:flex;flex-wrap:wrap;align-items:flex-start;gap:30px;margin-top:40px}
+.f-svcp__fact{display:flex;align-items:flex-start;gap:16px;margin:0;padding:4px 16px;border-radius:5px;background:#FFFFFF;font-size:10px;line-height:25px;letter-spacing:0.02em}
+.f-svcp__fact b{font-weight:400;color:#0B5C60;text-transform:uppercase}
+.f-svcp__fact>span{padding-left:16px;border-left:1px solid #E0E0E0;color:#767676}
+.f-svcp__fact--wide{flex:1 1 420px;max-width:791px}
+.f-svcp__fact--wide>span{line-height:18px;padding-top:4px;padding-bottom:4px}
+.f-svcp__h{margin:20px 0 20px;font-family:'Onest',sans-serif;font-size:30px;line-height:36px;font-weight:400;color:#444444}
+.f-svcp__facts+.f-svcp__h{margin-top:20px}
+.f-svcp__cols{display:grid;grid-template-columns:minmax(0,522px) minmax(0,520px);justify-content:space-between;gap:22px;align-items:start}
+.f-svcp__steps{border-top:1px solid #E0E0E0}
+.f-svcp__step{display:flex;gap:18px;padding:20px 10px 20px 38px;border-bottom:1px solid #E0E0E0}
+.f-svcp__step span{flex:0 0 auto;min-width:13px;font-size:12px;line-height:23px;color:#767676}
+.f-svcp__step p{margin:0;padding-top:2px;font-size:12px;line-height:20px}
+.f-svcp__aside{display:flex;flex-direction:column;gap:20px}
+.f-svcp__card{padding:23px 33px 28px;border-radius:5px;background:#FFFFFF}
+.f-svcp__card p{margin:12px 0 0;font-size:12px;line-height:20px}
+.f-svcp__card p.f-svcp__card-h{margin:0;font-size:16px;line-height:18px;text-transform:uppercase;color:#4CB272}
+.f-svcp__card--accent{background:linear-gradient(105deg,#4CB272 0%,#139EA1 33%,#0072BB 100%)}
+.f-svcp__card--accent p,.f-svcp__card--accent p.f-svcp__card-h{color:#FFFFFF}
+.f-svcp__related{display:flex;flex-wrap:wrap;gap:20px}
+.f-svcp__related button{display:inline-flex;align-items:center;gap:6px;min-height:32px;padding:4px 22px;border:0;border-radius:5px;background:#FFFFFF;color:#0B5C60;font-family:'Onest',sans-serif;font-size:12px;line-height:25px;letter-spacing:0.02em;cursor:pointer;transition:box-shadow 0.2s ease}
+.f-svcp__related button:hover{box-shadow:0 0 0 1px #139EA1}
+.f-svcp__cta{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;margin-top:64px;min-height:127px;padding:20px 236px 20px 36px;border-radius:5px;background:linear-gradient(90deg,#1C6BA2,#139EA1);color:#FFFFFF}
+.f-svcp__cta h3{margin:0;font-family:'Onest',sans-serif;font-size:32px;line-height:55px;font-weight:400;letter-spacing:-0.01em}
+.f-svcp__cta p{margin:0;font-size:12px;line-height:23px}
+@media (max-width:1060px){.f-svcp__cols{grid-template-columns:1fr}.f-svcp__cta{padding-right:36px}}
+@media (max-width:720px){
+  .f-svcp__bar{padding:18px 10px 19px 20px}
+  .f-svcp__bar-left{gap:16px}
+  .f-svcp__crumbs{display:none}
+  .f-svcp__bar .f-btn{min-width:0;padding:0 14px}
+  .f-svcp__body{padding:24px 20px 48px}
+  .f-svcp__title{font-size:30px;line-height:36px}
+  .f-svcp__facts{gap:12px}
+  .f-svcp__fact{flex-direction:column;gap:0}
+  .f-svcp__fact>span{padding-left:0;border-left:0}
+  .f-svcp__h{font-size:24px;line-height:30px;margin-top:32px}
+  .f-svcp__step{padding:16px 0 16px 8px}
+  .f-svcp__card{padding:20px}
+  .f-svcp__related{gap:12px}
+  .f-svcp__cta{padding:24px 20px}
+  .f-svcp__cta h3{font-size:24px;line-height:32px}
+  .f-svcp__cta .f-btn{width:100%;height:44px}
+}
 /* Рельс-навигация по секциям — ghost rail */
 [data-rail]{position:fixed;top:50%;right:12px;transform:translateY(-50%);z-index:90;pointer-events:none}
 [data-rail-shell]{position:relative;display:flex;flex-direction:column;gap:14px;align-items:flex-end;padding:0;background:transparent;border:none;box-shadow:none}
@@ -145,10 +188,6 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
   [data-two-col]{grid-template-columns:1fr !important}
   [data-steps]{grid-template-columns:repeat(2,1fr) !important}
   [data-proj-grid]>*{grid-column:1 / -1 !important}
-  #eco-svc-page [data-svc-aside]{position:static}
-  [data-svc-step]{padding:16px 0 16px 28px}
-  [data-svc-step]::before{top:20px}
-  [data-svc-step]:not(:last-child)::after{top:31px}
 }
 @media (max-width:720px){
   [data-sec]:not(.f-sec):not(#kontakty){padding-left:24px !important;padding-right:24px !important;padding-top:80px !important;padding-bottom:80px !important}
@@ -1034,75 +1073,58 @@ a.f-doc:hover .f-doc__preview{border-color:var(--f-teal)}
     </svg>
   </template>
 
-  <!-- СТРАНИЦА УСЛУГИ -->
+  <!-- СТРАНИЦА УСЛУГИ (по макету «Услуга — СЗЗ — Desktop») -->
   <sc-if value="{{ svcOpen }}" hint-placeholder-val="{{ false }}">
-    <div id="eco-svc-page" data-screen-label="Страница услуги" role="dialog" aria-modal="true" aria-labelledby="eco-svc-title" tabindex="-1" style="position:fixed;inset:0;z-index:170;background:#F7FBF9;overflow:auto;overscroll-behavior:contain;animation:fadeIn 0.25s ease both;outline:none">
-      <div data-sec="true" style="position:sticky;top:0;z-index:5;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:16px 48px;background:rgba(247,251,249,0.92);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid rgba(11,92,96,0.1)">
-        <div style="display:flex;align-items:center;gap:14px;min-width:0">
-          <button type="button" onClick="{{ goHome }}" aria-label="На главную — в начало страницы" style="display:block;padding:0;border:0;background:transparent;cursor:pointer;flex:0 0 auto;line-height:0;border-radius:8px;transition:opacity 0.2s ease" style-hover="opacity:0.75">
-            <img src="./assets/logo_ecolog.svg" alt="НИЦ Эколог" style="height:34px;width:auto;display:block">
+    <div id="eco-svc-page" data-screen-label="Страница услуги" role="dialog" aria-modal="true" aria-labelledby="eco-svc-title" tabindex="-1">
+      <div class="f-svcp__bar">
+        <div class="f-svcp__bar-left">
+          <button type="button" class="f-svcp__logo" onClick="{{ goHome }}" aria-label="На главную — в начало страницы">
+            <img src="./assets/figma/logo-ecolog.svg" alt="НИЦ Эколог" width="104" height="35">
           </button>
-          <nav aria-label="Навигация по странице услуги" style="font-family:'Stolzl','Onest',sans-serif;font-size:12px;letter-spacing:0.1em;color:#51696B;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">
-            <button type="button" onClick="{{ goHome }}" style="padding:0;border:0;background:transparent;font:inherit;letter-spacing:inherit;color:inherit;cursor:pointer;transition:color 0.2s ease" style-hover="color:#139EA1">ГЛАВНАЯ</button>
-            <span aria-hidden="true"> · </span>
-            <span>УСЛУГИ</span>
-            <span aria-hidden="true"> · </span>
-            <span style="color:#0B5C60">{{ svcCrumb }}</span>
+          <nav class="f-svcp__crumbs" aria-label="Навигация по странице услуги">
+            <button type="button" onClick="{{ goHome }}">Главная</button><span aria-hidden="true"> | </span><span>Услуги</span><span aria-hidden="true"> | </span><b>{{ svcCrumb }}</b>
           </nav>
         </div>
-        <button type="button" data-svc-close="true" aria-label="Закрыть страницу услуги и вернуться к списку" onClick="{{ closeSvc }}" style="display:inline-flex;align-items:center;gap:10px;border:1px solid rgba(11,92,96,0.25);border-radius:4px;background:#FFFFFF;color:#0B5C60;font-family:'Onest',sans-serif;font-size:14px;font-weight:500;padding:10px 22px;cursor:pointer;flex:0 0 auto;transition:background 0.2s ease" style-hover="background:rgba(11,92,96,0.06)">← Назад к услугам</button>
+        <button type="button" class="f-btn f-btn--sm" data-svc-close="true" aria-label="Закрыть страницу услуги и вернуться к списку" onClick="{{ closeSvc }}">←&nbsp;&nbsp;Назад к услугам</button>
       </div>
-      <div data-sec="true" style="max-width:1180px;margin:0 auto;width:100%;padding:64px 48px 90px">
-        <p style="margin:0 0 16px;font-family:'Stolzl','Onest',sans-serif;font-size:12px;font-weight:500;letter-spacing:0.22em;color:#139EA1;text-transform:uppercase">{{ svcGroup }}</p>
-        <h2 id="eco-svc-title" style="margin:0;font-weight:300;font-size:clamp(34px,4.4vw,62px);line-height:1.08;letter-spacing:-0.01em;color:#13282B;max-width:900px;text-wrap:balance">{{ svcName }}</h2>
-        <p style="margin:24px 0 0;font-size:18px;line-height:1.7;color:#3E5557;max-width:720px">{{ svcLead }}</p>
+      <div class="f-svcp__body">
+        <p class="f-svcp__eyebrow">{{ svcGroup }}</p>
+        <h2 id="eco-svc-title" class="f-svcp__title">{{ svcName }}</h2>
+        <p class="f-svcp__lead">{{ svcLead }}</p>
         <sc-if value="{{ svcLead2 }}" hint-placeholder-val="">
-          <p style="margin:16px 0 0;font-size:18px;line-height:1.7;color:#3E5557;max-width:720px">{{ svcLead2 }}</p>
+          <p class="f-svcp__lead">{{ svcLead2 }}</p>
         </sc-if>
-        <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:28px">
-          <span style="display:inline-flex;align-items:center;gap:8px;background:#FFFFFF;border:1px solid rgba(11,92,96,0.16);border-radius:999px;padding:10px 20px;font-size:14px;color:#2C4346"><span style="font-family:'Stolzl','Onest',sans-serif;font-size:11px;letter-spacing:0.12em;color:#647A7C">СРОК</span> {{ svcTerm }}</span>
-          <span style="display:inline-flex;align-items:center;gap:8px;background:#FFFFFF;border:1px solid rgba(11,92,96,0.16);border-radius:999px;padding:10px 20px;font-size:14px;color:#2C4346"><span style="font-family:'Stolzl','Onest',sans-serif;font-size:11px;letter-spacing:0.12em;color:#647A7C">КОМУ</span> {{ svcWho }}</span>
+        <div class="f-svcp__facts">
+          <p class="f-svcp__fact"><b>Срок</b><span>{{ svcTerm }}</span></p>
+          <p class="f-svcp__fact f-svcp__fact--wide"><b>Кому</b><span>{{ svcWho }}</span></p>
         </div>
-        <div data-two-col="true" style="display:grid;grid-template-columns:1.1fr 0.9fr;gap:56px;margin-top:64px;align-items:start">
-          <div>
-            <h2 style="margin:0 0 28px;font-weight:400;font-size:26px;color:#13282B">Что входит в работу</h2>
-            <div data-svc-steps="true">
-              <sc-for list="{{ svcIncludes }}" as="step" hint-placeholder-count="4">
-                <div data-svc-step="true">
-                  <span data-svc-step-n="true">{{ step.n }}</span>
-                  <p data-svc-step-text="true">{{ step.text }}</p>
-                </div>
-              </sc-for>
-            </div>
-          </div>
-          <div data-svc-aside="true" style="display:flex;flex-direction:column;gap:18px">
-            <div style="background:linear-gradient(135deg,#0B5C60,#14496F);border-radius:24px;padding:34px 36px;color:#FFFFFF">
-              <p style="margin:0 0 10px;font-family:'Stolzl','Onest',sans-serif;font-size:11px;letter-spacing:0.18em;color:#ADCF7A">РЕЗУЛЬТАТ</p>
-              <p style="margin:0;font-size:17px;line-height:1.65;color:rgba(255,255,255,0.92)">{{ svcResult }}</p>
-            </div>
-            <div style="background:#FFFFFF;border:1px solid rgba(11,92,96,0.14);border-radius:24px;padding:34px 36px">
-              <p style="margin:0 0 10px;font-family:'Stolzl','Onest',sans-serif;font-size:11px;letter-spacing:0.18em;color:#139EA1">ПОЧЕМУ МЫ</p>
-              <p style="margin:0;font-size:15.5px;line-height:1.65;color:#2C4346">{{ svcWhyUs }}</p>
-            </div>
-          </div>
-        </div>
-        <div style="margin-top:64px">
-          <h3 style="margin:0 0 18px;font-weight:400;font-size:20px;color:#13282B">Смежные услуги</h3>
-          <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
-            <sc-for list="{{ svcRelated }}" as="rel" hint-placeholder-count="3">
-              <button type="button" onClick="{{ rel.open }}" style="display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(11,92,96,0.22);border-radius:4px;background:#FFFFFF;color:#0B5C60;font-family:'Onest',sans-serif;font-size:14.5px;font-weight:500;padding:12px 24px;cursor:pointer;transition:border-color 0.2s ease,background 0.2s ease" style-hover="border-color:#139EA1;background:rgba(19,158,161,0.06)">{{ rel.label }} <span aria-hidden="true">→</span></button>
+        <h3 class="f-svcp__h">Что входит в работу</h3>
+        <div class="f-svcp__cols">
+          <div class="f-svcp__steps">
+            <sc-for list="{{ svcIncludes }}" as="step" hint-placeholder-count="4">
+              <div class="f-svcp__step">
+                <span>{{ step.n }}</span>
+                <p>{{ step.text }}</p>
+              </div>
             </sc-for>
           </div>
+          <div class="f-svcp__aside">
+            <div class="f-svcp__card f-svcp__card--accent"><p class="f-svcp__card-h">Результат</p><p>{{ svcResult }}</p></div>
+            <div class="f-svcp__card"><p class="f-svcp__card-h">Почему мы</p><p>{{ svcWhyUs }}</p></div>
+          </div>
         </div>
-        <div data-cta-row="true" style="display:flex;align-items:center;justify-content:space-between;gap:28px;flex-wrap:wrap;margin-top:72px;background:linear-gradient(105deg,#139EA1,#1C6BA2);border-radius:28px;padding:44px 48px;color:#FFFFFF">
+        <h3 class="f-svcp__h">Смежные услуги</h3>
+        <div class="f-svcp__related">
+          <sc-for list="{{ svcRelated }}" as="rel" hint-placeholder-count="3">
+            <button type="button" onClick="{{ rel.open }}">{{ rel.label }} <span aria-hidden="true">→</span></button>
+          </sc-for>
+        </div>
+        <div class="f-svcp__cta">
           <div>
-            <h3 style="margin:0 0 8px;font-weight:300;font-size:clamp(24px,2.4vw,34px)">Обсудим вашу задачу?</h3>
-            <p style="margin:0;font-size:15.5px;color:rgba(255,255,255,0.85)">Вернёмся с планом работ и оценкой в течение рабочего дня.</p>
+            <h3>Обсудим вашу задачу</h3>
+            <p>Вернёмся с планом работ и оценкой в течение рабочего дня.</p>
           </div>
-          <div style="display:flex;align-items:center;gap:18px;flex-wrap:wrap">
-            <button type="button" class="btn-primary" onClick="{{ goForm }}" style="display:inline-flex;align-items:center;gap:10px;background:#FFFFFF;border:none;border-radius:4px;color:#0B5C60;font-family:'Onest',sans-serif;font-size:16px;font-weight:500;padding:17px 36px;cursor:pointer;transition:transform 0.25s ease,box-shadow 0.25s ease" style-hover="transform:translateY(-2px);box-shadow:0 14px 32px rgba(0,0,0,0.2)">Оставить заявку</button>
-            <a href="tel:+78124499348" style="font-size:17px;font-weight:500;color:#FFFFFF;text-decoration:none">+7&nbsp;(812)&nbsp;449-93-48</a>
-          </div>
+          <button type="button" class="f-btn f-btn--sm f-btn--ghost f-btn--light" onClick="{{ goForm }}">Оставить заявку</button>
         </div>
       </div>
     </div>

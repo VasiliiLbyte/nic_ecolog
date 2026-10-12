@@ -92,6 +92,18 @@ function parseIntro(raw, slug) {
   return paragraphs;
 }
 
+/** Optional fact-checked blocks from the design (срок, кому, результат, почему мы). Gated text stays out. */
+function parseOptionalText(raw) {
+  const text = raw
+    .split('\n')
+    .map((l) => l.trim())
+    .filter((l) => l && !l.startsWith('>') && !/^[-_—]{3,}$/.test(l))
+    .join(' ')
+    .trim();
+  if (!text || /TODO\(evidence/i.test(text)) return null;
+  return text;
+}
+
 function parseIncludes(raw) {
   return raw
     .split('\n')
@@ -184,6 +196,10 @@ export function parseBrief(slug, seoGeoRoot) {
     includes,
     related,
     schema,
+    term: parseOptionalText(sectionBody(markdown, 'Срок')),
+    who: parseOptionalText(sectionBody(markdown, 'Кому')),
+    result: parseOptionalText(sectionBody(markdown, 'Результат')),
+    whyUs: parseOptionalText(sectionBody(markdown, 'Почему мы')),
   };
 }
 
