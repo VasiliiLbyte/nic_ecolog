@@ -1,0 +1,121 @@
+/* НИЦ «Эколог» — каркас по макету Figma (файл mMov36hdKHtm0ncyGM2KYm): шрифт, токены,
+   кнопки, шапка, мобильное меню, подвал. Подключается на всех страницах, включая lab.html,
+   поэтому классы с префиксом (nh, nm, nf, nbtn) и без глобальных сбросов. */
+
+@font-face{font-family:'Onest';font-style:normal;font-display:swap;font-weight:100 900;
+  src:url('../fonts/onest-cyrillic-wght-normal.woff2') format('woff2');
+  unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:'Onest';font-style:normal;font-display:swap;font-weight:100 900;
+  src:url('../fonts/onest-latin-wght-normal.woff2') format('woff2');
+  unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+
+:root{
+  --n-teal-700:#0B5C60;   /* заголовки */
+  --n-teal-500:#139EA1;   /* акцент 2 */
+  --n-blue-600:#1C6BA2;
+  --n-blue-500:#2081C4;
+  --n-green-500:#4CB272;
+  --n-lime:#ADCF7A;       /* акцент на тёмном */
+  --n-text:#222;
+  --n-text-2:#444;
+  --n-text-3:#767676;
+  --n-line:#E0E0E0;
+  --n-alt:#F3F7F7;        /* светлый фон секций и карточек */
+  --n-white:#fff;
+  --n-grad-primary:linear-gradient(28deg,#139EA1 21%,#1C6BA2 76%);
+  --n-grad-green:linear-gradient(99deg,#ADCF7A 1%,#4CB272 104%);
+  --n-grad-esg:linear-gradient(99deg,#ADCF7A 1%,#139EA1 104%);
+  --n-grad-panel:linear-gradient(216deg,#139EA1 19%,#1C6BA2 89%);
+  --n-grad-result:linear-gradient(148deg,#4CB272 5%,#139EA1 30%,#0072BB 102%);
+  --n-gutter:clamp(16px,4vw,48px);
+  --n-container:1064px;
+  --n-hdr-h:102px;
+  --n-ease:cubic-bezier(.22,1,.36,1);
+  --n-font:'Onest',system-ui,-apple-system,'Segoe UI',Roboto,Arial,sans-serif;
+}
+
+/* Локальные сбросы: каркас ставится и на страницы со своими стилями (lab.html). */
+.nh,.nm,.nf{font-family:var(--n-font);-webkit-font-smoothing:antialiased}
+.nh *,.nm *,.nf *,.nh *::before,.nm *::before,.nf *::before,.nh *::after,.nm *::after,.nf *::after{box-sizing:border-box}
+.nh p,.nm p,.nf p,.nf h3,.nf ul{margin:0}
+.nf ul{padding:0;list-style:none}
+.nh a,.nm a,.nf a{color:inherit}
+.skip{position:absolute;left:16px;top:-60px;z-index:300;background:var(--n-teal-700);color:#fff;padding:10px 16px;text-decoration:none}
+.skip:focus{top:12px}
+.nh img,.nm img,.nf img{display:block;max-width:100%}
+.nbtn{box-sizing:border-box;font-family:var(--n-font)}
+.container{width:min(var(--n-container),100% - 2*var(--n-gutter));margin-inline:auto}
+
+/* ---------- Кнопки ---------- */
+.nbtn{--btn-bg:var(--n-grad-primary);display:inline-flex;align-items:center;justify-content:center;gap:8px;min-width:210px;height:35px;padding:0 20px;border:0;border-radius:0;background:var(--btn-bg);color:#fff;font-size:12px;line-height:18px;font-weight:400;text-decoration:none;white-space:nowrap;cursor:pointer;outline:1px solid transparent;outline-offset:2px;transition:transform .25s var(--n-ease),outline-color .25s ease,filter .25s ease}
+.nbtn:hover{transform:scale(1.04);outline-color:var(--n-blue-600)}
+.nbtn:active{transform:scale(.98);filter:brightness(.93)}
+.nbtn:focus-visible{outline:2px solid var(--n-blue-600)}
+.nbtn[disabled],.nbtn.is-disabled{opacity:.45;pointer-events:none}
+.nbtn--lg{height:42px;padding:0 24px}
+.nbtn--green{--btn-bg:var(--n-grad-green)}
+.nbtn--esg{--btn-bg:var(--n-grad-esg)}
+.nbtn--white{--btn-bg:#fff;color:var(--n-blue-600)}
+.nbtn--ghost{--btn-bg:transparent;min-width:89px;color:var(--n-blue-600);box-shadow:inset 0 0 0 1px var(--n-blue-600)}
+.nbtn--ghost-inv{--btn-bg:transparent;min-width:89px;color:#fff;box-shadow:inset 0 0 0 1px rgba(255,255,255,.75)}
+.nbtn--ghost-inv:hover{outline-color:#fff}
+
+/* ---------- Шапка ---------- */
+.nh{position:sticky;top:0;z-index:150;background:#fff;transition:box-shadow .3s ease}
+.nh.is-scrolled{box-shadow:0 1px 0 rgba(11,92,96,.08),0 8px 24px rgba(11,92,96,.06)}
+.nh__in{display:flex;align-items:center;justify-content:space-between;gap:24px;height:var(--n-hdr-h);padding:0 32px;transition:height .3s var(--n-ease)}
+.nh.is-scrolled .nh__in{height:72px}
+.nh__logo{flex:0 0 auto;display:block;width:104px;height:35px}
+.nh__logo img{width:104px;height:35px;object-fit:contain}
+.nh__nav{display:flex;align-items:center;gap:32px;font-size:12px;line-height:18px}
+.nh__nav a{color:var(--n-teal-700);text-decoration:none;position:relative;padding:6px 0}
+.nh__nav a::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:var(--n-teal-500);transform:scaleX(0);transform-origin:left;transition:transform .3s var(--n-ease)}
+.nh__nav a:hover::after,.nh__nav a[aria-current="page"]::after{transform:scaleX(1)}
+.nh__actions{display:flex;align-items:center;gap:24px;flex:0 0 auto}
+.nh__phone{font-size:14px;line-height:20px;font-weight:500;letter-spacing:.02em;color:var(--n-teal-700);text-decoration:none;white-space:nowrap;font-variant-numeric:tabular-nums}
+.nh__phone:hover{color:var(--n-teal-500)}
+.nh__crumbs{font-size:12px;line-height:18px;color:var(--n-text-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.nh__crumbs a{text-decoration:none}
+.nh__crumbs a:hover{color:var(--n-teal-500)}
+.nh__burger{display:none;width:44px;height:44px;align-items:center;justify-content:center;border:0;background:transparent;cursor:pointer;padding:0;color:var(--n-teal-700)}
+.nm{position:fixed;inset:0;z-index:220;background:#fff;display:flex;flex-direction:column;padding:16px var(--n-gutter) 32px;opacity:0;visibility:hidden;transition:opacity .25s ease,visibility 0s linear .25s;overflow-y:auto;overscroll-behavior:contain}
+.nm.is-open{opacity:1;visibility:visible;transition:opacity .25s ease}
+.nm__top{display:flex;align-items:center;justify-content:space-between;min-height:56px}
+.nm__close{width:44px;height:44px;border:0;background:transparent;cursor:pointer;color:var(--n-teal-700);display:flex;align-items:center;justify-content:center}
+.nm__nav{display:flex;flex-direction:column;margin-top:24px}
+.nm__nav a{display:flex;align-items:center;min-height:52px;border-bottom:1px solid var(--n-line);font-size:22px;font-weight:500;color:var(--n-teal-700);text-decoration:none}
+.nm__foot{margin-top:auto;padding-top:32px;display:flex;flex-direction:column;gap:16px}
+.nm__foot .nh__phone{font-size:18px}
+.nm__foot .nbtn{width:100%;height:48px;font-size:14px}
+@media (max-width:1240px){.nh__nav{gap:20px}.nh__actions{gap:16px}}
+@media (max-width:1140px){.nh__nav,.nh__actions .nh__phone{display:none}.nh__burger{display:flex}.nh__in{padding:0 var(--n-gutter);height:72px}.nh.is-scrolled .nh__in{height:64px}:root{--n-hdr-h:72px}}
+@media (max-width:600px){.nh__actions .nbtn{display:none}}
+
+/* ---------- Подвал ---------- */
+.nf{position:relative;overflow:hidden;color:#fff;isolation:isolate;background:#0A595D}
+.nf__bg{position:absolute;inset:0;z-index:-1;background:
+  radial-gradient(34% 70% at 0% 0%,#115C78 0%,rgba(17,92,120,0) 100%),
+  radial-gradient(30% 60% at 30% -10%,#115E74 0%,rgba(17,94,116,0) 100%),
+  radial-gradient(40% 70% at 100% -6%,#2C8262 0%,rgba(44,130,98,0) 100%),
+  radial-gradient(30% 50% at -4% 104%,#2E8466 0%,rgba(46,132,102,0) 100%),
+  radial-gradient(30% 60% at 100% 104%,#105E72 0%,rgba(16,94,114,0) 100%),
+  #0A595D}
+.nf__in{padding:64px 0 85px}
+.nf__top{display:flex;justify-content:space-between;gap:48px;padding-bottom:32px;border-bottom:1px solid rgba(19,158,161,.7);min-height:212px}
+.nf__brand{width:254px;display:flex;flex-direction:column;gap:32px;font-size:12px;line-height:18px}
+.nf__brand img{width:104px;height:35px;object-fit:contain;filter:brightness(0) invert(1)}
+.nf__brand p:nth-of-type(1){color:var(--n-teal-500)}
+.nf__brand p:nth-of-type(2){color:var(--n-lime)}
+.nf__brand div{display:flex;flex-direction:column;gap:16px;max-width:170px}
+.nf__nav{display:flex;gap:96px;font-size:12px;line-height:18px}
+.nf__col{display:flex;flex-direction:column;gap:24px}
+.nf__col h3{font-size:12px;line-height:18px;font-weight:400;color:var(--n-teal-500);text-transform:uppercase}
+.nf__col ul{display:flex;flex-direction:column;gap:16px}
+.nf__col a{text-decoration:none;color:#fff}
+.nf__col a:hover{color:var(--n-lime)}
+.nf__bottom{display:flex;justify-content:space-between;align-items:center;gap:16px 48px;flex-wrap:wrap;padding-top:32px;font-size:12px;line-height:18px;color:var(--n-teal-500)}
+.nf__bottom nav{display:flex;gap:48px;flex-wrap:wrap}
+.nf__bottom a{text-decoration:none}
+.nf__bottom a:hover{color:#fff}
+@media (max-width:1000px){.nf__top{flex-direction:column}.nf__nav{gap:48px;flex-wrap:wrap}}
+@media (max-width:560px){.nf__nav{display:grid;grid-template-columns:1fr 1fr;gap:32px 24px}.nf__col:last-child{grid-column:1/-1}.nf__in{padding:48px 0 40px}.nf__bottom nav{gap:16px 24px}}

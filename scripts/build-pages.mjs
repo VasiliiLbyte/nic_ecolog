@@ -3,14 +3,23 @@ import { execFileSync } from 'node:child_process';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { loadWave1Briefs, WAVE1_SLUGS } from './lib/parse-brief.mjs';
-import { renderHubPage, renderServicePage, setSiteOptions, WAVE1_SITEMAP_URLS } from './lib/service-page-template.mjs';
+import {
+  chromeBar,
+  footerBlock,
+  renderHubPage,
+  renderServicePage,
+  setSiteOptions,
+  WAVE1_SITEMAP_URLS,
+} from './lib/service-page-template.mjs';
 import { articlesByService, loadArticles, renderArticlePage, renderBlogHub } from './lib/blog-template.mjs';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const out = join(root, 'docs');
 const seoGeoRoot = process.env.SEO_GEO_ROOT ?? join(root, '..', 'seo_geo');
 
-const HOME_SRC = 'NIC Ecolog - Главная v2.dc.html';
+// Главная по макету Figma (статичный HTML, без React/CDN). Данные оверлеев услуг — site/services.json.
+const HOME_SRC = 'site/index.html';
+const SERVICES_SRC = 'site/services.json';
 const BLOG_SRC = join(root, 'content', 'blog');
 
 // Blog (NIC-010): only status=published articles go into a production build.
@@ -47,33 +56,51 @@ function copyDir(src, dest) {
   cpSync(join(root, src), join(out, src), { recursive: true });
 }
 
-// Adds a «Блог» link right after the given «Лицензии» link (footer), only when the blog is built.
-function addBlogLink(html, anchor, link) {
-  if (!hasBlog) return html;
-  if (!html.includes(anchor)) throw new Error(`blog link anchor not found: ${anchor.slice(0, 60)}`);
-  return html.replace(anchor, `${anchor}\n${link}`);
+// Элементы с data-blog (пункты «Блог» в меню и подвале) остаются, только если блог собран.
+function dropBlogLinks(html) {
+  if (hasBlog) return html.replace(/ data-blog(?=[ >])/g, '');
+  return html.replace(/^.*\sdata-blog[ >].*\n/gm, '');
 }
 
 function patchHome(html) {
-  return addBlogLink(
-    html.replaceAll('href="/privacy"', 'href="privacy.html"'),
-    '<a href="#litsenzii" style="font-size:14.5px;color:rgba(255,255,255,0.8);text-decoration:none;transition:color 0.2s" style-hover="color:#ADCF7A">Лицензии</a>',
-    '          <a href="blog/" style="font-size:14.5px;color:rgba(255,255,255,0.8);text-decoration:none;transition:color 0.2s" style-hover="color:#ADCF7A">Блог</a>'
-  );
+  const data = JSON.stringify(JSON.parse(readFileSync(join(root, SERVICES_SRC), 'utf8')));
+  if (!html.includes('<!--SVC_DATA-->')) throw new Error('home: <!--SVC_DATA--> placeholder not found');
+  // JSON внутри <script>: экранируем «</» на всякий случай.
+  return dropBlogLinks(html.replace('<!--SVC_DATA-->', () => data.replace(/<\//g, '<\\/')));
+}
+
+// Лаборатория: контент страницы прежний, шапка/меню/подвал — общий каркас по макету Figma.
+const LAB_CHROME_CSS = `<link rel="preload" as="font" type="font/woff2" href="assets/fonts/onest-cyrillic-wght-normal.woff2" crossorigin>
+<link rel="stylesheet" href="assets/site/chrome.css">
+<style>#lab{padding-top:96px}@media(max-width:1060px){#lab{padding-top:72px}}@media(max-width:720px){#lab{padding-top:56px}}
+.btn-grad{background:linear-gradient(28deg,#139EA1 21%,#1C6BA2 76%);border-radius:0;font-weight:400;outline:1px solid transparent;outline-offset:2px;transition:transform .25s ease,outline-color .25s ease}
+.btn-grad:hover{background:linear-gradient(28deg,#139EA1 21%,#1C6BA2 76%);transform:scale(1.03);outline-color:#1C6BA2}</style>
+</head>`;
+
+// Заменяет кусок от startMarker до endMarker; с includeEnd endMarker тоже уходит.
+function replaceBetween(html, startMarker, endMarker, replacement, label, includeEnd = false) {
+  const start = html.indexOf(startMarker);
+  const end = html.indexOf(endMarker, start);
+  if (start < 0 || end < 0) throw new Error(`lab: ${label} markers not found`);
+  return html.slice(0, start) + replacement + html.slice(end + (includeEnd ? endMarker.length : 0));
 }
 
 function patchLab(html) {
-  const patched = html
+  let patched = html
     .replaceAll('НИЦ Эколог - Сайт (вау).html', 'index.html')
     .replaceAll('#services', '#uslugi')
     .replaceAll('#about', '#o-centre')
     .replaceAll('#portfolio', '#proekty');
-  // Footer column «Центр»: the last of three identical «Лицензии» links (header, mobile menu, footer).
-  if (!hasBlog) return patched;
-  const anchor = '<a href="index.html#litsenzii">Лицензии</a>';
-  const at = patched.lastIndexOf(anchor);
-  if (at < 0) throw new Error('lab footer anchor not found');
-  return `${patched.slice(0, at + anchor.length)}\n<a href="blog/">Блог</a>${patched.slice(at + anchor.length)}`;
+  // Старые шапка и мобильное меню: от <header> до кнопки «Наверх». id="hdr" нужен скрипту страницы.
+  const header = chromeBar({ depth: 0, current: 'lab', ctaHref: '#lab-contact' })
+    .replace('href="#main"', 'href="#lab"')
+    .replace('<header class="nh" data-hdr>', '<header class="nh" id="hdr" data-hdr>');
+  patched = replaceBetween(patched, '<header class="hdr', '<button id="totop"', `${header}\n\n`, 'header');
+  patched = replaceBetween(patched, '<footer class="ft">', '</footer>', footerBlock({ depth: 0 }), 'footer', true);
+  if (!patched.includes('</head>')) throw new Error('lab: </head> not found');
+  return patched
+    .replace('</head>', LAB_CHROME_CSS)
+    .replace('</body>', '<script src="assets/site/site.js" defer></script>\n</body>');
 }
 
 const privacyHtml = `<!DOCTYPE html>
@@ -111,10 +138,6 @@ mkdirSync(out, { recursive: true });
 
 writeFileSync(join(out, 'index.html'), injectMetrika(patchHome(readFileSync(join(root, HOME_SRC), 'utf8'))));
 writeFileSync(join(out, 'lab.html'), injectMetrika(patchLab(readFileSync(join(root, LAB_SRC), 'utf8'))));
-
-for (const file of ['support.js', 'image-slot.js']) {
-  cpSync(join(root, file), join(out, file));
-}
 
 copyDir('tokens', 'tokens');
 copyDir('assets', 'assets');

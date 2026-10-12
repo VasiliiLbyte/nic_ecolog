@@ -15,96 +15,13 @@ export function esc(s) {
     .replace(/"/g, '&quot;');
 }
 
+// depth: 0 — корень сайта (lab.html), 1 — /uslugi/, /blog/, 2 — /uslugi/<slug>/, /blog/<slug>/.
 function assetPrefix(depth) {
-  return depth === 1 ? '../' : '../../';
+  return depth === 0 ? '' : '../'.repeat(depth);
 }
 
-export function pageStyles() {
-  return `
-  *{box-sizing:border-box}
-  body{margin:0;font-family:var(--font-body,'Onest',sans-serif);background:var(--bg,#F7FBF9);color:var(--ink-2,#51696B);font-size:16px;line-height:1.6}
-  body.menu-open{overflow:hidden}
-  h1,h2,h3,p{margin:0}
-  a{color:inherit}
-  .mono{font-family:var(--font-mono,'Stolzl','Onest',sans-serif)}
-  .bar{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px 24px;background:rgba(247,251,249,.94);backdrop-filter:blur(14px);border-bottom:1px solid var(--line,#E2EBE8);flex-wrap:nowrap}
-  .bar-left{display:flex;align-items:center;gap:16px;min-width:120px;flex:0 1 auto;overflow:hidden}
-  .bar-left img{height:34px;width:auto;display:block;flex:0 0 auto}
-  .crumbs{font-family:var(--font-mono,'Stolzl','Onest',sans-serif);font-size:11px;letter-spacing:.08em;color:var(--slate-3,#7A9496);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-  .crumbs b{color:var(--teal-deep,#0B5C60);font-weight:500}
-  .bar-nav{display:flex;align-items:center;gap:18px;flex-wrap:nowrap;flex:0 0 auto;justify-content:flex-end}
-  .bar-nav a:not(.btn-cta){font-size:14.5px;color:#2C4346;text-decoration:none;font-weight:400;transition:color .2s}
-  .bar-nav a:not(.btn-cta):hover{color:var(--teal,#139EA1)}
-  .bar-phone{font-size:14.5px;font-weight:500;color:var(--teal-deep,#0B5C60);text-decoration:none;font-variant-numeric:tabular-nums;white-space:nowrap}
-  .btn-cta{display:inline-flex;align-items:center;gap:8px;background:#1C6BA2;color:#fff;font-size:14px;font-weight:500;text-decoration:none;padding:10px 20px;border-radius:4px;white-space:nowrap}
-  .burger{display:none;align-items:center;justify-content:center;width:44px;height:44px;border:1px solid rgba(11,92,96,.25);border-radius:12px;background:rgba(255,255,255,.75);cursor:pointer;padding:0;flex:0 0 auto}
-  .mmenu{position:fixed;inset:0;z-index:180;background:rgba(247,251,249,.97);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);display:flex;flex-direction:column;padding:22px 24px 36px;opacity:0;visibility:hidden;transition:opacity .25s ease;outline:none;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
-  .mmenu.open{opacity:1;visibility:visible}
-  .mm-top{display:flex;align-items:center;justify-content:space-between}
-  .mm-brand{font-size:20px;font-weight:600;color:var(--teal-deep,#0B5C60)}
-  .mm-close{display:flex;align-items:center;justify-content:center;width:44px;height:44px;border:1px solid rgba(11,92,96,.25);border-radius:12px;background:#fff;cursor:pointer;padding:0}
-  .mmenu nav{display:flex;flex-direction:column;gap:6px;margin-top:48px}
-  .mmenu nav a{font-size:26px;font-weight:300;color:var(--ink,#13282B);text-decoration:none;padding:14px 0;min-height:44px;display:flex;align-items:center;border-bottom:1px solid rgba(11,92,96,.1)}
-  .mm-foot{margin-top:auto;display:flex;flex-direction:column;gap:16px}
-  .mm-foot .bar-phone{font-size:19px}
-  .mm-foot .btn-cta{justify-content:center;padding:18px 38px;font-size:16px}
-  @media(min-width:1061px){.burger{display:none !important}}
-  @media(max-width:1060px){.bar-nav a:not(.btn-cta),.bar-phone,.bar-nav .btn-cta{display:none}.burger{display:flex}}
-  .wrap{max-width:960px;margin:0 auto;padding:48px 24px 80px}
-  .eye{font-family:var(--font-mono,'Stolzl','Onest',sans-serif);font-size:11px;font-weight:500;letter-spacing:.18em;color:var(--teal,#139EA1);text-transform:uppercase;margin-bottom:12px}
-  h1{font-family:var(--font-display,'Stolzl',sans-serif);font-weight:300;font-size:clamp(28px,4vw,48px);line-height:1.12;color:var(--ink,#13282B);margin-top:8px;text-wrap:balance}
-  .lead{margin-top:20px;font-size:17px;line-height:1.7;color:var(--slate-2,#3D5557);max-width:720px}
-  .lead p+p{margin-top:12px}
-  h2{font-weight:400;font-size:22px;color:var(--ink,#13282B);margin:48px 0 20px}
-  .steps{display:flex;flex-direction:column;border-top:1px solid var(--line,#E2EBE8)}
-  .step{display:flex;gap:18px;padding:18px 0;border-bottom:1px solid var(--line,#E2EBE8)}
-  .step .n{font-family:var(--font-mono,'Stolzl','Onest',sans-serif);font-size:13px;color:var(--teal,#139EA1);padding-top:2px;flex:0 0 auto;min-width:28px}
-  .step p{font-size:15px;line-height:1.65;color:var(--slate-1,#3D5557)}
-  .chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:8px}
-  .chip{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line-strong,#C5D6D2);border-radius:999px;background:#fff;color:var(--teal-deep,#0B5C60);font-size:14px;font-weight:500;padding:10px 18px;text-decoration:none}
-  .chip:hover{border-color:var(--teal,#139EA1);background:rgba(19,158,161,.06)}
-  .chip-static{display:inline-flex;align-items:center;border:1px dashed var(--line-strong,#C5D6D2);border-radius:999px;color:var(--slate-3,#7A9496);font-size:14px;padding:10px 18px}
-  .cta{margin-top:56px;background:linear-gradient(105deg,#139EA1,#1C6BA2);border-radius:20px;padding:36px 32px;color:#fff;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}
-  .cta h3{font-family:var(--font-display,'Stolzl',sans-serif);font-weight:300;font-size:clamp(22px,2.5vw,28px)}
-  .cta p{margin-top:6px;font-size:15px;color:rgba(255,255,255,.88)}
-  .cta-btn{background:#fff;color:var(--teal-deep,#0B5C60);border-radius:4px;font-size:15px;font-weight:500;padding:14px 28px;text-decoration:none;display:inline-block}
-  .hub-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px;margin-top:24px}
-  .hub-card{border:1px solid var(--line,#E2EBE8);border-radius:16px;padding:24px;background:#fff;text-decoration:none;color:inherit;display:block;transition:border-color .2s,box-shadow .2s}
-  a.hub-card:hover{border-color:var(--teal,#139EA1);box-shadow:0 8px 24px rgba(19,158,161,.1)}
-  .hub-card h3{font-size:17px;font-weight:500;color:var(--ink,#13282B);margin-bottom:8px}
-  .hub-card p{font-size:14px;line-height:1.6;color:var(--slate-2,#3D5557)}
-  .hub-group{margin-top:40px}
-  .hub-group h2{font-size:20px;margin:0 0 16px}
-  .lab-block{margin-top:40px;padding:24px;border:1px solid var(--line,#E2EBE8);border-radius:16px;background:#fff}
-  .soon{font-size:14px;color:var(--slate-3,#7A9496);font-style:italic}
-  .ft{background:#06141C;color:#fff;padding:64px 24px 32px;margin-top:80px}
-  .ft-inner{max-width:1240px;margin:0 auto}
-  .ft-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:40px}
-  .ft-grid>div:first-child p{max-width:300px;line-height:1.6;color:rgba(255,255,255,.7);margin-top:14px}
-  .ft h4{font-family:'Stolzl','Onest',sans-serif;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:18px}
-  .ft a,.ft p{font-size:14.5px;color:rgba(255,255,255,.75);text-decoration:none;line-height:2;display:block}
-  .ft a:hover{color:#fff}
-  .ft-bot{display:flex;justify-content:space-between;align-items:center;margin-top:54px;padding-top:24px;border-top:1px solid rgba(255,255,255,.1);font-size:13px;color:rgba(255,255,255,.5);flex-wrap:wrap;gap:12px}
-  @media(max-width:900px){.ft-grid{grid-template-columns:1fr 1fr;gap:32px}}
-  @media(max-width:640px){.bar{padding:12px 16px}.wrap{padding:32px 16px 64px}.ft-grid{grid-template-columns:1fr}}
-  .post-meta{margin-top:14px;font-size:14px;color:var(--slate-3,#7A9496)}
-  .post{margin-top:28px;max-width:760px;font-size:16.5px;line-height:1.75;color:var(--slate-1,#2C4346)}
-  .post p{margin:0 0 16px}
-  .post h2{margin:40px 0 16px}
-  .post h3{font-size:18px;font-weight:500;color:var(--ink,#13282B);margin:28px 0 12px}
-  .post ul,.post ol{margin:0 0 18px;padding-left:22px}
-  .post li{margin:6px 0}
-  .post a{color:var(--teal-deep,#0B5C60);text-underline-offset:3px}
-  .post strong{color:var(--ink,#13282B);font-weight:600}
-  .post .tbl{overflow-x:auto;margin:0 0 20px;-webkit-overflow-scrolling:touch}
-  .post table{border-collapse:collapse;width:100%;min-width:560px;font-size:14.5px;line-height:1.5;background:#fff}
-  .post th,.post td{border:1px solid var(--line,#E2EBE8);padding:10px 12px;text-align:left;vertical-align:top}
-  .post th{background:rgba(19,158,161,.07);color:var(--ink,#13282B);font-weight:500}
-  .post-date{font-size:13px;color:var(--slate-3,#7A9496);margin-top:10px}
-  .post-cover{margin:28px 0 0;max-width:960px}
-  .post-cover img{display:block;width:100%;height:auto;border-radius:16px}
-  .hub-card .cover{display:block;width:calc(100% + 48px);margin:-24px -24px 18px;height:auto;border-radius:16px 16px 0 0}
-  `;
+function homeFor(depth) {
+  return depth === 0 ? './' : assetPrefix(depth);
 }
 
 export function headBlock({ title, description, canonical, depth, schema, ogType = 'website', ogImage: ogImageOverride }) {
@@ -135,162 +52,164 @@ export function headBlock({ title, description, canonical, depth, schema, ogType
 <meta name="twitter:image" content="${ogImage}">
 <link rel="icon" type="image/png" href="${prefix}assets/favicon-512.png">
 <link rel="apple-touch-icon" href="${prefix}assets/apple-touch-icon.png">
-<link rel="stylesheet" href="${prefix}tokens/reset.css">
-<link rel="stylesheet" href="${prefix}tokens/fonts.css">
-<link rel="stylesheet" href="${prefix}tokens/colors.css">
-<link rel="stylesheet" href="${prefix}tokens/typography.css">
-<link rel="stylesheet" href="${prefix}tokens/spacing.css">
-<link rel="stylesheet" href="${prefix}tokens/fluid.css">
-<link rel="stylesheet" href="${prefix}tokens/effects.css">
-<link rel="stylesheet" href="${prefix}tokens/responsive.css">
-<style>${pageStyles()}</style>
+<link rel="preload" as="font" type="font/woff2" href="${prefix}assets/fonts/onest-cyrillic-wght-normal.woff2" crossorigin>
+<link rel="stylesheet" href="${prefix}assets/site/chrome.css">
+<link rel="stylesheet" href="${prefix}assets/site/site.css">
 ${schemaScript}
 </head>`;
 }
 
-function navLinks({ uslugiHref, prefix, homeHref }) {
+function navLinks({ depth, uslugiHref }) {
+  const prefix = assetPrefix(depth);
+  const home = homeFor(depth);
   return [
-    { href: uslugiHref, label: 'Услуги' },
-    { href: `${prefix}lab.html`, label: 'Лаборатория' },
-    { href: `${homeHref}#proekty`, label: 'Проекты' },
-    { href: `${homeHref}#o-centre`, label: 'О центре' },
-    { href: `${homeHref}#esg`, label: 'ESG' },
-    { href: `${homeHref}#litsenzii`, label: 'Лицензии' },
-    ...(siteOptions.hasBlog ? [{ href: `${prefix}blog/`, label: 'Блог' }] : []),
-    { href: `${homeHref}#kontakty`, label: 'Контакты' },
+    { href: uslugiHref ?? `${prefix}uslugi/`, label: 'Услуги', key: 'uslugi' },
+    { href: `${prefix}lab.html`, label: 'Лаборатория', key: 'lab' },
+    { href: `${home}#proekty`, label: 'Проекты' },
+    { href: `${home}#o-centre`, label: 'О центре' },
+    { href: `${home}#esg`, label: 'ESG' },
+    { href: `${home}#litsenzii`, label: 'Лицензии' },
+    { href: `${home}#kontakty`, label: 'Контакты' },
+    ...(siteOptions.hasBlog ? [{ href: `${prefix}blog/`, label: 'Блог', key: 'blog' }] : []),
   ];
 }
 
-export function chromeBar({ depth, crumbCurrent, homeHref = '/', uslugiHref: uslugiOverride, crumbsHtml }) {
+/** Шапка по макету Figma: логотип, меню, телефон, кнопка; на узких экранах — бургер и полноэкранное меню. */
+export function chromeBar({ depth, uslugiHref, current, ctaHref }) {
   const prefix = assetPrefix(depth);
-  const uslugiHref = uslugiOverride ?? (depth === 1 ? './' : `${prefix}uslugi/`);
-  const links = navLinks({ uslugiHref, prefix, homeHref });
-  const navHtml = links.map((l) => `<a href="${l.href}">${l.label}</a>`).join('\n    ');
-  return `<header class="bar">
-  <div class="bar-left">
-    <a href="${homeHref}"><img src="${prefix}assets/logo_ecolog.svg" alt="НИЦ Эколог"></a>
-    <span class="crumbs">${crumbsHtml ?? `ГЛАВНАЯ · <a href="${uslugiHref}" style="color:inherit;text-decoration:none">УСЛУГИ</a>${crumbCurrent ? ` · <b>${esc(crumbCurrent)}</b>` : ''}`}</span>
+  const home = homeFor(depth);
+  const cta = ctaHref ?? `${home}#zayavka`;
+  const links = navLinks({ depth, uslugiHref })
+    .map((l) => `<a href="${l.href}"${l.key && l.key === current ? ' aria-current="page"' : ''}>${l.label}</a>`)
+    .join('\n      ');
+  return `<a class="skip" href="#main">Перейти к содержанию</a>
+<header class="nh" data-hdr>
+  <div class="nh__in">
+    <a class="nh__logo" href="${home}" aria-label="НИЦ «Эколог» — на главную"><img src="${prefix}assets/logo_ecolog.svg" alt="НИЦ «Эколог»" width="104" height="35"></a>
+    <nav class="nh__nav" aria-label="Основная навигация">
+      ${links}
+    </nav>
+    <div class="nh__actions">
+      <a class="nh__phone" href="tel:+78124499348">+7 (812) 449 93 48</a>
+      <a class="nbtn" href="${cta}">Заказать исследование</a>
+      <button class="nh__burger" type="button" aria-label="Открыть меню" aria-expanded="false" aria-controls="nm" data-menu-open>
+        <svg width="22" height="16" viewBox="0 0 22 16" aria-hidden="true"><g stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M1 1h20M1 8h20M1 15h20"/></g></svg>
+      </button>
+    </div>
   </div>
-  <nav class="bar-nav" aria-label="Навигация">
-    ${navHtml}
-    <a class="bar-phone" href="tel:+78124499348">+7&nbsp;(812)&nbsp;449-93-48</a>
-    <a class="btn-cta" href="${homeHref}#zayavka">Оставить заявку</a>
-  </nav>
-  <button class="burger" type="button" aria-label="Открыть меню" aria-haspopup="dialog" aria-expanded="false" aria-controls="mmenu" data-menu-open>
-    <svg width="20" height="14" viewBox="0 0 20 14" aria-hidden="true"><g stroke="#0B5C60" stroke-width="1.8" stroke-linecap="round"><line x1="1" y1="1" x2="19" y2="1"></line><line x1="1" y1="7" x2="19" y2="7"></line><line x1="1" y1="13" x2="19" y2="13"></line></g></svg>
-  </button>
 </header>
-<div class="mmenu" id="mmenu" role="dialog" aria-modal="true" aria-label="Меню навигации" tabindex="-1">
-  <div class="mm-top">
-    <span class="mm-brand">Эколог</span>
-    <button type="button" class="mm-close" aria-label="Закрыть меню" data-menu-close>
-      <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><g stroke="#0B5C60" stroke-width="1.8" stroke-linecap="round"><line x1="2" y1="2" x2="14" y2="14"></line><line x1="14" y1="2" x2="2" y2="14"></line></g></svg>
+<div class="nm" id="nm" role="dialog" aria-modal="true" aria-label="Меню" tabindex="-1">
+  <div class="nm__top">
+    <img src="${prefix}assets/logo_ecolog.svg" alt="" width="104" height="35">
+    <button class="nm__close" type="button" aria-label="Закрыть меню" data-menu-close>
+      <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><g stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M2 2l14 14M16 2L2 16"/></g></svg>
     </button>
   </div>
-  <nav aria-label="Мобильная навигация">
-    ${navHtml}
+  <nav class="nm__nav" aria-label="Мобильная навигация">
+    ${links}
   </nav>
-  <div class="mm-foot">
-    <a class="bar-phone" href="tel:+78124499348">+7&nbsp;(812)&nbsp;449-93-48</a>
-    <a class="btn-cta" href="${homeHref}#zayavka">Оставить заявку</a>
+  <div class="nm__foot">
+    <a class="nh__phone" href="tel:+78124499348">+7 (812) 449 93 48</a>
+    <a class="nbtn" href="${cta}">Заказать исследование</a>
   </div>
 </div>`;
 }
 
-export function menuScript() {
-  return `<script>(function(){
-var b=document.querySelector('[data-menu-open]'),c=document.querySelector('[data-menu-close]'),m=document.getElementById('mmenu');
-function open(){if(!m)return;m.classList.add('open');b&&b.setAttribute('aria-expanded','true');document.body.classList.add('menu-open');}
-function close(){if(!m)return;m.classList.remove('open');b&&b.setAttribute('aria-expanded','false');document.body.classList.remove('menu-open');}
-if(b)b.addEventListener('click',function(){m&&m.classList.contains('open')?close():open();});
-if(c)c.addEventListener('click',close);
-})();</script>`;
+/** Скрипт каркаса: шапка, меню, появление блоков (тот же, что на главной). */
+export function menuScript(depth = 2) {
+  return `<script src="${assetPrefix(depth)}assets/site/site.js" defer></script>`;
 }
 
-export function footerBlock({ depth, homeHref = '/', uslugiHref: uslugiOverride }) {
+/** Подвал по макету Figma. */
+export function footerBlock({ depth, uslugiHref }) {
   const prefix = assetPrefix(depth);
-  const uslugiHref = uslugiOverride ?? (depth === 1 ? './' : `${prefix}uslugi/`);
-  const privacyHref = `${prefix}privacy.html`;
-  return `<footer class="ft">
-  <div class="ft-inner">
-    <div class="ft-grid">
-      <div>
-        <a href="${homeHref}" style="display:inline-flex;align-items:center"><img src="${prefix}assets/logo_ecolog.svg" alt="НИЦ Эколог" style="height:40px"></a>
-        <p>Наука + экология + прикладные решения. Надёжность и экспертиза без бюрократии.</p>
+  const home = homeFor(depth);
+  const uslugi = uslugiHref ?? `${prefix}uslugi/`;
+  return `<footer class="nf" id="kontakty">
+  <div class="nf__bg" aria-hidden="true"></div>
+  <div class="container nf__in">
+    <div class="nf__top">
+      <div class="nf__brand">
+        <a href="${home}" aria-label="НИЦ «Эколог» — на главную"><img src="${prefix}assets/logo_ecolog.svg" alt="НИЦ «Эколог»" width="104" height="35"></a>
+        <div><p>Наука + экология + прикладные решения</p><p>Надёжность и экспертиза без бюрократии</p></div>
       </div>
-      <div>
-        <h4>Услуги</h4>
-        <a href="${uslugiHref}">Проектирование и документация</a>
-        <a href="${uslugiHref}">Сопровождение предприятий</a>
-        <a href="${uslugiHref}">Изыскания и исследования</a>
-        <a href="${homeHref}#esg">ESG и устойчивое развитие</a>
-      </div>
-      <div>
-        <h4>Центр</h4>
-        <a href="${homeHref}#o-centre">О центре</a>
-        <a href="${prefix}lab.html">Лаборатория «Аналитик Лаб»</a>
-        <a href="${homeHref}#proekty">Проекты</a>
-        <a href="${homeHref}#litsenzii">Лицензии</a>${siteOptions.hasBlog ? `
-        <a href="${prefix}blog/">Блог</a>` : ''}
-      </div>
-      <div>
-        <h4>Контакты</h4>
-        <a href="tel:+78124499348">+7&nbsp;(812)&nbsp;449-93-48</a>
-        <a href="mailto:info@nic-ecolog.ru">info@nic-ecolog.ru</a>
-        <p>Санкт-Петербург</p>
-      </div>
+      <nav class="nf__nav" aria-label="Навигация в подвале">
+        <div class="nf__col"><h3>Услуги</h3><ul>
+          <li><a href="${uslugi}">Проектирование и документация</a></li>
+          <li><a href="${home}#uslugi-soprovozhdenie">Сопровождение предприятий</a></li>
+          <li><a href="${home}#uslugi-izyskaniya">Изыскания и исследования</a></li>
+          <li><a href="${home}#esg">ESG и устойчивое развитие</a></li>
+        </ul></div>
+        <div class="nf__col"><h3>Центр</h3><ul>
+          <li><a href="${home}#o-centre">О центре</a></li>
+          <li><a href="${prefix}lab.html">Лаборатория «Аналитик Лаб»</a></li>
+          <li><a href="${home}#proekty">Проекты</a></li>
+          <li><a href="${home}#esg">ESG</a></li>
+          <li><a href="${home}#litsenzii">Лицензии</a></li>${siteOptions.hasBlog ? `
+          <li><a href="${prefix}blog/">Блог</a></li>` : ''}
+        </ul></div>
+        <div class="nf__col"><h3>Контакты</h3><ul>
+          <li><a href="tel:+78124499348">+7 812 449 93 48</a></li>
+          <li><a href="mailto:info@nic-ecolog.ru">info@nic-ecolog.ru</a></li>
+          <li>Санкт-Петербург</li>
+        </ul></div>
+      </nav>
     </div>
-    <div class="ft-bot">
-      <span>© 2026 НИЦ «Эколог» · НАУКА ДЛЯ ПРИРОДЫ</span>
-      <span>nic-ecolog.ru · <a href="${privacyHref}" style="display:inline;color:inherit">Политика конфиденциальности</a></span>
+    <div class="nf__bottom">
+      <span>© 2026 НИЦ «Эколог»</span>
+      <nav aria-label="Правовая информация"><a href="${prefix}privacy.html">Политика конфиденциальности</a><a href="${home}">nic-ecolog.ru</a></nav>
     </div>
   </div>
 </footer>`;
 }
 
-export function ctaBlock(homeHref = '/') {
-  return `<div class="cta">
-  <div><h3>Обсудим вашу задачу?</h3><p>Оставьте заявку — мы свяжемся с вами.</p></div>
-  <a class="cta-btn" href="${homeHref}#zayavka">Оставить заявку</a>
-</div>`;
+/** Хлебные крошки «Главная | Услуги | СЗЗ»: items — [label, href?], последний без ссылки. */
+export function crumbsNav(items) {
+  const parts = items.map(([label, href], i) =>
+    href && i < items.length - 1 ? `<a href="${href}">${esc(label)}</a>` : `<span aria-current="page">${esc(label)}</span>`
+  );
+  return `<nav class="svcp__crumbs" aria-label="Хлебные крошки">${parts.join('<span aria-hidden="true">|</span>')}</nav>`;
 }
 
-function relatedBlock(related) {
-  if (!related?.length) return '';
-  const chips = related
-    .map((r) => {
-      if (r.href) {
-        const target = r.external ? ' target="_blank" rel="noopener noreferrer"' : '';
-        return `<a class="chip" href="${esc(r.href)}"${target}>${esc(r.label)} <span aria-hidden="true">→</span></a>`;
-      }
-      return `<span class="chip-static">${esc(r.label)}</span>`;
-    })
-    .join('\n    ');
-  return `<h2>Смежные услуги</h2>
-  <div class="chips">${chips}</div>`;
+/** Плашка «Обсудим вашу задачу» внизу страниц (макет «Услуга — СЗЗ»). */
+export function ctaBlock(depth = 2) {
+  return `<div class="cta">
+    <div><h2>Обсудим вашу задачу</h2><p>Вернёмся с планом работ и оценкой в течение рабочего дня.</p></div>
+    <a class="nbtn nbtn--white" href="${homeFor(depth)}#zayavka">Отправить заявку</a>
+  </div>`;
+}
+
+function chip(item) {
+  if (item.href) {
+    const target = item.external ? ' target="_blank" rel="noopener noreferrer"' : '';
+    return `<a class="chip" href="${esc(item.href)}"${target}>${esc(item.label)}&nbsp;→</a>`;
+  }
+  return `<span class="chip chip--static">${esc(item.label)}</span>`;
+}
+
+// Ссылки из брифа абсолютные (/uslugi/ndv/) — переводим в относительные, чтобы работало и на превью.
+function relHref(href, depth) {
+  if (!href || /^https?:/.test(href)) return href;
+  return href.startsWith('/') ? `${assetPrefix(depth)}${href.slice(1)}` : href;
 }
 
 /**
- * @param {import('./parse-brief.mjs').parseBrief extends (...args: any[]) => infer R ? R : never} brief
+ * Страница услуги по макету «Услуга — СЗЗ». Контент — только из брифа seo_geo
+ * (сроки, «кому» и «результат» из инвентаря не публикуются без реестра доказательств).
  */
-function articlesBlock(articles) {
-  if (!articles?.length) return '';
-  const chips = articles
-    .map((a) => `<a class="chip" href="../../blog/${esc(a.slug)}/">${esc(a.h1)} <span aria-hidden="true">→</span></a>`)
-    .join('\n    ');
-  return `<h2>Статьи по теме</h2>
-  <div class="chips">${chips}</div>`;
-}
-
 export function renderServicePage(brief, { depth = 2, articles = [] } = {}) {
-  const homeHref = depth === 1 ? '../index.html' : '../../index.html';
-  const introHtml = brief.intro.map((p) => `<p>${esc(p)}</p>`).join('\n      ');
+  const prefix = assetPrefix(depth);
+  const introHtml = brief.intro.map((p) => `<p>${esc(p)}</p>`).join('\n        ');
   const steps = brief.includes
-    .map(
-      (text, i) =>
-        `<div class="step"><span class="n">${String(i + 1).padStart(2, '0')}</span><p>${esc(text)}</p></div>`
-    )
-    .join('\n      ');
+    .map((text, i) => `<li><span>${String(i + 1).padStart(2, '0')}</span><p>${esc(text)}</p></li>`)
+    .join('\n          ');
+  const related = (brief.related ?? [])
+    .map((r) => chip({ ...r, href: relHref(r.href, depth) }))
+    .join('\n            ');
+  const articleChips = articles
+    .map((a) => chip({ label: a.h1, href: `${prefix}blog/${a.slug}/` }))
+    .join('\n            ');
+  const short = brief.h1.split(' — ')[0];
 
   return `${headBlock({
     title: brief.title,
@@ -300,19 +219,42 @@ export function renderServicePage(brief, { depth = 2, articles = [] } = {}) {
     schema: brief.schema,
   })}
 <body>
-${chromeBar({ depth, crumbCurrent: brief.h1, homeHref })}
-<main class="wrap">
-  <p class="eye">${esc(brief.group ?? '')}</p>
-  <h1>${esc(brief.h1)}</h1>
-  <div class="lead">${introHtml}</div>
-  <h2>Что входит в работу</h2>
-  <div class="steps">${steps}</div>
-  ${relatedBlock(brief.related)}${articles.length ? `
-  ${articlesBlock(articles)}` : ''}
-  ${ctaBlock(homeHref)}
+${chromeBar({ depth, current: 'uslugi' })}
+<main class="svcp" id="main">
+  <div class="container svcp__in">
+    ${crumbsNav([['Главная', homeFor(depth)], ['Услуги', `${prefix}uslugi/`], [short]])}
+    <div class="svcp__head">
+      <p class="eyebrow">${esc(brief.group ?? '')}</p>
+      <h1 class="h2">${esc(brief.h1)}</h1>
+      <div class="lead svcp__lead">
+        ${introHtml}
+      </div>
+    </div>
+    <h2 class="svcp__h">Что входит в работу</h2>
+    <div class="svcp__grid">
+      <ol class="inc">
+          ${steps}
+      </ol>
+      <div class="svcp__aside">${related ? `
+        <div class="box box--why">
+          <h3>Смежные услуги</h3>
+          <div class="chips chips--box">
+            ${related}
+          </div>
+        </div>` : ''}${articleChips ? `
+        <div class="box box--why">
+          <h3>Статьи по теме</h3>
+          <div class="chips chips--box">
+            ${articleChips}
+          </div>
+        </div>` : ''}
+      </div>
+    </div>
+    ${ctaBlock(depth)}
+  </div>
 </main>
-${footerBlock({ depth, homeHref })}
-${menuScript()}
+${footerBlock({ depth })}
+${menuScript(depth)}
 </body>
 </html>`;
 }
@@ -377,33 +319,23 @@ function hubSchema() {
 
 export function renderHubPage(briefs) {
   const bySlug = Object.fromEntries(briefs.map((b) => [b.slug, b]));
-  const homeHref = '../index.html';
 
-  const wave1Cards = briefs
-    .map((b) => {
-      const teaser = b.intro[0] ?? '';
-      return `<a class="hub-card" href="./${b.slug}/">
-      <h3>${esc(b.h1)}</h3>
-      <p>${esc(teaser.length > 120 ? `${teaser.slice(0, 117)}…` : teaser)}</p>
-    </a>`;
-    })
-    .join('\n    ');
-
-  const groupsHtml = HUB_GROUPS.map((g) => {
+  const groupsHtml = HUB_GROUPS.map((g, gi) => {
     const cards = g.slugs
       .filter((s) => bySlug[s])
       .map((s) => {
         const b = bySlug[s];
-        return `<a class="hub-card" href="./${s}/"><h3>${esc(b.h1)}</h3><p>${esc((b.intro[0] ?? '').slice(0, 100))}</p></a>`;
+        const teaser = b.intro[0] ?? '';
+        return `<a class="hub-card" href="./${s}/"><h3><span class="dot dot--s" aria-hidden="true"></span>${esc(b.h1)}</h3><p>${esc(teaser.length > 120 ? `${teaser.slice(0, 117)}…` : teaser)}</p></a>`;
       })
       .join('\n      ');
     const soon = g.soon
-      .map((s) => `<span class="chip-static">${esc(SOON_LABELS[s] ?? s)} <span class="soon">— скоро</span></span>`)
+      .map((s) => `<span class="chip chip--static">${esc(SOON_LABELS[s] ?? s)} — скоро</span>`)
       .join('\n      ');
     return `<section class="hub-group">
-    <h2>${esc(g.title)}</h2>
-    <div class="hub-grid">${cards}</div>
-    ${soon ? `<div class="chips" style="margin-top:12px">${soon}</div>` : ''}
+    <h2><b>${String(gi + 1).padStart(2, '0')}</b>${esc(g.title)}</h2>
+    ${cards ? `<div class="hub-grid">${cards}</div>` : ''}
+    ${soon ? `<div class="hub-soon">${soon}</div>` : ''}
   </section>`;
   }).join('\n  ');
 
@@ -416,23 +348,23 @@ export function renderHubPage(briefs) {
     schema: hubSchema(),
   })}
 <body>
-${chromeBar({ depth: 1, crumbCurrent: null, homeHref })}
-<main class="wrap">
-  <p class="eye">НИЦ «Эколог» · Санкт-Петербург</p>
-  <h1>Услуги НИЦ «Эколог»</h1>
-  <p class="lead">Проектирование экологической документации, сопровождение предприятий, инженерные изыскания и ESG-услуги.</p>
-  <h2>Ключевые услуги</h2>
-  <div class="hub-grid">${wave1Cards}</div>
+${chromeBar({ depth: 1, uslugiHref: './', current: 'uslugi' })}
+<main class="page" id="main">
+  <div class="container page__in">
+    ${crumbsNav([['Главная', '../'], ['Услуги']])}
+    <p class="eyebrow">НИЦ «Эколог» · Санкт-Петербург</p>
+    <h1 class="h2" style="margin-top:24px">Услуги НИЦ «Эколог»</h1>
+    <p class="page__lead">Проектирование экологической документации, сопровождение предприятий, инженерные изыскания и ESG-услуги.</p>
   ${groupsHtml}
-  <div class="lab-block">
-    <h2 style="margin-top:0;font-size:18px">Лабораторные исследования</h2>
-    <p style="font-size:15px;color:var(--slate-2,#3D5557);margin:8px 0 16px">Анализы воды, воздуха, почв и отходов — в лаборатории «Аналитик Лаб».</p>
-    <a class="chip" href="https://analitik-lab.ru" target="_blank" rel="noopener noreferrer">Перейти на analitik-lab.ru →</a>
+    <section class="hub-group">
+      <h2><b>05</b>Лабораторные исследования</h2>
+      <div class="hub-grid"><a class="hub-card" href="https://analitik-lab.ru" target="_blank" rel="noopener noreferrer"><h3><span class="dot dot--s" aria-hidden="true"></span>«Аналитик Лаб»</h3><p>Анализы воды, воздуха, почв и отходов — сайт лаборатории analitik-lab.ru.</p></a></div>
+    </section>
+    ${ctaBlock(1)}
   </div>
-  ${ctaBlock(homeHref)}
 </main>
-${footerBlock({ depth: 1, homeHref })}
-${menuScript()}
+${footerBlock({ depth: 1, uslugiHref: './' })}
+${menuScript(1)}
 </body>
 </html>`;
 }

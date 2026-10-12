@@ -23,7 +23,7 @@ const PAGES = [
 /** Sections where clipped content must be caught even with overflow-x: clip */
 const CLIP_CHECK_SECTIONS = {
   home: ['#top', '#laboratoriya', '#uslugi', '#zayavka', '#kontakty'],
-  lab: ['#lab', '#process', '#domains', '#lab-contact', '.ft'],
+  lab: ['#lab', '#process', '#domains', '#lab-contact', '.nf'],
 };
 
 function waitForServer(url, timeoutMs = 30000) {

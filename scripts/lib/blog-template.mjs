@@ -1,7 +1,7 @@
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { renderMarkdown } from './markdown.mjs';
-import { chromeBar, ctaBlock, esc, footerBlock, headBlock, menuScript } from './service-page-template.mjs';
+import { chromeBar, crumbsNav, ctaBlock, esc, footerBlock, headBlock, menuScript } from './service-page-template.mjs';
 
 const SITE = 'https://nic-ecolog.ru';
 const REQUIRED = ['title', 'description', 'h1', 'slug', 'status', 'date'];
@@ -104,8 +104,8 @@ export function renderArticlePage(a) {
     ],
   };
   const services = a.services
-    .map((s) => `<a class="chip" href="../../uslugi/${s}/">${esc(SERVICE_LABELS[s])} <span aria-hidden="true">→</span></a>`)
-    .join('\n    ');
+    .map((s) => `<a class="chip" href="../../uslugi/${s}/">${esc(SERVICE_LABELS[s])}&nbsp;→</a>`)
+    .join('\n      ');
 
   return `${headBlock({
     title: a.title,
@@ -117,26 +117,26 @@ export function renderArticlePage(a) {
     ogImage: a.cover ? `${SITE}/assets/blog/${a.cover}` : undefined,
   })}
 <body>
-${chromeBar({
-  depth: 2,
-  homeHref,
-  // Article title is already the H1; a full title here pushes the nav onto several lines.
-  crumbsHtml: 'ГЛАВНАЯ · <a href="../" style="color:inherit;text-decoration:none"><b>БЛОГ</b></a>',
-})}
-<main class="wrap">
-  <p class="eye">Блог НИЦ «Эколог»</p>
-  <h1>${esc(a.h1)}</h1>
-  <p class="post-meta"><time datetime="${a.date}">${ruDate(a.date)}</time>${a.updated !== a.date ? ` · обновлено <time datetime="${a.updated}">${ruDate(a.updated)}</time>` : ''}</p>${a.cover ? `
-  <figure class="post-cover"><img src="../../assets/blog/${esc(a.cover)}" alt="${esc(a.cover_alt)}" width="1600" height="900" fetchpriority="high"></figure>` : ''}
-  <article class="post">
+${chromeBar({ depth: 2, current: 'blog' })}
+<main class="page" id="main">
+  <div class="container page__in">
+    ${crumbsNav([['Главная', '../../'], ['Блог', '../'], [a.h1]])}
+    <p class="eyebrow">Блог НИЦ «Эколог»</p>
+    <h1 class="h2" style="margin-top:24px;max-width:900px">${esc(a.h1)}</h1>
+    <p class="post-date"><time datetime="${a.date}">${ruDate(a.date)}</time>${a.updated !== a.date ? ` · обновлено <time datetime="${a.updated}">${ruDate(a.updated)}</time>` : ''}</p>${a.cover ? `
+    <figure class="post-cover"><img src="../../assets/blog/${esc(a.cover)}" alt="${esc(a.cover_alt)}" width="1600" height="900" fetchpriority="high"></figure>` : ''}
+    <article class="post">
 ${renderMarkdown(a.body)}
-  </article>${services ? `
-  <h2>Услуги по теме</h2>
-  <div class="chips">${services}</div>` : ''}
-  ${ctaBlock(homeHref)}
+    </article>${services ? `
+    <h2 class="svcp__h">Услуги по теме</h2>
+    <div class="chips">
+      ${services}
+    </div>` : ''}
+    ${ctaBlock(2)}
+  </div>
 </main>
-${footerBlock({ depth: 2, homeHref })}
-${menuScript()}
+${footerBlock({ depth: 2 })}
+${menuScript(2)}
 </body>
 </html>`;
 }
@@ -185,21 +185,19 @@ export function renderBlogHub(articles) {
     schema,
   })}
 <body>
-${chromeBar({
-  depth: 1,
-  homeHref,
-  uslugiHref: '../uslugi/',
-  crumbsHtml: 'ГЛАВНАЯ · <b>БЛОГ</b>',
-})}
-<main class="wrap">
-  <p class="eye">НИЦ «Эколог» · Санкт-Петербург</p>
-  <h1>Блог НИЦ «Эколог»</h1>
-  <p class="lead">Разборы требований к экологической документации предприятий: что изменилось в законодательстве и что с этим делать.</p>
-  <div class="hub-grid">${cards}</div>
-  ${ctaBlock(homeHref)}
+${chromeBar({ depth: 1, current: 'blog' })}
+<main class="page" id="main">
+  <div class="container page__in">
+    ${crumbsNav([['Главная', '../'], ['Блог']])}
+    <p class="eyebrow">НИЦ «Эколог» · Санкт-Петербург</p>
+    <h1 class="h2" style="margin-top:24px">Блог НИЦ «Эколог»</h1>
+    <p class="page__lead">Разборы требований к экологической документации предприятий: что изменилось в законодательстве и что с этим делать.</p>
+    <div class="hub-grid hub-grid--blog">${cards}</div>
+    ${ctaBlock(1)}
+  </div>
 </main>
-${footerBlock({ depth: 1, homeHref, uslugiHref: '../uslugi/' })}
-${menuScript()}
+${footerBlock({ depth: 1 })}
+${menuScript(1)}
 </body>
 </html>`;
 }
