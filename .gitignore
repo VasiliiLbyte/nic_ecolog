@@ -20,3 +20,6 @@ api/config.php
 /backup/
 /Сайт-2/
 /oxvat-3-brand-demo.html
+
+# исходники макетов Figma (выгружаются через npm run figma:assets)
+*.fig

@@ -20,90 +20,139 @@ function assetPrefix(depth) {
 }
 
 export function pageStyles() {
+  // Оболочка и страница услуги — по макету Figma «Услуга — СЗЗ — Desktop» и шапке/подвалу главной.
   return `
+  :root{--f-heading:#0B5C60;--f-text:#444444;--f-primary:#222222;--f-teal:#139EA1;--f-green:#4CB272;--f-green-l:#ADCF7A;--f-blue:#1C6BA2;--f-border:#E0E0E0;--f-muted:#767676;--f-alt:#F3F7F7}
   *{box-sizing:border-box}
-  body{margin:0;font-family:var(--font-body,'Onest',sans-serif);background:var(--bg,#F7FBF9);color:var(--ink-2,#51696B);font-size:16px;line-height:1.6}
+  body{margin:0;font-family:'Onest',-apple-system,'Segoe UI',sans-serif;background:var(--f-alt);color:var(--f-text);font-size:16px;line-height:1.6}
   body.menu-open{overflow:hidden}
   h1,h2,h3,p{margin:0}
   a{color:inherit}
-  .mono{font-family:var(--font-mono,'Stolzl','Onest',sans-serif)}
-  .bar{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px 24px;background:rgba(247,251,249,.94);backdrop-filter:blur(14px);border-bottom:1px solid var(--line,#E2EBE8);flex-wrap:nowrap}
-  .bar-left{display:flex;align-items:center;gap:16px;min-width:120px;flex:0 1 auto;overflow:hidden}
-  .bar-left img{height:34px;width:auto;display:block;flex:0 0 auto}
-  .crumbs{font-family:var(--font-mono,'Stolzl','Onest',sans-serif);font-size:11px;letter-spacing:.08em;color:var(--slate-3,#7A9496);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-  .crumbs b{color:var(--teal-deep,#0B5C60);font-weight:500}
-  .bar-nav{display:flex;align-items:center;gap:18px;flex-wrap:nowrap;flex:0 0 auto;justify-content:flex-end}
-  .bar-nav a:not(.btn-cta){font-size:14.5px;color:#2C4346;text-decoration:none;font-weight:400;transition:color .2s}
-  .bar-nav a:not(.btn-cta):hover{color:var(--teal,#139EA1)}
-  .bar-phone{font-size:14.5px;font-weight:500;color:var(--teal-deep,#0B5C60);text-decoration:none;font-variant-numeric:tabular-nums;white-space:nowrap}
-  .btn-cta{display:inline-flex;align-items:center;gap:8px;background:#1C6BA2;color:#fff;font-size:14px;font-weight:500;text-decoration:none;padding:10px 20px;border-radius:4px;white-space:nowrap}
-  .burger{display:none;align-items:center;justify-content:center;width:44px;height:44px;border:1px solid rgba(11,92,96,.25);border-radius:12px;background:rgba(255,255,255,.75);cursor:pointer;padding:0;flex:0 0 auto}
-  .mmenu{position:fixed;inset:0;z-index:180;background:rgba(247,251,249,.97);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);display:flex;flex-direction:column;padding:22px 24px 36px;opacity:0;visibility:hidden;transition:opacity .25s ease;outline:none;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
+  .bar{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:33px 32px;background:#FFFFFF;border-bottom:1px solid var(--f-border)}
+  .bar-left{display:flex;align-items:center;flex:0 0 auto}
+  .bar-left img{display:block;width:104px;height:35px}
+  .bar-nav{display:flex;align-items:center;gap:32px}
+  .bar-nav a{font-size:12px;line-height:20px;color:var(--f-heading);text-decoration:none;transition:color .2s}
+  .bar-nav a:hover{color:var(--f-teal)}
+  .bar-actions{display:flex;align-items:center;gap:24px;flex:0 0 auto}
+  .bar-phone{font-size:14px;line-height:20px;color:var(--f-heading);text-decoration:none;font-variant-numeric:tabular-nums;white-space:nowrap}
+  /* Кнопки по макету Figma «Button / Primary»: градиент, прямые углы, текст #444, наведение — увеличение + контур */
+  .btn-cta{display:inline-flex;align-items:center;justify-content:center;min-width:210px;height:35px;padding:0 24px;border:0;border-radius:0;background:linear-gradient(90deg,#139EA1 0%,#1C6BA2 100%);color:#444444;font-size:12px;line-height:20px;text-decoration:none;white-space:nowrap;transition:transform .2s ease,box-shadow .2s ease}
+  .btn-cta:hover{transform:scale(1.01);box-shadow:inset 0 0 0 1px #1C6BA2}
+  .btn-cta:active{transform:none;box-shadow:none}
+  .burger{display:none;align-items:center;justify-content:center;width:44px;height:44px;border:0;background:transparent;cursor:pointer;padding:0;flex:0 0 auto}
+  .crumbs-row{max-width:1160px;margin:0 auto;padding:24px 48px 0}
+  .crumbs{font-size:12px;line-height:18px;color:var(--f-text)}
+  .crumbs a{color:inherit;text-decoration:none}
+  .crumbs a:hover{color:var(--f-teal)}
+  .crumbs b{font-weight:400;color:var(--f-heading)}
+  .mmenu{position:fixed;inset:0;z-index:180;background:rgba(255,255,255,.98);display:flex;flex-direction:column;padding:18px 20px 36px;opacity:0;visibility:hidden;transition:opacity .25s ease;outline:none;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
   .mmenu.open{opacity:1;visibility:visible}
   .mm-top{display:flex;align-items:center;justify-content:space-between}
-  .mm-brand{font-size:20px;font-weight:600;color:var(--teal-deep,#0B5C60)}
-  .mm-close{display:flex;align-items:center;justify-content:center;width:44px;height:44px;border:1px solid rgba(11,92,96,.25);border-radius:12px;background:#fff;cursor:pointer;padding:0}
-  .mmenu nav{display:flex;flex-direction:column;gap:6px;margin-top:48px}
-  .mmenu nav a{font-size:26px;font-weight:300;color:var(--ink,#13282B);text-decoration:none;padding:14px 0;min-height:44px;display:flex;align-items:center;border-bottom:1px solid rgba(11,92,96,.1)}
-  .mm-foot{margin-top:auto;display:flex;flex-direction:column;gap:16px}
-  .mm-foot .bar-phone{font-size:19px}
-  .mm-foot .btn-cta{justify-content:center;padding:18px 38px;font-size:16px}
+  .mm-top img{display:block;width:104px;height:35px}
+  .mm-close{display:flex;align-items:center;justify-content:center;width:44px;height:44px;border:0;background:transparent;cursor:pointer;padding:0}
+  .mmenu nav{display:flex;flex-direction:column;margin-top:40px}
+  .mmenu nav a{font-size:22px;font-weight:600;color:var(--f-heading);text-decoration:none;padding:12px 0;min-height:44px;display:flex;align-items:center;border-bottom:1px solid var(--f-border)}
+  .mm-foot{margin-top:auto;padding-top:32px;display:flex;flex-direction:column;gap:16px}
+  .mm-foot .bar-phone{font-size:18px}
+  .mm-foot .btn-cta{height:44px}
   @media(min-width:1061px){.burger{display:none !important}}
-  @media(max-width:1060px){.bar-nav a:not(.btn-cta),.bar-phone,.bar-nav .btn-cta{display:none}.burger{display:flex}}
-  .wrap{max-width:960px;margin:0 auto;padding:48px 24px 80px}
-  .eye{font-family:var(--font-mono,'Stolzl','Onest',sans-serif);font-size:11px;font-weight:500;letter-spacing:.18em;color:var(--teal,#139EA1);text-transform:uppercase;margin-bottom:12px}
-  h1{font-family:var(--font-display,'Stolzl',sans-serif);font-weight:300;font-size:clamp(28px,4vw,48px);line-height:1.12;color:var(--ink,#13282B);margin-top:8px;text-wrap:balance}
-  .lead{margin-top:20px;font-size:17px;line-height:1.7;color:var(--slate-2,#3D5557);max-width:720px}
+  @media(max-width:1060px){.bar-nav,.bar-phone,.bar-actions .btn-cta{display:none}.burger{display:flex}}
+  .wrap{max-width:1160px;margin:0 auto;padding:40px 48px 96px}
+  .eye{font-size:12px;line-height:25px;letter-spacing:.02em;color:var(--f-text);text-transform:uppercase}
+  h1{margin-top:24px;max-width:640px;font-weight:400;font-size:50px;line-height:55px;color:var(--f-heading);text-wrap:balance}
+  .lead{margin-top:24px;max-width:540px;font-size:16px;line-height:23px;color:var(--f-text)}
   .lead p+p{margin-top:12px}
-  h2{font-weight:400;font-size:22px;color:var(--ink,#13282B);margin:48px 0 20px}
-  .steps{display:flex;flex-direction:column;border-top:1px solid var(--line,#E2EBE8)}
-  .step{display:flex;gap:18px;padding:18px 0;border-bottom:1px solid var(--line,#E2EBE8)}
-  .step .n{font-family:var(--font-mono,'Stolzl','Onest',sans-serif);font-size:13px;color:var(--teal,#139EA1);padding-top:2px;flex:0 0 auto;min-width:28px}
-  .step p{font-size:15px;line-height:1.65;color:var(--slate-1,#3D5557)}
-  .chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:8px}
-  .chip{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line-strong,#C5D6D2);border-radius:999px;background:#fff;color:var(--teal-deep,#0B5C60);font-size:14px;font-weight:500;padding:10px 18px;text-decoration:none}
-  .chip:hover{border-color:var(--teal,#139EA1);background:rgba(19,158,161,.06)}
-  .chip-static{display:inline-flex;align-items:center;border:1px dashed var(--line-strong,#C5D6D2);border-radius:999px;color:var(--slate-3,#7A9496);font-size:14px;padding:10px 18px}
-  .cta{margin-top:56px;background:linear-gradient(105deg,#139EA1,#1C6BA2);border-radius:20px;padding:36px 32px;color:#fff;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}
-  .cta h3{font-family:var(--font-display,'Stolzl',sans-serif);font-weight:300;font-size:clamp(22px,2.5vw,28px)}
-  .cta p{margin-top:6px;font-size:15px;color:rgba(255,255,255,.88)}
-  .cta-btn{background:#fff;color:var(--teal-deep,#0B5C60);border-radius:4px;font-size:15px;font-weight:500;padding:14px 28px;text-decoration:none;display:inline-block}
-  .hub-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px;margin-top:24px}
-  .hub-card{border:1px solid var(--line,#E2EBE8);border-radius:16px;padding:24px;background:#fff;text-decoration:none;color:inherit;display:block;transition:border-color .2s,box-shadow .2s}
-  a.hub-card:hover{border-color:var(--teal,#139EA1);box-shadow:0 8px 24px rgba(19,158,161,.1)}
-  .hub-card h3{font-size:17px;font-weight:500;color:var(--ink,#13282B);margin-bottom:8px}
-  .hub-card p{font-size:14px;line-height:1.6;color:var(--slate-2,#3D5557)}
-  .hub-group{margin-top:40px}
-  .hub-group h2{font-size:20px;margin:0 0 16px}
-  .lab-block{margin-top:40px;padding:24px;border:1px solid var(--line,#E2EBE8);border-radius:16px;background:#fff}
-  .soon{font-size:14px;color:var(--slate-3,#7A9496);font-style:italic}
-  .ft{background:#06141C;color:#fff;padding:64px 24px 32px;margin-top:80px}
-  .ft-inner{max-width:1240px;margin:0 auto}
-  .ft-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:40px}
-  .ft-grid>div:first-child p{max-width:300px;line-height:1.6;color:rgba(255,255,255,.7);margin-top:14px}
-  .ft h4{font-family:'Stolzl','Onest',sans-serif;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:18px}
-  .ft a,.ft p{font-size:14.5px;color:rgba(255,255,255,.75);text-decoration:none;line-height:2;display:block}
-  .ft a:hover{color:#fff}
-  .ft-bot{display:flex;justify-content:space-between;align-items:center;margin-top:54px;padding-top:24px;border-top:1px solid rgba(255,255,255,.1);font-size:13px;color:rgba(255,255,255,.5);flex-wrap:wrap;gap:12px}
-  @media(max-width:900px){.ft-grid{grid-template-columns:1fr 1fr;gap:32px}}
-  @media(max-width:640px){.bar{padding:12px 16px}.wrap{padding:32px 16px 64px}.ft-grid{grid-template-columns:1fr}}
-  .post-meta{margin-top:14px;font-size:14px;color:var(--slate-3,#7A9496)}
-  .post{margin-top:28px;max-width:760px;font-size:16.5px;line-height:1.75;color:var(--slate-1,#2C4346)}
+  .facts{display:flex;flex-wrap:wrap;gap:30px;margin-top:40px}
+  .fact{display:flex;align-items:flex-start;gap:16px;padding:4px 16px;border-radius:5px;background:#FFFFFF;font-size:10px;line-height:25px;letter-spacing:.02em}
+  .fact b{font-weight:400;color:var(--f-heading);text-transform:uppercase}
+  .fact span{padding-left:16px;border-left:1px solid var(--f-border);color:var(--f-muted)}
+  h2{margin:48px 0 20px;font-weight:400;font-size:30px;line-height:36px;color:var(--f-text)}
+  .svc-cols{display:grid;grid-template-columns:minmax(0,522px) minmax(0,520px);justify-content:space-between;gap:22px;align-items:start}
+  .svc-cols--single{grid-template-columns:minmax(0,760px)}
+  .steps{display:flex;flex-direction:column;border-top:1px solid var(--f-border)}
+  .step{display:flex;gap:18px;padding:20px 10px 20px 38px;border-bottom:1px solid var(--f-border)}
+  .step .n{flex:0 0 auto;min-width:13px;font-size:12px;line-height:23px;color:var(--f-muted)}
+  .step p{font-size:12px;line-height:20px;padding-top:2px;color:var(--f-text)}
+  .aside{display:flex;flex-direction:column;gap:20px}
+  .aside-card{padding:23px 33px 28px;border-radius:5px;background:#FFFFFF}
+  .aside-card h3{font-size:16px;line-height:18px;font-weight:400;color:var(--f-green);text-transform:uppercase}
+  .aside-card p{margin-top:12px;font-size:12px;line-height:20px;color:var(--f-text)}
+  .aside-card--accent{background:linear-gradient(105deg,#4CB272 0%,#139EA1 33%,#0072BB 100%)}
+  .aside-card--accent h3,.aside-card--accent p{color:#FFFFFF}
+  .chips{display:flex;flex-wrap:wrap;gap:20px;margin-top:8px}
+  .chip{display:inline-flex;align-items:center;gap:6px;min-height:32px;padding:4px 22px;border-radius:5px;background:#FFFFFF;color:var(--f-heading);font-size:12px;line-height:25px;letter-spacing:.02em;text-decoration:none;transition:box-shadow .2s ease}
+  .chip:hover{box-shadow:0 0 0 1px var(--f-teal)}
+  .chip-static{display:inline-flex;align-items:center;min-height:32px;padding:4px 22px;border-radius:5px;background:rgba(255,255,255,.6);color:var(--f-muted);font-size:12px;line-height:25px;letter-spacing:.02em}
+  .cta{margin-top:64px;min-height:127px;padding:20px 36px;border-radius:5px;background:linear-gradient(90deg,#1C6BA2,#139EA1);color:#FFFFFF;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}
+  .cta h3{font-size:32px;line-height:55px;font-weight:400;letter-spacing:-.01em}
+  .cta p{font-size:12px;line-height:23px;color:#FFFFFF}
+  .cta-btn{display:inline-flex;align-items:center;justify-content:center;min-width:210px;height:35px;padding:0 24px;border:0;border-radius:0;background:#FFFFFF;color:#444444;font-size:12px;line-height:20px;text-decoration:none;margin-right:200px;transition:transform .2s ease,box-shadow .2s ease}
+  .cta-btn:hover{transform:scale(1.01);box-shadow:inset 0 0 0 1px #1C6BA2}
+  .cta-btn:active{transform:none;box-shadow:none}
+  .hub-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;margin-top:24px}
+  .hub-card{display:block;padding:16px;border-radius:8px;background:#FFFFFF;text-decoration:none;color:inherit;transition:box-shadow .2s}
+  a.hub-card:hover{box-shadow:0 0 0 1px var(--f-teal)}
+  .hub-card h3{margin-bottom:8px;font-size:20px;line-height:28px;font-weight:600;color:var(--f-heading)}
+  .hub-card p{font-size:14px;line-height:20px;color:var(--f-text)}
+  .hub-group{margin-top:48px}
+  .hub-group h2{margin:0 0 16px;padding-bottom:8px;border-bottom:1px solid var(--f-border);font-size:16px;line-height:20px;font-weight:700;letter-spacing:.02em;color:var(--f-primary)}
+  .lab-block{margin-top:48px;padding:24px;border-radius:8px;background:#FFFFFF}
+  .soon{font-size:12px;color:var(--f-muted);font-style:italic}
+  .ft{background:#06141C;color:#FFFFFF;padding:64px 48px 85px}
+  .ft-inner{max-width:1064px;margin:0 auto}
+  .ft-top{display:flex;justify-content:space-between;gap:16px}
+  .ft-brand{flex:0 0 254px;display:flex;flex-direction:column;gap:32px}
+  .ft-brand img{display:block;width:104px;height:35px}
+  .ft-brand p{font-size:12px;line-height:18px}
+  .ft-brand p+p{margin-top:16px}
+  .ft-nav{display:flex;gap:96px}
+  .ft-col{display:flex;flex-direction:column;gap:16px}
+  .ft-col h4{margin:0 0 8px;font-size:10px;line-height:18px;font-weight:400;text-transform:uppercase;color:var(--f-teal)}
+  .ft-col a,.ft-col p{font-size:12px;line-height:18px;color:#FFFFFF;text-decoration:none}
+  .ft-col a:hover{color:var(--f-green-l)}
+  .ft-bot{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:24px;margin-top:32px;padding-top:32px;border-top:1px solid var(--f-teal);font-size:12px;line-height:18px;color:var(--f-teal)}
+  .ft-bot div{display:flex;gap:48px}
+  .ft-bot a{color:inherit;text-decoration:none}
+  .ft-bot a:hover{color:#FFFFFF}
+  @media(max-width:1060px){.svc-cols{grid-template-columns:1fr}.ft-top{flex-direction:column;gap:40px}.ft-nav{gap:48px;flex-wrap:wrap}.cta-btn{margin-right:0}}
+  @media(max-width:720px){
+    .bar{padding:18px 10px 19px 20px}
+    .crumbs-row{padding:16px 20px 0}
+    .wrap{padding:24px 20px 48px}
+    h1{font-size:30px;line-height:36px;margin-top:16px;font-weight:600}
+    h2{font-size:24px;line-height:30px;margin-top:40px}
+    .facts{gap:12px}
+    .fact{flex-direction:column;gap:0}
+    .fact span{padding-left:0;border-left:0}
+    .step{padding:16px 0 16px 8px}
+    .aside-card{padding:20px}
+    .cta{padding:24px 20px}
+    .cta h3{font-size:24px;line-height:32px}
+    .cta-btn{width:100%;height:44px}
+    .chips{gap:12px}
+    .ft{padding:32px 20px}
+    .ft-nav{flex-direction:column;gap:24px}
+    .ft-bot{flex-direction:column;align-items:flex-start;gap:16px;margin-top:24px;padding-top:24px}
+    .ft-bot div{flex-direction:column;gap:16px}
+  }
+  .post-meta{margin-top:14px;font-size:14px;color:var(--f-muted)}
+  .post{margin-top:28px;max-width:760px;font-size:16px;line-height:1.75;color:var(--f-primary)}
   .post p{margin:0 0 16px}
   .post h2{margin:40px 0 16px}
-  .post h3{font-size:18px;font-weight:500;color:var(--ink,#13282B);margin:28px 0 12px}
+  .post h3{font-size:18px;font-weight:600;color:var(--f-heading);margin:28px 0 12px}
   .post ul,.post ol{margin:0 0 18px;padding-left:22px}
   .post li{margin:6px 0}
-  .post a{color:var(--teal-deep,#0B5C60);text-underline-offset:3px}
-  .post strong{color:var(--ink,#13282B);font-weight:600}
+  .post a{color:var(--f-heading);text-underline-offset:3px}
+  .post strong{color:var(--f-primary);font-weight:600}
   .post .tbl{overflow-x:auto;margin:0 0 20px;-webkit-overflow-scrolling:touch}
-  .post table{border-collapse:collapse;width:100%;min-width:560px;font-size:14.5px;line-height:1.5;background:#fff}
-  .post th,.post td{border:1px solid var(--line,#E2EBE8);padding:10px 12px;text-align:left;vertical-align:top}
-  .post th{background:rgba(19,158,161,.07);color:var(--ink,#13282B);font-weight:500}
-  .post-date{font-size:13px;color:var(--slate-3,#7A9496);margin-top:10px}
+  .post table{border-collapse:collapse;width:100%;min-width:560px;font-size:14px;line-height:1.5;background:#fff}
+  .post th,.post td{border:1px solid var(--f-border);padding:10px 12px;text-align:left;vertical-align:top}
+  .post th{background:var(--f-alt);color:var(--f-primary);font-weight:500}
+  .post-date{font-size:12px;color:var(--f-muted);margin-top:10px}
   .post-cover{margin:28px 0 0;max-width:960px}
-  .post-cover img{display:block;width:100%;height:auto;border-radius:16px}
-  .hub-card .cover{display:block;width:calc(100% + 48px);margin:-24px -24px 18px;height:auto;border-radius:16px 16px 0 0}
+  .post-cover img{display:block;width:100%;height:auto;border-radius:8px}
+  .hub-card .cover{display:block;width:calc(100% + 32px);margin:-16px -16px 16px;height:auto;border-radius:8px 8px 0 0}
   `;
 }
 
@@ -156,8 +205,8 @@ function navLinks({ uslugiHref, prefix, homeHref }) {
     { href: `${homeHref}#o-centre`, label: 'О центре' },
     { href: `${homeHref}#esg`, label: 'ESG' },
     { href: `${homeHref}#litsenzii`, label: 'Лицензии' },
-    ...(siteOptions.hasBlog ? [{ href: `${prefix}blog/`, label: 'Блог' }] : []),
     { href: `${homeHref}#kontakty`, label: 'Контакты' },
+    ...(siteOptions.hasBlog ? [{ href: `${prefix}blog/`, label: 'Блог' }] : []),
   ];
 }
 
@@ -166,33 +215,35 @@ export function chromeBar({ depth, crumbCurrent, homeHref = '/', uslugiHref: usl
   const uslugiHref = uslugiOverride ?? (depth === 1 ? './' : `${prefix}uslugi/`);
   const links = navLinks({ uslugiHref, prefix, homeHref });
   const navHtml = links.map((l) => `<a href="${l.href}">${l.label}</a>`).join('\n    ');
+  const crumbs = crumbsHtml
+    ?? `<a href="${homeHref}">Главная</a> | <a href="${uslugiHref}">Услуги</a>${crumbCurrent ? ` | <b>${esc(crumbCurrent)}</b>` : ''}`;
   return `<header class="bar">
-  <div class="bar-left">
-    <a href="${homeHref}"><img src="${prefix}assets/logo_ecolog.svg" alt="НИЦ Эколог"></a>
-    <span class="crumbs">${crumbsHtml ?? `ГЛАВНАЯ · <a href="${uslugiHref}" style="color:inherit;text-decoration:none">УСЛУГИ</a>${crumbCurrent ? ` · <b>${esc(crumbCurrent)}</b>` : ''}`}</span>
-  </div>
+  <a class="bar-left" href="${homeHref}"><img src="${prefix}assets/figma/logo-ecolog.svg" alt="НИЦ Эколог" width="104" height="35"></a>
   <nav class="bar-nav" aria-label="Навигация">
     ${navHtml}
-    <a class="bar-phone" href="tel:+78124499348">+7&nbsp;(812)&nbsp;449-93-48</a>
-    <a class="btn-cta" href="${homeHref}#zayavka">Оставить заявку</a>
   </nav>
-  <button class="burger" type="button" aria-label="Открыть меню" aria-haspopup="dialog" aria-expanded="false" aria-controls="mmenu" data-menu-open>
-    <svg width="20" height="14" viewBox="0 0 20 14" aria-hidden="true"><g stroke="#0B5C60" stroke-width="1.8" stroke-linecap="round"><line x1="1" y1="1" x2="19" y2="1"></line><line x1="1" y1="7" x2="19" y2="7"></line><line x1="1" y1="13" x2="19" y2="13"></line></g></svg>
-  </button>
+  <div class="bar-actions">
+    <a class="bar-phone" href="tel:+78124499348">+7&nbsp;(812)&nbsp;449&nbsp;93&nbsp;48</a>
+    <a class="btn-cta" href="${homeHref}#zayavka">Заказать исследование</a>
+    <button class="burger" type="button" aria-label="Открыть меню" aria-haspopup="dialog" aria-expanded="false" aria-controls="mmenu" data-menu-open>
+      <svg width="24" height="17" viewBox="0 0 24 17" aria-hidden="true"><g stroke="#0B5C60" stroke-width="1"><line x1="0" y1="0.5" x2="24" y2="0.5"></line><line x1="0" y1="8.5" x2="24" y2="8.5"></line><line x1="0" y1="16.5" x2="24" y2="16.5"></line></g></svg>
+    </button>
+  </div>
 </header>
+<nav class="crumbs-row" aria-label="Хлебные крошки"><p class="crumbs">${crumbs}</p></nav>
 <div class="mmenu" id="mmenu" role="dialog" aria-modal="true" aria-label="Меню навигации" tabindex="-1">
   <div class="mm-top">
-    <span class="mm-brand">Эколог</span>
+    <img src="${prefix}assets/figma/logo-ecolog.svg" alt="НИЦ Эколог" width="104" height="35">
     <button type="button" class="mm-close" aria-label="Закрыть меню" data-menu-close>
-      <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><g stroke="#0B5C60" stroke-width="1.8" stroke-linecap="round"><line x1="2" y1="2" x2="14" y2="14"></line><line x1="14" y1="2" x2="2" y2="14"></line></g></svg>
+      <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><g stroke="#0B5C60" stroke-width="1.5" stroke-linecap="round"><line x1="2" y1="2" x2="14" y2="14"></line><line x1="14" y1="2" x2="2" y2="14"></line></g></svg>
     </button>
   </div>
   <nav aria-label="Мобильная навигация">
     ${navHtml}
   </nav>
   <div class="mm-foot">
-    <a class="bar-phone" href="tel:+78124499348">+7&nbsp;(812)&nbsp;449-93-48</a>
-    <a class="btn-cta" href="${homeHref}#zayavka">Оставить заявку</a>
+    <a class="bar-phone" href="tel:+78124499348">+7&nbsp;(812)&nbsp;449&nbsp;93&nbsp;48</a>
+    <a class="btn-cta" href="${homeHref}#zayavka">Заказать исследование</a>
   </div>
 </div>`;
 }
@@ -213,36 +264,42 @@ export function footerBlock({ depth, homeHref = '/', uslugiHref: uslugiOverride 
   const privacyHref = `${prefix}privacy.html`;
   return `<footer class="ft">
   <div class="ft-inner">
-    <div class="ft-grid">
-      <div>
-        <a href="${homeHref}" style="display:inline-flex;align-items:center"><img src="${prefix}assets/logo_ecolog.svg" alt="НИЦ Эколог" style="height:40px"></a>
-        <p>Наука + экология + прикладные решения. Надёжность и экспертиза без бюрократии.</p>
+    <div class="ft-top">
+      <div class="ft-brand">
+        <a href="${homeHref}"><img src="${prefix}assets/figma/logo-ecolog-white.svg" alt="НИЦ Эколог" width="104" height="35"></a>
+        <div>
+          <p style="color:#139EA1">Наука + экология +<br>прикладные решения</p>
+          <p style="color:#ADCF7A">Надёжность и экспертиза<br>без бюрократии</p>
+        </div>
       </div>
-      <div>
-        <h4>Услуги</h4>
-        <a href="${uslugiHref}">Проектирование и документация</a>
-        <a href="${uslugiHref}">Сопровождение предприятий</a>
-        <a href="${uslugiHref}">Изыскания и исследования</a>
-        <a href="${homeHref}#esg">ESG и устойчивое развитие</a>
-      </div>
-      <div>
-        <h4>Центр</h4>
-        <a href="${homeHref}#o-centre">О центре</a>
-        <a href="${prefix}lab.html">Лаборатория «Аналитик Лаб»</a>
-        <a href="${homeHref}#proekty">Проекты</a>
-        <a href="${homeHref}#litsenzii">Лицензии</a>${siteOptions.hasBlog ? `
-        <a href="${prefix}blog/">Блог</a>` : ''}
-      </div>
-      <div>
-        <h4>Контакты</h4>
-        <a href="tel:+78124499348">+7&nbsp;(812)&nbsp;449-93-48</a>
-        <a href="mailto:info@nic-ecolog.ru">info@nic-ecolog.ru</a>
-        <p>Санкт-Петербург</p>
+      <div class="ft-nav">
+        <nav class="ft-col" aria-label="Услуги">
+          <h4>Услуги</h4>
+          <a href="${uslugiHref}">Проектирование и документация</a>
+          <a href="${uslugiHref}">Сопровождение предприятий</a>
+          <a href="${uslugiHref}">Изыскания и исследования</a>
+          <a href="${homeHref}#esg">ESG и устойчивое развитие</a>
+        </nav>
+        <nav class="ft-col" aria-label="Центр">
+          <h4>Центр</h4>
+          <a href="${homeHref}#o-centre">О центре</a>
+          <a href="${prefix}lab.html">Лаборатория «Аналитик Лаб»</a>
+          <a href="${homeHref}#proekty">Проекты</a>
+          <a href="${homeHref}#esg">ESG</a>
+          <a href="${homeHref}#litsenzii">Лицензии</a>${siteOptions.hasBlog ? `
+          <a href="${prefix}blog/">Блог</a>` : ''}
+        </nav>
+        <div class="ft-col">
+          <h4>Контакты</h4>
+          <a href="tel:+78124499348">+7&nbsp;812&nbsp;449&nbsp;93&nbsp;48</a>
+          <a href="mailto:info@nic-ecolog.ru">info@nic-ecolog.ru</a>
+          <p>Санкт-Петербург</p>
+        </div>
       </div>
     </div>
     <div class="ft-bot">
-      <span>© 2026 НИЦ «Эколог» · НАУКА ДЛЯ ПРИРОДЫ</span>
-      <span>nic-ecolog.ru · <a href="${privacyHref}" style="display:inline;color:inherit">Политика конфиденциальности</a></span>
+      <span>© 2026 НИЦ «Эколог»</span>
+      <div><a href="${privacyHref}">Политика конфиденциальности</a><span>nic-ecolog.ru</span></div>
     </div>
   </div>
 </footer>`;
@@ -250,7 +307,7 @@ export function footerBlock({ depth, homeHref = '/', uslugiHref: uslugiOverride 
 
 export function ctaBlock(homeHref = '/') {
   return `<div class="cta">
-  <div><h3>Обсудим вашу задачу?</h3><p>Оставьте заявку — мы свяжемся с вами.</p></div>
+  <div><h3>Обсудим вашу задачу</h3><p>Вернёмся с планом работ и оценкой в течение рабочего дня.</p></div>
   <a class="cta-btn" href="${homeHref}#zayavka">Оставить заявку</a>
 </div>`;
 }
@@ -282,6 +339,21 @@ function articlesBlock(articles) {
   <div class="chips">${chips}</div>`;
 }
 
+// Блоки «Срок / Кому» и «Результат / Почему мы» из макета выводятся только при наличии
+// проверенных разделов в брифе (parse-brief.mjs): без факт-чека их не публикуем.
+function factsBlock(brief) {
+  const facts = [['Срок', brief.term], ['Кому', brief.who]].filter(([, v]) => v);
+  if (!facts.length) return '';
+  return `<div class="facts">${facts.map(([k, v]) => `<p class="fact"><b>${k}</b><span>${esc(v)}</span></p>`).join('')}</div>`;
+}
+
+function asideBlock(brief) {
+  const cards = [];
+  if (brief.result) cards.push(`<div class="aside-card aside-card--accent"><h3>Результат</h3><p>${esc(brief.result)}</p></div>`);
+  if (brief.whyUs) cards.push(`<div class="aside-card"><h3>Почему мы</h3><p>${esc(brief.whyUs)}</p></div>`);
+  return cards.length ? `<div class="aside">${cards.join('\n      ')}</div>` : '';
+}
+
 export function renderServicePage(brief, { depth = 2, articles = [] } = {}) {
   const homeHref = depth === 1 ? '../index.html' : '../../index.html';
   const introHtml = brief.intro.map((p) => `<p>${esc(p)}</p>`).join('\n      ');
@@ -291,6 +363,7 @@ export function renderServicePage(brief, { depth = 2, articles = [] } = {}) {
         `<div class="step"><span class="n">${String(i + 1).padStart(2, '0')}</span><p>${esc(text)}</p></div>`
     )
     .join('\n      ');
+  const aside = asideBlock(brief);
 
   return `${headBlock({
     title: brief.title,
@@ -305,8 +378,12 @@ ${chromeBar({ depth, crumbCurrent: brief.h1, homeHref })}
   <p class="eye">${esc(brief.group ?? '')}</p>
   <h1>${esc(brief.h1)}</h1>
   <div class="lead">${introHtml}</div>
+  ${factsBlock(brief)}
   <h2>Что входит в работу</h2>
-  <div class="steps">${steps}</div>
+  <div class="svc-cols${aside ? '' : ' svc-cols--single'}">
+    <div class="steps">${steps}</div>
+    ${aside}
+  </div>
   ${relatedBlock(brief.related)}${articles.length ? `
   ${articlesBlock(articles)}` : ''}
   ${ctaBlock(homeHref)}

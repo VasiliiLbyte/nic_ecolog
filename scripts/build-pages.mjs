@@ -55,11 +55,14 @@ function addBlogLink(html, anchor, link) {
 }
 
 function patchHome(html) {
-  return addBlogLink(
+  // «Блог» — последним пунктом меню шапки (как в макете Figma) и в колонке «Центр» подвала.
+  // Якоря различаются отступом: в шапке 6 пробелов, в подвале 12.
+  const withHeader = addBlogLink(
     html.replaceAll('href="/privacy"', 'href="privacy.html"'),
-    '<a href="#litsenzii" style="font-size:14.5px;color:rgba(255,255,255,0.8);text-decoration:none;transition:color 0.2s" style-hover="color:#ADCF7A">Лицензии</a>',
-    '          <a href="blog/" style="font-size:14.5px;color:rgba(255,255,255,0.8);text-decoration:none;transition:color 0.2s" style-hover="color:#ADCF7A">Блог</a>'
+    '\n      <a href="#kontakty">Контакты</a>',
+    '      <a href="blog/">Блог</a>'
   );
+  return addBlogLink(withHeader, '\n            <a href="#litsenzii">Лицензии</a>', '            <a href="blog/">Блог</a>');
 }
 
 function patchLab(html) {

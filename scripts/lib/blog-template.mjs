@@ -121,7 +121,7 @@ ${chromeBar({
   depth: 2,
   homeHref,
   // Article title is already the H1; a full title here pushes the nav onto several lines.
-  crumbsHtml: 'ГЛАВНАЯ · <a href="../" style="color:inherit;text-decoration:none"><b>БЛОГ</b></a>',
+  crumbsHtml: `<a href="${homeHref}">Главная</a> | <a href="../">Блог</a>`,
 })}
 <main class="wrap">
   <p class="eye">Блог НИЦ «Эколог»</p>
@@ -189,7 +189,7 @@ ${chromeBar({
   depth: 1,
   homeHref,
   uslugiHref: '../uslugi/',
-  crumbsHtml: 'ГЛАВНАЯ · <b>БЛОГ</b>',
+  crumbsHtml: `<a href="${homeHref}">Главная</a> | <b>Блог</b>`,
 })}
 <main class="wrap">
   <p class="eye">НИЦ «Эколог» · Санкт-Петербург</p>
