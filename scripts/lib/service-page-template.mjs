@@ -36,9 +36,10 @@ export function pageStyles() {
   .bar-nav a:hover{color:var(--f-teal)}
   .bar-actions{display:flex;align-items:center;gap:24px;flex:0 0 auto}
   .bar-phone{font-size:14px;line-height:20px;color:var(--f-heading);text-decoration:none;font-variant-numeric:tabular-nums;white-space:nowrap}
-  .btn-cta{display:inline-flex;align-items:center;justify-content:center;min-width:210px;height:35px;padding:0 24px;border:1px solid var(--f-blue);border-radius:4px;background:var(--f-blue);color:#FFFFFF;font-size:13px;line-height:20px;text-decoration:none;white-space:nowrap;transition:transform .2s ease,box-shadow .2s ease,background .2s ease}
-  .btn-cta:hover{transform:scale(1.03);box-shadow:0 0 0 2px #FFFFFF,0 0 0 3px var(--f-blue)}
-  .btn-cta:active{transform:scale(1);background:var(--f-teal);border-color:var(--f-teal);box-shadow:none}
+  /* Кнопки по макету Figma «Button / Primary»: градиент, прямые углы, текст #444, наведение — увеличение + контур */
+  .btn-cta{display:inline-flex;align-items:center;justify-content:center;min-width:210px;height:35px;padding:0 24px;border:0;border-radius:0;background:linear-gradient(90deg,#139EA1 0%,#1C6BA2 100%);color:#444444;font-size:12px;line-height:20px;text-decoration:none;white-space:nowrap;transition:transform .2s ease,box-shadow .2s ease}
+  .btn-cta:hover{transform:scale(1.01);box-shadow:inset 0 0 0 1px #1C6BA2}
+  .btn-cta:active{transform:none;box-shadow:none}
   .burger{display:none;align-items:center;justify-content:center;width:44px;height:44px;border:0;background:transparent;cursor:pointer;padding:0;flex:0 0 auto}
   .crumbs-row{max-width:1160px;margin:0 auto;padding:24px 48px 0}
   .crumbs{font-size:12px;line-height:18px;color:var(--f-text)}
@@ -86,8 +87,9 @@ export function pageStyles() {
   .cta{margin-top:64px;min-height:127px;padding:20px 36px;border-radius:5px;background:linear-gradient(90deg,#1C6BA2,#139EA1);color:#FFFFFF;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}
   .cta h3{font-size:32px;line-height:55px;font-weight:400;letter-spacing:-.01em}
   .cta p{font-size:12px;line-height:23px;color:#FFFFFF}
-  .cta-btn{display:inline-flex;align-items:center;justify-content:center;min-width:210px;height:35px;padding:0 24px;border:1px solid #FFFFFF;border-radius:4px;color:#FFFFFF;font-size:13px;line-height:20px;text-decoration:none;margin-right:200px;transition:transform .2s ease,background .2s ease}
-  .cta-btn:hover{transform:scale(1.03);background:rgba(255,255,255,.12)}
+  .cta-btn{display:inline-flex;align-items:center;justify-content:center;min-width:210px;height:35px;padding:0 24px;border:0;border-radius:0;background:#FFFFFF;color:#444444;font-size:12px;line-height:20px;text-decoration:none;margin-right:200px;transition:transform .2s ease,box-shadow .2s ease}
+  .cta-btn:hover{transform:scale(1.01);box-shadow:inset 0 0 0 1px #1C6BA2}
+  .cta-btn:active{transform:none;box-shadow:none}
   .hub-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;margin-top:24px}
   .hub-card{display:block;padding:16px;border-radius:8px;background:#FFFFFF;text-decoration:none;color:inherit;transition:box-shadow .2s}
   a.hub-card:hover{box-shadow:0 0 0 1px var(--f-teal)}

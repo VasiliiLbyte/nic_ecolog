@@ -57,10 +57,6 @@ html{hanging-punctuation:first last;hyphens:manual}
 [data-svc] [data-desc]>p:last-child{display:inline-block;position:relative}
 [data-svc] [data-desc]>p:last-child::after{content:"";position:absolute;left:0;bottom:-2px;width:100%;height:1px;background:currentColor;transform:scaleX(0);transform-origin:left;transition:transform 0.3s ease}
 [data-svc]:hover [data-desc]>p:last-child::after,[data-svc]:focus-within [data-desc]>p:last-child::after{transform:scaleX(1)}
-.btn-primary{transition:transform 0.25s ease,box-shadow 0.25s ease}
-.btn-primary>span[aria-hidden]{display:inline-block;transition:transform 0.25s ease}
-.btn-primary:hover>span[aria-hidden]{transform:translateX(4px)}
-.btn-primary:active{transform:translateY(0) scale(0.98)!important}
 [data-lab-link]>span[aria-hidden]{display:inline-block;transition:transform 0.25s ease}
 [data-lab-link]::after{content:"";position:absolute;left:0;bottom:-6px;height:2px;width:100%;background:currentColor;border-radius:2px;transform:scaleX(0);transform-origin:left;transition:transform 0.32s cubic-bezier(0.22,1,0.36,1);opacity:0.55}
 [data-lab-link]:hover{color:#C7E29B}
@@ -243,16 +239,30 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
 .f-lead--narrow{max-width:227px !important}
 
 /* Кнопки: по умолчанию / наведение (увеличение + контур #1C6BA2) / нажатие / отключено */
-.f-btn{display:inline-flex;align-items:center;justify-content:center;min-width:210px;height:42px;padding:0 24px;border:1px solid var(--f-blue);border-radius:4px;background:var(--f-blue);color:#FFFFFF;font-family:'Onest',sans-serif;font-size:12px;line-height:20px;font-weight:400;text-decoration:none;cursor:pointer;transition:transform 0.2s ease,box-shadow 0.2s ease,background 0.2s ease}
-.f-btn:hover{transform:scale(1.03);box-shadow:0 0 0 2px #FFFFFF,0 0 0 3px var(--f-blue)}
-.f-btn:active{transform:scale(1);background:var(--f-teal);border-color:var(--f-teal);box-shadow:none}
-.f-btn:disabled,.f-btn[aria-disabled="true"]{background:var(--f-border);border-color:var(--f-border);color:var(--f-text);transform:none;box-shadow:none;cursor:default}
+/* Кнопки — по макету Figma (компоненты «Button / Primary», «Button/Primary», «Button / Secondary»
+   и доска состояний «По умолчанию / При наведении / При нажатии / Отключено»): прямые углы, градиенты */
+.f-btn{display:inline-flex;align-items:center;justify-content:center;min-width:210px;height:42px;padding:0 24px;border:0;border-radius:0;background:linear-gradient(90deg,#139EA1 0%,#1C6BA2 100%);color:#444444;font-family:'Onest',sans-serif;font-size:12px;line-height:20px;font-weight:400;text-decoration:none;white-space:nowrap;cursor:pointer;transition:transform 0.2s ease,box-shadow 0.2s ease,background 0.2s ease}
+.f-btn:hover{transform:scale(1.01);box-shadow:inset 0 0 0 1px #1C6BA2}
+.f-btn:active{transform:none;box-shadow:none}
+.f-btn:disabled,.f-btn[aria-disabled="true"]{background:#E0E0E0;color:#444444;transform:none;box-shadow:none;cursor:default}
 .f-btn--sm{height:35px}
-.f-btn--ghost{background:transparent;color:var(--f-blue)}
-.f-btn--ghost:active{background:rgba(28,107,162,0.08);color:var(--f-blue)}
-.f-btn--light{border-color:#FFFFFF;color:#FFFFFF}
-.f-btn--light:hover{box-shadow:0 0 0 2px rgba(255,255,255,0.35)}
-.f-btn--light:active{background:rgba(255,255,255,0.12);border-color:#FFFFFF;color:#FFFFFF}
+.f-btn--on-dark{color:#FFFFFF}
+.f-btn--green{background:linear-gradient(90deg,#ADCF7A 0%,#4CB272 100%);color:#FFFFFF}
+.f-btn--green:hover{transform:none;box-shadow:none;background:#4CB272}
+.f-btn--green:active{background:linear-gradient(90deg,#ADCF7A 0%,#4CB272 100%)}
+.f-btn--green:disabled{background:#E0E0E0;color:#FFFFFF}
+.f-btn--esg{background:linear-gradient(90deg,#ADCF7A 0%,#139EA1 100%)}
+.f-btn--esg:hover{box-shadow:inset 0 0 0 1px #139EA1}
+.f-btn--white{background:#FFFFFF}
+.f-btn--white:hover{box-shadow:inset 0 0 0 1px #1C6BA2}
+.f-btn--ghost{min-width:0;background:transparent;box-shadow:inset 0 0 0 1px #1C6BA2;color:#1C6BA2}
+.f-btn--ghost:hover{box-shadow:inset 0 0 0 1px #1C6BA2}
+.f-btn--ghost:active{box-shadow:inset 0 0 0 1px #1C6BA2}
+.f-btn--ghost-green{box-shadow:inset 0 0 0 1px #ADCF7A;color:#ADCF7A}
+.f-btn--ghost-green:hover,.f-btn--ghost-green:active{box-shadow:inset 0 0 0 1px #ADCF7A}
+/* Исключение для читаемости: контурная кнопка поверх синей картинки героя на десктопе */
+.f-btn--light{box-shadow:inset 0 0 0 1px #FFFFFF;color:#FFFFFF}
+.f-btn--light:hover,.f-btn--light:active{box-shadow:inset 0 0 0 1px #FFFFFF}
 .f-br-m{display:none}
 .f-dot{position:relative;flex:0 0 auto;width:9px;height:9px;border-radius:50%;background:var(--f-green);box-shadow:0 0 6px rgba(76,178,114,0.75)}
 
@@ -514,7 +524,7 @@ a.f-doc:hover .f-doc__preview{border-color:var(--f-teal)}
   #top{padding:104px 20px 32px;background:#FFFFFF url('./assets/figma/bg-hero-mobile.webp') 0 72px / 100% auto no-repeat;color:var(--f-heading)}
   #top .f-hero__eyebrow,#top .f-hero__lead{color:var(--f-heading)}
   #top .f-hero__proof{color:var(--f-teal)}
-  #top .f-btn--light{border-color:var(--f-blue);color:var(--f-blue)}
+  #top .f-btn--light{box-shadow:inset 0 0 0 1px #1C6BA2;color:#1C6BA2}
   .f-hero__eyebrow{font-size:14px;line-height:20px;font-weight:500}
   .f-sep{display:none}
   .f-br-m{display:inline}
@@ -553,7 +563,7 @@ a.f-doc:hover .f-doc__preview{border-color:var(--f-teal)}
   .f-cat:first-child .f-svc,.f-cat:nth-child(2) .f-svc{min-height:0}
   .f-svc-intro__text{gap:24px}
   .f-svc-intro__copy .f-lead{max-width:none}
-  .f-svc-intro__copy .f-btn{width:100%;height:35px;border-color:var(--f-green);color:var(--f-green)}
+  .f-svc-intro__copy .f-btn{width:100%;height:35px}
   .f-svc-content{gap:32px;margin-top:32px}
   .f-cat__head{flex-direction:column;align-items:flex-start;gap:8px}
   .f-cat__title{gap:8px}
@@ -663,7 +673,7 @@ a.f-doc:hover .f-doc__preview{border-color:var(--f-teal)}
         </h1>
         <p class="f-hero__lead">Экологический инжиниринг и консалтинг: изыскания, собственная аккредитованная лаборатория, разрешительная документация и ESG. Научно обоснованно. Без бюрократии.</p>
         <div class="f-hero__actions">
-          <a class="f-btn f-btn--sm" href="#zayavka">Заказать исследование</a>
+          <a class="f-btn f-btn--sm f-btn--on-dark" href="#zayavka">Заказать исследование</a>
           <a class="f-btn f-btn--sm f-btn--ghost f-btn--light" href="#uslugi">Услуги</a>
         </div>
         <p class="f-hero__proof">14 ЛЕТ В ЭКОЛОГИЧЕСКОМ ИНЖИНИРИНГЕ<span class="f-sep">&nbsp;&nbsp;|&nbsp;&nbsp;</span><br class="f-br-m">АККРЕДИТОВАННАЯ ЛАБОРАТОРИЯ «АНАЛИТИК ЛАБ»</p>
@@ -737,7 +747,7 @@ a.f-doc:hover .f-doc__preview{border-color:var(--f-teal)}
             <span class="f-flow__step f-flow__step--final">Согласование</span>
           </div>
           <p class="f-lab__meta" data-rv="true">АТТЕСТАТ RA.RU.516478    |    РЕЕСТР АККРЕДИТОВАННЫХ ЛИЦ</p>
-          <a class="f-btn" href="lab.html" data-rv="true">Страница лаборатории</a>
+          <a class="f-btn f-btn--green" href="lab.html" data-rv="true">Страница лаборатории</a>
         </div>
         <div class="f-lab__grid">
           <div class="f-lab__card" data-rv="true"><div class="f-lab__head"><span class="f-lab__icon" aria-hidden="true"><img src="./assets/figma/lab-water.svg" alt=""></span><h3>Вода</h3></div><p>Питьевая, природная, сточная — химический и микробиологический анализ</p></div>
@@ -757,7 +767,7 @@ a.f-doc:hover .f-doc__preview{border-color:var(--f-teal)}
             <div class="f-svc-intro__copy">
               <h2 class="f-h2 f-h2--regular" data-rv="true">Экологический инжиниринг полного цикла</h2>
               <p class="f-lead" data-rv="true">От разового проекта до полного экологического сопровождения предприятия.</p>
-              <a class="f-btn f-btn--sm f-btn--ghost" href="uslugi/" data-rv="true">Все услуги</a>
+              <a class="f-btn f-btn--sm f-btn--ghost f-btn--ghost-green" href="uslugi/" data-rv="true">Все услуги →</a>
             </div>
           </div>
           <img class="f-svc-island" data-svc-illustration="true" src="./assets/services-illustration.webp" alt="" aria-hidden="true" width="395" height="537">
@@ -929,7 +939,7 @@ a.f-doc:hover .f-doc__preview{border-color:var(--f-teal)}
             <p class="f-lead" data-rv="true">Экология — это измеримые величины, а не декларации. Каждое наше решение опирается на фактические данные, лабораторный анализ и воспроизводимые расчёты.</p>
           </div>
           <p class="f-data__motto" data-rv="true">НЕТ ДАННЫХ — НЕТ РЕШЕНИЯ<br><br class="f-br-d">НАУКА ДЛЯ ПРИРОДЫ</p>
-          <a class="f-btn f-btn--ghost f-btn--light" href="#uslugi" data-rv="true">Услуги ESG</a>
+          <a class="f-btn f-btn--esg" href="#uslugi" data-rv="true">Услуги ESG</a>
         </div>
         <div class="f-data__visual" data-rv="true">
           <div class="f-donut">
@@ -1149,7 +1159,7 @@ a.f-doc:hover .f-doc__preview{border-color:var(--f-teal)}
             <h3>Обсудим вашу задачу</h3>
             <p>Вернёмся с планом работ и оценкой в течение рабочего дня.</p>
           </div>
-          <button type="button" class="f-btn f-btn--sm f-btn--ghost f-btn--light" onClick="{{ goForm }}">Оставить заявку</button>
+          <button type="button" class="f-btn f-btn--sm f-btn--white" onClick="{{ goForm }}">Оставить заявку</button>
         </div>
       </div>
     </div>
@@ -1176,7 +1186,7 @@ a.f-doc:hover .f-doc__preview{border-color:var(--f-teal)}
       </nav>
       <div style="margin-top:auto;display:flex;flex-direction:column;gap:16px">
         <a href="tel:+78124499348" style="font-size:19px;font-weight:500;color:#0B5C60;text-decoration:none">+7&nbsp;(812)&nbsp;449-93-48</a>
-        <a class="btn-primary" href="#zayavka" onClick="{{ closeMenu }}" style="display:inline-flex;align-items:center;justify-content:center;gap:10px;background:#1C6BA2;color:#FFFFFF;font-size:16px;font-weight:500;text-decoration:none;padding:18px 38px;border-radius:4px">Заказать исследование</a>
+        <a class="f-btn" href="#zayavka" onClick="{{ closeMenu }}" style="width:100%;height:44px">Заказать исследование</a>
       </div>
     </div>
   </sc-if>
