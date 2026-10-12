@@ -1,0 +1,87 @@
+name: Deploy PROD (nic-ecolog.ru)
+
+# Боевой сайт nic-ecolog.ru на reg.ru. Запуск ТОЛЬКО вручную:
+#   gh workflow run deploy-prod.yml --ref <ветка>
+# Логика повторяет ручной деплой: бэкап докрута на сервере → rsync docs/ БЕЗ --delete
+# (api/config.php, CNAME, .nojekyll не трогаем) → проверки живого сайта.
+#
+# Секреты репозитория:
+#   PROD_SSH_KEY     — приватный ключ (содержимое ~/.ssh/nic_ecolog_regru)
+#   PROD_KNOWN_HOSTS — вывод `ssh-keyscan server40.hosting.reg.ru`
+#   SEO_GEO_TOKEN    — PAT на чтение VasiliiLbyte/seo_geo (страницы услуг). ОБЯЗАТЕЛЕН:
+#                      без него прод собрался бы без /uslugi/*.
+
+on:
+  workflow_dispatch:
+    inputs:
+      confirm:
+        description: 'Напишите DEPLOY для подтверждения выкладки на прод'
+        required: true
+
+concurrency:
+  group: prod
+  cancel-in-progress: false
+
+env:
+  HOST: u3337857@server40.hosting.reg.ru
+  ROOT: www/nic-ecolog.ru
+
+jobs:
+  deploy:
+    if: github.event.inputs.confirm == 'DEPLOY'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/checkout@v4
+        with:
+          repository: VasiliiLbyte/seo_geo
+          token: ${{ secrets.SEO_GEO_TOKEN }}
+          path: seo_geo
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Build (без черновиков блога)
+        run: SEO_GEO_ROOT="$GITHUB_WORKSPACE/seo_geo" npm run pages:build
+
+      - name: Sanity check build
+        run: |
+          test -f docs/index.html
+          test -d docs/uslugi || { echo "Нет docs/uslugi — сборка без seo_geo"; exit 1; }
+          grep -q 'mc.yandex' docs/index.html || { echo "Нет Метрики в index.html"; exit 1; }
+          ! grep -q 'noindex' docs/index.html || { echo "В index.html noindex"; exit 1; }
+          rm -f docs/api/config.php
+
+      - name: Setup SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.PROD_SSH_KEY }}" > ~/.ssh/id_prod
+          chmod 600 ~/.ssh/id_prod
+          echo "${{ secrets.PROD_KNOWN_HOSTS }}" > ~/.ssh/known_hosts
+
+      - name: Backup docroot on server
+        run: |
+          ssh -i ~/.ssh/id_prod "$HOST" \
+            "mkdir -p ~/backups && tar czf ~/backups/nic-ecolog-\$(date +%Y%m%d-%H%M%S)-gha.tgz -C ~/www nic-ecolog.ru"
+
+      - name: Rsync (без --delete)
+        run: |
+          rsync -az -e "ssh -i ~/.ssh/id_prod" \
+            --exclude 'api/config.php' --exclude 'CNAME' --exclude '.nojekyll' \
+            docs/ "$HOST:$ROOT/"
+
+      - name: Verify live site
+        run: |
+          sleep 5
+          curl -fsS https://nic-ecolog.ru/ -o live.html
+          cmp live.html docs/index.html || { echo "Живая главная отличается от docs/index.html"; exit 1; }
+          grep -q 'mc.yandex' live.html
+          code=$(curl -s -o /dev/null -w '%{http_code}' -X POST https://nic-ecolog.ru/api/send.php)
+          echo "send.php empty POST -> $code"
+          test "$code" = "422"
+
+      - name: Cleanup key
+        if: always()
+        run: rm -f ~/.ssh/id_prod
