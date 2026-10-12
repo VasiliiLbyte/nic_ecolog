@@ -400,7 +400,25 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
 .f-data__motto{margin:0;font-family:'Stolzl','Onest',sans-serif;font-weight:500;font-size:16px;line-height:20px;color:var(--f-green-l)}
 .f-data__visual{flex:0 1 471px;display:flex;flex-direction:column;gap:32px}
 .f-donut{position:relative;width:100%;max-width:471px;aspect-ratio:471/444}
-.f-donut img{display:block;width:100%;height:100%;object-fit:contain}
+/* Интерактивная 3D-диаграмма: картинка из макета разрезана на три слоя-сегмента (assets/figma/esg-donut-scope*.webp).
+   Появление — сегменты собираются по очереди; бублик «дышит» и наклоняется за курсором;
+   наведение/тап на сегмент или строку легенды выдвигает сегмент и меняет подпись. */
+.f-donut__float{position:absolute;inset:0;animation:donutFloat 8s ease-in-out infinite}
+@keyframes donutFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.f-donut__stage{position:absolute;inset:0;transform:perspective(1100px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transition:transform 0.6s cubic-bezier(0.22,1,0.36,1);cursor:pointer}
+.f-donut__seg{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:contain;transition:transform 0.55s cubic-bezier(0.22,1,0.36,1),opacity 0.4s ease,filter 0.4s ease;will-change:transform}
+[data-anim="on"] .f-donut:not(.is-in) .f-donut__seg{opacity:0;transform:translate(calc(var(--dx) * 14%),calc(var(--dy) * 14% - 12%)) scale(0.94)}
+.f-donut.is-in:not(.is-ready) .f-donut__seg{transition:transform 1.1s cubic-bezier(0.22,1,0.36,1) var(--d),opacity 0.8s ease var(--d)}
+.f-data__visual.has-active .f-donut__seg{opacity:0.62;filter:saturate(0.65)}
+.f-data__visual.has-active .f-donut__seg.is-active{z-index:2;opacity:1;filter:saturate(1.1) brightness(1.06) drop-shadow(0 16px 20px rgba(6,30,60,0.35));transform:translate(calc(var(--dx) * var(--lift)),calc(var(--dy) * var(--lift) - 2.4%))}
+.f-donut__label{transition:left 0.45s cubic-bezier(0.22,1,0.36,1),top 0.45s cubic-bezier(0.22,1,0.36,1),transform 0.45s cubic-bezier(0.22,1,0.36,1),opacity 0.25s ease;pointer-events:none;z-index:3}
+.f-donut__label.is-swap{opacity:0}
+.f-donut[data-active="2"] .f-donut__label,.f-donut[data-active="1"] .f-donut__label{left:50.4%;top:48.9%;transform:translate(-50%,-50%);text-align:center}
+.f-legend__row{appearance:none;margin:0;padding:0;border:0;background:none;font:inherit;color:inherit;text-align:left;cursor:pointer;transition:opacity 0.3s ease}
+.f-legend__row:focus-visible{outline:2px solid #ADCF7A;outline-offset:4px;border-radius:2px}
+.f-legend__sw{transition:transform 0.3s ease}
+.f-data__visual.has-active .f-legend__row:not(.is-active){opacity:0.5}
+.f-legend__row.is-active .f-legend__sw{transform:scale(1.25)}
 .f-donut__label{position:absolute;left:62.8%;top:58.6%;font-size:20px;line-height:28px;font-weight:600;color:#FFFFFF}
 .f-legend{display:grid;grid-template-columns:153px 129px 141px;gap:24px}
 .f-legend__row{display:flex;align-items:flex-start;gap:16px}
@@ -946,14 +964,20 @@ a.f-doc:hover .f-doc__preview{border-color:var(--f-teal)}
           <a class="f-btn f-btn--esg" href="#uslugi" data-rv="true">Услуги ESG</a>
         </div>
         <div class="f-data__visual" data-rv="true">
-          <div class="f-donut">
-            <img src="./assets/figma/esg-donut.webp" alt="Структура углеродного следа: охват 3 — до 70%, охват 2 — около 18%, охват 1 — около 12%" width="471" height="444" loading="lazy" decoding="async">
-            <span class="f-donut__label" aria-hidden="true">ОХВАТ 3<br>до 70%</span>
+          <div class="f-donut" data-donut="true">
+            <div class="f-donut__float">
+              <div class="f-donut__stage" role="img" aria-label="Структура углеродного следа: охват 3 — до 70%, охват 2 — около 18%, охват 1 — около 12%">
+                <img class="f-donut__seg" data-seg="3" src="./assets/figma/esg-donut-scope3.webp" alt="" width="471" height="444" loading="lazy" decoding="async" style="--dx:0.64;--dy:0.77;--lift:1.6%;--d:0s">
+                <img class="f-donut__seg" data-seg="2" src="./assets/figma/esg-donut-scope2.webp" alt="" width="471" height="444" loading="lazy" decoding="async" style="--dx:-0.51;--dy:-0.86;--lift:3.4%;--d:0.16s">
+                <img class="f-donut__seg" data-seg="1" src="./assets/figma/esg-donut-scope1.webp" alt="" width="471" height="444" loading="lazy" decoding="async" style="--dx:-0.98;--dy:-0.21;--lift:3.4%;--d:0.32s">
+              </div>
+            </div>
+            <span class="f-donut__label" aria-hidden="true"><span data-donut-name>ОХВАТ 3</span><br><span data-donut-val>до 70%</span></span>
           </div>
           <div class="f-legend">
-            <div class="f-legend__row"><span class="f-legend__sw" style="background:#2081C4" aria-hidden="true"></span><span><span class="f-legend__name">Охват 3<br>цепочка поставок<br>и жизненный цикл</span><span class="f-legend__pct">≈70%</span></span></div>
-            <div class="f-legend__row"><span class="f-legend__sw" style="background:#139EA1" aria-hidden="true"></span><span><span class="f-legend__name">Охват 2<br>закупаемая энергия</span><span class="f-legend__pct">≈18%</span></span></div>
-            <div class="f-legend__row"><span class="f-legend__sw" style="background:#ADCF7A" aria-hidden="true"></span><span><span class="f-legend__name">Охват 1<br>прямые выбросы</span><span class="f-legend__pct">≈12%</span></span></div>
+            <button type="button" class="f-legend__row" data-seg="3" aria-pressed="false"><span class="f-legend__sw" style="background:#2081C4" aria-hidden="true"></span><span><span class="f-legend__name">Охват 3<br>цепочка поставок<br>и жизненный цикл</span><span class="f-legend__pct">≈70%</span></span></button>
+            <button type="button" class="f-legend__row" data-seg="2" aria-pressed="false"><span class="f-legend__sw" style="background:#139EA1" aria-hidden="true"></span><span><span class="f-legend__name">Охват 2<br>закупаемая энергия</span><span class="f-legend__pct">≈18%</span></span></button>
+            <button type="button" class="f-legend__row" data-seg="1" aria-pressed="false"><span class="f-legend__sw" style="background:#ADCF7A" aria-hidden="true"></span><span><span class="f-legend__name">Охват 1<br>прямые выбросы</span><span class="f-legend__pct">≈12%</span></span></button>
           </div>
           <p class="f-data__note">Типичная структура углеродного следа компании. Мы считаем все три охвата — по первичным данным.</p>
         </div>
@@ -1372,6 +1396,9 @@ class Component extends DCLogic {
       counters.forEach((el) => this._ioCnt.observe(el));
     }
 
+    // --- ESG: интерактивная 3D-диаграмма (сегменты — отдельные слои картинки из макета) ---
+    this._initDonut(reduced);
+
     // --- Рельс-навигация по секциям ---
     const rail = document.querySelector('[data-rail]');
     const railData = Array.from(document.querySelectorAll('[data-rail-item]')).map((el) => ({
@@ -1550,6 +1577,146 @@ class Component extends DCLogic {
     }
   }
 
+  _initDonut(reduced) {
+    const donut = document.querySelector('[data-donut]');
+    const visual = donut && donut.closest('.f-data__visual');
+    if (!donut || !visual) return;
+    const stage = donut.querySelector('.f-donut__stage');
+    const segs = Array.from(donut.querySelectorAll('.f-donut__seg'));
+    const rows = Array.from(visual.querySelectorAll('.f-legend__row'));
+    const label = donut.querySelector('.f-donut__label');
+    const nameEl = donut.querySelector('[data-donut-name]');
+    const valEl = donut.querySelector('[data-donut-val]');
+    const TEXT = { 0: ['ОХВАТ 3', 'до 70%'], 3: ['ОХВАТ 3', 'до 70%'], 2: ['ОХВАТ 2', '≈18%'], 1: ['ОХВАТ 1', '≈12%'] };
+    let active = 0;
+    let pinned = 0;
+    let swapTimer = 0;
+
+    const setActive = (seg) => {
+      if (seg === active) return;
+      active = seg;
+      visual.classList.toggle('has-active', !!seg);
+      donut.dataset.active = seg ? String(seg) : '';
+      segs.forEach((el) => el.classList.toggle('is-active', +el.dataset.seg === seg));
+      rows.forEach((el) => {
+        const on = +el.dataset.seg === seg;
+        el.classList.toggle('is-active', on);
+        el.setAttribute('aria-pressed', String(on && pinned === seg));
+      });
+      // подпись: короткое затухание и смена текста
+      clearTimeout(swapTimer);
+      label.classList.add('is-swap');
+      swapTimer = setTimeout(() => {
+        nameEl.textContent = TEXT[seg][0];
+        valEl.textContent = TEXT[seg][1];
+        label.classList.remove('is-swap');
+      }, reduced ? 0 : 160);
+    };
+    const release = () => setActive(pinned);
+
+    // попадание курсором: карта сегментов (красный канал = номер слоя × 80; слой 1 — охват 3, 2 — охват 2, 3 — охват 1)
+    let map = null;
+    const loadMap = () => {
+      if (map) return;
+      map = { w: 0 };
+      const img = new Image();
+      img.onload = () => {
+        const c = document.createElement('canvas');
+        c.width = img.naturalWidth;
+        c.height = img.naturalHeight;
+        const cx = c.getContext('2d');
+        cx.drawImage(img, 0, 0);
+        map = { w: c.width, h: c.height, data: cx.getImageData(0, 0, c.width, c.height).data };
+      };
+      img.src = './assets/figma/esg-donut-map.png';
+    };
+    const hit = (e) => {
+      if (!map || !map.data) return 0;
+      const r = donut.getBoundingClientRect();
+      const x = Math.floor(((e.clientX - r.left) / r.width) * map.w);
+      const y = Math.floor(((e.clientY - r.top) / r.height) * map.h);
+      if (x < 0 || y < 0 || x >= map.w || y >= map.h) return 0;
+      return [0, 3, 2, 1][Math.round(map.data[(y * map.w + x) * 4] / 80)] || 0;
+    };
+
+    const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+    visual.addEventListener('pointerenter', loadMap);
+    visual.addEventListener('touchstart', loadMap, { passive: true });
+    stage.addEventListener('pointermove', (e) => {
+      if (e.pointerType !== 'mouse') return;
+      const seg = hit(e);
+      if (seg) setActive(seg); else release();
+    });
+    stage.addEventListener('pointerleave', release);
+    stage.addEventListener('click', (e) => {
+      loadMap();
+      const seg = hit(e);
+      pinned = seg && seg !== pinned ? seg : 0;
+      active = -1; // принудительно обновить подпись и aria-pressed
+      setActive(pinned || (finePointer ? seg : 0));
+    });
+    rows.forEach((row) => {
+      const seg = +row.dataset.seg;
+      row.addEventListener('pointerenter', (e) => { if (e.pointerType === 'mouse') setActive(seg); });
+      row.addEventListener('pointerleave', (e) => { if (e.pointerType === 'mouse') release(); });
+      row.addEventListener('focus', () => setActive(seg));
+      row.addEventListener('blur', release);
+      row.addEventListener('click', () => {
+        pinned = pinned === seg ? 0 : seg;
+        active = -1;
+        setActive(pinned || (finePointer ? seg : 0));
+      });
+    });
+
+    // наклон за курсором (только мышь, без prefers-reduced-motion)
+    if (!reduced && finePointer) {
+      let raf = 0;
+      visual.addEventListener('pointermove', (e) => {
+        if (e.pointerType !== 'mouse') return;
+        const r = donut.getBoundingClientRect();
+        const px = Math.max(-1, Math.min(1, ((e.clientX - r.left) / r.width - 0.5) * 2));
+        const py = Math.max(-1, Math.min(1, ((e.clientY - r.top) / r.height - 0.5) * 2));
+        cancelAnimationFrame(raf);
+        raf = requestAnimationFrame(() => {
+          stage.style.setProperty('--ry', (px * 7).toFixed(2) + 'deg');
+          stage.style.setProperty('--rx', (-py * 6).toFixed(2) + 'deg');
+        });
+      });
+      visual.addEventListener('pointerleave', () => {
+        stage.style.setProperty('--ry', '0deg');
+        stage.style.setProperty('--rx', '0deg');
+      });
+    }
+
+    // появление: сегменты собираются по очереди, «до 70%» досчитывает
+    const reveal = () => {
+      loadMap();
+      donut.classList.add('is-in');
+      setTimeout(() => donut.classList.add('is-ready'), 1500);
+      if (reduced) return;
+      const t0 = performance.now();
+      const step = (t) => {
+        const p = Math.min(1, (t - t0) / 1400);
+        if (!active) valEl.textContent = 'до ' + Math.round(70 * (1 - Math.pow(1 - p, 3))) + '%';
+        if (p < 1) requestAnimationFrame(step);
+        else if (!active) valEl.textContent = 'до 70%';
+      };
+      requestAnimationFrame(step);
+    };
+    if (reduced || !('IntersectionObserver' in window)) {
+      loadMap();
+      donut.classList.add('is-in', 'is-ready');
+    } else {
+      this._ioDonut = new IntersectionObserver((entries) => {
+        if (entries.some((e) => e.isIntersecting)) {
+          reveal();
+          this._ioDonut.disconnect();
+        }
+      }, { threshold: 0.35 });
+      this._ioDonut.observe(donut);
+    }
+  }
+
   componentWillUnmount() {
     if (this._onScroll) window.removeEventListener('scroll', this._onScroll);
     if (this._onResize) window.removeEventListener('resize', this._onResize);
@@ -1557,6 +1724,7 @@ class Component extends DCLogic {
     if (this._onKeyDown) document.removeEventListener('keydown', this._onKeyDown);
     if (this._io) this._io.disconnect();
     if (this._ioCnt) this._ioCnt.disconnect();
+    if (this._ioDonut) this._ioDonut.disconnect();
     document.body.style.overflow = '';
   }
 

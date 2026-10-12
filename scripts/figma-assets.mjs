@@ -39,7 +39,6 @@ const SVG_EXPORTS = [
 // width — ширина результата в px (≈ @2x от размера в макете).
 const IMAGE_EXPORTS = [
   { path: ['hero-section', 'image 2'], file: 'hero-wave', width: 2400 },
-  { path: ['данные', 'data-layout', 'data-visual', 'data-chart'], file: 'esg-donut', width: 960 },
   { path: ['Клиенты', 'clients-content', 'clients-logos', 'client-card#3', 'logo-slot', 'client-logo'], file: 'client-mariinsky', width: 160 },
 ];
 
@@ -51,6 +50,14 @@ const BG_EXPORTS = [
   { path: ['данные', 'data-background'], frame: FRAME_MOBILE, file: 'bg-data-mobile' },
   { path: ['hero-section'], frame: FRAME_MOBILE, file: 'bg-hero-mobile', skip: ['Hero'] },
 ];
+
+// 3D-диаграмма ESG режется на три слоя (охват 3 / 2 / 1), чтобы на сайте анимировать сегменты
+// по отдельности, сохранив исходную картинку пиксель в пиксель (каждый пиксель — ровно в одном слое).
+// Сегменты определяются по тону (синий / бирюзовый / зелёный), блики отдаются ближайшему сегменту.
+// Зелёный сегмент вместе с его тёмным срезом задан многоугольником по швам картинки
+// (координаты при ширине 1038 px); по тону срез неотличим от бирюзового.
+const DONUT = { path: ['данные', 'data-layout', 'data-visual', 'data-chart'], width: 960, mapScale: 4 };
+const DONUT_GREEN_POLY = [[102, 218], [148, 290], [318, 385], [392, 440], [380, 470], [370, 514], [58, 524], [6, 436], [0, 400], [0, 330], [40, 290], [70, 255]];
 
 const figPath = process.argv[2];
 if (!figPath || !existsSync(figPath)) {
@@ -224,6 +231,120 @@ if (BG_EXPORTS.length) {
     execFileSync(IM, [png, '-strip', '-quality', '80', join(OUT, `${file}.webp`)]);
     console.log(`bg   ${file}.webp  ${w}x${h}`);
   }
+  await page.setContent('<body></body>');
+  const donut = await page.evaluate(async ({ b64, W, poly, mapScale }) => {
+    const img = new Image();
+    img.src = `data:image/png;base64,${b64}`;
+    await img.decode();
+    const H = Math.round((img.height * W) / img.width);
+    const cv = Object.assign(document.createElement('canvas'), { width: W, height: H });
+    const cx = cv.getContext('2d');
+    cx.imageSmoothingQuality = 'high';
+    cx.drawImage(img, 0, 0, W, H);
+    const px = cx.getImageData(0, 0, W, H).data;
+    const N = W * H;
+    const opaque = new Uint8Array(N);
+    let L = new Uint8Array(N); // 1 — охват 3 (синий), 2 — охват 2 (бирюзовый), 3 — охват 1 (зелёный)
+    for (let i = 0; i < N; i++) {
+      const r = px[i * 4], g = px[i * 4 + 1], b = px[i * 4 + 2], a = px[i * 4 + 3];
+      if (a <= 8) continue;
+      opaque[i] = 1;
+      const max = Math.max(r, g, b), min = Math.min(r, g, b);
+      if (!max || (max - min) / max <= 0.22) continue;
+      const dl = max - min;
+      let h = max === r ? ((g - b) / dl) % 6 : max === g ? (b - r) / dl + 2 : (r - g) / dl + 4;
+      h = (h * 60 + 360) % 360;
+      L[i] = h >= 195 && h < 250 ? 1 : h >= 140 && h < 195 ? 2 : h >= 45 && h < 125 ? 3 : 0;
+    }
+    // сглаживание: метка большинства в окне 9×9 (через суммы по прямоугольникам)
+    const R = 4, W1 = W + 1;
+    const integ = [1, 2, 3].map((k) => {
+      const I = new Int32Array(W1 * (H + 1));
+      for (let y = 0; y < H; y++) {
+        let row = 0;
+        for (let x = 0; x < W; x++) {
+          row += L[y * W + x] === k ? 1 : 0;
+          I[(y + 1) * W1 + x + 1] = I[y * W1 + x + 1] + row;
+        }
+      }
+      return I;
+    });
+    const sm = new Uint8Array(N);
+    for (let y = 0; y < H; y++) {
+      const y0 = Math.max(0, y - R), y1 = Math.min(H, y + R + 1);
+      for (let x = 0; x < W; x++) {
+        const i = y * W + x;
+        if (!opaque[i]) continue;
+        const x0 = Math.max(0, x - R), x1 = Math.min(W, x + R + 1);
+        let best = 0, bestN = 0;
+        integ.forEach((I, j) => {
+          const n = I[y1 * W1 + x1] - I[y0 * W1 + x1] - I[y1 * W1 + x0] + I[y0 * W1 + x0];
+          if (n > bestN) { bestN = n; best = j + 1; }
+        });
+        sm[i] = best;
+      }
+    }
+    L = sm;
+    const fill = () => {
+      for (let pass = 0; pass < 400; pass++) {
+        const next = L.slice();
+        let left = 0;
+        for (let i = 0; i < N; i++) {
+          if (!opaque[i] || L[i]) continue;
+          const x = i % W;
+          const n = (x > 0 && L[i - 1]) || (x < W - 1 && L[i + 1]) || (i >= W && L[i - W]) || (i + W < N && L[i + W]);
+          if (n) next[i] = n; else left++;
+        }
+        L = next;
+        if (!left) break;
+      }
+    };
+    fill();
+    // зелёный сегмент со срезом — многоугольник по швам
+    const pc = Object.assign(document.createElement('canvas'), { width: W, height: H });
+    const px2 = pc.getContext('2d');
+    const k = W / 1038;
+    px2.beginPath();
+    poly.forEach(([x, y], j) => (j ? px2.lineTo(x * k, y * k) : px2.moveTo(x * k, y * k)));
+    px2.closePath();
+    px2.fill();
+    const inPoly = px2.getImageData(0, 0, W, H).data;
+    for (let i = 0; i < N; i++) {
+      const inside = inPoly[i * 4 + 3] > 127;
+      if (inside && L[i] === 2) L[i] = 3;
+      else if (!inside && L[i] === 3) L[i] = 0;
+    }
+    fill();
+    const layers = [1, 2, 3].map((seg) => {
+      const out = cx.createImageData(W, H);
+      for (let i = 0; i < N; i++) if (L[i] === seg) for (let c = 0; c < 4; c++) out.data[i * 4 + c] = px[i * 4 + c];
+      const lc = Object.assign(document.createElement('canvas'), { width: W, height: H });
+      lc.getContext('2d').putImageData(out, 0, 0);
+      return lc.toDataURL('image/png');
+    });
+    // карта сегментов для попадания курсором: красный канал = номер сегмента × 80
+    const mw = Math.round(W / mapScale), mh = Math.round(H / mapScale);
+    const mc = Object.assign(document.createElement('canvas'), { width: mw, height: mh });
+    const mx = mc.getContext('2d');
+    const md = mx.createImageData(mw, mh);
+    for (let y = 0; y < mh; y++) for (let x = 0; x < mw; x++) {
+      const v = L[Math.min(H - 1, y * mapScale + 2) * W + Math.min(W - 1, x * mapScale + 2)];
+      const o = (y * mw + x) * 4;
+      md.data[o] = v * 80; md.data[o + 3] = 255;
+    }
+    mx.putImageData(md, 0, 0);
+    const share = [1, 2, 3].map((seg) => L.reduce((s, v) => s + (v === seg), 0));
+    return { layers, map: mc.toDataURL('image/png'), W, H, share };
+  }, { b64: readFileSync(imageOf(find(DONUT.path))).toString('base64'), W: DONUT.width, poly: DONUT_GREEN_POLY, mapScale: DONUT.mapScale });
+  const toFile = (dataUrl, file) => writeFileSync(file, Buffer.from(dataUrl.split(',')[1], 'base64'));
+  ['scope3', 'scope2', 'scope1'].forEach((name, j) => {
+    const png = join(tmp, `donut-${name}.png`);
+    toFile(donut.layers[j], png);
+    execFileSync(IM, [png, '-strip', '-quality', '86', '-define', 'webp:alpha-quality=100', join(OUT, `esg-donut-${name}.webp`)]);
+  });
+  toFile(donut.map, join(OUT, 'esg-donut-map.png'));
+  const total = donut.share.reduce((a, b) => a + b, 0);
+  console.log(`esg  esg-donut-scope3/2/1.webp + esg-donut-map.png  ${donut.W}x${donut.H}, доли пикселей ${donut.share.map((v) => Math.round((v / total) * 100)).join('/')}%`);
   await browser.close();
 }
 rmSync(tmp, { recursive: true, force: true });
