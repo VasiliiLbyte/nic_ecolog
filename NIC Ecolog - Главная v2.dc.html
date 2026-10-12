@@ -22,7 +22,6 @@
 <meta name="twitter:image" content="https://nic-ecolog.ru/assets/hero-mesh-poster.jpg">
 <link rel="icon" type="image/png" href="./assets/favicon-512.png">
 <link rel="apple-touch-icon" href="./assets/apple-touch-icon.png">
-<link rel="preload" as="font" type="font/woff2" href="./assets/Stolzl-Book.woff2" crossorigin>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@graph":[
 {"@type":"ProfessionalService","@id":"https://nic-ecolog.ru/#org","name":"НИЦ «Эколог»","alternateName":"Независимый исследовательский центр «Эколог»","url":"https://nic-ecolog.ru/","logo":"https://nic-ecolog.ru/assets/favicon-512.png","image":"https://nic-ecolog.ru/assets/hero-mesh-poster.jpg","description":"Экологический инжиниринг и консалтинг: изыскания, разрешительная документация, ПЭК, ESG и собственная аккредитованная лаборатория «Аналитик Лаб».","telephone":"+7-812-449-93-48","email":"info@nic-ecolog.ru","foundingDate":"2011","areaServed":"RU","address":{"@type":"PostalAddress","addressLocality":"Санкт-Петербург","addressCountry":"RU"},"knowsAbout":["экологическое проектирование","инженерно-экологические изыскания","ПНООЛР","проект СЗЗ","ОВОС","ПЭК","ESG","лабораторный анализ"]},
@@ -36,7 +35,7 @@
 <helmet>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
-<link href="https://fonts.googleapis.com/css2?family=Onest:wght@200;300;400;500;600&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@200;300;400;500;600;700&amp;display=swap" rel="stylesheet">
 <style>
 @import url('./tokens/colors.css');
 @import url('./tokens/effects.css');
@@ -49,7 +48,7 @@ body{margin:0;background:#FFFFFF;-webkit-font-smoothing:antialiased;text-renderi
 @font-face{font-family:'Stolzl';src:url('./assets/Stolzl-Regular.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}
 @font-face{font-family:'Stolzl';src:url('./assets/Stolzl-Medium.woff2') format('woff2');font-weight:500;font-style:normal;font-display:swap}
 @font-face{font-family:'Stolzl';src:url('./assets/Stolzl-Bold.woff2') format('woff2');font-weight:600 700;font-style:normal;font-display:swap}
-h1,h2,h3,h4{font-family:'Stolzl','Onest',-apple-system,'Segoe UI',sans-serif}
+h1,h2,h3,h4{font-family:'Onest',-apple-system,'Segoe UI',sans-serif}
 ::selection{background:rgba(173,207,122,0.45)}
 /* --- Полировка: типографика, аффорданс ссылок, кнопки --- */
 h2,h3{text-wrap:balance}
@@ -80,18 +79,6 @@ input::placeholder,textarea::placeholder{color:#6E8385}
 [data-anim="on"] [data-rv].rv-on{opacity:1;transform:translateY(0)}
 [data-svc] [data-desc]{max-height:0;opacity:0;overflow:hidden;transition:max-height 0.45s ease,opacity 0.35s ease}
 [data-svc]:hover [data-desc],[data-svc]:focus-within [data-desc]{max-height:280px;opacity:1}
-/* Услуги — зонирование групп фоном (variant A): чередующиеся full-bleed полосы */
-.svc-zone{position:relative;padding-block:56px}
-.svc-zone>*{position:relative}
-.svc-zone--tint::before{content:"";position:absolute;top:0;bottom:0;left:50%;margin-left:-50vw;width:100vw;background:#EAF2EF;pointer-events:none}
-@media (max-width:720px){
-  .svc-zone{padding-block:40px}
-  .svc-zone>div:first-child{flex-wrap:wrap;gap:6px 16px}
-  .svc-zone>div:first-child>h3{font-size:22px}
-  .svc-zone>div:first-child>span:last-child{flex-basis:100%;margin-left:0}
-}
-[data-proj] [data-pimg]{transition:transform 0.9s cubic-bezier(0.22,1,0.36,1)}
-[data-proj]:hover [data-pimg]{transform:scale(1.045)}
 /* Service overlay — steps timeline + sticky aside */
 #eco-svc-page [data-svc-aside]{position:sticky;top:24px;align-self:start}
 [data-svc-steps]{display:flex;flex-direction:column}
@@ -158,26 +145,20 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
   [data-two-col]{grid-template-columns:1fr !important}
   [data-steps]{grid-template-columns:repeat(2,1fr) !important}
   [data-proj-grid]>*{grid-column:1 / -1 !important}
-  [data-logo-wall]{grid-template-columns:repeat(2,1fr) !important}
   #eco-svc-page [data-svc-aside]{position:static}
   [data-svc-step]{padding:16px 0 16px 28px}
   [data-svc-step]::before{top:20px}
   [data-svc-step]:not(:last-child)::after{top:31px}
 }
 @media (max-width:720px){
-  [data-sec]{padding-left:24px !important;padding-right:24px !important;padding-top:80px !important;padding-bottom:80px !important}
-  #top{padding-top:120px !important;padding-bottom:48px !important;min-height:auto !important}
-  #top h1{font-size:clamp(32px,9vw,44px) !important;line-height:1.08 !important}
-  #top [data-hero-meta]{font-size:11px !important;line-height:1.55 !important;letter-spacing:0.02em !important}
+  [data-sec]:not(.f-sec):not(#kontakty){padding-left:24px !important;padding-right:24px !important;padding-top:80px !important;padding-bottom:80px !important}
   [data-head-cta]{display:none !important}
-  #eco-header{padding-left:16px !important;padding-right:16px !important;gap:16px !important}
   [data-cols4]{grid-template-columns:1fr !important}
   [data-steps]{grid-template-columns:1fr !important}
   [data-cta-row]{flex-direction:column !important;align-items:stretch !important}
   [data-cta-row] a{width:100% !important;justify-content:center !important;box-sizing:border-box}
   #kontakty [data-cols4]{grid-template-columns:1fr 1fr !important;gap:32px !important}
   #zayavka [data-two-col]{grid-template-columns:1fr !important}
-  #zayavka #kontakty-info,#zayavka #eco-form{padding:40px 28px !important}
   [data-flow]{flex-direction:column !important;align-items:stretch !important;gap:0 !important}
   [data-flow]>span:not([data-flow-arrow]){width:100% !important;justify-content:center !important;text-align:center;box-sizing:border-box;padding:14px 20px !important;font-size:15px !important}
   [data-flow-arrow]{display:flex !important;flex-direction:column;align-items:center;justify-content:center;width:100%;margin:0 !important;padding:9px 0;font-size:0 !important;color:transparent !important}
@@ -186,7 +167,6 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
   [data-lab-link]{justify-content:center !important;width:100% !important;box-sizing:border-box;padding:15px 22px !important;border-radius:4px;border:1px solid rgba(173,207,122,0.5);background:rgba(173,207,122,0.1);margin-top:24px !important}
   [data-lab-link]::after{display:none !important}
   [style*="animation:marquee"] span{font-size:11px !important;letter-spacing:0.18em !important;padding-right:40px !important}
-  #laboratoriya h2{font-size:clamp(30px,7.5vw,38px) !important}
 }
 @media (max-width:480px){
   #kontakty [data-cols4]{grid-template-columns:1fr !important}
@@ -200,431 +180,628 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
   [data-anim="on"] [data-rv]{opacity:1;transform:none}
   [data-rail-tick],[data-rail-fill],[data-rail-label],[data-rail-shell]{transition:none !important}
 }
-/* ESG donut — лаконичное тонкое кольцо (флэт-цвета из легенды), draw-in по появлению */
-[data-esg-svg]{filter:drop-shadow(0 10px 24px rgba(0,0,0,0.16))}
-[data-esg-svg] circle{transform-box:view-box;transform-origin:150px 150px}
-@keyframes esgDraw{from{stroke-dashoffset:var(--len)}to{stroke-dashoffset:0}}
-[data-anim="on"] [data-esg-svg] .seg{stroke-dashoffset:var(--len)}
-[data-rv].rv-on [data-esg-svg] .seg{animation:esgDraw 1.2s cubic-bezier(0.33,1,0.68,1) forwards;animation-delay:var(--d,0s)}
-@media (prefers-reduced-motion:reduce){
-  [data-anim="on"] [data-esg-svg] .seg{stroke-dashoffset:0}
-  [data-rv].rv-on [data-esg-svg] .seg{animation:none}
+/* ==== Вёрстка по макету Figma «Главная — Desktop 1440 / Mobile 390» ====
+   Контейнер 1064px, Onest (H2 SemiBold 50/55, Display Bold 60/68), цвета из переменных макета.
+   Кнопки — плоские #1C6BA2 r4 (решение проекта, не градиент из макета). */
+:root{
+  --f-heading:#0B5C60;--f-text:#444444;--f-primary:#222222;--f-teal:#139EA1;--f-green:#4CB272;
+  --f-green-l:#ADCF7A;--f-blue:#1C6BA2;--f-border:#E0E0E0;--f-muted:#767676;--f-alt:#F3F7F7;
+}
+#eco-root{font-family:'Onest',-apple-system,'Segoe UI',sans-serif;color:var(--f-text)}
+.f-sec{position:relative;padding:96px 48px;scroll-margin-top:80px}
+.f-sec--alt{background:var(--f-alt)}
+.f-wrap{position:relative;max-width:1064px;margin:0 auto}
+.f-eyebrow{margin:0;font-size:16px;line-height:25px;font-weight:400;letter-spacing:0.02em;text-transform:uppercase;color:var(--f-text)}
+.f-h2{margin:0;font-family:'Onest',sans-serif;font-weight:600;font-size:50px;line-height:55px;color:var(--f-heading);text-wrap:balance}
+.f-lead{margin:0;font-size:16px;line-height:23px;color:var(--f-text)}
+.f-intro{display:flex;flex-direction:column;gap:48px}
+.f-intro__row{display:grid;grid-template-columns:minmax(0,700px) minmax(0,1fr);align-items:start}
+.f-intro__row>.f-h2{max-width:611px}
+.f-intro__row>.f-lead{padding-top:7px;max-width:330px}
+
+/* Кнопки: по умолчанию / наведение (увеличение + контур #1C6BA2) / нажатие / отключено */
+.f-btn{display:inline-flex;align-items:center;justify-content:center;min-width:210px;height:42px;padding:0 24px;border:1px solid var(--f-blue);border-radius:4px;background:var(--f-blue);color:#FFFFFF;font-family:'Onest',sans-serif;font-size:13px;line-height:20px;font-weight:400;text-decoration:none;cursor:pointer;transition:transform 0.2s ease,box-shadow 0.2s ease,background 0.2s ease}
+.f-btn:hover{transform:scale(1.03);box-shadow:0 0 0 2px #FFFFFF,0 0 0 3px var(--f-blue)}
+.f-btn:active{transform:scale(1);background:var(--f-teal);border-color:var(--f-teal);box-shadow:none}
+.f-btn:disabled,.f-btn[aria-disabled="true"]{background:var(--f-border);border-color:var(--f-border);color:var(--f-text);transform:none;box-shadow:none;cursor:default}
+.f-btn--sm{height:35px}
+.f-btn--ghost{background:transparent;color:var(--f-blue)}
+.f-btn--ghost:active{background:rgba(28,107,162,0.08);color:var(--f-blue)}
+.f-btn--light{border-color:#FFFFFF;color:#FFFFFF}
+.f-btn--light:hover{box-shadow:0 0 0 2px rgba(255,255,255,0.35)}
+.f-btn--light:active{background:rgba(255,255,255,0.12);border-color:#FFFFFF;color:#FFFFFF}
+.f-br-m{display:none}
+.f-dot{position:relative;flex:0 0 auto;width:9px;height:9px;border-radius:50%;background:var(--f-green);box-shadow:0 0 6px rgba(76,178,114,0.75)}
+
+/* Шапка */
+#eco-header{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:33px 32px;background:transparent;border-bottom:1px solid transparent;transition:background 0.35s ease,padding 0.35s ease,border-color 0.35s ease}
+.f-logo img{display:block;width:104px;height:35px}
+.f-nav{display:flex;align-items:center;gap:32px}
+.f-nav a{font-size:12px;line-height:20px;color:var(--f-heading);text-decoration:none;transition:color 0.2s}
+.f-nav a:hover{color:var(--f-teal)}
+.f-head-actions{display:flex;align-items:center;gap:24px;flex:0 0 auto}
+.f-head-phone{font-size:14px;line-height:20px;color:var(--f-heading);text-decoration:none;font-variant-numeric:tabular-nums}
+.f-burger{display:none;align-items:center;justify-content:center;width:44px;height:44px;border:0;background:transparent;color:var(--f-heading);cursor:pointer;flex:0 0 auto}
+/* Над героем шапка светлая (в макете она лежит поверх фоновой картинки), после прокрутки — на белой подложке */
+.f-logo__dark{display:none !important}
+#eco-header.is-scrolled .f-logo__light{display:none !important}
+#eco-header.is-scrolled .f-logo__dark{display:block !important}
+#eco-header:not(.is-scrolled) .f-nav a,#eco-header:not(.is-scrolled) .f-head-phone,#eco-header:not(.is-scrolled) .f-burger{color:#FFFFFF}
+#eco-header:not(.is-scrolled) .f-nav a:hover{color:var(--f-green-l)}
+
+/* Герой */
+#top{padding:166px 48px 60px;background:#1C6BA2 url('./assets/figma/hero-wave.webp') center/cover no-repeat;overflow:hidden;color:#FFFFFF}
+.f-hero__eyebrow{margin:0;font-size:16px;line-height:16px;letter-spacing:0.02em;text-transform:uppercase;color:var(--f-green-l);animation:fadeIn 1s ease 0.1s both}
+.f-hero__title{margin:64px 0 0;max-width:890px;font-family:'Onest',sans-serif;font-weight:700;font-size:60px;line-height:68px;color:#FFFFFF}
+.f-hero__title>span{display:block;overflow:hidden;padding-bottom:0.06em;margin-bottom:-0.06em}
+.f-hero__title>span>span{display:inline-block;animation:wordUp 0.9s cubic-bezier(0.22,1,0.36,1) both}
+.f-hero__lead{margin:48px 0 0;max-width:548px;font-size:16px;line-height:23px;color:rgba(255,255,255,0.9);animation:fadeIn 1s ease 0.7s both}
+.f-hero__actions{display:flex;align-items:center;gap:24px;margin-top:48px;flex-wrap:wrap;animation:fadeIn 1s ease 0.85s both}
+.f-hero__actions .f-btn--ghost{min-width:89px}
+.f-svc-intro__copy .f-btn--ghost{min-width:124px}
+.f-hero__proof{margin:64px 0 0;font-size:12px;line-height:20px;color:var(--f-green-l);animation:fadeIn 1s ease 1s both}
+
+/* Бегущая строка */
+.f-ticker{overflow:hidden;height:40px;display:flex;align-items:center;border-top:1px solid var(--f-border);border-bottom:1px solid var(--f-border);background:#FFFFFF}
+.f-ticker__track{display:inline-flex;white-space:nowrap;animation:marquee 38s linear infinite;will-change:transform}
+.f-ticker__seq{display:inline-flex;gap:96px;padding-right:96px}
+.f-ticker__seq span{font-size:20px;line-height:28px;font-weight:600;color:var(--f-heading)}
+.f-ticker__seq span:nth-child(odd){color:var(--f-teal)}
+
+/* О центре — цифры */
+.f-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:48px}
+.f-stat{position:relative;padding-top:24px}
+.f-stat::before{content:"";position:absolute;top:0;left:0;width:min(220px,100%);height:1px;background:var(--f-border)}
+.f-stat__num{font-weight:200;font-size:64px;line-height:72px;color:var(--f-heading);font-variant-numeric:tabular-nums;white-space:nowrap}
+.f-stat__label{margin:8px 0 0;max-width:170px;font-size:12px;line-height:16px;color:var(--f-text)}
+
+/* Почему выбирают нас */
+.f-why{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:64px}
+.f-why__card{min-height:160px;padding:20px 24px;border-radius:8px;background:#FFFFFF}
+.f-why__title{display:flex;align-items:center;gap:12px}
+.f-why__title h3{margin:0;font-family:'Onest',sans-serif;font-size:18px;line-height:28px;font-weight:600;color:var(--f-heading)}
+.f-why__card p{margin:8px 0 0;font-size:14px;line-height:20px;color:var(--f-text)}
+
+/* Лаборатория */
+#laboratoriya{background:#0B5C60 url('./assets/figma/bg-lab.webp') center/cover no-repeat;color:#FFFFFF}
+.f-lab{display:flex;align-items:flex-start;justify-content:space-between;gap:48px}
+.f-lab__content{flex:0 1 557px;display:flex;flex-direction:column;align-items:flex-start;gap:40px}
+.f-lab__intro{max-width:456px}
+.f-lab__intro .f-eyebrow{color:var(--f-green-l)}
+.f-lab__intro .f-h2{margin-top:64px;color:#FFFFFF}
+.f-lab__intro .f-lead{margin-top:40px;max-width:418px;color:#FFFFFF}
+.f-flow{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.f-flow__step{display:inline-flex;align-items:center;height:35px;padding:0 12px;border-radius:5px;background:rgba(255,255,255,0.1);font-size:10px;line-height:20px;text-transform:uppercase;white-space:nowrap;color:#FFFFFF}
+.f-flow__step--final{background:rgba(173,207,122,0.2)}
+.f-flow__arrow{display:block;flex:0 0 auto;width:10px;height:10px}
+.f-lab__meta{margin:0;font-size:12px;line-height:20px;color:var(--f-green-l);white-space:pre-wrap}
+.f-lab__grid{flex:0 0 416px;display:grid;grid-template-columns:repeat(2,200px);gap:16px;margin-top:93px}
+.f-lab__card{min-height:199px;padding:20px;border-radius:5px;background:rgba(255,255,255,0.1)}
+.f-lab__head{display:flex;flex-direction:column;align-items:flex-start;gap:8px}
+.f-lab__icon{position:relative;display:flex;align-items:center;justify-content:center;flex:0 0 auto;width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,var(--f-teal),var(--f-blue));box-shadow:0 0 16px rgba(19,158,161,0.45)}
+.f-lab__icon--green{background:linear-gradient(135deg,var(--f-green-l),var(--f-teal));box-shadow:0 0 16px rgba(173,207,122,0.45)}
+.f-lab__icon img{display:block;width:26px;height:26px;object-fit:contain}
+.f-lab__card h3{margin:0;font-family:'Onest',sans-serif;font-size:20px;line-height:28px;font-weight:600;color:#FFFFFF}
+.f-lab__card p{margin:8px 0 0;font-size:12px;line-height:18px;color:#FFFFFF}
+
+/* Услуги */
+#uslugi{padding-top:0;background:#FFFFFF;overflow:hidden}
+.f-svc-intro{display:flex;align-items:center;justify-content:space-between;gap:49px;min-height:537px}
+.f-svc-intro__text{flex:0 1 604px;display:flex;flex-direction:column;align-items:flex-start;gap:48px}
+.f-svc-intro__copy{display:flex;flex-direction:column;align-items:flex-start;gap:24px}
+.f-svc-intro__copy .f-lead{max-width:260px}
+.f-svc-island{flex:0 0 395px;align-self:flex-start;width:395px;height:537px;object-fit:cover;pointer-events:none}
+.f-svc-content{display:flex;flex-direction:column;gap:48px;margin-top:24px}
+.f-cat__head{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-bottom:8px;border-bottom:1px solid var(--f-border);margin-bottom:24px}
+.f-cat__title{display:flex;align-items:baseline;gap:16px;margin:0;font-family:'Onest',sans-serif;font-size:16px;line-height:20px;font-weight:700;letter-spacing:0.02em;color:var(--f-primary)}
+.f-cat__num{font-size:14px;color:var(--f-green)}
+.f-cat__desc{font-size:12px;line-height:20px;color:var(--f-green);text-align:right}
+.f-svc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;align-items:start}
+.f-svc{padding:16px;border-radius:8px;background:var(--f-alt);cursor:pointer;outline-offset:2px;transition:background 0.25s ease}
+.f-svc:hover,.f-svc:focus-within{background:rgba(11,92,96,0.09)}
+.f-svc__title{display:flex;align-items:flex-start;gap:12px;margin:0;font-family:'Onest',sans-serif;font-size:20px;line-height:28px;font-weight:600;color:var(--f-heading)}
+.f-svc__title .f-dot{width:8px;height:8px;margin-top:10px}
+.f-svc__title a{color:inherit;text-decoration:none}
+.f-svc__desc{margin:8px 0 0;font-size:14px;line-height:20px;color:var(--f-text)}
+.f-svc__desc a{color:inherit;text-decoration:none}
+.f-svc [data-desc] p{margin:12px 0 0;font-size:13px;line-height:19px;color:var(--f-text)}
+.f-svc [data-desc] p:last-child{font-size:11px;letter-spacing:0.08em;color:var(--f-teal)}
+.f-svc [data-desc] a{color:inherit;text-decoration:none}
+
+/* Проекты */
+.f-proj-grid{display:flex;flex-wrap:wrap;gap:16px;margin-top:48px}
+.f-proj{width:calc((100% - 16px) * 0.4141);display:flex;flex-direction:column;border-radius:8px;overflow:hidden;background:#FFFFFF}
+.f-proj--wide{width:calc((100% - 16px) * 0.5859)}
+.f-proj__img{height:238px;overflow:hidden}
+.f-proj__img img{display:block;width:100%;height:100%;object-fit:cover;transition:transform 0.9s cubic-bezier(0.22,1,0.36,1)}
+.f-proj:hover .f-proj__img img{transform:scale(1.04)}
+.f-proj__copy{display:flex;flex-direction:column;gap:8px;padding:16px 16px 34px}
+.f-proj__eyebrow{margin:0;font-size:10px;line-height:18px;letter-spacing:0.02em;text-transform:uppercase;color:var(--f-muted)}
+.f-proj__copy h3{margin:0;font-family:'Onest',sans-serif;font-size:16px;line-height:23px;font-weight:500;color:var(--f-heading)}
+.f-proj__copy p:last-child{margin:0;font-size:12px;line-height:18px;color:var(--f-primary)}
+
+/* Как мы работаем */
+.f-steps{display:grid;grid-template-columns:repeat(5,1fr);margin-top:64px}
+.f-step{--dot:var(--f-green-l);position:relative}
+.f-step--accent{--dot:var(--f-teal)}
+.f-step__marker{position:relative;height:20px}
+.f-step__marker::before{content:"";position:absolute;left:0;top:0;width:20px;height:20px;border-radius:50%;background:var(--dot);opacity:0.5}
+.f-step__marker::after{content:"";position:absolute;left:5px;top:5px;width:11px;height:11px;border-radius:50%;background:var(--dot)}
+.f-step__marker span{position:absolute;left:20px;right:0;top:10px;height:1px;background:var(--f-green-l)}
+.f-step__num{margin:16px 0 0;font-size:12px;line-height:23px;color:rgba(68,68,68,0.3)}
+.f-step h3{margin:16px 0 0;max-width:155px;font-family:'Onest',sans-serif;font-size:16px;line-height:20px;font-weight:500;color:var(--f-heading)}
+.f-step p:last-child{margin:16px 0 0;max-width:155px;font-size:12px;line-height:18px;color:var(--f-text)}
+
+/* Экология — это данные (ESG) */
+#esg{padding:56px 48px 80px;background:#1C6BA2 url('./assets/figma/bg-data.webp') center/cover no-repeat;color:#FFFFFF}
+.f-data{display:flex;align-items:flex-start;justify-content:space-between;gap:48px}
+.f-data__content{flex:0 1 456px;display:flex;flex-direction:column;align-items:flex-start;gap:96px;padding-top:25px}
+.f-data__title{margin:0;font-family:'Onest',sans-serif;font-weight:700;font-size:60px;line-height:68px;color:#FFFFFF}
+.f-data__content .f-lead{margin-top:24px;max-width:300px;font-size:16px;line-height:24px;color:#FFFFFF}
+.f-data__motto{margin:0;font-family:'Stolzl','Onest',sans-serif;font-weight:500;font-size:16px;line-height:20px;color:var(--f-green-l)}
+.f-data__visual{flex:0 1 471px;display:flex;flex-direction:column;gap:32px}
+.f-donut{position:relative;width:100%;max-width:471px;aspect-ratio:471/444}
+.f-donut img{display:block;width:100%;height:100%;object-fit:contain}
+.f-donut__label{position:absolute;left:62.8%;top:58.6%;font-size:20px;line-height:28px;font-weight:600;color:#FFFFFF}
+.f-legend{display:grid;grid-template-columns:repeat(3,auto);justify-content:space-between;gap:24px}
+.f-legend__row{display:flex;align-items:flex-start;gap:16px}
+.f-legend__sw{flex:0 0 auto;width:16px;height:16px}
+.f-legend__name{display:block;font-size:14px;line-height:20px;font-weight:500;letter-spacing:0.02em;text-transform:uppercase}
+.f-legend__pct{display:block;margin-top:4px;font-size:12px;line-height:18px}
+.f-data__note{margin:0;font-size:14px;line-height:20px;font-weight:500;letter-spacing:0.02em;text-transform:uppercase;color:#FFFFFF}
+
+/* Клиенты и отзывы */
+.f-clients .f-h2{max-width:628px}
+.f-logos{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:48px}
+.f-logo-card{margin:0;display:flex;flex-direction:column;align-items:center;gap:8px;padding:16px;border:1px solid var(--f-border);border-radius:8px;background:#FFFFFF}
+.f-logo-card>div{height:88px;display:flex;align-items:center;justify-content:center}
+.f-logo-card img{display:block;max-width:100%;height:auto}
+.f-logo-card figcaption{font-size:12px;line-height:23px;color:var(--f-text);text-align:center}
+.f-quotes{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:48px}
+.f-quote{position:relative;margin:0;padding:0 0 29px}
+.f-quote__body{display:flex;flex-direction:column;gap:24px;min-height:165px;padding:24px;border-radius:5px 5px 0 5px;background:var(--f-alt)}
+.f-quote::after{content:"";position:absolute;right:0;bottom:0;width:34px;height:29px;background:var(--f-alt);clip-path:polygon(0 0,100% 0,100% 100%)}
+.f-quote blockquote{margin:0;font-size:12px;line-height:18px;color:var(--f-text)}
+.f-quote figcaption{display:flex;flex-direction:column;gap:8px}
+.f-quote figcaption span:first-child{font-size:12px;line-height:16px;color:var(--f-text)}
+.f-quote figcaption span:last-child{font-family:'Stolzl','Onest',sans-serif;font-weight:300;font-size:12px;line-height:18px;text-transform:uppercase;color:var(--f-text)}
+
+/* Лицензии и документы */
+.f-docs .f-intro__row{grid-template-columns:minmax(0,644px) minmax(0,1fr)}
+.f-docs .f-intro__row>.f-h2{max-width:644px}
+.f-docs .f-intro__row>.f-lead{max-width:360px}
+.f-docs-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:58px}
+.f-doc{display:flex;flex-direction:column;background:#FFFFFF;text-decoration:none;color:inherit}
+.f-doc__preview{height:128px;border:1px solid var(--f-border);background:#FFFFFF}
+.f-doc__copy{display:flex;flex-direction:column;gap:13px;flex:1;padding:16px}
+.f-doc__meta{font-size:10px;line-height:18px;letter-spacing:0.02em;text-transform:uppercase;color:var(--f-heading)}
+.f-doc__title{font-size:12px;line-height:18px;font-weight:500;color:var(--f-primary)}
+.f-doc__action{margin-top:auto;font-size:10px;line-height:18px;color:var(--f-heading)}
+a.f-doc:hover .f-doc__preview{border-color:var(--f-teal)}
+.f-docs-note{margin:24px 0 0;font-size:12px;line-height:18px;color:var(--f-text)}
+
+/* Заявка */
+.f-request{display:grid;grid-template-columns:1fr 1fr;border-radius:8px;overflow:hidden}
+.f-request__panel{padding:32px 32px 112px;background:linear-gradient(135deg,var(--f-teal),var(--f-blue));color:#FFFFFF}
+.f-request__panel .f-h2{color:#FFFFFF}
+.f-request__panel .f-lead{margin-top:48px;max-width:420px;color:#FFFFFF}
+#eco-form{display:flex;flex-direction:column;gap:24px;padding:32px;background:var(--f-alt)}
+#eco-form-fields{display:flex;flex-direction:column;gap:16px}
+.f-field{display:flex;flex-direction:column;gap:8px}
+.f-field label{font-size:12px;line-height:16px;color:var(--f-text)}
+.f-field input,.f-field textarea{width:100%;height:40px;padding:10px 12px;border:1px solid transparent;border-radius:0;background:#FFFFFF;font-family:'Onest',sans-serif;font-size:14px;line-height:20px;color:var(--f-primary);outline:none;transition:border-color 0.2s ease,box-shadow 0.2s ease}
+.f-field textarea{height:80px;resize:vertical}
+.f-field input:focus,.f-field textarea:focus{border-color:var(--f-teal);box-shadow:0 0 0 3px rgba(19,158,161,0.15)}
+.f-field input::placeholder,.f-field textarea::placeholder{color:var(--f-muted)}
+.f-form-actions{display:flex;flex-direction:column;align-items:flex-start;gap:12px;margin-top:8px}
+.f-consent{margin:0;font-size:12px;line-height:20px;color:var(--f-teal)}
+.f-consent a{color:inherit}
+
+/* Подвал — тёмный #06141C (решение проекта), раскладка и типографика по макету */
+#kontakty{padding:64px 48px 85px;background:#06141C;color:#FFFFFF;scroll-margin-top:80px}
+.f-foot__top{display:flex;justify-content:space-between;gap:16px}
+.f-foot__brand{flex:0 0 254px;display:flex;flex-direction:column;gap:32px}
+.f-foot__brand img{display:block;width:104px;height:35px}
+.f-foot__brand p{margin:0;font-size:12px;line-height:18px}
+.f-foot__brand p+p{margin-top:16px}
+.f-foot__nav{display:flex;gap:96px}
+.f-foot__col{display:flex;flex-direction:column;gap:16px}
+.f-foot__col p{margin:0 0 8px;font-size:10px;line-height:18px;text-transform:uppercase;color:var(--f-teal)}
+.f-foot__col a,.f-foot__col span{font-size:12px;line-height:18px;color:#FFFFFF;text-decoration:none;transition:color 0.2s}
+.f-foot__col a:hover{color:var(--f-green-l)}
+.f-foot__bottom{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;margin-top:32px;padding-top:32px;border-top:1px solid var(--f-teal)}
+.f-foot__bottom p,.f-foot__bottom a,.f-foot__bottom span{margin:0;font-size:12px;line-height:18px;color:var(--f-teal);text-decoration:none}
+.f-foot__bottom div{display:flex;gap:48px}
+.f-foot__bottom a:hover{color:#FFFFFF}
+
+/* ==== Планшет ==== */
+@media (max-width:1180px){
+  .f-nav{gap:20px}
+  .f-lab__grid{margin-top:0}
+}
+@media (max-width:1060px){
+  .f-nav,.f-head-phone{display:none !important}
+  .f-burger{display:flex !important}
+  .f-intro__row,.f-docs .f-intro__row{grid-template-columns:1fr;gap:20px}
+  .f-intro__row>.f-lead{padding-top:0;max-width:520px}
+  .f-why{grid-template-columns:repeat(2,1fr)}
+  .f-lab{flex-direction:column}
+  .f-lab__content{flex-basis:auto}
+  .f-lab__grid{flex-basis:auto;width:100%;grid-template-columns:repeat(2,1fr)}
+  .f-svc-island{display:none}
+  .f-svc-intro{min-height:0;padding-top:96px}
+  .f-svc-grid{grid-template-columns:repeat(2,1fr)}
+  .f-proj,.f-proj--wide{width:100%}
+  .f-steps{grid-template-columns:repeat(3,1fr);row-gap:40px}
+  .f-data{flex-direction:column;gap:64px}
+  .f-data__content,.f-data__visual{flex-basis:auto;width:100%}
+  .f-logos,.f-docs-grid{grid-template-columns:repeat(2,1fr)}
+  .f-quotes{grid-template-columns:1fr}
+  .f-request{grid-template-columns:1fr}
+  .f-foot__top{flex-direction:column;gap:40px}
+  .f-foot__nav{gap:48px;flex-wrap:wrap}
+}
+
+/* ==== Мобильный (макет 390) ==== */
+@media (max-width:720px){
+  .f-sec{padding:32px 20px}
+  #eco-header{padding:18px 10px 19px 20px !important;gap:16px;background:#FFFFFF !important}
+  #eco-header .f-logo__light{display:none !important}
+  #eco-header .f-logo__dark{display:block !important}
+  #eco-header .f-burger{color:var(--f-heading) !important}
+  .f-head-actions .f-btn{display:none}
+  .f-eyebrow{font-size:14px;line-height:20px;font-weight:500}
+  .f-h2{font-size:30px;line-height:36px}
+  .f-intro{gap:24px}
+  .f-intro__row,.f-docs .f-intro__row{gap:20px}
+  #top{padding:104px 20px 32px;background:#FFFFFF url('./assets/figma/bg-hero-mobile.webp') 0 72px / 100% auto no-repeat;color:var(--f-heading)}
+  #top .f-hero__eyebrow,#top .f-hero__lead{color:var(--f-heading)}
+  #top .f-hero__proof{color:var(--f-teal)}
+  #top .f-btn--light{border-color:var(--f-blue);color:var(--f-blue)}
+  .f-hero__eyebrow{font-size:14px;line-height:20px;font-weight:500}
+  .f-sep{display:none}
+  .f-br-m{display:inline}
+  .f-hero__title{margin-top:32px;font-size:38px;line-height:44px}
+  .f-hero__lead{margin-top:24px}
+  .f-hero__actions{margin-top:48px;gap:16px;flex-wrap:nowrap}
+  .f-hero__actions .f-btn{height:44px}
+  .f-hero__actions .f-btn:first-child{flex:0 1 210px;min-width:0}
+  .f-hero__actions .f-btn--ghost{flex:1 1 auto}
+  .f-hero__proof{margin-top:32px;font-size:12px;line-height:16px}
+  .f-ticker__seq span{font-size:12px;line-height:18px;font-weight:400}
+  .f-stats{grid-template-columns:repeat(2,1fr);row-gap:32px;margin-top:32px}
+  .f-stat{padding-top:0}
+  .f-stat__num{font-size:48px;line-height:72px;letter-spacing:-0.03em}
+  .f-stat__label{margin-top:0;font-size:12px;line-height:18px}
+  .f-why{grid-template-columns:1fr;gap:16px;margin-top:32px}
+  .f-lab__content{gap:24px}
+  .f-lab__meta{white-space:normal;font-size:11.5px}
+  .f-lab__intro .f-h2{margin-top:24px}
+  .f-lab__intro .f-lead{margin-top:20px}
+  #laboratoriya{background-image:url('./assets/figma/bg-lab-mobile.webp')}
+  .f-lab{gap:32px}
+  .f-flow{flex-direction:column;align-items:stretch;gap:8px;width:100%}
+  .f-flow__step{justify-content:center;height:42px;font-size:12px;line-height:18px;text-transform:none}
+  .f-flow__arrow{align-self:center;transform:rotate(90deg)}
+  .f-lab__content .f-btn{width:100%}
+  .f-lab__grid{grid-template-columns:1fr;gap:16px}
+  .f-lab__card{min-height:0;padding:16px}
+  .f-lab__head{flex-direction:row;align-items:center;gap:12px}
+  .f-lab__icon{width:40px;height:40px}
+  .f-lab__icon img{width:22px;height:22px}
+  .f-lab__card p{margin-left:52px}
+  .f-svc-intro{padding-top:20px}
+  .f-svc-intro__text{gap:24px}
+  .f-svc-intro__copy .f-lead{max-width:none}
+  .f-svc-intro__copy .f-btn{width:100%;height:35px;border-color:var(--f-green);color:var(--f-green)}
+  .f-svc-content{gap:32px;margin-top:32px}
+  .f-cat__head{flex-direction:column;align-items:flex-start;gap:8px}
+  .f-cat__title{gap:8px}
+  .f-cat__num{font-size:16px}
+  .f-cat__desc{text-align:left;padding-left:26px;font-size:12px;line-height:18px}
+  .f-svc-grid{grid-template-columns:1fr}
+  .f-proj-grid{margin-top:32px}
+  .f-proj__img{height:190px}
+  .f-proj__copy{padding-bottom:16px}
+  .f-proj__eyebrow{font-size:12px;line-height:18px;letter-spacing:0;text-transform:none}
+  .f-proj__copy h3{font-size:20px;line-height:28px;font-weight:600}
+  .f-steps{grid-template-columns:1fr;row-gap:24px;margin-top:32px}
+  .f-step{display:grid;grid-template-columns:20px 1fr;column-gap:16px}
+  .f-step__marker{grid-row:1 / span 3}
+  .f-step__marker span{left:9.5px;right:auto;top:20px;width:1px;height:calc(100% + 24px + 72px);background:var(--line,var(--f-green-l))}
+  .f-step:nth-child(1){--dot:var(--f-green-l)}
+  .f-step:nth-child(2){--dot:var(--f-green);--line:var(--f-green)}
+  .f-step:nth-child(3){--dot:var(--f-teal);--line:var(--f-teal)}
+  .f-step:nth-child(4){--dot:var(--f-blue);--line:var(--f-blue)}
+  .f-step:nth-child(5){--dot:var(--f-heading)}
+  .f-step:last-child .f-step__marker span{display:none}
+  .f-step__num{margin:0;font-size:14px;line-height:20px;font-weight:500;letter-spacing:0.02em}
+  .f-step h3{margin-top:8px;max-width:none;font-weight:700;letter-spacing:0.02em}
+  .f-step p:last-child{margin-top:8px;max-width:none}
+  #esg{padding:32px 20px;background-image:url('./assets/figma/bg-data-mobile.webp')}
+  .f-data{gap:32px}
+  .f-data__content{gap:32px;padding-top:0}
+  .f-data__title{font-size:38px;line-height:44px}
+  .f-data__content .f-lead{margin-top:20px}
+  .f-data__content .f-btn{width:100%}
+  .f-data__visual{gap:24px}
+  .f-donut{max-width:350px}
+  .f-donut__label{font-size:15px;line-height:21px}
+  .f-legend{gap:16px}
+  .f-legend__row{gap:8px}
+  .f-legend__name{font-size:12px;line-height:18px}
+  .f-data__note{font-size:12px;line-height:18px;font-weight:400;letter-spacing:0;text-transform:none}
+  .f-logos{gap:16px;margin-top:32px}
+  .f-logo-card>div{height:88px}
+  .f-logo-card img{max-width:100%;height:auto}
+  .f-quotes{margin-top:24px}
+  .f-quote__body{padding:16px;gap:20px;min-height:0}
+  .f-quote blockquote{color:var(--f-primary)}
+  .f-quote figcaption span:last-child{font-family:'Onest',sans-serif;font-weight:400}
+  .f-docs-grid{grid-template-columns:1fr;margin-top:34px}
+  .f-doc__copy{gap:8px}
+  .f-doc__meta,.f-doc__action{font-size:12px;line-height:18px}
+  .f-doc__title{font-weight:400}
+  .f-request__panel{padding:24px}
+  .f-request__panel .f-lead{margin-top:20px}
+  #eco-form{padding:24px}
+  .f-field input{height:44px;font-size:16px}
+  .f-field textarea{height:96px;font-size:16px}
+  .f-form-actions .f-btn{width:100%;height:44px}
+  #kontakty{padding:32px 20px}
+  .f-foot__top{gap:32px}
+  .f-foot__brand{flex-basis:auto}
+  .f-foot__nav{flex-direction:column;gap:24px}
+  .f-foot__col p{font-size:12px;margin-bottom:8px}
+  .f-foot__bottom{flex-direction:column;align-items:flex-start;gap:16px;margin-top:24px;padding-top:24px}
+  .f-foot__bottom div{flex-direction:column;gap:16px}
 }
 </style>
 <script src="./image-slot.js" defer></script>
 </helmet>
-<div id="eco-root" style="font-family:'Onest',-apple-system,sans-serif;color:#16282B;background:#FFFFFF;font-size:16px;line-height:1.6">
+<div id="eco-root" style="background:#FFFFFF;font-size:16px;line-height:1.6">
 
   <a href="#top" data-skip="true">К основному содержимому</a>
 
   <!-- ШАПКА -->
-  <header id="eco-header" style="position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;gap:32px;padding:22px 48px;background:transparent;border-bottom:1px solid transparent;transition:background 0.35s ease,padding 0.35s ease,border-color 0.35s ease">
-    <a href="#top" aria-label="Эколог — на главную" style="display:flex;align-items:center;gap:14px;text-decoration:none;flex:0 0 auto">
-      <img src="./assets/logo_ecolog.svg" alt="НИЦ Эколог" style="height:42px;width:auto;display:block">
+  <header id="eco-header">
+    <a class="f-logo" href="#top" aria-label="Эколог — на главную">
+      <img class="f-logo__light" src="./assets/figma/logo-ecolog-white.svg" alt="НИЦ Эколог" width="104" height="35">
+      <img class="f-logo__dark" src="./assets/figma/logo-ecolog.svg" alt="" aria-hidden="true" width="104" height="35">
     </a>
-    <nav data-nav="true" aria-label="Основная навигация" style="display:flex;align-items:center;gap:30px">
-      <a href="#uslugi" style="font-size:14.5px;font-weight:400;color:#2C4346;text-decoration:none;transition:color 0.2s" style-hover="color:#139EA1">Услуги</a>
-      <a href="lab.html" style="font-size:14.5px;font-weight:400;color:#2C4346;text-decoration:none;transition:color 0.2s" style-hover="color:#139EA1">Лаборатория</a>
-      <a href="#proekty" style="font-size:14.5px;font-weight:400;color:#2C4346;text-decoration:none;transition:color 0.2s" style-hover="color:#139EA1">Проекты</a>
-      <a href="#o-centre" style="font-size:14.5px;font-weight:400;color:#2C4346;text-decoration:none;transition:color 0.2s" style-hover="color:#139EA1">О центре</a>
-      <a href="#esg" style="font-size:14.5px;font-weight:400;color:#2C4346;text-decoration:none;transition:color 0.2s" style-hover="color:#139EA1">ESG</a>
-      <a href="#litsenzii" style="font-size:14.5px;font-weight:400;color:#2C4346;text-decoration:none;transition:color 0.2s" style-hover="color:#139EA1">Лицензии</a>
-      <a href="#kontakty" style="font-size:14.5px;font-weight:400;color:#2C4346;text-decoration:none;transition:color 0.2s" style-hover="color:#139EA1">Контакты</a>
+    <nav class="f-nav" data-nav="true" aria-label="Основная навигация">
+      <a href="#uslugi">Услуги</a>
+      <a href="lab.html">Лаборатория</a>
+      <a href="#proekty">Проекты</a>
+      <a href="#o-centre">О центре</a>
+      <a href="#esg">ESG</a>
+      <a href="#litsenzii">Лицензии</a>
+      <a href="#kontakty">Контакты</a>
     </nav>
-    <div style="display:flex;align-items:center;gap:24px;flex:0 0 auto">
-      <a data-head-phone="true" href="tel:+78124499348" style="font-size:15px;font-weight:500;color:#0B5C60;text-decoration:none;font-variant-numeric:tabular-nums">+7&nbsp;(812)&nbsp;449-93-48</a>
-      <a class="btn-primary" data-head-cta="true" href="#zayavka" style="display:inline-flex;align-items:center;gap:8px;background:#1C6BA2;color:#FFFFFF;font-size:14px;font-weight:500;text-decoration:none;padding:12px 24px;border-radius:4px;transition:transform 0.25s ease,background 0.25s ease" style-hover="transform:translateY(-2px);background:#155A8A">Заказать исследование</a>
-      <button data-burger="true" type="button" aria-label="Открыть меню" aria-haspopup="dialog" aria-expanded="{{ menuExpanded }}" aria-controls="eco-menu" onClick="{{ toggleMenu }}" style="display:none;align-items:center;justify-content:center;width:44px;height:44px;border:1px solid rgba(11,92,96,0.25);border-radius:12px;background:rgba(255,255,255,0.75);cursor:pointer;flex:0 0 auto">
-        <svg width="20" height="14" viewBox="0 0 20 14" aria-hidden="true"><g stroke="#0B5C60" stroke-width="1.8" stroke-linecap="round"><line x1="1" y1="1" x2="19" y2="1"></line><line x1="1" y1="7" x2="19" y2="7"></line><line x1="1" y1="13" x2="19" y2="13"></line></g></svg>
+    <div class="f-head-actions">
+      <a class="f-head-phone" data-head-phone="true" href="tel:+78124499348">+7&nbsp;(812)&nbsp;449&nbsp;93&nbsp;48</a>
+      <a class="f-btn f-btn--sm" data-head-cta="true" href="#zayavka">Заказать исследование</a>
+      <button class="f-burger" data-burger="true" type="button" aria-label="Открыть меню" aria-haspopup="dialog" aria-expanded="{{ menuExpanded }}" aria-controls="eco-menu" onClick="{{ toggleMenu }}">
+        <svg width="24" height="17" viewBox="0 0 24 17" aria-hidden="true"><g stroke="currentColor" stroke-width="1"><line x1="0" y1="0.5" x2="24" y2="0.5"></line><line x1="0" y1="8.5" x2="24" y2="8.5"></line><line x1="0" y1="16.5" x2="24" y2="16.5"></line></g></svg>
       </button>
     </div>
   </header>
 
-  <!-- РЕЛЬС-НАВИГАЦИЯ ПО СЕКЦИЯМ -->
-  <nav data-rail="true" aria-label="Навигация по разделам">
-    <div data-rail-shell="true">
-      <div data-rail-track="true" aria-hidden="true"></div>
-      <a data-rail-item="true" data-rail-target="top" href="#top" aria-label="Перейти к разделу: Главная">
-        <span data-rail-label="true">Главная</span>
-        <span data-rail-tick="true"><span data-rail-fill="true"></span></span>
-      </a>
-      <a data-rail-item="true" data-rail-target="o-centre" href="#o-centre" aria-label="Перейти к разделу: О центре">
-        <span data-rail-label="true">О центре</span>
-        <span data-rail-tick="true"><span data-rail-fill="true"></span></span>
-      </a>
-      <a data-rail-item="true" data-rail-target="laboratoriya" data-rail-dark="1" href="#laboratoriya" aria-label="Перейти к разделу: Лаборатория">
-        <span data-rail-label="true">Лаборатория</span>
-        <span data-rail-tick="true"><span data-rail-fill="true"></span></span>
-      </a>
-      <a data-rail-item="true" data-rail-target="uslugi" href="#uslugi" aria-label="Перейти к разделу: Услуги">
-        <span data-rail-label="true">Услуги</span>
-        <span data-rail-tick="true"><span data-rail-fill="true"></span></span>
-      </a>
-      <a data-rail-item="true" data-rail-target="proekty" href="#proekty" aria-label="Перейти к разделу: Проекты">
-        <span data-rail-label="true">Проекты</span>
-        <span data-rail-tick="true"><span data-rail-fill="true"></span></span>
-      </a>
-      <a data-rail-item="true" data-rail-target="protsess" href="#protsess" aria-label="Перейти к разделу: Процесс">
-        <span data-rail-label="true">Процесс</span>
-        <span data-rail-tick="true"><span data-rail-fill="true"></span></span>
-      </a>
-      <a data-rail-item="true" data-rail-target="esg" data-rail-dark="1" href="#esg" aria-label="Перейти к разделу: ESG">
-        <span data-rail-label="true">ESG</span>
-        <span data-rail-tick="true"><span data-rail-fill="true"></span></span>
-      </a>
-      <a data-rail-item="true" data-rail-target="klienty" href="#klienty" aria-label="Перейти к разделу: Клиенты">
-        <span data-rail-label="true">Клиенты</span>
-        <span data-rail-tick="true"><span data-rail-fill="true"></span></span>
-      </a>
-      <a data-rail-item="true" data-rail-target="zayavka" href="#zayavka" aria-label="Перейти к разделу: Заявка">
-        <span data-rail-label="true">Заявка</span>
-        <span data-rail-tick="true"><span data-rail-fill="true"></span></span>
-      </a>
-      <a data-rail-item="true" data-rail-target="kontakty" data-rail-dark="1" href="#kontakty" aria-label="Перейти к разделу: Контакты">
-        <span data-rail-label="true">Контакты</span>
-        <span data-rail-tick="true"><span data-rail-fill="true"></span></span>
-      </a>
-    </div>
-  </nav>
-
   <main>
     <!-- ГЕРОЙ -->
-    <section id="top" data-screen-label="Герой" data-sec="true" style="position:relative;min-height:96vh;display:flex;flex-direction:column;justify-content:center;overflow:hidden;background:#0B5C60 url('./assets/hero-fon.webp') center/cover no-repeat;padding:170px 48px 64px">
-      <div aria-hidden="true" style="position:absolute;inset:0;pointer-events:none">
-        <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,92,96,0.25),rgba(11,92,96,0.45))"></div>
-      </div>
-      <div style="position:relative;max-width:1280px;margin:0 auto;width:100%">
-        <p style="margin:0 0 28px;font-family:'Stolzl','Onest',sans-serif;font-size:12px;font-weight:400;letter-spacing:0.22em;color:rgba(255,255,255,0.85);text-transform:uppercase;animation:fadeIn 1s ease 0.1s both">Независимый исследовательский центр · Санкт-Петербург</p>
-        <h1 style="margin:0;font-weight:300;font-size:clamp(44px,6.3vw,92px);line-height:1.04;letter-spacing:-0.015em;color:#FFFFFF;max-width:1180px;text-wrap:balance">
-          <span style="display:block;overflow:hidden;padding-bottom:0.08em;margin-bottom:-0.08em"><span style="display:inline-block;animation:wordUp 0.9s cubic-bezier(0.22,1,0.36,1) 0.15s both">Превращаем <span style="font-weight:400;color:#FFFFFF">данные</span></span></span>
-          <span style="display:block;overflow:hidden;padding-bottom:0.08em;margin-bottom:-0.08em"><span style="display:inline-block;animation:wordUp 0.9s cubic-bezier(0.22,1,0.36,1) 0.3s both">и исследования в понятные</span></span>
-          <span style="display:block;overflow:hidden;padding-bottom:0.12em"><span style="display:inline-block;animation:wordUp 0.9s cubic-bezier(0.22,1,0.36,1) 0.45s both">эффективные <span style="font-weight:400;color:#FFFFFF">решения</span></span></span>
+    <section id="top" class="f-sec" data-screen-label="Герой" data-sec="true">
+      <div class="f-wrap">
+        <p class="f-hero__eyebrow">Независимый исследовательский центр<span class="f-sep">&nbsp;&nbsp;|&nbsp;&nbsp;</span><br class="f-br-m">Санкт-Петербург</p>
+        <h1 class="f-hero__title">
+          <span><span style="animation-delay:0.15s">Превращаем данные</span></span>
+          <span><span style="animation-delay:0.3s">и исследования в понятные</span></span>
+          <span><span style="animation-delay:0.45s">эффективные решения</span></span>
         </h1>
-        <p style="margin:30px 0 0;font-size:18px;font-weight:400;color:rgba(255,255,255,0.88);max-width:620px;line-height:1.65;animation:fadeIn 1s ease 0.7s both">Экологический инжиниринг и консалтинг: изыскания, собственная аккредитованная лаборатория, разрешительная документация и ESG. Научно обоснованно. Без бюрократии.</p>
-        <div data-cta-row="true" style="display:flex;align-items:center;gap:18px;margin-top:42px;flex-wrap:wrap;animation:fadeIn 1s ease 0.85s both">
-          <a class="btn-primary" href="#zayavka" style="display:inline-flex;align-items:center;gap:10px;background:#1C6BA2;color:#FFFFFF;font-size:16px;font-weight:500;text-decoration:none;padding:18px 38px;border-radius:4px;transition:transform 0.25s ease,background 0.25s ease" style-hover="transform:translateY(-3px);background:#155A8A">Заказать исследование <span aria-hidden="true">→</span></a>
-          <a href="#uslugi" style="display:inline-flex;align-items:center;gap:10px;border:1px solid #FFFFFF;color:#FFFFFF;font-size:16px;font-weight:500;text-decoration:none;padding:17px 36px;border-radius:4px;background:transparent;transition:background 0.25s ease" style-hover="background:rgba(255,255,255,0.12)">Услуги</a>
+        <p class="f-hero__lead">Экологический инжиниринг и консалтинг: изыскания, собственная аккредитованная лаборатория, разрешительная документация и ESG. Научно обоснованно. Без бюрократии.</p>
+        <div class="f-hero__actions">
+          <a class="f-btn f-btn--sm" href="#zayavka">Заказать исследование</a>
+          <a class="f-btn f-btn--sm f-btn--ghost f-btn--light" href="#uslugi">Услуги</a>
         </div>
-        <p data-hero-meta="true" style="margin:56px 0 0;font-family:'Stolzl','Onest',sans-serif;font-size:12.5px;font-weight:300;color:rgba(255,255,255,0.75);letter-spacing:0.04em;animation:fadeIn 1s ease 1s both">14 лет в экологическом инжиниринге&nbsp;&nbsp;·&nbsp;&nbsp;аккредитованная лаборатория «Аналитик Лаб»&nbsp;&nbsp;·&nbsp;&nbsp;Лахта Центр, порты, МОЭК, Мариинский театр</p>
+        <p class="f-hero__proof">14 ЛЕТ В ЭКОЛОГИЧЕСКОМ ИНЖИНИРИНГЕ<span class="f-sep">&nbsp;&nbsp;|&nbsp;&nbsp;</span><br class="f-br-m">АККРЕДИТОВАННАЯ ЛАБОРАТОРИЯ «АНАЛИТИК ЛАБ»</p>
       </div>
     </section>
 
     <!-- БЕГУЩАЯ СТРОКА -->
-    <div aria-hidden="true" style="overflow:hidden;border-top:1px solid rgba(11,92,96,0.1);border-bottom:1px solid rgba(11,92,96,0.1);background:#FFFFFF;padding:16px 0">
-      <div style="display:inline-flex;white-space:nowrap;animation:marquee 38s linear infinite;will-change:transform">
-        <span style="display:inline-flex">
-          <span style="padding-right:72px;font-family:'Stolzl','Onest',sans-serif;font-size:13px;letter-spacing:0.24em;color:#0B5C60">ЭКОЛОГИЯ — ЭТО ДАННЫЕ</span>
-          <span style="padding-right:72px;font-family:'Stolzl','Onest',sans-serif;font-size:13px;letter-spacing:0.24em;color:#9CB8B9">НЕТ ДАННЫХ — НЕТ РЕШЕНИЯ</span>
-          <span style="padding-right:72px;font-family:'Stolzl','Onest',sans-serif;font-size:13px;letter-spacing:0.24em;color:#0B5C60">НАУКА ДЛЯ ПРИРОДЫ</span>
-          <span style="padding-right:72px;font-family:'Stolzl','Onest',sans-serif;font-size:13px;letter-spacing:0.24em;color:#9CB8B9">NIC-ECOLOG.RU</span>
-          <span style="padding-right:72px;font-family:'Stolzl','Onest',sans-serif;font-size:13px;letter-spacing:0.24em;color:#0B5C60">ЭКОЛОГИЯ — ЭТО ДАННЫЕ</span>
-          <span style="padding-right:72px;font-family:'Stolzl','Onest',sans-serif;font-size:13px;letter-spacing:0.24em;color:#9CB8B9">НЕТ ДАННЫХ — НЕТ РЕШЕНИЯ</span>
-          <span style="padding-right:72px;font-family:'Stolzl','Onest',sans-serif;font-size:13px;letter-spacing:0.24em;color:#0B5C60">НАУКА ДЛЯ ПРИРОДЫ</span>
-          <span style="padding-right:72px;font-family:'Stolzl','Onest',sans-serif;font-size:13px;letter-spacing:0.24em;color:#9CB8B9">NIC-ECOLOG.RU</span>
-        </span>
-        <span style="display:inline-flex" aria-hidden="true">
-          <span style="padding-right:72px;font-family:'Stolzl','Onest',sans-serif;font-size:13px;letter-spacing:0.24em;color:#0B5C60">ЭКОЛОГИЯ — ЭТО ДАННЫЕ</span>
-          <span style="padding-right:72px;font-family:'Stolzl','Onest',sans-serif;font-size:13px;letter-spacing:0.24em;color:#9CB8B9">НЕТ ДАННЫХ — НЕТ РЕШЕНИЯ</span>
-          <span style="padding-right:72px;font-family:'Stolzl','Onest',sans-serif;font-size:13px;letter-spacing:0.24em;color:#0B5C60">НАУКА ДЛЯ ПРИРОДЫ</span>
-          <span style="padding-right:72px;font-family:'Stolzl','Onest',sans-serif;font-size:13px;letter-spacing:0.24em;color:#9CB8B9">NIC-ECOLOG.RU</span>
-          <span style="padding-right:72px;font-family:'Stolzl','Onest',sans-serif;font-size:13px;letter-spacing:0.24em;color:#0B5C60">ЭКОЛОГИЯ — ЭТО ДАННЫЕ</span>
-          <span style="padding-right:72px;font-family:'Stolzl','Onest',sans-serif;font-size:13px;letter-spacing:0.24em;color:#9CB8B9">НЕТ ДАННЫХ — НЕТ РЕШЕНИЯ</span>
-          <span style="padding-right:72px;font-family:'Stolzl','Onest',sans-serif;font-size:13px;letter-spacing:0.24em;color:#0B5C60">НАУКА ДЛЯ ПРИРОДЫ</span>
-          <span style="padding-right:72px;font-family:'Stolzl','Onest',sans-serif;font-size:13px;letter-spacing:0.24em;color:#9CB8B9">NIC-ECOLOG.RU</span>
-        </span>
+    <div class="f-ticker" aria-hidden="true">
+      <div class="f-ticker__track">
+        <span class="f-ticker__seq"><span>NIC-ECOLOG.RU</span><span>ЭКОЛОГИЯ — ЭТО ДАННЫЕ</span><span>НЕТ ДАННЫХ — НЕТ РЕШЕНИЯ</span><span>НАУКА ДЛЯ ПРИРОДЫ</span><span>NIC-ECOLOG.RU</span><span>ЭКОЛОГИЯ — ЭТО ДАННЫЕ</span><span>НЕТ ДАННЫХ — НЕТ РЕШЕНИЯ</span><span>НАУКА ДЛЯ ПРИРОДЫ</span></span>
+        <span class="f-ticker__seq"><span>NIC-ECOLOG.RU</span><span>ЭКОЛОГИЯ — ЭТО ДАННЫЕ</span><span>НЕТ ДАННЫХ — НЕТ РЕШЕНИЯ</span><span>НАУКА ДЛЯ ПРИРОДЫ</span><span>NIC-ECOLOG.RU</span><span>ЭКОЛОГИЯ — ЭТО ДАННЫЕ</span><span>НЕТ ДАННЫХ — НЕТ РЕШЕНИЯ</span><span>НАУКА ДЛЯ ПРИРОДЫ</span></span>
       </div>
     </div>
 
-    <!-- ЦИФРЫ-ДОВЕРИЕ -->
-    <section id="o-centre" data-screen-label="О центре — цифры" data-sec="true" style="position:relative;padding:120px 48px 110px;background:#FFFFFF;scroll-margin-top:80px;overflow:hidden">
-      <div aria-hidden="true" style="position:absolute;inset:0;background-image:linear-gradient(rgba(19,158,161,0.05) 1px,transparent 1px),linear-gradient(90deg,rgba(19,158,161,0.05) 1px,transparent 1px);background-size:56px 56px;mask-image:linear-gradient(180deg,transparent,#000 22%,#000 78%,transparent);-webkit-mask-image:linear-gradient(180deg,transparent,#000 22%,#000 78%,transparent)"></div>
-      <div style="position:relative;max-width:1280px;margin:0 auto">
-        <div data-two-col="true" style="display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:end;margin-bottom:80px">
-          <div>
-            <p data-rv="true" style="margin:0 0 18px;font-family:'Stolzl','Onest',sans-serif;font-size:12px;font-weight:500;letter-spacing:0.22em;color:#139EA1;text-transform:uppercase">О центре</p>
-            <h2 data-rv="true" style="margin:0;font-weight:300;font-size:clamp(34px,3.4vw,52px);line-height:1.12;letter-spacing:-0.01em;color:#13282B">Наука + экология + прикладные решения</h2>
+    <!-- О ЦЕНТРЕ — ЦИФРЫ -->
+    <section id="o-centre" class="f-sec" data-screen-label="О центре — цифры" data-sec="true">
+      <div class="f-wrap">
+        <div class="f-intro">
+          <p class="f-eyebrow" data-rv="true">О центре</p>
+          <div class="f-intro__row">
+            <h2 class="f-h2" data-rv="true">Наука + экология + прикладные решения</h2>
+            <p class="f-lead" data-rv="true">Помогаем бизнесу и регионам принимать научно обоснованные экологические решения. Говорим прямо, считаем точно, показываем реальную картину.</p>
           </div>
-          <p data-rv="true" style="margin:0;font-size:17px;color:#3E5557;max-width:480px;justify-self:end">Помогаем бизнесу и регионам принимать научно обоснованные экологические решения. Говорим прямо, считаем точно, показываем реальную картину.</p>
         </div>
-        <div data-cols4="true" style="display:grid;grid-template-columns:repeat(4,1fr);gap:40px">
-          <div data-rv="true" style="border-top:1px solid rgba(11,92,96,0.18);padding-top:28px">
-            <div style="font-weight:300;font-size:clamp(54px,5vw,80px);line-height:0.9;color:#0B5C60;font-variant-numeric:tabular-nums"><span data-count="14">0</span></div>
-            <p style="margin:10px 0 0;font-size:15px;color:#51696B">лет в экологическом инжиниринге</p>
-          </div>
-          <div data-rv="true" style="border-top:1px solid rgba(11,92,96,0.18);padding-top:28px">
-            <div style="font-weight:300;font-size:clamp(54px,5vw,80px);line-height:0.9;color:#0B5C60;font-variant-numeric:tabular-nums"><span data-count="500">0</span><span style="color:#4CB272">+</span></div>
-            <p style="margin:10px 0 0;font-size:15px;color:#51696B">реализованных проектов</p>
-          </div>
-          <div data-rv="true" style="border-top:1px solid rgba(11,92,96,0.18);padding-top:28px">
-            <div style="font-weight:300;font-size:clamp(54px,5vw,80px);line-height:0.9;color:#0B5C60;font-variant-numeric:tabular-nums"><span data-count="1200">0</span><span style="color:#4CB272">+</span></div>
-            <p style="margin:10px 0 0;font-size:15px;color:#51696B">обследованных объектов</p>
-          </div>
-          <div data-rv="true" style="border-top:1px solid rgba(11,92,96,0.18);padding-top:28px">
-            <div style="font-weight:300;font-size:clamp(54px,5vw,80px);line-height:0.9;color:#0B5C60;font-variant-numeric:tabular-nums"><span data-count="98">0</span><span style="color:#4CB272">%</span></div>
-            <p style="margin:10px 0 0;font-size:15px;color:#51696B">документации согласовано без замечаний</p>
-          </div>
+        <div class="f-stats">
+          <div class="f-stat" data-rv="true"><div class="f-stat__num"><span data-count="14">0</span></div><p class="f-stat__label">лет в экологическом инжиниринге</p></div>
+          <div class="f-stat" data-rv="true"><div class="f-stat__num"><span data-count="500">0</span>+</div><p class="f-stat__label">реализованных проектов</p></div>
+          <div class="f-stat" data-rv="true"><div class="f-stat__num"><span data-count="1200">0</span>+</div><p class="f-stat__label">обследованных объектов</p></div>
+          <div class="f-stat" data-rv="true"><div class="f-stat__num"><span data-count="98">0</span>%</div><p class="f-stat__label">документации согласовано без замечаний</p></div>
         </div>
       </div>
     </section>
 
     <!-- ПОЧЕМУ ВЫБИРАЮТ НАС -->
-    <section id="pochemu" data-screen-label="Почему мы" data-sec="true" style="position:relative;padding:130px 48px;background:#F7FBF9;scroll-margin-top:80px;overflow:hidden">
-      <div style="position:relative;max-width:1280px;margin:0 auto">
-        <div data-two-col="true" style="display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:end;margin-bottom:72px">
-          <div>
-            <p data-rv="true" style="margin:0 0 18px;font-family:'Stolzl','Onest',sans-serif;font-size:12px;font-weight:500;letter-spacing:0.22em;color:#139EA1;text-transform:uppercase">Почему выбирают нас</p>
-            <h2 data-rv="true" style="margin:0;font-weight:300;font-size:clamp(34px,3.4vw,52px);line-height:1.12;letter-spacing:-0.01em;color:#13282B">Компетенция, которую видно в данных</h2>
+    <section id="pochemu" class="f-sec f-sec--alt" data-screen-label="Почему мы" data-sec="true">
+      <div class="f-wrap">
+        <div class="f-intro">
+          <p class="f-eyebrow" data-rv="true">Почему выбирают нас</p>
+          <div class="f-intro__row">
+            <h2 class="f-h2" data-rv="true">Компетенция, которую видно в данных</h2>
+            <p class="f-lead" data-rv="true">Шесть причин, по которым инженеры и девелоперы приходят к нам с объектами, где цена ошибки высока.</p>
           </div>
-          <p data-rv="true" style="margin:0;font-size:17px;color:#3E5557;max-width:460px;justify-self:end">Шесть причин, по которым инженеры и девелоперы приходят к нам с объектами, где цена ошибки высока.</p>
         </div>
-        <div data-cols4="true" style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px">
-          <div data-rv="true" style="border:1px solid rgba(11,92,96,0.14);border-radius:20px;padding:30px 28px;background:#FFFFFF;transition:border-color 0.3s ease,transform 0.3s ease,box-shadow 0.3s ease" style-hover="border-color:#139EA1;transform:translateY(-4px);box-shadow:0 18px 40px rgba(11,92,96,0.1)">
-            <div style="display:flex;align-items:center;gap:12px"><span aria-hidden="true" style="width:10px;height:10px;border-radius:50%;background:radial-gradient(circle,#ADCF7A,#4CB272);box-shadow:0 0 12px rgba(173,207,122,0.8)"></span><h3 style="margin:0;font-size:20px;font-weight:500;color:#0B5C60;letter-spacing:0.01em">Экспертность</h3></div>
-            <p style="margin:14px 0 0;font-size:14.5px;line-height:1.6;color:#51696B">14 лет практики: инженеры и учёные, а не менеджеры. За плечами — объекты федерального масштаба.</p>
-          </div>
-          <div data-rv="true" style="border:1px solid rgba(11,92,96,0.14);border-radius:20px;padding:30px 28px;background:#FFFFFF;transition:border-color 0.3s ease,transform 0.3s ease,box-shadow 0.3s ease" style-hover="border-color:#139EA1;transform:translateY(-4px);box-shadow:0 18px 40px rgba(11,92,96,0.1)">
-            <div style="display:flex;align-items:center;gap:12px"><span aria-hidden="true" style="width:10px;height:10px;border-radius:50%;background:radial-gradient(circle,#4CB272,#139EA1);box-shadow:0 0 12px rgba(76,178,114,0.8)"></span><h3 style="margin:0;font-size:20px;font-weight:500;color:#0B5C60;letter-spacing:0.01em">Научный подход</h3></div>
-            <p style="margin:14px 0 0;font-size:14.5px;line-height:1.6;color:#51696B">Каждое заключение опирается на измерения и воспроизводимые расчёты, а не на пересказ нормативов.</p>
-          </div>
-          <div data-rv="true" style="border:1px solid rgba(11,92,96,0.14);border-radius:20px;padding:30px 28px;background:#FFFFFF;transition:border-color 0.3s ease,transform 0.3s ease,box-shadow 0.3s ease" style-hover="border-color:#139EA1;transform:translateY(-4px);box-shadow:0 18px 40px rgba(11,92,96,0.1)">
-            <div style="display:flex;align-items:center;gap:12px"><span aria-hidden="true" style="width:10px;height:10px;border-radius:50%;background:radial-gradient(circle,#139EA1,#1C6BA2);box-shadow:0 0 12px rgba(19,158,161,0.8)"></span><h3 style="margin:0;font-size:20px;font-weight:500;color:#0B5C60;letter-spacing:0.01em">Скорость работы</h3></div>
-            <p style="margin:14px 0 0;font-size:14.5px;line-height:1.6;color:#51696B">Изыскания, лаборатория и документация — одна команда по одному адресу. Без потерь на стыках подрядчиков.</p>
-          </div>
-          <div data-rv="true" style="border:1px solid rgba(11,92,96,0.14);border-radius:20px;padding:30px 28px;background:#FFFFFF;transition:border-color 0.3s ease,transform 0.3s ease,box-shadow 0.3s ease" style-hover="border-color:#139EA1;transform:translateY(-4px);box-shadow:0 18px 40px rgba(11,92,96,0.1)">
-            <div style="display:flex;align-items:center;gap:12px"><span aria-hidden="true" style="width:10px;height:10px;border-radius:50%;background:radial-gradient(circle,#ADCF7A,#139EA1);box-shadow:0 0 12px rgba(173,207,122,0.8)"></span><h3 style="margin:0;font-size:20px;font-weight:500;color:#0B5C60;letter-spacing:0.01em">Комплексные решения</h3></div>
-            <p style="margin:14px 0 0;font-size:14.5px;line-height:1.6;color:#51696B">От разового проекта до полного экологического сопровождения предприятия — под ключ, без субподряда.</p>
-          </div>
-          <div data-rv="true" style="border:1px solid rgba(11,92,96,0.14);border-radius:20px;padding:30px 28px;background:#FFFFFF;transition:border-color 0.3s ease,transform 0.3s ease,box-shadow 0.3s ease" style-hover="border-color:#139EA1;transform:translateY(-4px);box-shadow:0 18px 40px rgba(11,92,96,0.1)">
-            <div style="display:flex;align-items:center;gap:12px"><span aria-hidden="true" style="width:10px;height:10px;border-radius:50%;background:radial-gradient(circle,#1C6BA2,#0B5C60);box-shadow:0 0 12px rgba(28,107,162,0.8)"></span><h3 style="margin:0;font-size:20px;font-weight:500;color:#0B5C60;letter-spacing:0.01em">ESG-компетенции</h3></div>
-            <p style="margin:14px 0 0;font-size:14.5px;line-height:1.6;color:#51696B">Углеродный след по трём охватам, ESG-отчётность и климатическая повестка — на данных, а не декларациях.</p>
-          </div>
-          <div data-rv="true" style="border:1px solid rgba(11,92,96,0.14);border-radius:20px;padding:30px 28px;background:#FFFFFF;transition:border-color 0.3s ease,transform 0.3s ease,box-shadow 0.3s ease" style-hover="border-color:#139EA1;transform:translateY(-4px);box-shadow:0 18px 40px rgba(11,92,96,0.1)">
-            <div style="display:flex;align-items:center;gap:12px"><span aria-hidden="true" style="width:10px;height:10px;border-radius:50%;background:radial-gradient(circle,#4CB272,#1C6BA2);box-shadow:0 0 12px rgba(76,178,114,0.8)"></span><h3 style="margin:0;font-size:20px;font-weight:500;color:#0B5C60;letter-spacing:0.01em">Цифровые инструменты</h3></div>
-            <p style="margin:14px 0 0;font-size:14.5px;line-height:1.6;color:#51696B">Собственная аналитика и прослеживаемость до каждой пробы: понятные отчёты вместо тысяч страниц.</p>
-          </div>
+        <div class="f-why">
+          <div class="f-why__card" data-rv="true"><div class="f-why__title"><span class="f-dot" aria-hidden="true"></span><h3>Экспертность</h3></div><p>14 лет практики: инженеры и учёные, а не менеджеры. За плечами — объекты федерального масштаба.</p></div>
+          <div class="f-why__card" data-rv="true"><div class="f-why__title"><span class="f-dot" aria-hidden="true"></span><h3>Научный подход</h3></div><p>Каждое заключение опирается на измерения и воспроизводимые расчёты, а не на пересказ нормативов.</p></div>
+          <div class="f-why__card" data-rv="true"><div class="f-why__title"><span class="f-dot" aria-hidden="true"></span><h3>Скорость работы</h3></div><p>Изыскания, лаборатория и документация — одна команда по одному адресу. Без потерь на стыках подрядчиков.</p></div>
+          <div class="f-why__card" data-rv="true"><div class="f-why__title"><span class="f-dot" aria-hidden="true"></span><h3>Комплексные решения</h3></div><p>От разового проекта до полного экологического сопровождения предприятия — под ключ, без субподряда.</p></div>
+          <div class="f-why__card" data-rv="true"><div class="f-why__title"><span class="f-dot" aria-hidden="true"></span><h3>ESG-компетенции</h3></div><p>Углеродный след по трём охватам, ESG-отчётность и климатическая повестка — на данных, а не декларациях.</p></div>
+          <div class="f-why__card" data-rv="true"><div class="f-why__title"><span class="f-dot" aria-hidden="true"></span><h3>Цифровые инструменты</h3></div><p>Собственная аналитика и прослеживаемость до каждой пробы: понятные отчёты вместо тысяч страниц.</p></div>
         </div>
       </div>
     </section>
 
     <!-- ЛАБОРАТОРИЯ -->
-    <section id="laboratoriya" data-screen-label="Лаборатория Аналитик Лаб" data-sec="true" style="position:relative;padding:130px 48px;background:#0A3D42 url('./assets/analitik.webp') center/cover no-repeat;color:#FFFFFF;overflow:hidden;scroll-margin-top:80px">
-      <div aria-hidden="true" style="position:absolute;inset:0;background:rgba(10,61,66,0.55);pointer-events:none"></div>
-      <div style="position:relative;z-index:1;max-width:1280px;margin:0 auto">
-        <div data-two-col="true" style="display:grid;grid-template-columns:1.05fr 0.95fr;gap:72px;align-items:center">
-          <div>
-            <p data-rv="true" style="margin:0 0 18px;font-family:'Stolzl','Onest',sans-serif;font-size:12px;font-weight:500;letter-spacing:0.22em;color:#ADCF7A;text-transform:uppercase">Собственная аккредитованная лаборатория</p>
-            <h2 data-rv="true" style="margin:0;font-weight:300;font-size:clamp(38px,4vw,62px);line-height:1.08;letter-spacing:-0.01em;color:#FFFFFF;overflow-wrap:break-word;hanging-punctuation:none">«Аналитик Лаб» — лаборатория в составе центра</h2>
-            <p data-rv="true" style="margin:26px 0 0;font-size:17px;line-height:1.7;color:rgba(255,255,255,0.78);max-width:540px">Редкость для рынка: отбор и анализ проб, изыскания, документация и согласование — в одной команде и по одному адресу. Без субподряда, без потери качества данных и сроков.</p>
-            <div data-rv="true" data-flow="true" style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:36px">
-              <span style="display:inline-flex;align-items:center;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.22);border-radius:999px;padding:9px 16px;font-size:13.5px;font-weight:500;white-space:nowrap">Изыскания</span>
-              <span aria-hidden="true" data-flow-arrow="true" style="color:rgba(173,207,122,0.65);font-size:15px;line-height:1">→</span>
-              <span style="display:inline-flex;align-items:center;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.22);border-radius:999px;padding:9px 16px;font-size:13.5px;font-weight:500;white-space:nowrap">Лабораторный анализ</span>
-              <span aria-hidden="true" data-flow-arrow="true" style="color:rgba(173,207,122,0.65);font-size:15px;line-height:1">→</span>
-              <span style="display:inline-flex;align-items:center;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.22);border-radius:999px;padding:9px 16px;font-size:13.5px;font-weight:500;white-space:nowrap">Документация</span>
-              <span aria-hidden="true" data-flow-arrow="true" style="color:rgba(173,207,122,0.65);font-size:15px;line-height:1">→</span>
-              <span style="display:inline-flex;align-items:center;background:rgba(173,207,122,0.18);border:1px solid rgba(173,207,122,0.5);border-radius:999px;padding:9px 16px;font-size:13.5px;font-weight:500;white-space:nowrap;color:#D9EBB8">Согласование</span>
-            </div>
-            <p data-rv="true" style="margin:34px 0 0;font-family:'Stolzl','Onest',sans-serif;font-size:12px;letter-spacing:0.1em;color:rgba(255,255,255,0.55)">АТТЕСТАТ RA.RU.516478 · РЕЕСТР АККРЕДИТОВАННЫХ ЛИЦ</p>
-            <a data-rv="true" data-lab-link="true" href="lab.html" style="position:relative;display:inline-flex;align-items:center;gap:8px;margin-top:28px;font-size:15px;font-weight:500;color:#ADCF7A;text-decoration:none;transition:color 0.25s ease">Страница лаборатории <span aria-hidden="true">→</span></a>
+    <section id="laboratoriya" class="f-sec" data-screen-label="Лаборатория Аналитик Лаб" data-sec="true">
+      <div class="f-wrap f-lab">
+        <div class="f-lab__content">
+          <div class="f-lab__intro">
+            <p class="f-eyebrow" data-rv="true">Собственная аккредитованная лаборатория</p>
+            <h2 class="f-h2" data-rv="true">«Аналитик Лаб»&nbsp;— лаборатория в составе центра</h2>
+            <p class="f-lead" data-rv="true">Редкость для рынка: отбор и анализ проб, изыскания, документация и согласование — в одной команде и по одному адресу. Без субподряда, без потери качества данных и сроков.</p>
           </div>
-          <div data-cols4="true" style="display:grid;grid-template-columns:repeat(2,1fr);gap:18px">
-            <div data-rv="true" style="background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.16);border-radius:22px;padding:30px 28px;transition:background 0.3s ease" style-hover="background:rgba(255,255,255,0.12)">
-              <div aria-hidden="true" style="width:48px;height:48px;border-radius:14px;background:linear-gradient(135deg,#ADCF7A,#139EA1);display:flex;align-items:center;justify-content:center;margin-bottom:20px;box-shadow:0 8px 24px rgba(19,158,161,0.35)">
-                <img src="./assets/figma/lab-water.svg" alt="" width="24" height="24" style="display:block;width:24px;height:24px;object-fit:contain">
-              </div>
-              <h3 style="margin:0 0 8px;font-size:19px;font-weight:500">Вода</h3>
-              <p style="margin:0;font-size:14px;color:rgba(255,255,255,0.65);line-height:1.6">Питьевая, природная, сточная — химический и микробиологический анализ</p>
-            </div>
-            <div data-rv="true" style="background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.16);border-radius:22px;padding:30px 28px;transition:background 0.3s ease" style-hover="background:rgba(255,255,255,0.12)">
-              <div aria-hidden="true" style="width:48px;height:48px;border-radius:14px;background:linear-gradient(135deg,#139EA1,#1C6BA2);display:flex;align-items:center;justify-content:center;margin-bottom:20px;box-shadow:0 8px 24px rgba(19,158,161,0.35)">
-                <img src="./assets/figma/lab-air.svg" alt="" width="24" height="24" style="display:block;width:24px;height:24px;object-fit:contain">
-              </div>
-              <h3 style="margin:0 0 8px;font-size:19px;font-weight:500">Воздух</h3>
-              <p style="margin:0;font-size:14px;color:rgba(255,255,255,0.65);line-height:1.6">Атмосферный воздух, промвыбросы, воздух рабочей зоны</p>
-            </div>
-            <div data-rv="true" style="background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.16);border-radius:22px;padding:30px 28px;transition:background 0.3s ease" style-hover="background:rgba(255,255,255,0.12)">
-              <div aria-hidden="true" style="width:48px;height:48px;border-radius:14px;background:linear-gradient(135deg,#4CB272,#0B5C60);display:flex;align-items:center;justify-content:center;margin-bottom:20px;box-shadow:0 8px 24px rgba(76,178,114,0.35)">
-                <img src="./assets/figma/lab-soil.svg" alt="" width="24" height="24" style="display:block;width:24px;height:24px;object-fit:contain">
-              </div>
-              <h3 style="margin:0 0 8px;font-size:19px;font-weight:500">Почвы и грунты</h3>
-              <p style="margin:0;font-size:14px;color:rgba(255,255,255,0.65);line-height:1.6">Загрязнения, агрохимия, оценка для изысканий и экспертизы</p>
-            </div>
-            <div data-rv="true" style="background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.16);border-radius:22px;padding:30px 28px;transition:background 0.3s ease" style-hover="background:rgba(255,255,255,0.12)">
-              <div aria-hidden="true" style="width:48px;height:48px;border-radius:14px;background:linear-gradient(135deg,#1C6BA2,#139EA1);display:flex;align-items:center;justify-content:center;margin-bottom:20px;box-shadow:0 8px 24px rgba(28,107,162,0.35)">
-                <img src="./assets/figma/lab-waste.svg" alt="" width="24" height="24" style="display:block;width:24px;height:24px;object-fit:contain">
-              </div>
-              <h3 style="margin:0 0 8px;font-size:19px;font-weight:500">Отходы</h3>
-              <p style="margin:0;font-size:14px;color:rgba(255,255,255,0.65);line-height:1.6">Определение класса опасности, морфология, паспортизация</p>
-            </div>
+          <div class="f-flow" data-rv="true">
+            <span class="f-flow__step">Изыскания</span>
+            <svg class="f-flow__arrow" viewBox="0 0 10 10" aria-hidden="true"><path d="M0 5H9M5.5 1.5L9 5L5.5 8.5" fill="none" stroke="#ADCF7A" stroke-width="1"/></svg>
+            <span class="f-flow__step">Лабораторный анализ</span>
+            <svg class="f-flow__arrow" viewBox="0 0 10 10" aria-hidden="true"><path d="M0 5H9M5.5 1.5L9 5L5.5 8.5" fill="none" stroke="#ADCF7A" stroke-width="1"/></svg>
+            <span class="f-flow__step">Документация</span>
+            <svg class="f-flow__arrow" viewBox="0 0 10 10" aria-hidden="true"><path d="M0 5H9M5.5 1.5L9 5L5.5 8.5" fill="none" stroke="#ADCF7A" stroke-width="1"/></svg>
+            <span class="f-flow__step f-flow__step--final">Согласование</span>
           </div>
+          <p class="f-lab__meta" data-rv="true">АТТЕСТАТ RA.RU.516478    |    РЕЕСТР АККРЕДИТОВАННЫХ ЛИЦ</p>
+          <a class="f-btn" href="lab.html" data-rv="true">Страница лаборатории</a>
         </div>
-        <!-- Хроматограмма — декоративная полоса ПОД контентом (не absolute), поэтому
-             физически не может перекрыть текст ни при какой высоте колонок/ширине экрана -->
-        <div aria-hidden="true" data-rv="true" data-chroma="true" style="position:relative;height:176px;margin:64px auto 0;pointer-events:none">
-          <svg viewBox="0 0 1200 140" preserveAspectRatio="none" width="100%" height="100%" style="display:block;mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);-webkit-mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent)">
-            <defs>
-              <linearGradient id="chromaStroke" x1="0" y1="0" x2="1" y2="0">
-                <stop offset="0" stop-color="#ADCF7A"></stop>
-                <stop offset="0.5" stop-color="#139EA1"></stop>
-                <stop offset="1" stop-color="#1C6BA2"></stop>
-              </linearGradient>
-            </defs>
-            <g stroke="rgba(255,255,255,0.06)" stroke-width="1">
-              <line x1="252" y1="24" x2="252" y2="120"></line>
-              <line x1="524" y1="24" x2="524" y2="120"></line>
-              <line x1="830" y1="24" x2="830" y2="120"></line>
-              <line x1="1120" y1="24" x2="1120" y2="120"></line>
-            </g>
-            <line x1="0" y1="120" x2="1200" y2="120" stroke="rgba(255,255,255,0.16)" stroke-width="1"></line>
-            <path id="eco-chroma-path" d="M0,120 L80,120 C100,120 104,86 116,86 C128,86 132,120 152,120 L206,120 C230,120 236,30 252,30 C268,30 274,120 296,120 L316,120 C332,120 338,64 350,64 C362,64 368,120 386,120 L470,120 C500,120 508,10 524,10 C540,10 548,120 576,120 L626,120 C648,120 654,70 668,70 C682,70 688,120 708,120 L786,120 C808,120 816,42 830,42 C844,42 852,120 872,120 L958,120 C978,120 984,88 1000,88 C1016,88 1022,120 1040,120 L1086,120 C1102,120 1108,58 1120,58 C1132,58 1138,120 1158,120 L1200,120" fill="none" stroke="url(#chromaStroke)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="filter:drop-shadow(0 0 6px rgba(19,158,161,0.45))"></path>
-          </svg>
-          <span style="position:absolute;left:2px;bottom:8px;font-family:'Stolzl','Onest',sans-serif;font-size:10px;letter-spacing:0.18em;color:rgba(255,255,255,0.38)">ОТКЛИК</span>
-          <span style="position:absolute;right:2px;bottom:8px;font-family:'Stolzl','Onest',sans-serif;font-size:10px;letter-spacing:0.18em;color:rgba(255,255,255,0.38)">ВРЕМЯ →</span>
+        <div class="f-lab__grid">
+          <div class="f-lab__card" data-rv="true"><div class="f-lab__head"><span class="f-lab__icon" aria-hidden="true"><img src="./assets/figma/lab-water.svg" alt=""></span><h3>Вода</h3></div><p>Питьевая, природная, сточная — химический и микробиологический анализ</p></div>
+          <div class="f-lab__card" data-rv="true"><div class="f-lab__head"><span class="f-lab__icon" aria-hidden="true"><img src="./assets/figma/lab-air.svg" alt=""></span><h3>Воздух</h3></div><p>Атмосферный воздух, промвыбросы, воздух рабочей зоны</p></div>
+          <div class="f-lab__card" data-rv="true"><div class="f-lab__head"><span class="f-lab__icon f-lab__icon--green" aria-hidden="true"><img src="./assets/figma/lab-soil.svg" alt=""></span><h3>Почвы и грунты</h3></div><p>Загрязнения, агрохимия, оценка для изысканий и экспертизы</p></div>
+          <div class="f-lab__card" data-rv="true"><div class="f-lab__head"><span class="f-lab__icon f-lab__icon--green" aria-hidden="true"><img src="./assets/figma/lab-waste.svg" alt=""></span><h3>Отходы</h3></div><p>Определение класса опасности, морфология, паспортизация</p></div>
         </div>
       </div>
     </section>
 
     <!-- УСЛУГИ -->
-    <section id="uslugi" data-screen-label="Услуги" data-sec="true" style="position:relative;overflow:hidden;padding:130px 48px;background:#FFFFFF;scroll-margin-top:80px">
-      <div aria-hidden="true" style="position:absolute;inset:0;pointer-events:none;z-index:0">
-        <div style="position:absolute;top:-8%;left:-4%;width:min(680px,56vw);height:min(680px,56vw);border-radius:50%;background:radial-gradient(circle at 44% 44%,rgba(76,178,114,0.5) 0%,rgba(173,207,122,0.32) 38%,rgba(76,178,114,0) 70%);filter:blur(58px)"></div>
-      </div>
-      <img data-svc-illustration="true" src="./assets/services-illustration.webp" alt="" aria-hidden="true" style="position:absolute;z-index:0;top:64px;right:clamp(-80px,-4vw,-12px);width:clamp(320px,33vw,500px);height:auto;pointer-events:none;filter:drop-shadow(0 34px 62px rgba(11,92,96,0.2));animation:svcFloat 7.5s ease-in-out infinite">
-      <div style="position:relative;z-index:1;max-width:1280px;margin:0 auto">
-        <div data-svc-head="true" style="display:flex;align-items:center;min-height:clamp(300px,32vw,420px);margin-bottom:72px">
-          <div style="max-width:560px">
-            <p data-rv="true" style="margin:0 0 18px;font-family:'Stolzl','Onest',sans-serif;font-size:12px;font-weight:500;letter-spacing:0.22em;color:#139EA1;text-transform:uppercase">Услуги</p>
-            <h2 data-rv="true" style="margin:0;font-weight:300;font-size:clamp(34px,3.4vw,52px);line-height:1.12;letter-spacing:-0.01em;color:#13282B">Полный спектр экологического инжиниринга</h2>
-            <p data-rv="true" style="margin:26px 0 0;font-size:17px;color:#3E5557;max-width:460px">От разового проекта до полного экологического сопровождения предприятия. Наведите на карточку, чтобы увидеть состав работ.</p>
-            <p data-rv="true" style="margin:18px 0 0"><a href="uslugi/" style="font-family:'Stolzl','Onest',sans-serif;font-size:11px;letter-spacing:0.14em;color:#139EA1;text-decoration:none">ВСЕ УСЛУГИ →</a></p>
+    <section id="uslugi" class="f-sec" data-screen-label="Услуги" data-sec="true">
+      <div class="f-wrap">
+        <div class="f-svc-intro">
+          <div class="f-svc-intro__text">
+            <p class="f-eyebrow" data-rv="true">Услуги</p>
+            <div class="f-svc-intro__copy">
+              <h2 class="f-h2" data-rv="true">Экологический инжиниринг полного цикла</h2>
+              <p class="f-lead" data-rv="true">От разового проекта до полного экологического сопровождения предприятия.</p>
+              <a class="f-btn f-btn--sm f-btn--ghost" href="uslugi/" data-rv="true">Все услуги</a>
+            </div>
           </div>
+          <img class="f-svc-island" data-svc-illustration="true" src="./assets/services-illustration.webp" alt="" aria-hidden="true" width="395" height="537">
         </div>
-
-        <!-- 01 Проектирование и документация -->
-        <div class="svc-zone svc-zone--tint" style="margin-bottom:0">
-          <div data-rv="true" style="display:flex;align-items:baseline;gap:22px;border-width:0 0 2px;border-style:solid;border-image:linear-gradient(90deg,#ADCF7A 0%,#139EA1 55%,#1C6BA2 100%) 1;padding-bottom:20px;margin-bottom:32px">
-            <span style="font-family:'Stolzl','Onest',sans-serif;font-size:22px;font-weight:600;letter-spacing:0.02em;line-height:1;background:linear-gradient(120deg,#ADCF7A,#139EA1 55%,#1C6BA2);-webkit-background-clip:text;background-clip:text;color:transparent">01</span>
-            <h3 style="margin:0;font-size:26px;font-weight:500;color:#13282B;letter-spacing:-0.01em">Проектирование и документация</h3>
-            <span style="margin-left:auto;font-size:14px;color:#647A7C;align-self:center">разрешительная документация под ключ</span>
-          </div>
-          <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px">
-            <div data-svc="true" data-svc-href="uslugi/ndv/" data-rv="true" tabindex="0" style="border:1px solid rgba(11,92,96,0.14);border-radius:20px;padding:26px 26px 22px;background:#FFFFFF;cursor:pointer;transition:border-color 0.3s ease,transform 0.3s ease,box-shadow 0.3s ease" style-hover="border-color:#139EA1;transform:translateY(-4px);box-shadow:0 18px 40px rgba(11,92,96,0.1)">
-              <div style="display:flex;align-items:center;gap:12px"><span aria-hidden="true" style="width:10px;height:10px;border-radius:50%;background:radial-gradient(circle,#ADCF7A,#4CB272);box-shadow:0 0 12px rgba(173,207,122,0.8)"></span><span style="font-size:26px;font-weight:500;color:#0B5C60;letter-spacing:0.02em" data-svc-id="ndv">НДВ</span></div>
-              <p style="margin:10px 0 0;font-size:14.5px;color:#51696B"><a href="uslugi/ndv/" style="color:inherit;text-decoration:none">Нормативы допустимых выбросов</a></p>
-              <div data-desc="true"><p style="margin:14px 0 0;font-size:14px;color:#3E5557;line-height:1.6">Инвентаризация источников выбросов, расчёт рассеивания загрязняющих веществ в атмосферном воздухе, разработка проекта и его сопровождение при согласовании.</p><p style="margin:12px 0 0;font-family:'Stolzl','Onest',sans-serif;font-size:11px;letter-spacing:0.14em;color:#139EA1"><a href="uslugi/ndv/" style="color:inherit;text-decoration:none">СТРАНИЦА УСЛУГИ →</a></p></div>
-            </div>
-            <div data-svc="true" data-rv="true" tabindex="0" style="border:1px solid rgba(11,92,96,0.14);border-radius:20px;padding:26px 26px 22px;background:#FFFFFF;cursor:pointer;transition:border-color 0.3s ease,transform 0.3s ease,box-shadow 0.3s ease" style-hover="border-color:#139EA1;transform:translateY(-4px);box-shadow:0 18px 40px rgba(11,92,96,0.1)">
-              <div style="display:flex;align-items:center;gap:12px"><span aria-hidden="true" style="width:10px;height:10px;border-radius:50%;background:radial-gradient(circle,#4CB272,#139EA1);box-shadow:0 0 12px rgba(76,178,114,0.8)"></span><span style="font-size:26px;font-weight:500;color:#0B5C60;letter-spacing:0.02em" data-svc-id="nds">НДС</span></div>
-              <p style="margin:10px 0 0;font-size:14.5px;color:#51696B">Нормативы допустимых сбросов</p>
-              <div data-desc="true"><p style="margin:14px 0 0;font-size:14px;color:#3E5557;line-height:1.6">Расчёт нормативов сбросов в водные объекты и системы водоотведения, согласование.</p><p style="margin:12px 0 0;font-family:'Stolzl','Onest',sans-serif;font-size:11px;letter-spacing:0.14em;color:#139EA1">СТРАНИЦА УСЛУГИ →</p></div>
-            </div>
-            <div data-svc="true" data-rv="true" tabindex="0" style="border:1px solid rgba(11,92,96,0.14);border-radius:20px;padding:26px 26px 22px;background:#FFFFFF;cursor:pointer;transition:border-color 0.3s ease,transform 0.3s ease,box-shadow 0.3s ease" style-hover="border-color:#139EA1;transform:translateY(-4px);box-shadow:0 18px 40px rgba(11,92,96,0.1)">
-              <div style="display:flex;align-items:center;gap:12px"><span aria-hidden="true" style="width:10px;height:10px;border-radius:50%;background:radial-gradient(circle,#139EA1,#1C6BA2);box-shadow:0 0 12px rgba(19,158,161,0.8)"></span><span style="font-size:26px;font-weight:500;color:#0B5C60;letter-spacing:0.02em" data-svc-id="pnoolr">ПНООЛР</span></div>
-              <p style="margin:10px 0 0;font-size:14.5px;color:#51696B">Нормативы образования отходов и лимиты на размещение</p>
-              <div data-desc="true"><p style="margin:14px 0 0;font-size:14px;color:#3E5557;line-height:1.6">Проведение инвентаризации отходов производства и потребления, расчёт нормативов образования отходов, разработка проекта.</p><p style="margin:12px 0 0;font-family:'Stolzl','Onest',sans-serif;font-size:11px;letter-spacing:0.14em;color:#139EA1">СТРАНИЦА УСЛУГИ →</p></div>
-            </div>
-            <div data-svc="true" data-svc-href="uslugi/proekt-szz/" data-rv="true" tabindex="0" style="border:1px solid rgba(11,92,96,0.14);border-radius:20px;padding:26px 26px 22px;background:#FFFFFF;cursor:pointer;transition:border-color 0.3s ease,transform 0.3s ease,box-shadow 0.3s ease" style-hover="border-color:#139EA1;transform:translateY(-4px);box-shadow:0 18px 40px rgba(11,92,96,0.1)">
-              <div style="display:flex;align-items:center;gap:12px"><span aria-hidden="true" style="width:10px;height:10px;border-radius:50%;background:radial-gradient(circle,#ADCF7A,#139EA1);box-shadow:0 0 12px rgba(173,207,122,0.8)"></span><span style="font-size:26px;font-weight:500;color:#0B5C60;letter-spacing:0.02em" data-svc-id="szz">СЗЗ</span></div>
-              <p style="margin:10px 0 0;font-size:14.5px;color:#51696B"><a href="uslugi/proekt-szz/" style="color:inherit;text-decoration:none">Проект санитарно-защитной зоны</a></p>
-              <div data-desc="true"><p style="margin:14px 0 0;font-size:14px;color:#3E5557;line-height:1.6">Проект СЗЗ с натурными измерениями нашей лаборатории — без привлечения подрядчиков.</p><p style="margin:12px 0 0;font-family:'Stolzl','Onest',sans-serif;font-size:11px;letter-spacing:0.14em;color:#139EA1"><a href="uslugi/proekt-szz/" style="color:inherit;text-decoration:none">СТРАНИЦА УСЛУГИ →</a></p></div>
-            </div>
-            <div data-svc="true" data-rv="true" tabindex="0" style="border:1px solid rgba(11,92,96,0.14);border-radius:20px;padding:26px 26px 22px;background:#FFFFFF;cursor:pointer;transition:border-color 0.3s ease,transform 0.3s ease,box-shadow 0.3s ease" style-hover="border-color:#139EA1;transform:translateY(-4px);box-shadow:0 18px 40px rgba(11,92,96,0.1)">
-              <div style="display:flex;align-items:center;gap:12px"><span aria-hidden="true" style="width:10px;height:10px;border-radius:50%;background:radial-gradient(circle,#1C6BA2,#0B5C60);box-shadow:0 0 12px rgba(28,107,162,0.8)"></span><span style="font-size:26px;font-weight:500;color:#0B5C60;letter-spacing:0.02em" data-svc-id="ker">КЭР</span></div>
-              <p style="margin:10px 0 0;font-size:14.5px;color:#51696B">Комплексное экологическое разрешение</p>
-              <div data-desc="true"><p style="margin:14px 0 0;font-size:14px;color:#3E5557;line-height:1.6">Подготовка заявки и материалов КЭР для объектов I категории, сопровождение документации при рассмотрении заявки.</p><p style="margin:12px 0 0;font-family:'Stolzl','Onest',sans-serif;font-size:11px;letter-spacing:0.14em;color:#139EA1">СТРАНИЦА УСЛУГИ →</p></div>
-            </div>
-            <div data-svc="true" data-svc-href="uslugi/ovos/" data-rv="true" tabindex="0" style="border:1px solid rgba(11,92,96,0.14);border-radius:20px;padding:26px 26px 22px;background:#FFFFFF;cursor:pointer;transition:border-color 0.3s ease,transform 0.3s ease,box-shadow 0.3s ease" style-hover="border-color:#139EA1;transform:translateY(-4px);box-shadow:0 18px 40px rgba(11,92,96,0.1)">
-              <div style="display:flex;align-items:center;gap:12px"><span aria-hidden="true" style="width:10px;height:10px;border-radius:50%;background:radial-gradient(circle,#4CB272,#1C6BA2);box-shadow:0 0 12px rgba(76,178,114,0.8)"></span><span style="font-size:26px;font-weight:500;color:#0B5C60;letter-spacing:0.02em" data-svc-id="ovos">ОВОС</span></div>
-              <p style="margin:10px 0 0;font-size:14.5px;color:#51696B"><a href="uslugi/ovos/" style="color:inherit;text-decoration:none">Оценка воздействия на окружающую среду</a></p>
-              <div data-desc="true"><p style="margin:14px 0 0;font-size:14px;color:#3E5557;line-height:1.6">Разработка раздела ОВОС, проведение процедуры общественных обсуждений и сопровождение проектной документации при согласовании в государственной экологической экспертизе (ГЭЭ).</p><p style="margin:12px 0 0;font-family:'Stolzl','Onest',sans-serif;font-size:11px;letter-spacing:0.14em;color:#139EA1"><a href="uslugi/ovos/" style="color:inherit;text-decoration:none">СТРАНИЦА УСЛУГИ →</a></p></div>
-            </div>
-            <div data-svc="true" data-svc-href="uslugi/pek/" data-rv="true" tabindex="0" style="border:1px solid rgba(11,92,96,0.14);border-radius:20px;padding:26px 26px 22px;background:#FFFFFF;cursor:pointer;transition:border-color 0.3s ease,transform 0.3s ease,box-shadow 0.3s ease" style-hover="border-color:#139EA1;transform:translateY(-4px);box-shadow:0 18px 40px rgba(11,92,96,0.1)">
-              <div style="display:flex;align-items:center;gap:12px"><span aria-hidden="true" style="width:10px;height:10px;border-radius:50%;background:radial-gradient(circle,#139EA1,#0B5C60);box-shadow:0 0 12px rgba(19,158,161,0.8)"></span><span style="font-size:26px;font-weight:500;color:#0B5C60;letter-spacing:0.02em" data-svc-id="pek">ПЭК</span></div>
-              <p style="margin:10px 0 0;font-size:14.5px;color:#51696B"><a href="uslugi/pek/" style="color:inherit;text-decoration:none">Программа производственного экологического контроля</a></p>
-              <div data-desc="true"><p style="margin:14px 0 0;font-size:14px;color:#3E5557;line-height:1.6">Разработка программы ПЭК, составление ежегодных отчётов, измерения силами лаборатории.</p><p style="margin:12px 0 0;font-family:'Stolzl','Onest',sans-serif;font-size:11px;letter-spacing:0.14em;color:#139EA1"><a href="uslugi/pek/" style="color:inherit;text-decoration:none">СТРАНИЦА УСЛУГИ →</a></p></div>
-            </div>
-            <div data-svc="true" data-rv="true" tabindex="0" style="border:1px solid rgba(11,92,96,0.14);border-radius:20px;padding:26px 26px 22px;background:#FFFFFF;cursor:pointer;transition:border-color 0.3s ease,transform 0.3s ease,box-shadow 0.3s ease" style-hover="border-color:#139EA1;transform:translateY(-4px);box-shadow:0 18px 40px rgba(11,92,96,0.1)">
-              <div style="display:flex;align-items:center;gap:12px"><span aria-hidden="true" style="width:10px;height:10px;border-radius:50%;background:radial-gradient(circle,#ADCF7A,#1C6BA2);box-shadow:0 0 12px rgba(173,207,122,0.8)"></span><span style="font-size:26px;font-weight:500;color:#0B5C60;letter-spacing:0.02em" data-svc-id="pmoos">ПМООС</span></div>
-              <p style="margin:10px 0 0;font-size:14.5px;color:#51696B">Мероприятия по охране окружающей среды</p>
-              <div data-desc="true"><p style="margin:14px 0 0;font-size:14px;color:#3E5557;line-height:1.6">Разработка проектной документации и сопровождение при её согласовании в государственной экспертизе.</p><p style="margin:12px 0 0;font-family:'Stolzl','Onest',sans-serif;font-size:11px;letter-spacing:0.14em;color:#139EA1">СТРАНИЦА УСЛУГИ →</p></div>
-            </div>
-            <div data-svc="true" data-rv="true" tabindex="0" style="border:1px solid rgba(11,92,96,0.14);border-radius:20px;padding:26px 26px 22px;background:#FFFFFF;cursor:pointer;transition:border-color 0.3s ease,transform 0.3s ease,box-shadow 0.3s ease" style-hover="border-color:#139EA1;transform:translateY(-4px);box-shadow:0 18px 40px rgba(11,92,96,0.1)">
-              <div style="display:flex;align-items:center;gap:12px"><span aria-hidden="true" style="width:10px;height:10px;border-radius:50%;background:radial-gradient(circle,#4CB272,#0B5C60);box-shadow:0 0 12px rgba(76,178,114,0.8)"></span><span style="font-size:26px;font-weight:500;color:#0B5C60;letter-spacing:0.02em" data-svc-id="dvos">ДВОС</span></div>
-              <p style="margin:10px 0 0;font-size:14.5px;color:#51696B">Декларация о воздействии на окружающую среду</p>
-              <div data-desc="true"><p style="margin:14px 0 0;font-size:14px;color:#3E5557;line-height:1.6">Подготовка и подача декларации для объектов II категории.</p><p style="margin:12px 0 0;font-family:'Stolzl','Onest',sans-serif;font-size:11px;letter-spacing:0.14em;color:#139EA1">СТРАНИЦА УСЛУГИ →</p></div>
+        <div class="f-svc-content">
+          <div class="f-cat" data-rv="true">
+            <div class="f-cat__head"><h3 class="f-cat__title"><span class="f-cat__num">01</span><span>Проектирование и документация</span></h3><span class="f-cat__desc">разрешительная документация под ключ</span></div>
+            <div class="f-svc-grid">
+              <div class="f-svc" data-svc="true" data-svc-href="uslugi/ndv/" data-rv="true" tabindex="0">
+                <h4 class="f-svc__title"><span class="f-dot" aria-hidden="true"></span><span data-svc-id="ndv">НДВ</span></h4>
+                <p class="f-svc__desc"><a href="uslugi/ndv/" style="color:inherit;text-decoration:none">Нормативы допустимых выбросов</a></p>
+                <div data-desc="true"><p>Инвентаризация источников выбросов, расчёт рассеивания загрязняющих веществ в атмосферном воздухе, разработка проекта и его сопровождение при согласовании.</p><p><a href="uslugi/ndv/" style="color:inherit;text-decoration:none">СТРАНИЦА УСЛУГИ →</a></p></div>
+              </div>
+              <div class="f-svc" data-svc="true" data-rv="true" tabindex="0">
+                <h4 class="f-svc__title"><span class="f-dot" aria-hidden="true"></span><span data-svc-id="nds">НДС</span></h4>
+                <p class="f-svc__desc">Нормативы допустимых сбросов</p>
+                <div data-desc="true"><p>Расчёт нормативов сбросов в водные объекты и системы водоотведения, согласование.</p><p>СТРАНИЦА УСЛУГИ →</p></div>
+              </div>
+              <div class="f-svc" data-svc="true" data-rv="true" tabindex="0">
+                <h4 class="f-svc__title"><span class="f-dot" aria-hidden="true"></span><span data-svc-id="pnoolr">ПНООЛР</span></h4>
+                <p class="f-svc__desc">Нормативы образования отходов и лимиты на размещение</p>
+                <div data-desc="true"><p>Проведение инвентаризации отходов производства и потребления, расчёт нормативов образования отходов, разработка проекта.</p><p>СТРАНИЦА УСЛУГИ →</p></div>
+              </div>
+              <div class="f-svc" data-svc="true" data-svc-href="uslugi/proekt-szz/" data-rv="true" tabindex="0">
+                <h4 class="f-svc__title"><span class="f-dot" aria-hidden="true"></span><span data-svc-id="szz">СЗЗ</span></h4>
+                <p class="f-svc__desc"><a href="uslugi/proekt-szz/" style="color:inherit;text-decoration:none">Проект санитарно-защитной зоны</a></p>
+                <div data-desc="true"><p>Проект СЗЗ с натурными измерениями нашей лаборатории — без привлечения подрядчиков.</p><p><a href="uslugi/proekt-szz/" style="color:inherit;text-decoration:none">СТРАНИЦА УСЛУГИ →</a></p></div>
+              </div>
+              <div class="f-svc" data-svc="true" data-rv="true" tabindex="0">
+                <h4 class="f-svc__title"><span class="f-dot" aria-hidden="true"></span><span data-svc-id="ker">КЭР</span></h4>
+                <p class="f-svc__desc">Комплексное экологическое разрешение</p>
+                <div data-desc="true"><p>Подготовка заявки и материалов КЭР для объектов I категории, сопровождение документации при рассмотрении заявки.</p><p>СТРАНИЦА УСЛУГИ →</p></div>
+              </div>
+              <div class="f-svc" data-svc="true" data-svc-href="uslugi/ovos/" data-rv="true" tabindex="0">
+                <h4 class="f-svc__title"><span class="f-dot" aria-hidden="true"></span><span data-svc-id="ovos">ОВОС</span></h4>
+                <p class="f-svc__desc"><a href="uslugi/ovos/" style="color:inherit;text-decoration:none">Оценка воздействия на окружающую среду</a></p>
+                <div data-desc="true"><p>Разработка раздела ОВОС, проведение процедуры общественных обсуждений и сопровождение проектной документации при согласовании в государственной экологической экспертизе (ГЭЭ).</p><p><a href="uslugi/ovos/" style="color:inherit;text-decoration:none">СТРАНИЦА УСЛУГИ →</a></p></div>
+              </div>
+              <div class="f-svc" data-svc="true" data-svc-href="uslugi/pek/" data-rv="true" tabindex="0">
+                <h4 class="f-svc__title"><span class="f-dot" aria-hidden="true"></span><span data-svc-id="pek">ПЭК</span></h4>
+                <p class="f-svc__desc"><a href="uslugi/pek/" style="color:inherit;text-decoration:none">Программа производственного экологического контроля</a></p>
+                <div data-desc="true"><p>Разработка программы ПЭК, составление ежегодных отчётов, измерения силами лаборатории.</p><p><a href="uslugi/pek/" style="color:inherit;text-decoration:none">СТРАНИЦА УСЛУГИ →</a></p></div>
+              </div>
+              <div class="f-svc" data-svc="true" data-rv="true" tabindex="0">
+                <h4 class="f-svc__title"><span class="f-dot" aria-hidden="true"></span><span data-svc-id="pmoos">ПМООС</span></h4>
+                <p class="f-svc__desc">Мероприятия по охране окружающей среды</p>
+                <div data-desc="true"><p>Разработка проектной документации и сопровождение при её согласовании в государственной экспертизе.</p><p>СТРАНИЦА УСЛУГИ →</p></div>
+              </div>
+              <div class="f-svc" data-svc="true" data-rv="true" tabindex="0">
+                <h4 class="f-svc__title"><span class="f-dot" aria-hidden="true"></span><span data-svc-id="dvos">ДВОС</span></h4>
+                <p class="f-svc__desc">Декларация о воздействии на окружающую среду</p>
+                <div data-desc="true"><p>Подготовка и подача декларации для объектов II категории.</p><p>СТРАНИЦА УСЛУГИ →</p></div>
+              </div>
             </div>
           </div>
-        </div>
-
-        <!-- 02 Сопровождение -->
-        <div class="svc-zone" style="margin-bottom:0">
-          <div data-rv="true" style="display:flex;align-items:baseline;gap:22px;border-width:0 0 2px;border-style:solid;border-image:linear-gradient(90deg,#ADCF7A 0%,#139EA1 55%,#1C6BA2 100%) 1;padding-bottom:20px;margin-bottom:32px">
-            <span style="font-family:'Stolzl','Onest',sans-serif;font-size:22px;font-weight:600;letter-spacing:0.02em;line-height:1;background:linear-gradient(120deg,#ADCF7A,#139EA1 55%,#1C6BA2);-webkit-background-clip:text;background-clip:text;color:transparent">02</span>
-            <h3 style="margin:0;font-size:26px;font-weight:500;color:#13282B;letter-spacing:-0.01em">Экологическое сопровождение предприятий</h3>
-            <span style="margin-left:auto;font-size:14px;color:#647A7C;align-self:center">текущая отчётность и контроль</span>
-          </div>
-          <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px">
-            <div data-svc="true" data-svc-href="uslugi/autsorsing-ekologa/" data-rv="true" tabindex="0" style="border:1px solid rgba(11,92,96,0.14);border-radius:20px;padding:26px 26px 22px;background:#FFFFFF;cursor:pointer;transition:border-color 0.3s ease,transform 0.3s ease,box-shadow 0.3s ease" style-hover="border-color:#139EA1;transform:translateY(-4px);box-shadow:0 18px 40px rgba(11,92,96,0.1)">
-              <div style="display:flex;align-items:flex-start;gap:12px"><span aria-hidden="true" style="width:10px;height:10px;border-radius:50%;background:radial-gradient(circle,#ADCF7A,#4CB272);box-shadow:0 0 12px rgba(173,207,122,0.8);margin-top:6px;flex:0 0 auto"></span><h4 style="margin:0;font-size:18px;font-weight:500;color:#13282B" data-svc-id="autsorsing"><a href="uslugi/autsorsing-ekologa/" style="color:inherit;text-decoration:none">Аутсорсинг эколога</a></h4></div>
-              <div data-desc="true"><p style="margin:12px 0 0;font-size:14px;color:#3E5557;line-height:1.6">Штатный эколог на аутсорсе: проведение аудита предприятия в части соответствия его деятельности действующему природоохранному законодательству, составление и ведение необходимых журналов и отчётов, подача сведений, отчётов, деклараций в личном кабинете природопользователя, а также взаимодействие с надзорными органами при необходимости.</p><p style="margin:12px 0 0;font-family:'Stolzl','Onest',sans-serif;font-size:11px;letter-spacing:0.14em;color:#139EA1"><a href="uslugi/autsorsing-ekologa/" style="color:inherit;text-decoration:none">СТРАНИЦА УСЛУГИ →</a></p></div>
-            </div>
-            <div data-svc="true" data-rv="true" tabindex="0" style="border:1px solid rgba(11,92,96,0.14);border-radius:20px;padding:26px 26px 22px;background:#FFFFFF;cursor:pointer;transition:border-color 0.3s ease,transform 0.3s ease,box-shadow 0.3s ease" style-hover="border-color:#139EA1;transform:translateY(-4px);box-shadow:0 18px 40px rgba(11,92,96,0.1)">
-              <div style="display:flex;align-items:flex-start;gap:12px"><span aria-hidden="true" style="width:10px;height:10px;border-radius:50%;background:radial-gradient(circle,#4CB272,#139EA1);box-shadow:0 0 12px rgba(76,178,114,0.8);margin-top:6px;flex:0 0 auto"></span><h4 style="margin:0;font-size:18px;font-weight:500;color:#13282B" data-svc-id="tp2">Отчётность 2-ТП</h4></div>
-              <div data-desc="true"><p style="margin:12px 0 0;font-size:14px;color:#3E5557;line-height:1.6">2-ТП (воздух), 2-ТП (водхоз), 2-ТП (отходы), 2-ТП (рекультивация) — подготовка и сдача отчётов в личном кабинете природопользователя.</p><p style="margin:12px 0 0;font-family:'Stolzl','Onest',sans-serif;font-size:11px;letter-spacing:0.14em;color:#139EA1">СТРАНИЦА УСЛУГИ →</p></div>
-            </div>
-            <div data-svc="true" data-rv="true" tabindex="0" style="border:1px solid rgba(11,92,96,0.14);border-radius:20px;padding:26px 26px 22px;background:#FFFFFF;cursor:pointer;transition:border-color 0.3s ease,transform 0.3s ease,box-shadow 0.3s ease" style-hover="border-color:#139EA1;transform:translateY(-4px);box-shadow:0 18px 40px rgba(11,92,96,0.1)">
-              <div style="display:flex;align-items:flex-start;gap:12px"><span aria-hidden="true" style="width:10px;height:10px;border-radius:50%;background:radial-gradient(circle,#139EA1,#1C6BA2);box-shadow:0 0 12px rgba(19,158,161,0.8);margin-top:6px;flex:0 0 auto"></span><h4 style="margin:0;font-size:18px;font-weight:500;color:#13282B" data-svc-id="nvos-uchet">Постановка на учёт НВОС</h4></div>
-              <div data-desc="true"><p style="margin:12px 0 0;font-size:14px;color:#3E5557;line-height:1.6">Постановка предприятия на учёт с целью получения им категории объекта НВОС, а также актуализация сведений о деятельности предприятия при необходимости.</p><p style="margin:12px 0 0;font-family:'Stolzl','Onest',sans-serif;font-size:11px;letter-spacing:0.14em;color:#139EA1">СТРАНИЦА УСЛУГИ →</p></div>
-            </div>
-            <div data-svc="true" data-svc-href="uslugi/plata-nvos/" data-rv="true" tabindex="0" style="border:1px solid rgba(11,92,96,0.14);border-radius:20px;padding:26px 26px 22px;background:#FFFFFF;cursor:pointer;transition:border-color 0.3s ease,transform 0.3s ease,box-shadow 0.3s ease" style-hover="border-color:#139EA1;transform:translateY(-4px);box-shadow:0 18px 40px rgba(11,92,96,0.1)">
-              <div style="display:flex;align-items:flex-start;gap:12px"><span aria-hidden="true" style="width:10px;height:10px;border-radius:50%;background:radial-gradient(circle,#1C6BA2,#0B5C60);box-shadow:0 0 12px rgba(28,107,162,0.8);margin-top:6px;flex:0 0 auto"></span><h4 style="margin:0;font-size:18px;font-weight:500;color:#13282B" data-svc-id="nvos-plata"><a href="uslugi/plata-nvos/" style="color:inherit;text-decoration:none">Расчёт платы за НВОС</a></h4></div>
-              <div data-desc="true"><p style="margin:12px 0 0;font-size:14px;color:#3E5557;line-height:1.6">Составление декларации о плате и её подача в личном кабинете природопользователя.</p><p style="margin:12px 0 0;font-family:'Stolzl','Onest',sans-serif;font-size:11px;letter-spacing:0.14em;color:#139EA1"><a href="uslugi/plata-nvos/" style="color:inherit;text-decoration:none">СТРАНИЦА УСЛУГИ →</a></p></div>
+          <div class="f-cat" data-rv="true">
+            <div class="f-cat__head"><h3 class="f-cat__title"><span class="f-cat__num">02</span><span>Экологическое сопровождение предприятий</span></h3><span class="f-cat__desc">текущая отчётность и контроль</span></div>
+            <div class="f-svc-grid">
+              <div class="f-svc" data-svc="true" data-svc-href="uslugi/autsorsing-ekologa/" data-rv="true" tabindex="0">
+                <h4 class="f-svc__title"><span class="f-dot" aria-hidden="true"></span><span data-svc-id="autsorsing"><a href="uslugi/autsorsing-ekologa/" style="color:inherit;text-decoration:none">Аутсорсинг эколога</a></span></h4>
+                <div data-desc="true"><p>Штатный эколог на аутсорсе: проведение аудита предприятия в части соответствия его деятельности действующему природоохранному законодательству, составление и ведение необходимых журналов и отчётов, подача сведений, отчётов, деклараций в личном кабинете природопользователя, а также взаимодействие с надзорными органами при необходимости.</p><p><a href="uslugi/autsorsing-ekologa/" style="color:inherit;text-decoration:none">СТРАНИЦА УСЛУГИ →</a></p></div>
+              </div>
+              <div class="f-svc" data-svc="true" data-rv="true" tabindex="0">
+                <h4 class="f-svc__title"><span class="f-dot" aria-hidden="true"></span><span data-svc-id="tp2">Отчётность 2-ТП</span></h4>
+                <div data-desc="true"><p>2-ТП (воздух), 2-ТП (водхоз), 2-ТП (отходы), 2-ТП (рекультивация) — подготовка и сдача отчётов в личном кабинете природопользователя.</p><p>СТРАНИЦА УСЛУГИ →</p></div>
+              </div>
+              <div class="f-svc" data-svc="true" data-rv="true" tabindex="0">
+                <h4 class="f-svc__title"><span class="f-dot" aria-hidden="true"></span><span data-svc-id="nvos-uchet">Постановка на учёт НВОС</span></h4>
+                <div data-desc="true"><p>Постановка предприятия на учёт с целью получения им категории объекта НВОС, а также актуализация сведений о деятельности предприятия при необходимости.</p><p>СТРАНИЦА УСЛУГИ →</p></div>
+              </div>
+              <div class="f-svc" data-svc="true" data-svc-href="uslugi/plata-nvos/" data-rv="true" tabindex="0">
+                <h4 class="f-svc__title"><span class="f-dot" aria-hidden="true"></span><span data-svc-id="nvos-plata"><a href="uslugi/plata-nvos/" style="color:inherit;text-decoration:none">Расчёт платы за НВОС</a></span></h4>
+                <div data-desc="true"><p>Составление декларации о плате и её подача в личном кабинете природопользователя.</p><p><a href="uslugi/plata-nvos/" style="color:inherit;text-decoration:none">СТРАНИЦА УСЛУГИ →</a></p></div>
+              </div>
             </div>
           </div>
-        </div>
-
-        <!-- 03 Изыскания -->
-        <div class="svc-zone svc-zone--tint" style="margin-bottom:0">
-          <div data-rv="true" style="display:flex;align-items:baseline;gap:22px;border-width:0 0 2px;border-style:solid;border-image:linear-gradient(90deg,#ADCF7A 0%,#139EA1 55%,#1C6BA2 100%) 1;padding-bottom:20px;margin-bottom:32px">
-            <span style="font-family:'Stolzl','Onest',sans-serif;font-size:22px;font-weight:600;letter-spacing:0.02em;line-height:1;background:linear-gradient(120deg,#ADCF7A,#139EA1 55%,#1C6BA2);-webkit-background-clip:text;background-clip:text;color:transparent">03</span>
-            <h3 style="margin:0;font-size:26px;font-weight:500;color:#13282B;letter-spacing:-0.01em">Изыскания и лабораторные исследования</h3>
-            <span style="margin-left:auto;font-size:14px;color:#647A7C;align-self:center">полевые работы + «Аналитик Лаб»</span>
-          </div>
-          <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px">
-            <div data-svc="true" data-svc-href="uslugi/iei/" data-rv="true" tabindex="0" style="border:1px solid rgba(11,92,96,0.14);border-radius:20px;padding:26px 26px 22px;background:#FFFFFF;cursor:pointer;transition:border-color 0.3s ease,transform 0.3s ease,box-shadow 0.3s ease" style-hover="border-color:#139EA1;transform:translateY(-4px);box-shadow:0 18px 40px rgba(11,92,96,0.1)">
-              <div style="display:flex;align-items:flex-start;gap:12px"><span aria-hidden="true" style="width:10px;height:10px;border-radius:50%;background:radial-gradient(circle,#ADCF7A,#139EA1);box-shadow:0 0 12px rgba(173,207,122,0.8);margin-top:6px;flex:0 0 auto"></span><h4 style="margin:0;font-size:18px;font-weight:500;color:#13282B" data-svc-id="iei"><a href="uslugi/iei/" style="color:inherit;text-decoration:none">Инженерно-экологические изыскания (ИЭИ)</a></h4></div>
-              <div data-desc="true"><p style="margin:12px 0 0;font-size:14px;color:#3E5557;line-height:1.6">Полный цикл ИЭИ для проектирования и прохождения экспертизы.</p><p style="margin:12px 0 0;font-family:'Stolzl','Onest',sans-serif;font-size:11px;letter-spacing:0.14em;color:#139EA1"><a href="uslugi/iei/" style="color:inherit;text-decoration:none">СТРАНИЦА УСЛУГИ →</a></p></div>
-            </div>
-            <div data-svc="true" data-rv="true" tabindex="0" style="border:1px solid rgba(11,92,96,0.14);border-radius:20px;padding:26px 26px 22px;background:#FFFFFF;cursor:pointer;transition:border-color 0.3s ease,transform 0.3s ease,box-shadow 0.3s ease" style-hover="border-color:#139EA1;transform:translateY(-4px);box-shadow:0 18px 40px rgba(11,92,96,0.1)">
-              <div style="display:flex;align-items:flex-start;gap:12px"><span aria-hidden="true" style="width:10px;height:10px;border-radius:50%;background:radial-gradient(circle,#4CB272,#1C6BA2);box-shadow:0 0 12px rgba(76,178,114,0.8);margin-top:6px;flex:0 0 auto"></span><h4 style="margin:0;font-size:18px;font-weight:500;color:#13282B" data-svc-id="lab">Лабораторные исследования</h4></div>
-              <div data-desc="true"><p style="margin:12px 0 0;font-size:14px;color:#3E5557;line-height:1.6">Вода, воздух, почва, отходы — анализ в собственной аккредитованной лаборатории.</p><p style="margin:12px 0 0;font-family:'Stolzl','Onest',sans-serif;font-size:11px;letter-spacing:0.14em;color:#139EA1">СТРАНИЦА УСЛУГИ →</p></div>
-            </div>
-            <div data-svc="true" data-rv="true" tabindex="0" style="border:1px solid rgba(11,92,96,0.14);border-radius:20px;padding:26px 26px 22px;background:#FFFFFF;cursor:pointer;transition:border-color 0.3s ease,transform 0.3s ease,box-shadow 0.3s ease" style-hover="border-color:#139EA1;transform:translateY(-4px);box-shadow:0 18px 40px rgba(11,92,96,0.1)">
-              <div style="display:flex;align-items:flex-start;gap:12px"><span aria-hidden="true" style="width:10px;height:10px;border-radius:50%;background:radial-gradient(circle,#139EA1,#0B5C60);box-shadow:0 0 12px rgba(19,158,161,0.8);margin-top:6px;flex:0 0 auto"></span><h4 style="margin:0;font-size:18px;font-weight:500;color:#13282B" data-svc-id="izm">Измерения для ПЭК и СЗЗ</h4></div>
-              <div data-desc="true"><p style="margin:12px 0 0;font-size:14px;color:#3E5557;line-height:1.6">Натурные замеры: шум, атмосферный воздух, ЭМИ, радиация, промышленные выбросы.</p><p style="margin:12px 0 0;font-family:'Stolzl','Onest',sans-serif;font-size:11px;letter-spacing:0.14em;color:#139EA1">СТРАНИЦА УСЛУГИ →</p></div>
+          <div class="f-cat" data-rv="true">
+            <div class="f-cat__head"><h3 class="f-cat__title"><span class="f-cat__num">03</span><span>Изыскания и лабораторные исследования</span></h3><span class="f-cat__desc">полевые работы + «Аналитик Лаб»</span></div>
+            <div class="f-svc-grid">
+              <div class="f-svc" data-svc="true" data-svc-href="uslugi/iei/" data-rv="true" tabindex="0">
+                <h4 class="f-svc__title"><span class="f-dot" aria-hidden="true"></span><span data-svc-id="iei"><a href="uslugi/iei/" style="color:inherit;text-decoration:none">Инженерно-экологические изыскания (ИЭИ)</a></span></h4>
+                <div data-desc="true"><p>Полный цикл ИЭИ для проектирования и прохождения экспертизы.</p><p><a href="uslugi/iei/" style="color:inherit;text-decoration:none">СТРАНИЦА УСЛУГИ →</a></p></div>
+              </div>
+              <div class="f-svc" data-svc="true" data-rv="true" tabindex="0">
+                <h4 class="f-svc__title"><span class="f-dot" aria-hidden="true"></span><span data-svc-id="lab">Лабораторные исследования</span></h4>
+                <div data-desc="true"><p>Вода, воздух, почва, отходы — анализ в собственной аккредитованной лаборатории.</p><p>СТРАНИЦА УСЛУГИ →</p></div>
+              </div>
+              <div class="f-svc" data-svc="true" data-rv="true" tabindex="0">
+                <h4 class="f-svc__title"><span class="f-dot" aria-hidden="true"></span><span data-svc-id="izm">Измерения для ПЭК и СЗЗ</span></h4>
+                <div data-desc="true"><p>Натурные замеры: шум, атмосферный воздух, ЭМИ, радиация, промышленные выбросы.</p><p>СТРАНИЦА УСЛУГИ →</p></div>
+              </div>
             </div>
           </div>
-        </div>
-
-        <!-- 04 ESG -->
-        <div class="svc-zone" style="margin-bottom:0">
-          <div data-rv="true" style="display:flex;align-items:baseline;gap:22px;border-width:0 0 2px;border-style:solid;border-image:linear-gradient(90deg,#ADCF7A 0%,#139EA1 55%,#1C6BA2 100%) 1;padding-bottom:20px;margin-bottom:32px">
-            <span style="font-family:'Stolzl','Onest',sans-serif;font-size:22px;font-weight:600;letter-spacing:0.02em;line-height:1;background:linear-gradient(120deg,#ADCF7A,#139EA1 55%,#1C6BA2);-webkit-background-clip:text;background-clip:text;color:transparent">04</span>
-            <h3 style="margin:0;font-size:26px;font-weight:500;color:#13282B;letter-spacing:-0.01em">ESG и устойчивое развитие</h3>
-            <span style="margin-left:auto;font-size:14px;color:#647A7C;align-self:center">научный подход к нефинансовым данным</span>
-          </div>
-          <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px">
-            <div data-svc="true" data-rv="true" tabindex="0" style="border:1px solid rgba(11,92,96,0.14);border-radius:20px;padding:26px 26px 22px;background:#FFFFFF;cursor:pointer;transition:border-color 0.3s ease,transform 0.3s ease,box-shadow 0.3s ease" style-hover="border-color:#139EA1;transform:translateY(-4px);box-shadow:0 18px 40px rgba(11,92,96,0.1)">
-              <div style="display:flex;align-items:flex-start;gap:12px"><span aria-hidden="true" style="width:10px;height:10px;border-radius:50%;background:radial-gradient(circle,#ADCF7A,#4CB272);box-shadow:0 0 12px rgba(173,207,122,0.8);margin-top:6px;flex:0 0 auto"></span><h4 style="margin:0;font-size:18px;font-weight:500;color:#13282B" data-svc-id="uglerod">Углеродный след</h4></div>
-              <div data-desc="true"><p style="margin:12px 0 0;font-size:14px;color:#3E5557;line-height:1.6">Расчёт выбросов Охват 1–3, верификация данных, план снижения.</p><p style="margin:12px 0 0;font-family:'Stolzl','Onest',sans-serif;font-size:11px;letter-spacing:0.14em;color:#139EA1">СТРАНИЦА УСЛУГИ →</p></div>
-            </div>
-            <div data-svc="true" data-rv="true" tabindex="0" style="border:1px solid rgba(11,92,96,0.14);border-radius:20px;padding:26px 26px 22px;background:#FFFFFF;cursor:pointer;transition:border-color 0.3s ease,transform 0.3s ease,box-shadow 0.3s ease" style-hover="border-color:#139EA1;transform:translateY(-4px);box-shadow:0 18px 40px rgba(11,92,96,0.1)">
-              <div style="display:flex;align-items:flex-start;gap:12px"><span aria-hidden="true" style="width:10px;height:10px;border-radius:50%;background:radial-gradient(circle,#139EA1,#1C6BA2);box-shadow:0 0 12px rgba(19,158,161,0.8);margin-top:6px;flex:0 0 auto"></span><h4 style="margin:0;font-size:18px;font-weight:500;color:#13282B" data-svc-id="esg-otchet">ESG-отчётность</h4></div>
-              <div data-desc="true"><p style="margin:12px 0 0;font-size:14px;color:#3E5557;line-height:1.6">Нефинансовая отчётность по российским и международным стандартам.</p><p style="margin:12px 0 0;font-family:'Stolzl','Onest',sans-serif;font-size:11px;letter-spacing:0.14em;color:#139EA1">СТРАНИЦА УСЛУГИ →</p></div>
-            </div>
-            <div data-svc="true" data-rv="true" tabindex="0" style="border:1px solid rgba(11,92,96,0.14);border-radius:20px;padding:26px 26px 22px;background:#FFFFFF;cursor:pointer;transition:border-color 0.3s ease,transform 0.3s ease,box-shadow 0.3s ease" style-hover="border-color:#139EA1;transform:translateY(-4px);box-shadow:0 18px 40px rgba(11,92,96,0.1)">
-              <div style="display:flex;align-items:flex-start;gap:12px"><span aria-hidden="true" style="width:10px;height:10px;border-radius:50%;background:radial-gradient(circle,#1C6BA2,#0B5C60);box-shadow:0 0 12px rgba(28,107,162,0.8);margin-top:6px;flex:0 0 auto"></span><h4 style="margin:0;font-size:18px;font-weight:500;color:#13282B" data-svc-id="klimat">Климатические риски</h4></div>
-              <div data-desc="true"><p style="margin:12px 0 0;font-size:14px;color:#3E5557;line-height:1.6">Оценка физических и переходных рисков, адаптационные стратегии.</p><p style="margin:12px 0 0;font-family:'Stolzl','Onest',sans-serif;font-size:11px;letter-spacing:0.14em;color:#139EA1">СТРАНИЦА УСЛУГИ →</p></div>
+          <div class="f-cat" data-rv="true">
+            <div class="f-cat__head"><h3 class="f-cat__title"><span class="f-cat__num">04</span><span>ESG и устойчивое развитие</span></h3><span class="f-cat__desc">научный подход к нефинансовым данным</span></div>
+            <div class="f-svc-grid">
+              <div class="f-svc" data-svc="true" data-rv="true" tabindex="0">
+                <h4 class="f-svc__title"><span class="f-dot" aria-hidden="true"></span><span data-svc-id="uglerod">Углеродный след</span></h4>
+                <div data-desc="true"><p>Расчёт выбросов Охват 1–3, верификация данных, план снижения.</p><p>СТРАНИЦА УСЛУГИ →</p></div>
+              </div>
+              <div class="f-svc" data-svc="true" data-rv="true" tabindex="0">
+                <h4 class="f-svc__title"><span class="f-dot" aria-hidden="true"></span><span data-svc-id="esg-otchet">ESG-отчётность</span></h4>
+                <div data-desc="true"><p>Нефинансовая отчётность по российским и международным стандартам.</p><p>СТРАНИЦА УСЛУГИ →</p></div>
+              </div>
+              <div class="f-svc" data-svc="true" data-rv="true" tabindex="0">
+                <h4 class="f-svc__title"><span class="f-dot" aria-hidden="true"></span><span data-svc-id="klimat">Климатические риски</span></h4>
+                <div data-desc="true"><p>Оценка физических и переходных рисков, адаптационные стратегии.</p><p>СТРАНИЦА УСЛУГИ →</p></div>
+              </div>
             </div>
           </div>
         </div>
@@ -632,282 +809,173 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
     </section>
 
     <!-- ПРОЕКТЫ -->
-    <section id="proekty" data-screen-label="Портфель проектов" data-sec="true" style="padding:130px 48px;background:#F4F8F7;scroll-margin-top:80px">
-      <div style="max-width:1280px;margin:0 auto">
-        <div data-two-col="true" style="display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:end;margin-bottom:64px">
-          <div>
-            <p data-rv="true" style="margin:0 0 18px;font-family:'Stolzl','Onest',sans-serif;font-size:12px;font-weight:500;letter-spacing:0.22em;color:#139EA1;text-transform:uppercase">Портфель</p>
-            <h2 data-rv="true" style="margin:0;font-weight:300;font-size:clamp(34px,3.4vw,52px);line-height:1.12;letter-spacing:-0.01em;color:#13282B">Объекты, которым нужна точность</h2>
+    <section id="proekty" class="f-sec f-sec--alt" data-screen-label="Портфель проектов" data-sec="true">
+      <div class="f-wrap">
+        <div class="f-intro">
+          <p class="f-eyebrow" data-rv="true">Проекты</p>
+          <div class="f-intro__row">
+            <h2 class="f-h2" data-rv="true">Объекты, которым нужна точность</h2>
+            <p class="f-lead" data-rv="true">Работаем с объектами федерального масштаба — от небоскрёбов до портовых акваторий и театров.</p>
           </div>
-          <p data-rv="true" style="margin:0;font-size:17px;color:#3E5557;max-width:460px;justify-self:end">Работаем с объектами федерального масштаба — от небоскрёбов до портовых акваторий и театров.</p>
         </div>
-        <div data-proj-grid="true" style="display:grid;grid-template-columns:repeat(12,1fr);gap:20px">
-          <article data-proj="true" data-rv="true" style="grid-column:span 7;background:#FFFFFF;border-radius:26px;overflow:hidden;box-shadow:0 2px 10px rgba(11,92,96,0.05);transition:transform 0.4s cubic-bezier(0.22,1,0.36,1),box-shadow 0.4s ease" style-hover="transform:translateY(-4px);box-shadow:0 24px 56px rgba(11,92,96,0.13)">
-            <div style="height:300px;overflow:hidden;position:relative">
-              <div data-pimg="true" style="position:absolute;inset:0;background:repeating-linear-gradient(45deg,#E0EDE8 0 14px,#EAF4EF 14px 28px)">
-                <image-slot id="proj-lahta" shape="rect" fit="cover" src="./assets/projects/project-lahta.jpg" alt="Лахта Центр — экологическое сопровождение строительства" placeholder="Лахта Центр" style="position:absolute;inset:0;width:100%;height:100%"></image-slot>
-              </div>
-            </div>
-            <div style="padding:32px 34px 36px">
-              <p style="margin:0 0 10px;font-family:'Stolzl','Onest',sans-serif;font-size:11px;letter-spacing:0.18em;color:#139EA1;text-transform:uppercase">Экологическое сопровождение строительства</p>
-              <h3 style="margin:0 0 10px;font-size:27px;font-weight:400;color:#13282B">Лахта Центр</h3>
-              <p style="margin:0;font-size:15px;color:#51696B;line-height:1.65">Полный цикл экологического контроля при строительстве самого высокого небоскрёба Европы: мониторинг, измерения, отчётность на всех этапах.</p>
-            </div>
+        <div class="f-proj-grid">
+          <article class="f-proj f-proj--wide" data-proj="true" data-rv="true">
+            <div class="f-proj__img"><img src="./assets/projects/project-lahta.jpg" alt="Лахта Центр — экологическое сопровождение строительства" loading="lazy" decoding="async" width="1024" height="576"></div>
+            <div class="f-proj__copy"><p class="f-proj__eyebrow">Экологическое сопровождение строительства</p><h3>Лахта Центр</h3><p>Полный цикл экологического контроля при строительстве самого высокого небоскрёба Европы: мониторинг, измерения, отчётность на всех этапах.</p></div>
           </article>
-          <article data-proj="true" data-rv="true" style="grid-column:span 5;background:#FFFFFF;border-radius:26px;overflow:hidden;box-shadow:0 2px 10px rgba(11,92,96,0.05);transition:transform 0.4s cubic-bezier(0.22,1,0.36,1),box-shadow 0.4s ease" style-hover="transform:translateY(-4px);box-shadow:0 24px 56px rgba(11,92,96,0.13)">
-            <div style="height:300px;overflow:hidden;position:relative">
-              <div data-pimg="true" style="position:absolute;inset:0;background:repeating-linear-gradient(45deg,#E0EDE8 0 14px,#EAF4EF 14px 28px)">
-                <image-slot id="proj-mariinsky" shape="rect" fit="cover" src="./assets/projects/project-mariinsky.jpg" alt="Мариинский театр — проект санитарно-защитной зоны и натурные измерения" placeholder="Мариинский театр" style="position:absolute;inset:0;width:100%;height:100%"></image-slot>
-              </div>
-            </div>
-            <div style="padding:32px 34px 36px">
-              <p style="margin:0 0 10px;font-family:'Stolzl','Onest',sans-serif;font-size:11px;letter-spacing:0.18em;color:#139EA1;text-transform:uppercase">Проект СЗЗ · измерения</p>
-              <h3 style="margin:0 0 10px;font-size:27px;font-weight:400;color:#13282B">Мариинский театр</h3>
-              <p style="margin:0;font-size:15px;color:#51696B;line-height:1.65">Санитарно-защитная зона и натурные измерения для объекта культурного значения в плотной городской среде.</p>
-            </div>
+          <article class="f-proj" data-proj="true" data-rv="true">
+            <div class="f-proj__img"><img src="./assets/projects/project-mariinsky.jpg" alt="Мариинский театр — проект санитарно-защитной зоны и натурные измерения" loading="lazy" decoding="async" width="1024" height="576"></div>
+            <div class="f-proj__copy"><p class="f-proj__eyebrow">Проект СЗЗ&nbsp;&nbsp;|&nbsp;&nbsp;измерения</p><h3>Мариинский театр</h3><p>Санитарно-защитная зона и натурные измерения для объекта культурного значения в плотной городской среде.</p></div>
           </article>
-          <article data-proj="true" data-rv="true" style="grid-column:span 5;background:#FFFFFF;border-radius:26px;overflow:hidden;box-shadow:0 2px 10px rgba(11,92,96,0.05);transition:transform 0.4s cubic-bezier(0.22,1,0.36,1),box-shadow 0.4s ease" style-hover="transform:translateY(-4px);box-shadow:0 24px 56px rgba(11,92,96,0.13)">
-            <div style="height:260px;overflow:hidden;position:relative">
-              <div data-pimg="true" style="position:absolute;inset:0;background:repeating-linear-gradient(45deg,#E0EDE8 0 14px,#EAF4EF 14px 28px)">
-                <image-slot id="proj-port" shape="rect" fit="cover" src="./assets/projects/project-port.jpg" alt="Большой порт Санкт-Петербург — изыскания и мониторинг акватории" placeholder="Большой порт СПб" style="position:absolute;inset:0;width:100%;height:100%"></image-slot>
-              </div>
-            </div>
-            <div style="padding:32px 34px 36px">
-              <p style="margin:0 0 10px;font-family:'Stolzl','Onest',sans-serif;font-size:11px;letter-spacing:0.18em;color:#139EA1;text-transform:uppercase">Изыскания · мониторинг акватории</p>
-              <h3 style="margin:0 0 10px;font-size:27px;font-weight:400;color:#13282B">Большой порт Санкт-Петербург</h3>
-              <p style="margin:0;font-size:15px;color:#51696B;line-height:1.65">Инженерно-экологические изыскания и мониторинг акватории при развитии портовой инфраструктуры.</p>
-            </div>
+          <article class="f-proj" data-proj="true" data-rv="true">
+            <div class="f-proj__img"><img src="./assets/projects/project-port.jpg" alt="Большой порт Санкт-Петербург — изыскания и мониторинг акватории" loading="lazy" decoding="async" width="1024" height="576"></div>
+            <div class="f-proj__copy"><p class="f-proj__eyebrow">Изыскания&nbsp;&nbsp;|&nbsp;&nbsp;Мониторинг акватории</p><h3>Большой порт Санкт-Петербург</h3><p>Инженерно-экологические изыскания и мониторинг акватории при развитии портовой инфраструктуры.</p></div>
           </article>
-          <article data-proj="true" data-rv="true" style="grid-column:span 7;background:#FFFFFF;border-radius:26px;overflow:hidden;box-shadow:0 2px 10px rgba(11,92,96,0.05);transition:transform 0.4s cubic-bezier(0.22,1,0.36,1),box-shadow 0.4s ease" style-hover="transform:translateY(-4px);box-shadow:0 24px 56px rgba(11,92,96,0.13)">
-            <div style="height:260px;overflow:hidden;position:relative">
-              <div data-pimg="true" style="position:absolute;inset:0;background:repeating-linear-gradient(45deg,#E0EDE8 0 14px,#EAF4EF 14px 28px)">
-                <image-slot id="proj-moek" shape="rect" fit="cover" src="./assets/projects/project-moek.jpg" alt="МОЭК — разрешительная документация и производственный экологический контроль" placeholder="МОЭК" style="position:absolute;inset:0;width:100%;height:100%"></image-slot>
-              </div>
-            </div>
-            <div style="padding:32px 34px 36px">
-              <p style="margin:0 0 10px;font-family:'Stolzl','Onest',sans-serif;font-size:11px;letter-spacing:0.18em;color:#139EA1;text-transform:uppercase">Нормативная документация · ПЭК</p>
-              <h3 style="margin:0 0 10px;font-size:27px;font-weight:400;color:#13282B">МОЭК</h3>
-              <p style="margin:0;font-size:15px;color:#51696B;line-height:1.65">Разрешительная документация и производственный экологический контроль для объектов теплоэнергетики Москвы.</p>
-            </div>
+          <article class="f-proj f-proj--wide" data-proj="true" data-rv="true">
+            <div class="f-proj__img"><img src="./assets/projects/project-moek.jpg" alt="МОЭК — разрешительная документация и производственный экологический контроль" loading="lazy" decoding="async" width="1024" height="576"></div>
+            <div class="f-proj__copy"><p class="f-proj__eyebrow">Нормативная документация&nbsp;&nbsp;|&nbsp;&nbsp;ПЭК</p><h3>МОЭК</h3><p>Разрешительная документация и производственный экологический контроль для объектов теплоэнергетики Москвы.</p></div>
           </article>
         </div>
       </div>
     </section>
 
     <!-- КАК МЫ РАБОТАЕМ -->
-    <section id="protsess" data-screen-label="Как мы работаем" data-sec="true" style="padding:130px 48px;background:#FFFFFF;scroll-margin-top:80px">
-      <div style="max-width:1280px;margin:0 auto">
-        <p data-rv="true" style="margin:0 0 18px;font-family:'Stolzl','Onest',sans-serif;font-size:12px;font-weight:500;letter-spacing:0.22em;color:#139EA1;text-transform:uppercase">Процесс</p>
-        <h2 data-rv="true" style="margin:0 0 72px;font-weight:300;font-size:clamp(34px,3.4vw,52px);line-height:1.12;letter-spacing:-0.01em;color:#13282B;max-width:700px">Как мы работаем</h2>
-        <div data-steps="true" style="display:grid;grid-template-columns:repeat(5,1fr);gap:36px;position:relative">
-          <div aria-hidden="true" style="position:absolute;top:5px;left:0;right:0;height:1px;background:linear-gradient(90deg,#ADCF7A,#4CB272,#139EA1,#1C6BA2,#0B5C60);opacity:0.45"></div>
-          <div data-rv="true" style="position:relative;padding-top:32px" style-before="content:'';position:absolute;top:0;left:0;width:11px;height:11px;border-radius:50%;background:#ADCF7A;box-shadow:0 0 0 4px rgba(173,207,122,0.25)">
-            <p style="margin:0 0 10px;font-family:'Stolzl','Onest',sans-serif;font-size:12px;color:#647A7C">01</p>
-            <h3 style="margin:0 0 10px;font-size:18px;font-weight:500;color:#13282B">Заявка и оценка задачи</h3>
-            <p style="margin:0;font-size:14.5px;color:#51696B;line-height:1.65">Отвечаем в течение рабочего дня, фиксируем объём, сроки и стоимость.</p>
-          </div>
-          <div data-rv="true" style="position:relative;padding-top:32px" style-before="content:'';position:absolute;top:0;left:0;width:11px;height:11px;border-radius:50%;background:#4CB272;box-shadow:0 0 0 4px rgba(76,178,114,0.25)">
-            <p style="margin:0 0 10px;font-family:'Stolzl','Onest',sans-serif;font-size:12px;color:#647A7C">02</p>
-            <h3 style="margin:0 0 10px;font-size:18px;font-weight:500;color:#13282B">Исходные данные</h3>
-            <p style="margin:0;font-size:14.5px;color:#51696B;line-height:1.65">Запрашиваем документы, при необходимости выезжаем на объект.</p>
-          </div>
-          <div data-rv="true" style="position:relative;padding-top:32px" style-before="content:'';position:absolute;top:0;left:0;width:11px;height:11px;border-radius:50%;background:#139EA1;box-shadow:0 0 0 4px rgba(19,158,161,0.25)">
-            <p style="margin:0 0 10px;font-family:'Stolzl','Onest',sans-serif;font-size:12px;color:#647A7C">03</p>
-            <h3 style="margin:0 0 10px;font-size:18px;font-weight:500;color:#13282B">Эксперты и лаборатория</h3>
-            <p style="margin:0;font-size:14.5px;color:#51696B;line-height:1.65">Полевые работы, отбор и анализ проб, расчёты и моделирование.</p>
-          </div>
-          <div data-rv="true" style="position:relative;padding-top:32px" style-before="content:'';position:absolute;top:0;left:0;width:11px;height:11px;border-radius:50%;background:#1C6BA2;box-shadow:0 0 0 4px rgba(28,107,162,0.25)">
-            <p style="margin:0 0 10px;font-family:'Stolzl','Onest',sans-serif;font-size:12px;color:#647A7C">04</p>
-            <h3 style="margin:0 0 10px;font-size:18px;font-weight:500;color:#13282B">Согласование</h3>
-            <p style="margin:0;font-size:14.5px;color:#51696B;line-height:1.65">Сопровождаем документацию в надзорных органах до утверждения.</p>
-          </div>
-          <div data-rv="true" style="position:relative;padding-top:32px" style-before="content:'';position:absolute;top:0;left:0;width:11px;height:11px;border-radius:50%;background:#0B5C60;box-shadow:0 0 0 4px rgba(11,92,96,0.25)">
-            <p style="margin:0 0 10px;font-family:'Stolzl','Onest',sans-serif;font-size:12px;color:#647A7C">05</p>
-            <h3 style="margin:0 0 10px;font-size:18px;font-weight:500;color:#13282B">Результат</h3>
-            <p style="margin:0;font-size:14.5px;color:#51696B;line-height:1.65">Комплект документов и защита от штрафов, предписаний и рисков.</p>
-          </div>
+    <section id="protsess" class="f-sec" data-screen-label="Как мы работаем" data-sec="true">
+      <div class="f-wrap">
+        <div class="f-intro">
+          <p class="f-eyebrow" data-rv="true">Процесс</p>
+          <h2 class="f-h2" data-rv="true">Как мы работаем</h2>
+        </div>
+        <div class="f-steps">
+          <div class="f-step" data-rv="true"><div class="f-step__marker" aria-hidden="true"><span></span></div><p class="f-step__num">01</p><h3>Заявка и оценка задачи</h3><p>Отвечаем в течение рабочего дня, фиксируем объём, сроки и стоимость.</p></div>
+          <div class="f-step f-step--accent" data-rv="true"><div class="f-step__marker" aria-hidden="true"><span></span></div><p class="f-step__num">02</p><h3>Исходные данные</h3><p>Запрашиваем документы, при необходимости выезжаем на объект.</p></div>
+          <div class="f-step" data-rv="true"><div class="f-step__marker" aria-hidden="true"><span></span></div><p class="f-step__num">03</p><h3>Эксперты и лаборатория</h3><p>Полевые работы, отбор и анализ проб, расчёты и моделирование.</p></div>
+          <div class="f-step" data-rv="true"><div class="f-step__marker" aria-hidden="true"><span></span></div><p class="f-step__num">04</p><h3>Согласование</h3><p>Сопровождаем документацию в надзорных органах до утверждения.</p></div>
+          <div class="f-step" data-rv="true"><div class="f-step__marker" aria-hidden="true"><span></span></div><p class="f-step__num">05</p><h3>Результат</h3><p>Комплект документов и защита от штрафов, предписаний и рисков.</p></div>
         </div>
       </div>
     </section>
 
     <!-- ESG / ЭКОЛОГИЯ — ЭТО ДАННЫЕ -->
-    <section id="esg" data-screen-label="ESG — данные" data-sec="true" style="position:relative;padding:140px 48px;background:linear-gradient(130deg,#122E54 0%,#1C6BA2 55%,#0B5C60 100%);color:#FFFFFF;overflow:hidden;scroll-margin-top:80px">
-      <div aria-hidden="true" style="position:absolute;inset:0;pointer-events:none">
-        <div style="position:absolute;top:-28%;right:-12%;width:52vw;height:52vw;border-radius:50%;background:radial-gradient(circle,#ADCF7A 0%,rgba(173,207,122,0) 66%);filter:blur(95px);opacity:0.3;animation:blobA 32s ease-in-out infinite"></div>
-        <div style="position:absolute;bottom:-30%;left:-8%;width:46vw;height:46vw;border-radius:50%;background:radial-gradient(circle,#139EA1 0%,rgba(19,158,161,0) 66%);filter:blur(90px);opacity:0.4;animation:blobC 28s ease-in-out infinite"></div>
-        <div style="position:absolute;inset:0;background:repeating-radial-gradient(ellipse 80% 110% at 15% 110%,rgba(255,255,255,0.05) 0px,rgba(255,255,255,0.05) 1px,transparent 1px,transparent 44px)"></div>
-      </div>
-      <div style="position:relative;max-width:1280px;margin:0 auto">
-        <div data-two-col="true" style="display:grid;grid-template-columns:1.1fr 0.9fr;gap:72px;align-items:center">
+    <section id="esg" class="f-sec" data-screen-label="ESG — данные" data-sec="true">
+      <div class="f-wrap f-data">
+        <div class="f-data__content">
           <div>
-            <h2 data-rv="true" style="margin:0;font-weight:200;font-size:clamp(56px,7vw,118px);line-height:1.02;letter-spacing:0.02em;color:#FFFFFF;text-transform:uppercase">Экология — это <span style="font-weight:400;background:linear-gradient(92deg,#ADCF7A,#4CB272 60%,#139EA1);-webkit-background-clip:text;background-clip:text;color:transparent">данные</span></h2>
-            <p data-rv="true" style="margin:32px 0 0;font-size:18px;line-height:1.7;color:rgba(255,255,255,0.8);max-width:520px">Экология — это измеримые величины, а не декларации. Каждое наше решение опирается на фактические данные, лабораторный анализ и воспроизводимые расчёты.</p>
-            <p data-rv="true" style="margin:36px 0 0;font-family:'Stolzl','Onest',sans-serif;font-size:12.5px;letter-spacing:0.18em;color:rgba(255,255,255,0.75)">НЕТ ДАННЫХ — НЕТ РЕШЕНИЯ&nbsp;&nbsp;·&nbsp;&nbsp;НАУКА ДЛЯ ПРИРОДЫ</p>
-            <a data-rv="true" href="#uslugi" style="display:inline-flex;align-items:center;gap:10px;margin-top:44px;border:1px solid rgba(255,255,255,0.4);color:#FFFFFF;font-size:15px;font-weight:500;text-decoration:none;padding:15px 32px;border-radius:4px;transition:background 0.25s ease,border-color 0.25s ease" style-hover="background:rgba(255,255,255,0.12);border-color:rgba(255,255,255,0.7)">Услуги ESG <span aria-hidden="true">→</span></a>
+            <h2 class="f-data__title" data-rv="true">Экология —<br>это данные</h2>
+            <p class="f-lead" data-rv="true">Экология — это измеримые величины, а не декларации. Каждое наше решение опирается на фактические данные, лабораторный анализ и воспроизводимые расчёты.</p>
           </div>
-          <div data-rv="true" style="display:flex;flex-direction:column;align-items:center;gap:36px">
-            <div data-esg-donut-wrap="true" style="position:relative;width:300px;height:300px">
-              <svg data-esg-svg="true" viewBox="0 0 300 300" width="300" height="300" aria-hidden="true" style="display:block;overflow:visible">
-                <circle cx="150" cy="150" r="112" fill="none" stroke="rgba(255,255,255,0.09)" stroke-width="20"></circle>
-                <circle class="seg" cx="150" cy="150" r="112" fill="none" stroke="#7FB2DE" stroke-width="20" style="--len:484.6;--d:0s;stroke-dasharray:484.6 703.72;transform:rotate(-90deg)"></circle>
-                <circle class="seg" cx="150" cy="150" r="112" fill="none" stroke="#45C3BD" stroke-width="20" style="--len:118.67;--d:0.5s;stroke-dasharray:118.67 703.72;transform:rotate(162deg)"></circle>
-                <circle class="seg" cx="150" cy="150" r="112" fill="none" stroke="#ADCF7A" stroke-width="20" style="--len:76.45;--d:0.85s;stroke-dasharray:76.45 703.72;transform:rotate(226.8deg)"></circle>
-              </svg>
-              <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center">
-                <span style="font-family:'Stolzl','Onest',sans-serif;font-size:11px;letter-spacing:0.2em;color:rgba(255,255,255,0.65)">ОХВАТ 3</span>
-                <span style="font-size:44px;font-weight:200;line-height:1.1">до 70%</span>
-              </div>
-            </div>
-            <div style="display:flex;flex-direction:column;gap:12px;width:100%;max-width:340px">
-              <div style="display:flex;align-items:center;gap:12px;font-size:14px;color:rgba(255,255,255,0.85)"><span aria-hidden="true" style="width:12px;height:12px;border-radius:4px;background:#7FB2DE;flex:0 0 auto"></span>Охват 3 — цепочка поставок и жизненный цикл<span style="margin-left:auto;font-family:'Stolzl','Onest',sans-serif;font-size:12px;color:rgba(255,255,255,0.6)">≈70%</span></div>
-              <div style="display:flex;align-items:center;gap:12px;font-size:14px;color:rgba(255,255,255,0.85)"><span aria-hidden="true" style="width:12px;height:12px;border-radius:4px;background:#45C3BD;flex:0 0 auto"></span>Охват 2 — закупаемая энергия<span style="margin-left:auto;font-family:'Stolzl','Onest',sans-serif;font-size:12px;color:rgba(255,255,255,0.6)">≈18%</span></div>
-              <div style="display:flex;align-items:center;gap:12px;font-size:14px;color:rgba(255,255,255,0.85)"><span aria-hidden="true" style="width:12px;height:12px;border-radius:4px;background:#ADCF7A;flex:0 0 auto"></span>Охват 1 — прямые выбросы<span style="margin-left:auto;font-family:'Stolzl','Onest',sans-serif;font-size:12px;color:rgba(255,255,255,0.6)">≈12%</span></div>
-              <p style="margin:10px 0 0;font-size:12.5px;color:rgba(255,255,255,0.5);line-height:1.6">Типичная структура углеродного следа компании. Мы считаем все три охвата — по первичным данным.</p>
-            </div>
+          <p class="f-data__motto" data-rv="true">НЕТ ДАННЫХ — НЕТ РЕШЕНИЯ<br><br>НАУКА ДЛЯ ПРИРОДЫ</p>
+          <a class="f-btn f-btn--ghost f-btn--light" href="#uslugi" data-rv="true">Услуги ESG</a>
+        </div>
+        <div class="f-data__visual" data-rv="true">
+          <div class="f-donut">
+            <img src="./assets/figma/esg-donut.webp" alt="Структура углеродного следа: охват 3 — до 70%, охват 2 — около 18%, охват 1 — около 12%" width="471" height="444" loading="lazy" decoding="async">
+            <span class="f-donut__label" aria-hidden="true">ОХВАТ 3<br>до 70%</span>
           </div>
+          <div class="f-legend">
+            <div class="f-legend__row"><span class="f-legend__sw" style="background:#2081C4" aria-hidden="true"></span><span><span class="f-legend__name">Охват 3<br>цепочка поставок<br>и жизненный цикл</span><span class="f-legend__pct">≈70%</span></span></div>
+            <div class="f-legend__row"><span class="f-legend__sw" style="background:#139EA1" aria-hidden="true"></span><span><span class="f-legend__name">Охват 2<br>закупаемая энергия</span><span class="f-legend__pct">≈18%</span></span></div>
+            <div class="f-legend__row"><span class="f-legend__sw" style="background:#ADCF7A" aria-hidden="true"></span><span><span class="f-legend__name">Охват 1<br>прямые выбросы</span><span class="f-legend__pct">≈12%</span></span></div>
+          </div>
+          <p class="f-data__note">Типичная структура углеродного следа компании. Мы считаем все три охвата — по первичным данным.</p>
         </div>
       </div>
     </section>
 
     <!-- КЛИЕНТЫ И ОТЗЫВЫ -->
-    <section id="klienty" data-screen-label="Клиенты и отзывы" data-sec="true" style="padding:130px 48px;background:#FFFFFF;scroll-margin-top:80px">
-      <div style="max-width:1280px;margin:0 auto">
-        <p data-rv="true" style="margin:0 0 18px;font-family:'Stolzl','Onest',sans-serif;font-size:12px;font-weight:500;letter-spacing:0.22em;color:#139EA1;text-transform:uppercase">Клиенты</p>
-        <h2 data-rv="true" style="margin:0 0 56px;font-weight:300;font-size:clamp(34px,3.4vw,52px);line-height:1.12;letter-spacing:-0.01em;color:#13282B;max-width:760px">Нам доверяют объекты, где цена ошибки высока</h2>
-        <div data-logo-wall="true" data-rv="true" style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:80px">
-          <figure style="margin:0;display:flex;flex-direction:column;align-items:center;gap:12px;padding:20px 16px 18px;background:#FFFFFF;border:1px solid rgba(11,92,96,0.12);border-radius:16px">
-            <div style="height:88px;display:flex;align-items:center;justify-content:center"><img src="./assets/figma/client-lahta.svg" alt="Лахта Центр" width="165" height="32" loading="lazy" decoding="async" style="display:block;max-width:100%;height:auto"></div>
-            <figcaption style="font-size:13px;line-height:1.4;color:#51696B;text-align:center">Лахта Центр</figcaption>
-          </figure>
-          <figure style="margin:0;display:flex;flex-direction:column;align-items:center;gap:12px;padding:20px 16px 18px;background:#FFFFFF;border:1px solid rgba(11,92,96,0.12);border-radius:16px">
-            <div style="height:88px;display:flex;align-items:center;justify-content:center"><img src="./assets/figma/client-port-spb.svg" alt="Большой порт СПб" width="176" height="37" loading="lazy" decoding="async" style="display:block;max-width:100%;height:auto"></div>
-            <figcaption style="font-size:13px;line-height:1.4;color:#51696B;text-align:center">Большой порт СПб</figcaption>
-          </figure>
-          <figure style="margin:0;display:flex;flex-direction:column;align-items:center;gap:12px;padding:20px 16px 18px;background:#FFFFFF;border:1px solid rgba(11,92,96,0.12);border-radius:16px">
-            <div style="height:88px;display:flex;align-items:center;justify-content:center"><img src="./assets/figma/client-moek.svg" alt="МОЭК" width="94" height="68" loading="lazy" decoding="async" style="display:block;max-width:100%;height:auto"></div>
-            <figcaption style="font-size:13px;line-height:1.4;color:#51696B;text-align:center">МОЭК</figcaption>
-          </figure>
-          <figure style="margin:0;display:flex;flex-direction:column;align-items:center;gap:12px;padding:20px 16px 18px;background:#FFFFFF;border:1px solid rgba(11,92,96,0.12);border-radius:16px">
-            <div style="height:88px;display:flex;align-items:center;justify-content:center"><img src="./assets/figma/client-mariinsky.webp" alt="Мариинский театр" width="73" height="76" loading="lazy" decoding="async" style="display:block;max-width:100%;height:auto"></div>
-            <figcaption style="font-size:13px;line-height:1.4;color:#51696B;text-align:center">Мариинский театр</figcaption>
-          </figure>
+    <section id="klienty" class="f-sec f-clients" data-screen-label="Клиенты и отзывы" data-sec="true">
+      <div class="f-wrap">
+        <div class="f-intro">
+          <p class="f-eyebrow" data-rv="true">Клиенты</p>
+          <h2 class="f-h2" data-rv="true">Нам доверяют объекты, где цена ошибки высока</h2>
         </div>
-        <div data-two-col="true" style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
-          <figure data-rv="true" style="margin:0;background:#F4F8F7;border-radius:24px;padding:40px 42px">
-            <blockquote style="margin:0;font-size:17.5px;line-height:1.7;color:#2C4346;font-weight:300">«Сопровождают наш комплекс четвёртый год: отчётность сдаётся в срок, проверки проходим без замечаний. Видно, что люди считают, а не пересказывают нормативы.»</blockquote>
-            <figcaption style="margin-top:24px">
-              <span style="display:block;font-size:15px;font-weight:500;color:#13282B">Марина К.</span>
-              <span style="display:block;margin-top:4px;font-family:'Stolzl','Onest',sans-serif;font-size:11.5px;letter-spacing:0.08em;color:#647A7C">ГЛАВНЫЙ ЭКОЛОГ ПРОИЗВОДСТВЕННОГО КОМПЛЕКСА</span>
-            </figcaption>
+        <div class="f-logos" data-rv="true">
+          <figure class="f-logo-card"><div><img src="./assets/figma/client-lahta.svg" alt="Лахта Центр" width="165" height="32" loading="lazy" decoding="async"></div><figcaption>Лахта Центр</figcaption></figure>
+          <figure class="f-logo-card"><div><img src="./assets/figma/client-port-spb.svg" alt="Большой порт СПб" width="176" height="37" loading="lazy" decoding="async"></div><figcaption>Большой порт СПб</figcaption></figure>
+          <figure class="f-logo-card"><div><img src="./assets/figma/client-moek.svg" alt="МОЭК" width="94" height="68" loading="lazy" decoding="async"></div><figcaption>МОЭК</figcaption></figure>
+          <figure class="f-logo-card"><div><img src="./assets/figma/client-mariinsky.webp" alt="Мариинский театр" width="73" height="76" loading="lazy" decoding="async"></div><figcaption>Мариинский театр</figcaption></figure>
+        </div>
+        <div class="f-quotes">
+          <figure class="f-quote" data-rv="true">
+            <div class="f-quote__body">
+              <blockquote>«Сопровождают наш комплекс четвёртый год: отчётность сдаётся в срок, проверки проходим без замечаний. Видно, что люди считают, а не пересказывают нормативы.»</blockquote>
+              <figcaption><span>Марина К.</span><span>Главный эколог производственного комплекса</span></figcaption>
+            </div>
           </figure>
-          <figure data-rv="true" style="margin:0;background:#F4F8F7;border-radius:24px;padding:40px 42px">
-            <blockquote style="margin:0;font-size:17.5px;line-height:1.7;color:#2C4346;font-weight:300">«Сложный объект и сжатые сроки экспертизы. То, что изыскания и лаборатория — одна команда, заметно ускорило проект: никаких потерь на стыках подрядчиков.»</blockquote>
-            <figcaption style="margin-top:24px">
-              <span style="display:block;font-size:15px;font-weight:500;color:#13282B">Дмитрий В.</span>
-              <span style="display:block;margin-top:4px;font-family:'Stolzl','Onest',sans-serif;font-size:11.5px;letter-spacing:0.08em;color:#647A7C">РУКОВОДИТЕЛЬ ПРОЕКТА, ДЕВЕЛОПМЕНТ</span>
-            </figcaption>
+          <figure class="f-quote" data-rv="true">
+            <div class="f-quote__body">
+              <blockquote>«Сложный объект и сжатые сроки экспертизы. То, что изыскания и лаборатория — одна команда, заметно ускорило проект: никаких потерь на стыках подрядчиков.»</blockquote>
+              <figcaption><span>Дмитрий В.</span><span>Руководитель проекта, девелопмент</span></figcaption>
+            </div>
           </figure>
         </div>
       </div>
     </section>
 
     <!-- ЛИЦЕНЗИИ И ДОКУМЕНТЫ -->
-    <section id="litsenzii" data-screen-label="Лицензии и документы" data-sec="true" style="position:relative;padding:130px 48px;background:#FFFFFF;scroll-margin-top:80px;overflow:hidden">
-      <div style="position:relative;max-width:1280px;margin:0 auto">
-        <div data-two-col="true" style="display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:end;margin-bottom:72px">
-          <div>
-            <p data-rv="true" style="margin:0 0 18px;font-family:'Stolzl','Onest',sans-serif;font-size:12px;font-weight:500;letter-spacing:0.22em;color:#139EA1;text-transform:uppercase">Лицензии и документы</p>
-            <h2 data-rv="true" style="margin:0;font-weight:300;font-size:clamp(34px,3.4vw,52px);line-height:1.12;letter-spacing:-0.01em;color:#13282B">Аккредитация и разрешения — открыто</h2>
+    <section id="litsenzii" class="f-sec f-sec--alt f-docs" data-screen-label="Лицензии и документы" data-sec="true">
+      <div class="f-wrap">
+        <div class="f-intro">
+          <p class="f-eyebrow" data-rv="true">Лицензии и документы</p>
+          <div class="f-intro__row">
+            <h2 class="f-h2" data-rv="true">Аккредитация и разрешения — открыто</h2>
+            <p class="f-lead" data-rv="true">Работаем в реестре аккредитованных лиц.<br><br>Аттестаты, выписки и сертификаты доступны для скачивания.</p>
           </div>
-          <p data-rv="true" style="margin:0;font-size:17px;color:#3E5557;max-width:460px;justify-self:end">Работаем в реестре аккредитованных лиц. Аттестаты, выписки и сертификаты доступны для скачивания.</p>
         </div>
-        <div data-cols4="true" style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px">
-          <a href="assets/docs/attestat-akkreditacii.pdf" download data-rv="true" style="display:flex;flex-direction:column;text-decoration:none;border:1px solid rgba(11,92,96,0.14);border-radius:20px;overflow:hidden;background:#FFFFFF;transition:border-color 0.3s ease,transform 0.3s ease,box-shadow 0.3s ease" style-hover="border-color:#139EA1;transform:translateY(-4px);box-shadow:0 18px 40px rgba(11,92,96,0.1)">
-            <span aria-hidden="true" style="position:relative;height:184px;background:repeating-linear-gradient(135deg,rgba(19,158,161,0.10) 0,rgba(19,158,161,0.10) 2px,rgba(173,207,122,0.10) 2px,rgba(173,207,122,0.10) 12px);border-bottom:1px solid rgba(11,92,96,0.12);display:flex;align-items:center;justify-content:center"><span style="font-family:'Stolzl','Onest',sans-serif;font-size:12px;letter-spacing:0.2em;color:#0B5C60;background:#FFFFFF;border:1px solid rgba(11,92,96,0.16);border-radius:999px;padding:8px 16px">PDF</span></span>
-            <span style="padding:22px 22px 24px;display:flex;flex-direction:column;gap:10px;flex:1">
-              <span style="font-family:'Stolzl','Onest',sans-serif;font-size:10.5px;letter-spacing:0.18em;color:#139EA1;text-transform:uppercase">RA.RU.516478 · 25.12.2025</span>
-              <span style="font-family:'Stolzl','Onest',sans-serif;font-size:17px;font-weight:500;line-height:1.35;color:#13282B">Аттестат аккредитации лаборатории «Аналитик Лаб»</span>
-              <span style="margin-top:auto;padding-top:10px;font-family:'Stolzl','Onest',sans-serif;font-size:11px;letter-spacing:0.14em;color:#0B5C60">СКАЧАТЬ PDF ↓</span>
-            </span>
+        <div class="f-docs-grid">
+          <a class="f-doc" href="assets/docs/attestat-akkreditacii.pdf" download data-rv="true">
+            <span class="f-doc__preview" aria-hidden="true"></span>
+            <span class="f-doc__copy"><span class="f-doc__meta">RA.RU.516478&nbsp;|&nbsp;25.12.2025</span><span class="f-doc__title">Аттестат аккредитации лаборатории «Аналитик Лаб»</span><span class="f-doc__action">СКАЧАТЬ PDF ↓</span></span>
           </a>
-          <div data-rv="true" style="display:flex;flex-direction:column;text-decoration:none;border:1px solid rgba(11,92,96,0.14);border-radius:20px;overflow:hidden;background:#FFFFFF;transition:border-color 0.3s ease,transform 0.3s ease,box-shadow 0.3s ease">
-            <span aria-hidden="true" style="position:relative;height:184px;background:repeating-linear-gradient(135deg,rgba(19,158,161,0.10) 0,rgba(19,158,161,0.10) 2px,rgba(173,207,122,0.10) 2px,rgba(173,207,122,0.10) 12px);border-bottom:1px solid rgba(11,92,96,0.12);display:flex;align-items:center;justify-content:center"><span style="font-family:'Stolzl','Onest',sans-serif;font-size:12px;letter-spacing:0.2em;color:#0B5C60;background:#FFFFFF;border:1px solid rgba(11,92,96,0.16);border-radius:999px;padding:8px 16px">PDF</span></span>
-            <span style="padding:22px 22px 24px;display:flex;flex-direction:column;gap:10px;flex:1">
-              <span style="font-family:'Stolzl','Onest',sans-serif;font-size:10.5px;letter-spacing:0.18em;color:#139EA1;text-transform:uppercase">Реестр</span>
-              <span style="font-family:'Stolzl','Onest',sans-serif;font-size:17px;font-weight:500;line-height:1.35;color:#13282B">Выписка из реестра аккредитованных лиц</span>
-              <span style="margin-top:auto;padding-top:10px;font-family:'Stolzl','Onest',sans-serif;font-size:11px;letter-spacing:0.14em;color:#647A7C">ПО ЗАПРОСУ</span>
-            </span>
+          <div class="f-doc" data-rv="true">
+            <span class="f-doc__preview" aria-hidden="true"></span>
+            <span class="f-doc__copy"><span class="f-doc__meta">Реестр</span><span class="f-doc__title">Выписка из реестра аккредитованных лиц</span><span class="f-doc__action">ПО ЗАПРОСУ</span></span>
           </div>
-          <div data-rv="true" style="display:flex;flex-direction:column;text-decoration:none;border:1px solid rgba(11,92,96,0.14);border-radius:20px;overflow:hidden;background:#FFFFFF;transition:border-color 0.3s ease,transform 0.3s ease,box-shadow 0.3s ease">
-            <span aria-hidden="true" style="position:relative;height:184px;background:repeating-linear-gradient(135deg,rgba(19,158,161,0.10) 0,rgba(19,158,161,0.10) 2px,rgba(173,207,122,0.10) 2px,rgba(173,207,122,0.10) 12px);border-bottom:1px solid rgba(11,92,96,0.12);display:flex;align-items:center;justify-content:center"><span style="font-family:'Stolzl','Onest',sans-serif;font-size:12px;letter-spacing:0.2em;color:#0B5C60;background:#FFFFFF;border:1px solid rgba(11,92,96,0.16);border-radius:999px;padding:8px 16px">PDF</span></span>
-            <span style="padding:22px 22px 24px;display:flex;flex-direction:column;gap:10px;flex:1">
-              <span style="font-family:'Stolzl','Onest',sans-serif;font-size:10.5px;letter-spacing:0.18em;color:#139EA1;text-transform:uppercase">Лицензия</span>
-              <span style="font-family:'Stolzl','Onest',sans-serif;font-size:17px;font-weight:500;line-height:1.35;color:#13282B">Лицензия на обращение с отходами I–IV классов</span>
-              <span style="margin-top:auto;padding-top:10px;font-family:'Stolzl','Onest',sans-serif;font-size:11px;letter-spacing:0.14em;color:#647A7C">ПО ЗАПРОСУ</span>
-            </span>
+          <div class="f-doc" data-rv="true">
+            <span class="f-doc__preview" aria-hidden="true"></span>
+            <span class="f-doc__copy"><span class="f-doc__meta">Лицензия</span><span class="f-doc__title">Лицензия на обращение с отходами I–IV классов</span><span class="f-doc__action">ПО ЗАПРОСУ</span></span>
           </div>
-          <div data-rv="true" style="display:flex;flex-direction:column;text-decoration:none;border:1px solid rgba(11,92,96,0.14);border-radius:20px;overflow:hidden;background:#FFFFFF;transition:border-color 0.3s ease,transform 0.3s ease,box-shadow 0.3s ease">
-            <span aria-hidden="true" style="position:relative;height:184px;background:repeating-linear-gradient(135deg,rgba(19,158,161,0.10) 0,rgba(19,158,161,0.10) 2px,rgba(173,207,122,0.10) 2px,rgba(173,207,122,0.10) 12px);border-bottom:1px solid rgba(11,92,96,0.12);display:flex;align-items:center;justify-content:center"><span style="font-family:'Stolzl','Onest',sans-serif;font-size:12px;letter-spacing:0.2em;color:#0B5C60;background:#FFFFFF;border:1px solid rgba(11,92,96,0.16);border-radius:999px;padding:8px 16px">PDF</span></span>
-            <span style="padding:22px 22px 24px;display:flex;flex-direction:column;gap:10px;flex:1">
-              <span style="font-family:'Stolzl','Onest',sans-serif;font-size:10.5px;letter-spacing:0.18em;color:#139EA1;text-transform:uppercase">Сертификаты</span>
-              <span style="font-family:'Stolzl','Onest',sans-serif;font-size:17px;font-weight:500;line-height:1.35;color:#13282B">Сертификаты системы менеджмента (ISO 9001, 14001)</span>
-              <span style="margin-top:auto;padding-top:10px;font-family:'Stolzl','Onest',sans-serif;font-size:11px;letter-spacing:0.14em;color:#647A7C">ПО ЗАПРОСУ</span>
-            </span>
+          <div class="f-doc" data-rv="true">
+            <span class="f-doc__preview" aria-hidden="true"></span>
+            <span class="f-doc__copy"><span class="f-doc__meta">Сертификаты</span><span class="f-doc__title">Сертификаты системы менеджмента (ISO 9001, 14001)</span><span class="f-doc__action">ПО ЗАПРОСУ</span></span>
           </div>
         </div>
-        <p data-rv="true" style="margin:24px 0 0;font-size:13px;color:#647A7C">Актуальные версии документов публикуются по мере обновления аккредитаций.</p>
+        <p class="f-docs-note" data-rv="true">Актуальные версии документов публикуются по мере обновления аккредитаций.</p>
       </div>
     </section>
 
     <!-- ЗАЯВКА -->
-    <section id="zayavka" data-screen-label="Форма заявки" data-sec="true" style="position:relative;padding:130px 48px;background:#F4F8F7;overflow:hidden;scroll-margin-top:80px">
-      <div aria-hidden="true" style="position:absolute;inset:0;pointer-events:none">
-        <div style="position:absolute;top:-30%;left:-12%;width:46vw;height:46vw;border-radius:50%;background:radial-gradient(circle,#ADCF7A 0%,rgba(173,207,122,0) 66%);filter:blur(85px);opacity:0.4;animation:blobA 30s ease-in-out infinite"></div>
-        <div style="position:absolute;bottom:-35%;right:-10%;width:50vw;height:50vw;border-radius:50%;background:radial-gradient(circle,#139EA1 0%,rgba(19,158,161,0) 66%);filter:blur(90px);opacity:0.3;animation:blobB 34s ease-in-out infinite"></div>
-      </div>
-      <div style="position:relative;max-width:1180px;margin:0 auto">
-        <div data-rv="true" data-two-col="true" style="display:grid;grid-template-columns:1fr 1.1fr;gap:0;background:#FFFFFF;border-radius:32px;box-shadow:0 24px 70px rgba(11,92,96,0.12);overflow:hidden">
-          <div id="kontakty-info" style="padding:56px 52px;background:linear-gradient(150deg,#0B5C60,#14496F);color:#FFFFFF;scroll-margin-top:120px">
-            <p style="margin:0 0 16px;font-family:'Stolzl','Onest',sans-serif;font-size:12px;letter-spacing:0.22em;color:#ADCF7A;text-transform:uppercase">Контакты</p>
-            <h2 style="margin:0 0 18px;font-weight:300;font-size:clamp(30px,2.8vw,42px);line-height:1.12">Обсудим вашу задачу</h2>
-            <p style="margin:0 0 40px;font-size:15.5px;line-height:1.7;color:rgba(255,255,255,0.78)">Опишите задачу — вернёмся с планом работ и оценкой в течение рабочего дня.</p>
-            <div style="display:flex;flex-direction:column;gap:22px">
-              <div>
-                <p style="margin:0 0 4px;font-family:'Stolzl','Onest',sans-serif;font-size:10.5px;letter-spacing:0.18em;color:rgba(255,255,255,0.5)">ТЕЛЕФОН</p>
-                <a href="tel:+78124499348" style="font-size:20px;font-weight:500;color:#FFFFFF;text-decoration:none">+7&nbsp;(812)&nbsp;449-93-48</a>
-              </div>
-              <div>
-                <p style="margin:0 0 4px;font-family:'Stolzl','Onest',sans-serif;font-size:10.5px;letter-spacing:0.18em;color:rgba(255,255,255,0.5)">ПОЧТА</p>
-                <a href="mailto:info@nic-ecolog.ru" style="font-size:20px;font-weight:500;color:#FFFFFF;text-decoration:none">info@nic-ecolog.ru</a>
-              </div>
-              <div>
-                <p style="margin:0 0 4px;font-family:'Stolzl','Onest',sans-serif;font-size:10.5px;letter-spacing:0.18em;color:rgba(255,255,255,0.5)">АДРЕС</p>
-                <p style="margin:0;font-size:16px;color:rgba(255,255,255,0.85)">Санкт-Петербург · офис и лаборатория по одному адресу</p>
-              </div>
-            </div>
+    <section id="zayavka" class="f-sec" data-screen-label="Форма заявки" data-sec="true">
+      <div class="f-wrap">
+        <div class="f-request" data-rv="true">
+          <div class="f-request__panel">
+            <h2 class="f-h2">Обсудим вашу задачу</h2>
+            <p class="f-lead">Опишите задачу — вернёмся с планом работ и оценкой в течение рабочего дня.</p>
           </div>
-          <form id="eco-form" style="padding:56px 52px;display:flex;flex-direction:column;gap:18px">
-            <div id="eco-form-fields" style="display:flex;flex-direction:column;gap:18px">
-              <div style="display:flex;flex-direction:column;gap:8px">
-                <label for="f-name" style="font-family:'Stolzl','Onest',sans-serif;font-size:10.5px;letter-spacing:0.18em;color:#647A7C">ИМЯ</label>
-                <input id="f-name" name="name" type="text" required="required" autocomplete="name" aria-required="true" placeholder="Как к вам обращаться" style="background:#F4F8F7;border:1px solid rgba(11,92,96,0.12);border-radius:14px;padding:16px 18px;font-family:'Onest',sans-serif;font-size:15px;color:#16282B;outline:none;transition:border-color 0.2s ease,box-shadow 0.2s ease" style-focus="border-color:#139EA1;box-shadow:0 0 0 3px rgba(19,158,161,0.15)">
+          <form id="eco-form">
+            <div id="eco-form-fields">
+              <div class="f-field">
+                <label for="f-name">Имя</label>
+                <input id="f-name" name="name" type="text" required="required" autocomplete="name" aria-required="true" placeholder="Как к вам обращаться">
               </div>
-              <div style="display:flex;flex-direction:column;gap:8px">
-                <label for="f-phone" style="font-family:'Stolzl','Onest',sans-serif;font-size:10.5px;letter-spacing:0.18em;color:#647A7C">ТЕЛЕФОН</label>
-                <input id="f-phone" name="phone" type="tel" required="required" inputmode="tel" autocomplete="tel" aria-required="true" placeholder="+7 (___) ___-__-__" style="background:#F4F8F7;border:1px solid rgba(11,92,96,0.12);border-radius:14px;padding:16px 18px;font-family:'Onest',sans-serif;font-size:15px;color:#16282B;outline:none;transition:border-color 0.2s ease,box-shadow 0.2s ease" style-focus="border-color:#139EA1;box-shadow:0 0 0 3px rgba(19,158,161,0.15)">
+              <div class="f-field">
+                <label for="f-phone">Телефон</label>
+                <input id="f-phone" name="phone" type="tel" required="required" inputmode="tel" autocomplete="tel" aria-required="true" placeholder="+7 (___) ___-__-__">
               </div>
-              <div style="display:flex;flex-direction:column;gap:8px">
-                <label for="f-task" style="font-family:'Stolzl','Onest',sans-serif;font-size:10.5px;letter-spacing:0.18em;color:#647A7C">ЗАДАЧА</label>
-                <textarea id="f-task" name="task" rows="4" placeholder="Например: нужен проект СЗЗ для производственной площадки" style="background:#F4F8F7;border:1px solid rgba(11,92,96,0.12);border-radius:14px;padding:16px 18px;font-family:'Onest',sans-serif;font-size:15px;color:#16282B;outline:none;resize:vertical;transition:border-color 0.2s ease,box-shadow 0.2s ease" style-focus="border-color:#139EA1;box-shadow:0 0 0 3px rgba(19,158,161,0.15)"></textarea>
+              <div class="f-field">
+                <label for="f-task">Задача</label>
+                <textarea id="f-task" name="task" rows="3" placeholder="Например: нужен проект СЗЗ для производственной площадки"></textarea>
               </div>
-              <p id="eco-form-error" role="alert" aria-live="assertive" style="display:none;margin:0;font-size:13px;line-height:1.5;color:#B23B3B;background:rgba(178,59,59,0.08);border:1px solid rgba(178,59,59,0.28);border-radius:12px;padding:12px 14px"></p>
-              <button type="submit" class="btn-primary" style="margin-top:6px;background:#1C6BA2;color:#FFFFFF;font-family:'Onest',sans-serif;font-size:16px;font-weight:500;border:none;border-radius:4px;padding:18px 38px;cursor:pointer;transition:transform 0.25s ease,background 0.25s ease" style-hover="transform:translateY(-2px);background:#155A8A">Отправить заявку</button>
-              <p style="margin:0;font-size:12px;color:#6E8385;line-height:1.6">Нажимая кнопку, вы соглашаетесь с <a href="/privacy" style="color:#139EA1">политикой конфиденциальности</a>.</p>
+              <p id="eco-form-error" role="alert" aria-live="assertive" style="display:none;margin:0;font-size:13px;line-height:1.5;color:#B23B3B;background:rgba(178,59,59,0.08);border:1px solid rgba(178,59,59,0.28);border-radius:4px;padding:12px 14px"></p>
+              <div class="f-form-actions">
+                <button type="submit" class="f-btn f-btn--sm">Отправить заявку</button>
+                <p class="f-consent">Нажимая кнопку, вы соглашаетесь с <a href="/privacy">политикой конфиденциальности</a>.</p>
+              </div>
             </div>
-            <div id="eco-form-ok" style="display:none;flex-direction:column;justify-content:center;gap:14px;min-height:380px">
-              <span aria-hidden="true" style="width:56px;height:56px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#ADCF7A,#4CB272);display:flex;align-items:center;justify-content:center;color:#FFFFFF;font-size:26px">✓</span>
-              <h3 style="margin:0;font-size:26px;font-weight:400;color:#13282B">Заявка отправлена</h3>
-              <p style="margin:0;font-size:15.5px;color:#51696B;line-height:1.65">Свяжемся с вами в течение рабочего дня и вернёмся с планом работ.</p>
+            <div id="eco-form-ok" style="display:none;flex-direction:column;justify-content:center;gap:14px;min-height:300px">
+              <span aria-hidden="true" style="width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,#ADCF7A,#4CB272);display:flex;align-items:center;justify-content:center;color:#FFFFFF;font-size:22px">✓</span>
+              <h3 style="margin:0;font-size:20px;line-height:28px;font-weight:600;color:#0B5C60">Заявка отправлена</h3>
+              <p style="margin:0;font-size:14px;line-height:20px;color:#444444">Свяжемся с вами в течение рабочего дня и вернёмся с планом работ.</p>
             </div>
           </form>
         </div>
@@ -916,47 +984,45 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
   </main>
 
   <!-- ПОДВАЛ -->
-  <footer id="kontakty" data-screen-label="Подвал" data-sec="true" style="background:#06141C;scroll-margin-top:80px;color:#FFFFFF;padding:80px 48px 36px">
-    <div style="max-width:1280px;margin:0 auto">
-      <div data-cols4="true" style="display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:48px;padding-bottom:56px;border-bottom:1px solid rgba(255,255,255,0.14)">
-        <div>
-          <div style="display:flex;align-items:center;gap:14px;margin-bottom:20px">
-            <img src="./assets/fingerprint-white.png" alt="" aria-hidden="true" style="height:40px;width:auto;display:block">
-            <span style="display:flex;flex-direction:column;line-height:1.1">
-              <span style="font-size:20px;font-weight:600;color:#FFFFFF">Эколог</span>
-              <span style="font-size:10px;color:rgba(255,255,255,0.6)">независимый исследовательский центр</span>
-            </span>
+  <footer id="kontakty" data-screen-label="Подвал" data-sec="true">
+    <div class="f-wrap">
+      <div class="f-foot__top">
+        <div class="f-foot__brand">
+          <img src="./assets/figma/logo-ecolog-white.svg" alt="НИЦ Эколог" width="104" height="35">
+          <div>
+            <p style="color:#139EA1">Наука + экология +<br>прикладные решения</p>
+            <p style="color:#ADCF7A">Надёжность и экспертиза<br>без бюрократии</p>
           </div>
-          <p style="margin:0;font-size:14.5px;color:rgba(255,255,255,0.6);line-height:1.7;max-width:300px">Наука + экология + прикладные решения. Надёжность и экспертиза без бюрократии.</p>
         </div>
-        <nav aria-label="Услуги" style="display:flex;flex-direction:column;gap:12px">
-          <p style="margin:0 0 6px;font-family:'Stolzl','Onest',sans-serif;font-size:11px;letter-spacing:0.18em;color:rgba(255,255,255,0.62)">УСЛУГИ</p>
-          <a href="uslugi/" style="font-size:14.5px;color:rgba(255,255,255,0.8);text-decoration:none;transition:color 0.2s" style-hover="color:#ADCF7A">Проектирование и документация</a>
-          <a href="uslugi/" style="font-size:14.5px;color:rgba(255,255,255,0.8);text-decoration:none;transition:color 0.2s" style-hover="color:#ADCF7A">Сопровождение предприятий</a>
-          <a href="uslugi/" style="font-size:14.5px;color:rgba(255,255,255,0.8);text-decoration:none;transition:color 0.2s" style-hover="color:#ADCF7A">Изыскания и исследования</a>
-          <a href="#uslugi" style="font-size:14.5px;color:rgba(255,255,255,0.8);text-decoration:none;transition:color 0.2s" style-hover="color:#ADCF7A">ESG и устойчивое развитие</a>
-        </nav>
-        <nav aria-label="Центр" style="display:flex;flex-direction:column;gap:12px">
-          <p style="margin:0 0 6px;font-family:'Stolzl','Onest',sans-serif;font-size:11px;letter-spacing:0.18em;color:rgba(255,255,255,0.62)">ЦЕНТР</p>
-          <a href="#o-centre" style="font-size:14.5px;color:rgba(255,255,255,0.8);text-decoration:none;transition:color 0.2s" style-hover="color:#ADCF7A">О центре</a>
-          <a href="lab.html" style="font-size:14.5px;color:rgba(255,255,255,0.8);text-decoration:none;transition:color 0.2s" style-hover="color:#ADCF7A">Лаборатория «Аналитик Лаб»</a>
-          <a href="#proekty" style="font-size:14.5px;color:rgba(255,255,255,0.8);text-decoration:none;transition:color 0.2s" style-hover="color:#ADCF7A">Проекты</a>
-          <a href="#esg" style="font-size:14.5px;color:rgba(255,255,255,0.8);text-decoration:none;transition:color 0.2s" style-hover="color:#ADCF7A">ESG</a>
-          <a href="#litsenzii" style="font-size:14.5px;color:rgba(255,255,255,0.8);text-decoration:none;transition:color 0.2s" style-hover="color:#ADCF7A">Лицензии</a>
-        </nav>
-        <div style="display:flex;flex-direction:column;gap:12px">
-          <p style="margin:0 0 6px;font-family:'Stolzl','Onest',sans-serif;font-size:11px;letter-spacing:0.18em;color:rgba(255,255,255,0.62)">КОНТАКТЫ</p>
-          <a href="tel:+78124499348" style="font-size:15px;font-weight:500;color:#FFFFFF;text-decoration:none">+7&nbsp;(812)&nbsp;449-93-48</a>
-          <a href="mailto:info@nic-ecolog.ru" style="font-size:14.5px;color:rgba(255,255,255,0.8);text-decoration:none">info@nic-ecolog.ru</a>
-          <p style="margin:0;font-size:14.5px;color:rgba(255,255,255,0.6);line-height:1.6">Санкт-Петербург</p>
+        <div class="f-foot__nav">
+          <nav class="f-foot__col" aria-label="Услуги">
+            <p>Услуги</p>
+            <a href="uslugi/">Проектирование и документация</a>
+            <a href="uslugi/">Сопровождение предприятий</a>
+            <a href="uslugi/">Изыскания и исследования</a>
+            <a href="#uslugi">ESG и устойчивое развитие</a>
+          </nav>
+          <nav class="f-foot__col" aria-label="Центр">
+            <p>Центр</p>
+            <a href="#o-centre">О центре</a>
+            <a href="lab.html">Лаборатория «Аналитик Лаб»</a>
+            <a href="#proekty">Проекты</a>
+            <a href="#esg">ESG</a>
+            <a href="#litsenzii">Лицензии</a>
+          </nav>
+          <div class="f-foot__col">
+            <p>Контакты</p>
+            <a href="tel:+78124499348">+7&nbsp;812&nbsp;449&nbsp;93&nbsp;48</a>
+            <a href="mailto:info@nic-ecolog.ru">info@nic-ecolog.ru</a>
+            <span>Санкт-Петербург</span>
+          </div>
         </div>
       </div>
-      <div style="display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;padding-top:28px">
-        <p style="margin:0;font-size:13px;color:rgba(255,255,255,0.6)">© 2026 НИЦ «Эколог»</p>
-        <p style="margin:0;font-family:'Stolzl','Onest',sans-serif;font-size:11px;letter-spacing:0.16em;color:rgba(255,255,255,0.6)">НАУКА ДЛЯ ПРИРОДЫ</p>
-        <div style="display:flex;align-items:center;gap:24px">
-          <a href="/privacy" style="font-size:13px;color:rgba(255,255,255,0.6);text-decoration:none;transition:color 0.2s" style-hover="color:#FFFFFF">Политика конфиденциальности</a>
-          <span style="font-size:13px;color:rgba(255,255,255,0.6)">nic-ecolog.ru</span>
+      <div class="f-foot__bottom">
+        <p>© 2026 НИЦ «Эколог»</p>
+        <div>
+          <a href="/privacy">Политика конфиденциальности</a>
+          <span>nic-ecolog.ru</span>
         </div>
       </div>
     </div>
@@ -1297,8 +1363,9 @@ class Component extends DCLogic {
         header.style.backdropFilter = s ? 'blur(16px)' : 'none';
         header.style.webkitBackdropFilter = s ? 'blur(16px)' : 'none';
         header.style.borderBottomColor = s ? 'rgba(11,92,96,0.12)' : 'transparent';
-        header.style.paddingTop = s ? '12px' : '22px';
-        header.style.paddingBottom = s ? '12px' : '22px';
+        header.style.paddingTop = s ? '14px' : '33px';
+        header.style.paddingBottom = s ? '14px' : '33px';
+        header.classList.toggle('is-scrolled', s);
       }
       if (this._updateRail) this._updateRail();
       if (this._updateChroma) this._updateChroma();
@@ -1362,7 +1429,7 @@ class Component extends DCLogic {
       const markInvalid = (el, on) => {
         if (!el) return;
         if (on) { el.setAttribute('aria-invalid', 'true'); el.style.borderColor = '#B23B3B'; }
-        else { el.removeAttribute('aria-invalid'); el.style.borderColor = 'rgba(11,92,96,0.12)'; }
+        else { el.removeAttribute('aria-invalid'); el.style.borderColor = ''; }
       };
       [nameEl, phoneEl].forEach((el) => {
         if (el) el.addEventListener('input', () => { if (el.value.trim()) markInvalid(el, false); });

@@ -4,7 +4,8 @@
 //
 // .fig — zip: canvas.fig (kiwi-бинарник с деревом слоёв) + images/ (оригиналы картинок по sha1).
 // Векторы собираются в SVG из геометрии слоёв и прогоняются через svgo.config.mjs,
-// картинки пережимаются ImageMagick (convert/magick) в WebP (как и остальные картинки сайта).
+// картинки пережимаются ImageMagick (convert/magick) в WebP (как и остальные картинки сайта),
+// размытые фоны секций (векторные пятна + blur) собираются в SVG и растеризуются Playwright'ом.
 // Сам .fig в git не кладём — это исходник дизайнера.
 import { execFileSync } from 'node:child_process';
 import { existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
@@ -20,6 +21,7 @@ import svgoConfig from '../svgo.config.mjs';
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const OUT = join(root, 'assets', 'figma');
 const FRAME = 'Главная — Desktop 1440';
+const FRAME_MOBILE = 'Главная — Mobile 390';
 
 // Что выгружаем: путь по именам слоёв от фрейма FRAME («имя#N» — N-й одноимённый сосед, с 0).
 const SVG_EXPORTS = [
@@ -39,6 +41,15 @@ const IMAGE_EXPORTS = [
   { path: ['hero-section', 'image 2'], file: 'hero-wave', width: 2400 },
   { path: ['данные', 'data-layout', 'data-visual', 'data-chart'], file: 'esg-donut', width: 960 },
   { path: ['Клиенты', 'clients-content', 'clients-logos', 'client-card#3', 'logo-slot', 'client-logo'], file: 'client-mariinsky', width: 160 },
+];
+
+// Фоны секций: фрейм целиком (заливка + размытые пятна), обрезанный по своим границам.
+const BG_EXPORTS = [
+  { path: ['лаборатория', 'lab-background'], file: 'bg-lab' },
+  { path: ['лаборатория', 'lab-background'], frame: FRAME_MOBILE, file: 'bg-lab-mobile' },
+  { path: ['данные', 'data-background'], file: 'bg-data' },
+  { path: ['данные', 'data-background'], frame: FRAME_MOBILE, file: 'bg-data-mobile' },
+  { path: ['hero-section'], frame: FRAME_MOBILE, file: 'bg-hero-mobile', skip: ['Hero'] },
 ];
 
 const figPath = process.argv[2];
@@ -79,8 +90,8 @@ for (const n of msg.nodeChanges) {
 for (const list of kids.values()) list.sort((a, b) => (a.parentIndex.position < b.parentIndex.position ? -1 : 1));
 const childrenOf = (n) => (kids.get(key(n.guid)) || []).filter((c) => c.visible !== false);
 
-function find(path) {
-  let node = msg.nodeChanges.find((n) => n.name === FRAME && n.visible !== false);
+function find(path, frame = FRAME) {
+  let node = msg.nodeChanges.find((n) => n.name === frame && n.visible !== false);
   for (const step of path) {
     const [name, idx = '0'] = step.split('#');
     node = childrenOf(node).filter((c) => c.name === name)[Number(idx)];
@@ -114,10 +125,11 @@ const mul = (a, b) => ({
 const ID = { m00: 1, m01: 0, m02: 0, m10: 0, m11: 1, m12: 0 };
 const matrix = (t) => `matrix(${[t.m00, t.m10, t.m01, t.m11, t.m02, t.m12].map(num).join(' ')})`;
 
-function toSvg(rootNode) {
+function toSvg(rootNode, { clip = false, skip = [] } = {}) {
   const defs = [];
   const body = [];
   let gradId = 0;
+  let blurId = 0;
   const paintAttr = (paint, node) => {
     if (paint.type === 'SOLID') {
       const op = (paint.opacity ?? 1) * paint.color.a;
@@ -148,18 +160,35 @@ function toSvg(rootNode) {
     const strokes = (node.strokePaints || []).filter((p) => p.visible !== false && p.type === 'SOLID');
     const op = node.opacity != null && node.opacity < 1 ? ` opacity="${num(node.opacity)}"` : '';
     const tfAttr = tf === ID ? '' : ` transform="${matrix(tf)}"`;
-    for (const g of node.fillGeometry || []) {
-      for (const p of fills.length ? fills : []) {
-        body.push(`<path${tfAttr}${op} fill-rule="${g.windingRule === 'EVENODD' ? 'evenodd' : 'nonzero'}" d="${pathData(g.commandsBlob)}" ${paintAttr(p, node)}/>`);
+    // Размытие слоя (Figma «Layer/Foreground blur»): stdDeviation ≈ radius / 2
+    const blur = (node.effects || []).find((e) => e.visible !== false && (e.type === 'FOREGROUND_BLUR' || e.type === 'LAYER_BLUR'));
+    if (blur) {
+      const id = `b${blurId++}`;
+      defs.push(`<filter id="${id}" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="${num(blur.radius / 2)}"/></filter>`);
+      body.push(`<g filter="url(#${id})">`);
+    }
+    // Заливка фрейма/прямоугольника без готовой геометрии — прямоугольник по размеру слоя
+    const geometry = node.fillGeometry?.length ? node.fillGeometry
+      : (fills.length && node.type === 'FRAME' ? [{ rect: true }] : []);
+    for (const g of geometry) {
+      for (const p of fills) {
+        const d = g.rect ? `M0 0H${num(node.size.x)}V${num(node.size.y)}H0Z` : pathData(g.commandsBlob);
+        body.push(`<path${tfAttr}${op} fill-rule="${g.windingRule === 'EVENODD' ? 'evenodd' : 'nonzero'}" d="${d}" ${paintAttr(p, node)}/>`);
       }
     }
     if (strokes.length) {
       for (const g of node.strokeGeometry || []) body.push(`<path${tfAttr}${op} d="${pathData(g.commandsBlob)}" ${paintAttr(strokes[0], node)}/>`);
     }
-    for (const c of childrenOf(node)) walk(c, tf, false);
+    for (const c of childrenOf(node)) if (!skip.includes(c.name)) walk(c, tf, false);
+    if (blur) body.push('</g>');
   };
   walk(rootNode, ID, true);
   const w = num(rootNode.size.x), h = num(rootNode.size.y);
+  if (clip) {
+    defs.push(`<clipPath id="clip"><rect width="${w}" height="${h}"/></clipPath>`);
+    body.unshift('<g clip-path="url(#clip)">');
+    body.push('</g>');
+  }
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" fill="none">` +
     (defs.length ? `<defs>${defs.join('')}</defs>` : '') + body.join('') + '</svg>';
 }
@@ -180,6 +209,22 @@ for (const { path, file } of SVG_EXPORTS) {
 for (const { path, file, width } of IMAGE_EXPORTS) {
   execFileSync(IM, [imageOf(find(path)), '-resize', `${width}x>`, '-strip', '-quality', '82', join(OUT, `${file}.webp`)]);
   console.log(`img  ${file}.webp`);
+}
+if (BG_EXPORTS.length) {
+  const { chromium } = await import('playwright');
+  const browser = await chromium.launch();
+  const page = await browser.newPage();
+  for (const { path, frame, file, skip } of BG_EXPORTS) {
+    const node = find(path, frame);
+    const [w, h] = [Math.round(node.size.x), Math.round(node.size.y)];
+    await page.setViewportSize({ width: w, height: h });
+    await page.setContent(`<body style="margin:0;background:#FFFFFF">${toSvg(node, { clip: true, skip })}</body>`);
+    const png = join(tmp, `${file}.png`);
+    await page.screenshot({ path: png, clip: { x: 0, y: 0, width: w, height: h } });
+    execFileSync(IM, [png, '-strip', '-quality', '80', join(OUT, `${file}.webp`)]);
+    console.log(`bg   ${file}.webp  ${w}x${h}`);
+  }
+  await browser.close();
 }
 rmSync(tmp, { recursive: true, force: true });
 console.log(`Готово → ${OUT}`);
