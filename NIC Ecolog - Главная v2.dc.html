@@ -230,16 +230,20 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
 .f-sec{position:relative;padding:96px 48px;scroll-margin-top:80px}
 .f-sec--alt{background:var(--f-alt)}
 .f-wrap{position:relative;max-width:1064px;margin:0 auto}
-.f-eyebrow{margin:0;font-size:16px;line-height:25px;font-weight:400;letter-spacing:0.02em;text-transform:uppercase;color:var(--f-text)}
+.f-eyebrow{margin:0;font-size:16px;line-height:20px;font-weight:400;letter-spacing:0.02em;text-transform:uppercase;color:var(--f-text)}
 .f-h2{margin:0;font-family:'Onest',sans-serif;font-weight:600;font-size:50px;line-height:55px;color:var(--f-heading);text-wrap:balance}
+/* В макете (desktop) часть H2 набрана Regular, на мобильном все SemiBold */
+.f-h2--regular{font-weight:400}
+.f-h2--tight{letter-spacing:-0.01em}
 .f-lead{margin:0;font-size:16px;line-height:23px;color:var(--f-text)}
 .f-intro{display:flex;flex-direction:column;gap:48px}
 .f-intro__row{display:grid;grid-template-columns:minmax(0,700px) minmax(0,1fr);align-items:start}
 .f-intro__row>.f-h2{max-width:611px}
 .f-intro__row>.f-lead{padding-top:7px;max-width:330px}
+.f-lead--narrow{max-width:227px !important}
 
 /* Кнопки: по умолчанию / наведение (увеличение + контур #1C6BA2) / нажатие / отключено */
-.f-btn{display:inline-flex;align-items:center;justify-content:center;min-width:210px;height:42px;padding:0 24px;border:1px solid var(--f-blue);border-radius:4px;background:var(--f-blue);color:#FFFFFF;font-family:'Onest',sans-serif;font-size:13px;line-height:20px;font-weight:400;text-decoration:none;cursor:pointer;transition:transform 0.2s ease,box-shadow 0.2s ease,background 0.2s ease}
+.f-btn{display:inline-flex;align-items:center;justify-content:center;min-width:210px;height:42px;padding:0 24px;border:1px solid var(--f-blue);border-radius:4px;background:var(--f-blue);color:#FFFFFF;font-family:'Onest',sans-serif;font-size:12px;line-height:20px;font-weight:400;text-decoration:none;cursor:pointer;transition:transform 0.2s ease,box-shadow 0.2s ease,background 0.2s ease}
 .f-btn:hover{transform:scale(1.03);box-shadow:0 0 0 2px #FFFFFF,0 0 0 3px var(--f-blue)}
 .f-btn:active{transform:scale(1);background:var(--f-teal);border-color:var(--f-teal);box-shadow:none}
 .f-btn:disabled,.f-btn[aria-disabled="true"]{background:var(--f-border);border-color:var(--f-border);color:var(--f-text);transform:none;box-shadow:none;cursor:default}
@@ -255,7 +259,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
 /* Шапка */
 #eco-header{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:33px 32px;background:transparent;border-bottom:1px solid transparent;transition:background 0.35s ease,padding 0.35s ease,border-color 0.35s ease}
 .f-logo img{display:block;width:104px;height:35px}
-.f-nav{display:flex;align-items:center;gap:32px}
+.f-nav{display:flex;align-items:center;gap:32px;margin-left:clamp(0px,calc(128px - (1440px - 100vw)),128px);margin-right:auto}
 .f-nav a{font-size:12px;line-height:20px;color:var(--f-heading);text-decoration:none;transition:color 0.2s}
 .f-nav a:hover{color:var(--f-teal)}
 .f-head-actions{display:flex;align-items:center;gap:24px;flex:0 0 auto}
@@ -270,14 +274,14 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
 
 /* Герой */
 #top{padding:166px 48px 60px;background:#1C6BA2 url('./assets/figma/hero-wave.webp') center/cover no-repeat;overflow:hidden;color:#FFFFFF}
-.f-hero__eyebrow{margin:0;font-size:16px;line-height:16px;letter-spacing:0.02em;text-transform:uppercase;color:var(--f-green-l);animation:fadeIn 1s ease 0.1s both}
+.f-hero__eyebrow{margin:0;font-size:16px;line-height:20px;letter-spacing:0.02em;text-transform:uppercase;color:var(--f-green-l);animation:fadeIn 1s ease 0.1s both}
 .f-hero__title{margin:64px 0 0;max-width:890px;font-family:'Onest',sans-serif;font-weight:700;font-size:60px;line-height:68px;color:#FFFFFF}
 .f-hero__title>span{display:block;overflow:hidden;padding-bottom:0.06em;margin-bottom:-0.06em}
 .f-hero__title>span>span{display:inline-block;animation:wordUp 0.9s cubic-bezier(0.22,1,0.36,1) both}
 .f-hero__lead{margin:48px 0 0;max-width:548px;font-size:16px;line-height:23px;color:rgba(255,255,255,0.9);animation:fadeIn 1s ease 0.7s both}
 .f-hero__actions{display:flex;align-items:center;gap:24px;margin-top:48px;flex-wrap:wrap;animation:fadeIn 1s ease 0.85s both}
 .f-hero__actions .f-btn--ghost{min-width:89px}
-.f-svc-intro__copy .f-btn--ghost{min-width:124px}
+.f-svc-intro__copy .f-btn--ghost{min-width:124px;margin-bottom:-59px}
 .f-hero__proof{margin:64px 0 0;font-size:12px;line-height:20px;color:var(--f-green-l);animation:fadeIn 1s ease 1s both}
 
 /* Бегущая строка */
@@ -292,13 +296,13 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
 .f-stat{position:relative;padding-top:24px}
 .f-stat::before{content:"";position:absolute;top:0;left:0;width:min(220px,100%);height:1px;background:var(--f-border)}
 .f-stat__num{font-weight:200;font-size:64px;line-height:72px;color:var(--f-heading);font-variant-numeric:tabular-nums;white-space:nowrap}
-.f-stat__label{margin:8px 0 0;max-width:170px;font-size:12px;line-height:16px;color:var(--f-text)}
+.f-stat__label{margin:8px 0 0;font-size:12px;line-height:18px;color:var(--f-text)}
 
 /* Почему выбирают нас */
 .f-why{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:64px}
 .f-why__card{min-height:160px;padding:20px 24px;border-radius:8px;background:#FFFFFF}
 .f-why__title{display:flex;align-items:center;gap:12px}
-.f-why__title h3{margin:0;font-family:'Onest',sans-serif;font-size:18px;line-height:28px;font-weight:600;color:var(--f-heading)}
+.f-why__title h3{margin:0;font-family:'Onest',sans-serif;font-size:20px;line-height:28px;font-weight:600;color:var(--f-heading)}
 .f-why__card p{margin:8px 0 0;font-size:14px;line-height:20px;color:var(--f-text)}
 
 /* Лаборатория */
@@ -315,12 +319,12 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
 .f-flow__arrow{display:block;flex:0 0 auto;width:10px;height:10px}
 .f-lab__meta{margin:0;font-size:12px;line-height:20px;color:var(--f-green-l);white-space:pre-wrap}
 .f-lab__grid{flex:0 0 416px;display:grid;grid-template-columns:repeat(2,200px);gap:16px;margin-top:93px}
-.f-lab__card{min-height:199px;padding:20px;border-radius:5px;background:rgba(255,255,255,0.1)}
+.f-lab__card{height:199px;padding:20px;border-radius:5px;background:rgba(255,255,255,0.1)}
 .f-lab__head{display:flex;flex-direction:column;align-items:flex-start;gap:8px}
 .f-lab__icon{position:relative;display:flex;align-items:center;justify-content:center;flex:0 0 auto;width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,var(--f-teal),var(--f-blue));box-shadow:0 0 16px rgba(19,158,161,0.45)}
 .f-lab__icon--green{background:linear-gradient(135deg,var(--f-green-l),var(--f-teal));box-shadow:0 0 16px rgba(173,207,122,0.45)}
 .f-lab__icon img{display:block;width:26px;height:26px;object-fit:contain}
-.f-lab__card h3{margin:0;font-family:'Onest',sans-serif;font-size:20px;line-height:28px;font-weight:600;color:#FFFFFF}
+.f-lab__card h3{margin:0;font-family:'Onest',sans-serif;font-size:16px;line-height:28px;font-weight:500;color:#FFFFFF}
 .f-lab__card p{margin:8px 0 0;font-size:12px;line-height:18px;color:#FFFFFF}
 
 /* Услуги */
@@ -338,8 +342,10 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
 .f-svc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;align-items:start}
 .f-svc{padding:16px;border-radius:8px;background:var(--f-alt);cursor:pointer;outline-offset:2px;transition:background 0.25s ease}
 .f-svc:hover,.f-svc:focus-within{background:rgba(11,92,96,0.09)}
-.f-svc__title{display:flex;align-items:flex-start;gap:12px;margin:0;font-family:'Onest',sans-serif;font-size:20px;line-height:28px;font-weight:600;color:var(--f-heading)}
-.f-svc__title .f-dot{width:8px;height:8px;margin-top:10px}
+.f-svc__title{display:flex;align-items:flex-start;gap:12px;margin:0;font-family:'Onest',sans-serif;font-size:20px;line-height:20px;font-weight:600;color:var(--f-heading)}
+.f-svc__title .f-dot{width:8px;height:8px;margin-top:6px}
+.f-cat:first-child .f-svc{min-height:100px}
+.f-cat:nth-child(2) .f-svc{min-height:72px}
 .f-svc__title a{color:inherit;text-decoration:none}
 .f-svc__desc{margin:8px 0 0;font-size:14px;line-height:20px;color:var(--f-text)}
 .f-svc__desc a{color:inherit;text-decoration:none}
@@ -354,9 +360,9 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
 .f-proj__img{height:238px;overflow:hidden}
 .f-proj__img img{display:block;width:100%;height:100%;object-fit:cover;transition:transform 0.9s cubic-bezier(0.22,1,0.36,1)}
 .f-proj:hover .f-proj__img img{transform:scale(1.04)}
-.f-proj__copy{display:flex;flex-direction:column;gap:8px;padding:16px 16px 34px}
+.f-proj__copy{display:flex;flex-direction:column;gap:8px;padding:16px}
 .f-proj__eyebrow{margin:0;font-size:10px;line-height:18px;letter-spacing:0.02em;text-transform:uppercase;color:var(--f-muted)}
-.f-proj__copy h3{margin:0;font-family:'Onest',sans-serif;font-size:16px;line-height:23px;font-weight:500;color:var(--f-heading)}
+.f-proj__copy h3{margin:0;font-family:'Onest',sans-serif;font-size:16px;line-height:28px;font-weight:500;color:var(--f-heading)}
 .f-proj__copy p:last-child{margin:0;font-size:12px;line-height:18px;color:var(--f-primary)}
 
 /* Как мы работаем */
@@ -368,12 +374,12 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
 .f-step__marker::after{content:"";position:absolute;left:5px;top:5px;width:11px;height:11px;border-radius:50%;background:var(--dot)}
 .f-step__marker span{position:absolute;left:20px;right:0;top:10px;height:1px;background:var(--f-green-l)}
 .f-step__num{margin:16px 0 0;font-size:12px;line-height:23px;color:rgba(68,68,68,0.3)}
-.f-step h3{margin:16px 0 0;max-width:155px;font-family:'Onest',sans-serif;font-size:16px;line-height:20px;font-weight:500;color:var(--f-heading)}
-.f-step p:last-child{margin:16px 0 0;max-width:155px;font-size:12px;line-height:18px;color:var(--f-text)}
+.f-step h3{margin:16px 0 0;max-width:155px;font-family:'Onest',sans-serif;font-size:16px;line-height:20px;font-weight:700;letter-spacing:0.02em;color:var(--f-heading)}
+.f-step p:last-child{margin:16px 0 0;max-width:155px;font-size:12px;line-height:16px;color:var(--f-text)}
 
 /* Экология — это данные (ESG) */
-#esg{padding:56px 48px 80px;background:#1C6BA2 url('./assets/figma/bg-data.webp') center/cover no-repeat;color:#FFFFFF}
-.f-data{display:flex;align-items:flex-start;justify-content:space-between;gap:48px}
+#esg{padding:56px 48px 120px;background:#1C6BA2 url('./assets/figma/bg-data.webp') center/cover no-repeat;color:#FFFFFF}
+.f-data{display:flex;align-items:flex-start;gap:90px}
 .f-data__content{flex:0 1 456px;display:flex;flex-direction:column;align-items:flex-start;gap:96px;padding-top:25px}
 .f-data__title{margin:0;font-family:'Onest',sans-serif;font-weight:700;font-size:60px;line-height:68px;color:#FFFFFF}
 .f-data__content .f-lead{margin-top:24px;max-width:300px;font-size:16px;line-height:24px;color:#FFFFFF}
@@ -382,10 +388,11 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
 .f-donut{position:relative;width:100%;max-width:471px;aspect-ratio:471/444}
 .f-donut img{display:block;width:100%;height:100%;object-fit:contain}
 .f-donut__label{position:absolute;left:62.8%;top:58.6%;font-size:20px;line-height:28px;font-weight:600;color:#FFFFFF}
-.f-legend{display:grid;grid-template-columns:repeat(3,auto);justify-content:space-between;gap:24px}
+.f-legend{display:grid;grid-template-columns:153px 129px 141px;gap:24px}
 .f-legend__row{display:flex;align-items:flex-start;gap:16px}
 .f-legend__sw{flex:0 0 auto;width:16px;height:16px}
-.f-legend__name{display:block;font-size:14px;line-height:20px;font-weight:500;letter-spacing:0.02em;text-transform:uppercase}
+/* В макете (desktop) подписи 14px капсом не помещаются в колонки 109–91px и вылезают за блок; берём вариант «Охват 2» (Regular 12), он помещается */
+.f-legend__name{display:block;font-size:12px;line-height:18px;font-weight:400}
 .f-legend__pct{display:block;margin-top:4px;font-size:12px;line-height:18px}
 .f-data__note{margin:0;font-size:14px;line-height:20px;font-weight:500;letter-spacing:0.02em;text-transform:uppercase;color:#FFFFFF}
 
@@ -395,15 +402,15 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
 .f-logo-card{margin:0;display:flex;flex-direction:column;align-items:center;gap:8px;padding:16px;border:1px solid var(--f-border);border-radius:8px;background:#FFFFFF}
 .f-logo-card>div{height:88px;display:flex;align-items:center;justify-content:center}
 .f-logo-card img{display:block;max-width:100%;height:auto}
-.f-logo-card figcaption{font-size:12px;line-height:23px;color:var(--f-text);text-align:center}
+.f-logo-card figcaption{font-size:12px;line-height:18px;color:var(--f-text);text-align:center}
 .f-quotes{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:48px}
 .f-quote{position:relative;margin:0;padding:0 0 29px}
-.f-quote__body{display:flex;flex-direction:column;gap:24px;min-height:165px;padding:24px;border-radius:5px 5px 0 5px;background:var(--f-alt)}
+.f-quote__body{display:flex;flex-direction:column;gap:24px;min-height:165px;padding:24px 24px 19px;border-radius:5px 5px 0 5px;background:var(--f-alt)}
 .f-quote::after{content:"";position:absolute;right:0;bottom:0;width:34px;height:29px;background:var(--f-alt);clip-path:polygon(0 0,100% 0,100% 100%)}
 .f-quote blockquote{margin:0;font-size:12px;line-height:18px;color:var(--f-text)}
 .f-quote figcaption{display:flex;flex-direction:column;gap:8px}
-.f-quote figcaption span:first-child{font-size:12px;line-height:16px;color:var(--f-text)}
-.f-quote figcaption span:last-child{font-family:'Stolzl','Onest',sans-serif;font-weight:300;font-size:12px;line-height:18px;text-transform:uppercase;color:var(--f-text)}
+.f-quote figcaption span:first-child{font-size:12px;line-height:18px;color:var(--f-text)}
+.f-quote figcaption span:last-child{font-size:12px;line-height:18px;text-transform:uppercase;color:var(--f-text)}
 
 /* Лицензии и документы */
 .f-docs .f-intro__row{grid-template-columns:minmax(0,644px) minmax(0,1fr)}
@@ -413,9 +420,9 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
 .f-doc{display:flex;flex-direction:column;background:#FFFFFF;text-decoration:none;color:inherit}
 .f-doc__preview{height:128px;border:1px solid var(--f-border);background:#FFFFFF}
 .f-doc__copy{display:flex;flex-direction:column;gap:13px;flex:1;padding:16px}
-.f-doc__meta{font-size:10px;line-height:18px;letter-spacing:0.02em;text-transform:uppercase;color:var(--f-heading)}
-.f-doc__title{font-size:12px;line-height:18px;font-weight:500;color:var(--f-primary)}
-.f-doc__action{margin-top:auto;font-size:10px;line-height:18px;color:var(--f-heading)}
+.f-doc__meta{font-size:12px;line-height:18px;text-transform:uppercase;color:var(--f-heading)}
+.f-doc__title{font-size:12px;line-height:18px;font-weight:400;color:var(--f-primary)}
+.f-doc__action{margin-top:auto;font-size:12px;line-height:18px;color:var(--f-heading)}
 a.f-doc:hover .f-doc__preview{border-color:var(--f-teal)}
 .f-docs-note{margin:24px 0 0;font-size:12px;line-height:18px;color:var(--f-text)}
 
@@ -427,13 +434,13 @@ a.f-doc:hover .f-doc__preview{border-color:var(--f-teal)}
 #eco-form{display:flex;flex-direction:column;gap:24px;padding:32px;background:var(--f-alt)}
 #eco-form-fields{display:flex;flex-direction:column;gap:16px}
 .f-field{display:flex;flex-direction:column;gap:8px}
-.f-field label{font-size:12px;line-height:16px;color:var(--f-text)}
+.f-field label{font-size:12px;line-height:18px;color:var(--f-text)}
 .f-field input,.f-field textarea{width:100%;height:40px;padding:10px 12px;border:1px solid transparent;border-radius:0;background:#FFFFFF;font-family:'Onest',sans-serif;font-size:14px;line-height:20px;color:var(--f-primary);outline:none;transition:border-color 0.2s ease,box-shadow 0.2s ease}
 .f-field textarea{height:80px;resize:vertical}
 .f-field input:focus,.f-field textarea:focus{border-color:var(--f-teal);box-shadow:0 0 0 3px rgba(19,158,161,0.15)}
 .f-field input::placeholder,.f-field textarea::placeholder{color:var(--f-muted)}
 .f-form-actions{display:flex;flex-direction:column;align-items:flex-start;gap:12px;margin-top:8px}
-.f-consent{margin:0;font-size:12px;line-height:20px;color:var(--f-teal)}
+.f-consent{margin:0;font-family:'Stolzl','Onest',sans-serif;font-weight:300;font-size:10px;line-height:18px;color:var(--f-teal)}
 .f-consent a{color:inherit}
 
 /* Подвал — тёмный #06141C (решение проекта), раскладка и типографика по макету */
@@ -445,10 +452,11 @@ a.f-doc:hover .f-doc__preview{border-color:var(--f-teal)}
 .f-foot__brand p+p{margin-top:16px}
 .f-foot__nav{display:flex;gap:96px}
 .f-foot__col{display:flex;flex-direction:column;gap:16px}
+.f-foot__col:nth-child(1){width:196px}.f-foot__col:nth-child(2){width:173px}.f-foot__col:nth-child(3){width:110px}
 .f-foot__col p{margin:0 0 8px;font-size:10px;line-height:18px;text-transform:uppercase;color:var(--f-teal)}
 .f-foot__col a,.f-foot__col span{font-size:12px;line-height:18px;color:#FFFFFF;text-decoration:none;transition:color 0.2s}
 .f-foot__col a:hover{color:var(--f-green-l)}
-.f-foot__bottom{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;margin-top:32px;padding-top:32px;border-top:1px solid var(--f-teal)}
+.f-foot__bottom{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;margin-top:16px;padding-top:32px;border-top:1px solid var(--f-teal)}
 .f-foot__bottom p,.f-foot__bottom a,.f-foot__bottom span{margin:0;font-size:12px;line-height:18px;color:var(--f-teal);text-decoration:none}
 .f-foot__bottom div{display:flex;gap:48px}
 .f-foot__bottom a:hover{color:#FFFFFF}
@@ -464,9 +472,15 @@ a.f-doc:hover .f-doc__preview{border-color:var(--f-teal)}
   .f-intro__row,.f-docs .f-intro__row{grid-template-columns:1fr;gap:20px}
   .f-intro__row>.f-lead{padding-top:0;max-width:520px}
   .f-why{grid-template-columns:repeat(2,1fr)}
+  .f-stats{grid-template-columns:repeat(2,1fr);row-gap:32px}
   .f-lab{flex-direction:column}
   .f-lab__content{flex-basis:auto}
   .f-lab__grid{flex-basis:auto;width:100%;grid-template-columns:repeat(2,1fr)}
+  .f-lab__card{height:auto;min-height:199px}
+  .f-svc-intro__copy .f-btn--ghost{margin-bottom:0}
+  .f-data{gap:64px}
+  .f-legend{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .f-foot__col:nth-child(n){width:auto}
   .f-svc-island{display:none}
   .f-svc-intro{min-height:0;padding-top:96px}
   .f-svc-grid{grid-template-columns:repeat(2,1fr)}
@@ -484,13 +498,17 @@ a.f-doc:hover .f-doc__preview{border-color:var(--f-teal)}
 /* ==== Мобильный (макет 390) ==== */
 @media (max-width:720px){
   .f-sec{padding:32px 20px}
-  #eco-header{padding:18px 10px 19px 20px !important;gap:16px;background:#FFFFFF !important}
+  #eco-header{padding:14px 10px 14px 20px !important;gap:16px;background:#FFFFFF !important}
   #eco-header .f-logo__light{display:none !important}
   #eco-header .f-logo__dark{display:block !important}
   #eco-header .f-burger{color:var(--f-heading) !important}
   .f-head-actions .f-btn{display:none}
   .f-eyebrow{font-size:14px;line-height:20px;font-weight:500}
   .f-h2{font-size:30px;line-height:36px}
+  .f-h2--regular{font-weight:600}
+  .f-h2--tight{letter-spacing:0}
+  .f-lead--narrow{max-width:none !important}
+  .f-lead--why{max-width:226px !important}
   .f-intro{gap:24px}
   .f-intro__row,.f-docs .f-intro__row{gap:20px}
   #top{padding:104px 20px 32px;background:#FFFFFF url('./assets/figma/bg-hero-mobile.webp') 0 72px / 100% auto no-repeat;color:var(--f-heading)}
@@ -501,7 +519,7 @@ a.f-doc:hover .f-doc__preview{border-color:var(--f-teal)}
   .f-sep{display:none}
   .f-br-m{display:inline}
   .f-hero__title{margin-top:32px;font-size:38px;line-height:44px}
-  .f-hero__lead{margin-top:24px}
+  .f-hero__lead{margin-top:24px;line-height:24px}
   .f-hero__actions{margin-top:48px;gap:16px;flex-wrap:nowrap}
   .f-hero__actions .f-btn{height:44px}
   .f-hero__actions .f-btn:first-child{flex:0 1 210px;min-width:0}
@@ -514,7 +532,7 @@ a.f-doc:hover .f-doc__preview{border-color:var(--f-teal)}
   .f-stat__label{margin-top:0;font-size:12px;line-height:18px}
   .f-why{grid-template-columns:1fr;gap:16px;margin-top:32px}
   .f-lab__content{gap:24px}
-  .f-lab__meta{white-space:normal;font-size:11.5px}
+  .f-lab__meta{white-space:normal;font-size:11.5px;line-height:18px}
   .f-lab__intro .f-h2{margin-top:24px}
   .f-lab__intro .f-lead{margin-top:20px}
   #laboratoriya{background-image:url('./assets/figma/bg-lab-mobile.webp')}
@@ -524,12 +542,15 @@ a.f-doc:hover .f-doc__preview{border-color:var(--f-teal)}
   .f-flow__arrow{align-self:center;transform:rotate(90deg)}
   .f-lab__content .f-btn{width:100%}
   .f-lab__grid{grid-template-columns:1fr;gap:16px}
-  .f-lab__card{min-height:0;padding:16px}
+  .f-lab__card{height:auto;min-height:0;padding:16px}
+  .f-lab__card h3{font-size:20px;font-weight:600}
   .f-lab__head{flex-direction:row;align-items:center;gap:12px}
   .f-lab__icon{width:40px;height:40px}
   .f-lab__icon img{width:22px;height:22px}
   .f-lab__card p{margin-left:52px}
-  .f-svc-intro{padding-top:20px}
+  #uslugi{padding:20px 32px}
+  .f-svc-intro{padding-top:0}
+  .f-cat:first-child .f-svc,.f-cat:nth-child(2) .f-svc{min-height:0}
   .f-svc-intro__text{gap:24px}
   .f-svc-intro__copy .f-lead{max-width:none}
   .f-svc-intro__copy .f-btn{width:100%;height:35px;border-color:var(--f-green);color:var(--f-green)}
@@ -556,8 +577,9 @@ a.f-doc:hover .f-doc__preview{border-color:var(--f-teal)}
   .f-step:last-child .f-step__marker span{display:none}
   .f-step__num{margin:0;font-size:14px;line-height:20px;font-weight:500;letter-spacing:0.02em}
   .f-step h3{margin-top:8px;max-width:none;font-weight:700;letter-spacing:0.02em}
-  .f-step p:last-child{margin-top:8px;max-width:none}
-  #esg{padding:32px 20px;background-image:url('./assets/figma/bg-data-mobile.webp')}
+  .f-step p:last-child{margin-top:8px;max-width:none;line-height:18px}
+  .f-step h3 br{display:none}
+  #esg{padding:32px 20px 20px;background-image:url('./assets/figma/bg-data-mobile.webp')}
   .f-data{gap:32px}
   .f-data__content{gap:32px;padding-top:0}
   .f-data__title{font-size:38px;line-height:44px}
@@ -565,19 +587,21 @@ a.f-doc:hover .f-doc__preview{border-color:var(--f-teal)}
   .f-data__content .f-btn{width:100%}
   .f-data__visual{gap:24px}
   .f-donut{max-width:350px}
-  .f-donut__label{font-size:15px;line-height:21px}
-  .f-legend{gap:16px}
+  .f-donut__label{left:43.4%;top:42.4%;font-size:15px;line-height:21px}
+  .f-legend{grid-template-columns:113px 113px 92px;gap:16px}
+  .f-legend__pct{font-size:14px;line-height:20px;font-weight:500;letter-spacing:0.02em;text-transform:uppercase}
+  .f-br-d{display:none}
   .f-legend__row{gap:8px}
-  .f-legend__name{font-size:12px;line-height:18px}
+  .f-legend__name{font-size:14px;line-height:20px;font-weight:500;letter-spacing:0.02em;text-transform:uppercase}
   .f-data__note{font-size:12px;line-height:18px;font-weight:400;letter-spacing:0;text-transform:none}
   .f-logos{gap:16px;margin-top:32px}
   .f-logo-card>div{height:88px}
   .f-logo-card img{max-width:100%;height:auto}
   .f-quotes{margin-top:24px}
   .f-quote__body{padding:16px;gap:20px;min-height:0}
+  .f-quote{padding-bottom:24px}
   .f-quote blockquote{color:var(--f-primary)}
-  .f-quote figcaption span:last-child{font-family:'Onest',sans-serif;font-weight:400}
-  .f-docs-grid{grid-template-columns:1fr;margin-top:34px}
+  .f-docs-grid{grid-template-columns:1fr;margin-top:42px}
   .f-doc__copy{gap:8px}
   .f-doc__meta,.f-doc__action{font-size:12px;line-height:18px}
   .f-doc__title{font-weight:400}
@@ -592,6 +616,7 @@ a.f-doc:hover .f-doc__preview{border-color:var(--f-teal)}
   .f-foot__brand{flex-basis:auto}
   .f-foot__nav{flex-direction:column;gap:24px}
   .f-foot__col p{font-size:12px;margin-bottom:8px}
+  .f-consent{font-family:'Onest',sans-serif;font-weight:400;font-size:12px}
   .f-foot__bottom{flex-direction:column;align-items:flex-start;gap:16px;margin-top:24px;padding-top:24px}
   .f-foot__bottom div{flex-direction:column;gap:16px}
 }
@@ -664,10 +689,10 @@ a.f-doc:hover .f-doc__preview{border-color:var(--f-teal)}
           </div>
         </div>
         <div class="f-stats">
-          <div class="f-stat" data-rv="true"><div class="f-stat__num"><span data-count="14">0</span></div><p class="f-stat__label">лет в экологическом инжиниринге</p></div>
+          <div class="f-stat" data-rv="true"><div class="f-stat__num"><span data-count="14">0</span></div><p class="f-stat__label">лет в экологическом<br>инжиниринге</p></div>
           <div class="f-stat" data-rv="true"><div class="f-stat__num"><span data-count="500">0</span>+</div><p class="f-stat__label">реализованных проектов</p></div>
           <div class="f-stat" data-rv="true"><div class="f-stat__num"><span data-count="1200">0</span>+</div><p class="f-stat__label">обследованных объектов</p></div>
-          <div class="f-stat" data-rv="true"><div class="f-stat__num"><span data-count="98">0</span>%</div><p class="f-stat__label">документации согласовано без замечаний</p></div>
+          <div class="f-stat" data-rv="true"><div class="f-stat__num"><span data-count="98">0</span>%</div><p class="f-stat__label">документации согласовано<br>без замечаний</p></div>
         </div>
       </div>
     </section>
@@ -679,7 +704,7 @@ a.f-doc:hover .f-doc__preview{border-color:var(--f-teal)}
           <p class="f-eyebrow" data-rv="true">Почему выбирают нас</p>
           <div class="f-intro__row">
             <h2 class="f-h2" data-rv="true">Компетенция, которую видно в данных</h2>
-            <p class="f-lead" data-rv="true">Шесть причин, по которым инженеры и девелоперы приходят к нам с объектами, где цена ошибки высока.</p>
+            <p class="f-lead f-lead--narrow f-lead--why" data-rv="true">Шесть причин, по которым инженеры и девелоперы приходят к нам с объектами, где цена ошибки высока.</p>
           </div>
         </div>
         <div class="f-why">
@@ -699,7 +724,7 @@ a.f-doc:hover .f-doc__preview{border-color:var(--f-teal)}
         <div class="f-lab__content">
           <div class="f-lab__intro">
             <p class="f-eyebrow" data-rv="true">Собственная аккредитованная лаборатория</p>
-            <h2 class="f-h2" data-rv="true">«Аналитик Лаб»&nbsp;— лаборатория в составе центра</h2>
+            <h2 class="f-h2 f-h2--regular" data-rv="true">«Аналитик Лаб»&nbsp;— лаборатория в составе центра</h2>
             <p class="f-lead" data-rv="true">Редкость для рынка: отбор и анализ проб, изыскания, документация и согласование — в одной команде и по одному адресу. Без субподряда, без потери качества данных и сроков.</p>
           </div>
           <div class="f-flow" data-rv="true">
@@ -730,7 +755,7 @@ a.f-doc:hover .f-doc__preview{border-color:var(--f-teal)}
           <div class="f-svc-intro__text">
             <p class="f-eyebrow" data-rv="true">Услуги</p>
             <div class="f-svc-intro__copy">
-              <h2 class="f-h2" data-rv="true">Экологический инжиниринг полного цикла</h2>
+              <h2 class="f-h2 f-h2--regular" data-rv="true">Экологический инжиниринг полного цикла</h2>
               <p class="f-lead" data-rv="true">От разового проекта до полного экологического сопровождения предприятия.</p>
               <a class="f-btn f-btn--sm f-btn--ghost" href="uslugi/" data-rv="true">Все услуги</a>
             </div>
@@ -853,8 +878,8 @@ a.f-doc:hover .f-doc__preview{border-color:var(--f-teal)}
         <div class="f-intro">
           <p class="f-eyebrow" data-rv="true">Проекты</p>
           <div class="f-intro__row">
-            <h2 class="f-h2" data-rv="true">Объекты, которым нужна точность</h2>
-            <p class="f-lead" data-rv="true">Работаем с объектами федерального масштаба — от небоскрёбов до портовых акваторий и театров.</p>
+            <h2 class="f-h2 f-h2--regular" data-rv="true">Объекты, которым нужна точность</h2>
+            <p class="f-lead f-lead--narrow" data-rv="true">Работаем с объектами федерального масштаба — от небоскрёбов до портовых акваторий и театров.</p>
           </div>
         </div>
         <div class="f-proj-grid">
@@ -883,11 +908,11 @@ a.f-doc:hover .f-doc__preview{border-color:var(--f-teal)}
       <div class="f-wrap">
         <div class="f-intro">
           <p class="f-eyebrow" data-rv="true">Процесс</p>
-          <h2 class="f-h2" data-rv="true">Как мы работаем</h2>
+          <h2 class="f-h2 f-h2--regular" data-rv="true">Как мы работаем</h2>
         </div>
         <div class="f-steps">
           <div class="f-step" data-rv="true"><div class="f-step__marker" aria-hidden="true"><span></span></div><p class="f-step__num">01</p><h3>Заявка и оценка задачи</h3><p>Отвечаем в течение рабочего дня, фиксируем объём, сроки и стоимость.</p></div>
-          <div class="f-step f-step--accent" data-rv="true"><div class="f-step__marker" aria-hidden="true"><span></span></div><p class="f-step__num">02</p><h3>Исходные данные</h3><p>Запрашиваем документы, при необходимости выезжаем на объект.</p></div>
+          <div class="f-step f-step--accent" data-rv="true"><div class="f-step__marker" aria-hidden="true"><span></span></div><p class="f-step__num">02</p><h3>Исходные <br>данные</h3><p>Запрашиваем документы, при необходимости выезжаем на объект.</p></div>
           <div class="f-step" data-rv="true"><div class="f-step__marker" aria-hidden="true"><span></span></div><p class="f-step__num">03</p><h3>Эксперты и лаборатория</h3><p>Полевые работы, отбор и анализ проб, расчёты и моделирование.</p></div>
           <div class="f-step" data-rv="true"><div class="f-step__marker" aria-hidden="true"><span></span></div><p class="f-step__num">04</p><h3>Согласование</h3><p>Сопровождаем документацию в надзорных органах до утверждения.</p></div>
           <div class="f-step" data-rv="true"><div class="f-step__marker" aria-hidden="true"><span></span></div><p class="f-step__num">05</p><h3>Результат</h3><p>Комплект документов и защита от штрафов, предписаний и рисков.</p></div>
@@ -903,7 +928,7 @@ a.f-doc:hover .f-doc__preview{border-color:var(--f-teal)}
             <h2 class="f-data__title" data-rv="true">Экология —<br>это данные</h2>
             <p class="f-lead" data-rv="true">Экология — это измеримые величины, а не декларации. Каждое наше решение опирается на фактические данные, лабораторный анализ и воспроизводимые расчёты.</p>
           </div>
-          <p class="f-data__motto" data-rv="true">НЕТ ДАННЫХ — НЕТ РЕШЕНИЯ<br><br>НАУКА ДЛЯ ПРИРОДЫ</p>
+          <p class="f-data__motto" data-rv="true">НЕТ ДАННЫХ — НЕТ РЕШЕНИЯ<br><br class="f-br-d">НАУКА ДЛЯ ПРИРОДЫ</p>
           <a class="f-btn f-btn--ghost f-btn--light" href="#uslugi" data-rv="true">Услуги ESG</a>
         </div>
         <div class="f-data__visual" data-rv="true">
@@ -926,7 +951,7 @@ a.f-doc:hover .f-doc__preview{border-color:var(--f-teal)}
       <div class="f-wrap">
         <div class="f-intro">
           <p class="f-eyebrow" data-rv="true">Клиенты</p>
-          <h2 class="f-h2" data-rv="true">Нам доверяют объекты, где цена ошибки высока</h2>
+          <h2 class="f-h2 f-h2--regular" data-rv="true">Нам доверяют объекты, где цена ошибки высока</h2>
         </div>
         <div class="f-logos" data-rv="true">
           <figure class="f-logo-card"><div><img src="./assets/figma/client-lahta.svg" alt="Лахта Центр" width="165" height="32" loading="lazy" decoding="async"></div><figcaption>Лахта Центр</figcaption></figure>
@@ -957,7 +982,7 @@ a.f-doc:hover .f-doc__preview{border-color:var(--f-teal)}
         <div class="f-intro">
           <p class="f-eyebrow" data-rv="true">Лицензии и документы</p>
           <div class="f-intro__row">
-            <h2 class="f-h2" data-rv="true">Аккредитация и разрешения — открыто</h2>
+            <h2 class="f-h2 f-h2--regular f-h2--tight" data-rv="true">Аккредитация и разрешения — открыто</h2>
             <p class="f-lead" data-rv="true">Работаем в реестре аккредитованных лиц.<br><br>Аттестаты, выписки и сертификаты доступны для скачивания.</p>
           </div>
         </div>
@@ -988,7 +1013,7 @@ a.f-doc:hover .f-doc__preview{border-color:var(--f-teal)}
       <div class="f-wrap">
         <div class="f-request" data-rv="true">
           <div class="f-request__panel">
-            <h2 class="f-h2">Обсудим вашу задачу</h2>
+            <h2 class="f-h2 f-h2--regular f-h2--tight">Обсудим вашу задачу</h2>
             <p class="f-lead">Опишите задачу — вернёмся с планом работ и оценкой в течение рабочего дня.</p>
           </div>
           <form id="eco-form">

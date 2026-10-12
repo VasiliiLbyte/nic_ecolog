@@ -59,7 +59,7 @@ export function pageStyles() {
   @media(max-width:1060px){.bar-nav,.bar-phone,.bar-actions .btn-cta{display:none}.burger{display:flex}}
   .wrap{max-width:1160px;margin:0 auto;padding:40px 48px 96px}
   .eye{font-size:12px;line-height:25px;letter-spacing:.02em;color:var(--f-text);text-transform:uppercase}
-  h1{margin-top:24px;max-width:640px;font-weight:600;font-size:50px;line-height:55px;color:var(--f-heading);text-wrap:balance}
+  h1{margin-top:24px;max-width:640px;font-weight:400;font-size:50px;line-height:55px;color:var(--f-heading);text-wrap:balance}
   .lead{margin-top:24px;max-width:540px;font-size:16px;line-height:23px;color:var(--f-text)}
   .lead p+p{margin-top:12px}
   .facts{display:flex;flex-wrap:wrap;gap:30px;margin-top:40px}
@@ -118,7 +118,7 @@ export function pageStyles() {
     .bar{padding:18px 10px 19px 20px}
     .crumbs-row{padding:16px 20px 0}
     .wrap{padding:24px 20px 48px}
-    h1{font-size:30px;line-height:36px;margin-top:16px}
+    h1{font-size:30px;line-height:36px;margin-top:16px;font-weight:600}
     h2{font-size:24px;line-height:30px;margin-top:40px}
     .facts{gap:12px}
     .fact{flex-direction:column;gap:0}
