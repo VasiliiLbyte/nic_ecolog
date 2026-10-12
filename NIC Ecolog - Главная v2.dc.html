@@ -69,7 +69,9 @@ input::placeholder,textarea::placeholder{color:#6E8385}
 @keyframes wordUp{from{opacity:0;transform:translateY(105%)}to{opacity:1;transform:translateY(0)}}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
 @keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-@keyframes svcFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+/* Остров в «Услугах» парит: опускается от позиции макета (сверху он упирается в край секции) и слегка покачивается; тень под ним дышит в такт */
+@keyframes islandFloat{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(16px) rotate(-1.2deg)}}
+@keyframes islandShadow{0%,100%{transform:scaleX(0.8);opacity:0.55}50%{transform:scaleX(1);opacity:1}}
 @keyframes drawPrint{from{stroke-dashoffset:100}to{stroke-dashoffset:0}}
 [data-anim="on"] [data-rv]{opacity:0;transform:translateY(30px);transition:opacity 0.9s ease,transform 0.9s cubic-bezier(0.22,1,0.36,1)}
 [data-anim="on"] [data-rv].rv-on{opacity:1;transform:translateY(0)}
@@ -343,7 +345,9 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
 .f-svc-intro__text{flex:0 1 604px;display:flex;flex-direction:column;align-items:flex-start;gap:48px}
 .f-svc-intro__copy{display:flex;flex-direction:column;align-items:flex-start;gap:24px}
 .f-svc-intro__copy .f-lead{max-width:260px}
-.f-svc-island{flex:0 0 395px;align-self:flex-start;width:395px;height:537px;object-fit:cover;pointer-events:none}
+.f-svc-island-wrap{position:relative;flex:0 0 395px;align-self:flex-start;width:395px;height:537px;pointer-events:none}
+.f-svc-island{display:block;width:100%;height:100%;object-fit:cover;transform-origin:50% 45%;animation:islandFloat 7s ease-in-out infinite;will-change:transform}
+.f-svc-island-shadow{position:absolute;left:24%;right:24%;bottom:-14px;height:26px;border-radius:50%;background:radial-gradient(closest-side,rgba(11,92,96,0.28),rgba(11,92,96,0));animation:islandShadow 7s ease-in-out infinite}
 .f-svc-content{display:flex;flex-direction:column;gap:48px;margin-top:24px}
 .f-cat__head{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-bottom:8px;border-bottom:1px solid var(--f-border);margin-bottom:24px}
 .f-cat__title{display:flex;align-items:baseline;gap:16px;margin:0;font-family:'Onest',sans-serif;font-size:16px;line-height:20px;font-weight:700;letter-spacing:0.02em;color:var(--f-primary)}
@@ -491,7 +495,7 @@ a.f-doc:hover .f-doc__preview{border-color:var(--f-teal)}
   .f-data{gap:64px}
   .f-legend{grid-template-columns:repeat(3,minmax(0,1fr))}
   .f-foot__col:nth-child(n){width:auto}
-  .f-svc-island{display:none}
+  .f-svc-island-wrap{display:none}
   .f-svc-intro{min-height:0;padding-top:96px}
   .f-svc-grid{grid-template-columns:repeat(2,1fr)}
   .f-proj,.f-proj--wide{width:100%}
@@ -770,7 +774,7 @@ a.f-doc:hover .f-doc__preview{border-color:var(--f-teal)}
               <a class="f-btn f-btn--sm f-btn--ghost f-btn--ghost-green" href="uslugi/" data-rv="true">Все услуги →</a>
             </div>
           </div>
-          <img class="f-svc-island" data-svc-illustration="true" src="./assets/services-illustration.webp" alt="" aria-hidden="true" width="395" height="537">
+          <div class="f-svc-island-wrap" data-svc-illustration="true" aria-hidden="true"><img class="f-svc-island" src="./assets/services-illustration.webp" alt="" width="395" height="537"><span class="f-svc-island-shadow"></span></div>
         </div>
         <div class="f-svc-content">
           <div class="f-cat" data-rv="true">
