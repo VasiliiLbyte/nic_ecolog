@@ -357,7 +357,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
 .f-svc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;align-items:start}
 .f-svc{padding:16px;border-radius:8px;background:var(--f-alt);cursor:pointer;outline-offset:2px;transition:background 0.25s ease}
 .f-svc:hover,.f-svc:focus-within{background:rgba(11,92,96,0.09)}
-.f-svc__title{display:flex;align-items:flex-start;gap:12px;margin:0;font-family:'Onest',sans-serif;font-size:20px;line-height:20px;font-weight:600;color:var(--f-heading)}
+.f-svc__title{display:flex;align-items:flex-start;gap:12px;margin:0;font-family:'Onest',sans-serif;font-size:16px;line-height:20px;font-weight:700;letter-spacing:0.02em;color:var(--f-heading)}
 .f-svc__title .f-dot{width:8px;height:8px;margin-top:6px}
 .f-cat:first-child .f-svc{min-height:100px}
 .f-cat:nth-child(2) .f-svc{min-height:72px}
@@ -432,6 +432,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
 .f-legend__sw{flex:0 0 auto;width:16px;height:16px}
 /* В макете (desktop) подписи 14px капсом не помещаются в колонки 109–91px и вылезают за блок; берём вариант «Охват 2» (Regular 12), он помещается */
 .f-legend__name{display:block;font-size:12px;line-height:18px;font-weight:400}
+.f-legend__scope{display:block;font-size:14px;line-height:20px;font-weight:500;letter-spacing:0.02em;text-transform:uppercase}
 .f-legend__pct{display:block;margin-top:4px;font-size:12px;line-height:18px}
 .f-data__note{margin:0;font-size:14px;line-height:20px;font-weight:500;letter-spacing:0.02em;text-transform:uppercase;color:#FFFFFF}
 
@@ -548,6 +549,7 @@ a.f-doc:hover .f-doc__preview{border-color:var(--f-teal)}
   .f-h2{font-size:30px;line-height:36px}
   .f-h2--regular{font-weight:600}
   .f-h2--tight{letter-spacing:0}
+  .f-lead{line-height:24px}
   .f-lead--narrow{max-width:none !important}
   .f-lead--why{max-width:226px !important}
   .f-intro{gap:24px}
@@ -567,7 +569,7 @@ a.f-doc:hover .f-doc__preview{border-color:var(--f-teal)}
   .f-hero__actions .f-btn--ghost{flex:1 1 auto}
   .f-hero__proof{margin-top:32px;font-size:12px;line-height:16px}
   .f-ticker__seq span{font-size:12px;line-height:18px;font-weight:400}
-  .f-stats{grid-template-columns:repeat(2,1fr);row-gap:32px;margin-top:32px}
+  .f-stats{grid-template-columns:repeat(2,1fr);row-gap:24px;margin-top:32px}
   .f-stat{padding-top:0}
   .f-stat__num{font-size:48px;line-height:72px;letter-spacing:-0.03em}
   .f-stat__label{margin-top:0;font-size:12px;line-height:18px}
@@ -637,7 +639,6 @@ a.f-doc:hover .f-doc__preview{border-color:var(--f-teal)}
   .f-legend__pct{font-size:14px;line-height:20px;font-weight:500;letter-spacing:0.02em;text-transform:uppercase}
   .f-br-d{display:none}
   .f-legend__row{gap:8px}
-  .f-legend__name{font-size:14px;line-height:20px;font-weight:500;letter-spacing:0.02em;text-transform:uppercase}
   .f-data__note{font-size:12px;line-height:18px;font-weight:400;letter-spacing:0;text-transform:none}
   .f-logos{gap:16px;margin-top:32px}
   .f-logo-card>div{height:88px}
@@ -646,7 +647,7 @@ a.f-doc:hover .f-doc__preview{border-color:var(--f-teal)}
   .f-quote__body{padding:16px;gap:20px;min-height:0}
   .f-quote{padding-bottom:24px}
   .f-quote blockquote{color:var(--f-primary)}
-  .f-docs-grid{grid-template-columns:1fr;margin-top:42px}
+  .f-docs-grid{grid-template-columns:1fr;margin-top:42px;padding-bottom:10px}
   .f-doc__copy{gap:8px}
   .f-doc__meta,.f-doc__action{font-size:12px;line-height:18px}
   .f-doc__title{font-weight:400}
@@ -656,19 +657,18 @@ a.f-doc:hover .f-doc__preview{border-color:var(--f-teal)}
   .f-field input{height:44px;font-size:16px}
   .f-field textarea{height:96px;font-size:16px}
   .f-form-actions .f-btn{width:100%;height:44px}
-  #kontakty{padding:32px 20px}
+  #kontakty{padding:32px 20px;background-image:url('./assets/figma/bg-footer-mobile.webp')}
   .f-foot__top{gap:32px}
   .f-foot__brand{flex-basis:auto}
   .f-foot__nav{flex-direction:column;gap:24px}
   .f-foot__col p{font-size:12px;margin-bottom:8px}
   .f-consent{font-family:'Onest',sans-serif;font-weight:400;font-size:12px}
   .f-foot__bottom{flex-direction:column;align-items:flex-start;gap:16px;margin-top:24px;padding-top:24px}
-  .f-foot__bottom div{flex-direction:column;gap:16px}
+  .f-foot__bottom div{flex-direction:column;gap:12px}
 }
-/* Уже 390 (макет): колонки легенды 113/113/92 со значком слева не помещаются — значок над текстом */
+/* Уже 390 (макет): колонки легенды 113/113/92 сжимаются пропорционально */
 @media (max-width:389px){
-  .f-legend{grid-template-columns:repeat(3,auto);justify-content:space-between;gap:12px}
-  .f-legend__row{flex-direction:column}
+  .f-legend{grid-template-columns:113fr 113fr 92fr}
 }
 
 /* ==== Движение: медленно и тонко; без JS и при prefers-reduced-motion страница остаётся как в макете ====
@@ -1081,9 +1081,9 @@ a.f-doc:hover .f-doc__preview{border-color:var(--f-teal)}
             </div>
           </div>
           <div class="f-legend">
-            <button type="button" class="f-legend__row" data-seg="3" aria-pressed="false"><span class="f-legend__sw" style="background:#2081C4" aria-hidden="true"></span><span><span class="f-legend__name">Охват 3<br>цепочка поставок<br>и жизненный цикл</span><span class="f-legend__pct">≈70%</span></span></button>
-            <button type="button" class="f-legend__row" data-seg="2" aria-pressed="false"><span class="f-legend__sw" style="background:#139EA1" aria-hidden="true"></span><span><span class="f-legend__name">Охват 2<br>закупаемая энергия</span><span class="f-legend__pct">≈18%</span></span></button>
-            <button type="button" class="f-legend__row" data-seg="1" aria-pressed="false"><span class="f-legend__sw" style="background:#ADCF7A" aria-hidden="true"></span><span><span class="f-legend__name">Охват 1<br>прямые выбросы</span><span class="f-legend__pct">≈12%</span></span></button>
+            <button type="button" class="f-legend__row" data-seg="3" aria-pressed="false"><span class="f-legend__sw" style="background:#2081C4" aria-hidden="true"></span><span><span class="f-legend__name"><span class="f-legend__scope">Охват 3</span>цепочка поставок<br class="f-br-d"> и жизненный цикл</span><span class="f-legend__pct">≈70%</span></span></button>
+            <button type="button" class="f-legend__row" data-seg="2" aria-pressed="false"><span class="f-legend__sw" style="background:#139EA1" aria-hidden="true"></span><span><span class="f-legend__name"><span class="f-legend__scope">Охват 2</span>закупаемая энергия</span><span class="f-legend__pct">≈18%</span></span></button>
+            <button type="button" class="f-legend__row" data-seg="1" aria-pressed="false"><span class="f-legend__sw" style="background:#ADCF7A" aria-hidden="true"></span><span><span class="f-legend__name"><span class="f-legend__scope">Охват 1</span>прямые<br class="f-br-d"> выбросы</span><span class="f-legend__pct">≈12%</span></span></button>
           </div>
           <p class="f-data__note">Типичная структура углеродного следа компании. Мы считаем все три охвата — по первичным данным.</p>
         </div>

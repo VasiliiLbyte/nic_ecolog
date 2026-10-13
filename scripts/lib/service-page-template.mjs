@@ -99,7 +99,7 @@ export function pageStyles() {
   .hub-group h2{margin:0 0 16px;padding-bottom:8px;border-bottom:1px solid var(--f-border);font-size:16px;line-height:20px;font-weight:700;letter-spacing:.02em;color:var(--f-primary)}
   .lab-block{margin-top:48px;padding:24px;border-radius:8px;background:#FFFFFF}
   .soon{font-size:12px;color:var(--f-muted);font-style:italic}
-  .ft{background:#0B5C60 center top/cover no-repeat;color:#FFFFFF;padding:64px 48px 85px}
+  .ft{background:#0B5C60 var(--ft-bg) center top/cover no-repeat;color:#FFFFFF;padding:64px 48px 85px}
   .ft-inner{max-width:1064px;margin:0 auto}
   .ft-top{display:flex;justify-content:space-between;gap:16px}
   .ft-brand{flex:0 0 254px;display:flex;flex-direction:column;gap:32px}
@@ -132,13 +132,13 @@ export function pageStyles() {
     .cta h3{font-size:24px;line-height:32px}
     .cta-btn{width:100%;height:44px}
     .chips{gap:12px}
-    .ft{padding:32px 20px}
+    .ft{padding:32px 20px;background-image:var(--ft-bg-m)}
     .ft-top{gap:32px}
     .ft-brand{flex-basis:auto}
     .ft-col h4{font-size:12px}
     .ft-nav{flex-direction:column;gap:24px}
     .ft-bot{flex-direction:column;align-items:flex-start;gap:16px;margin-top:24px;padding-top:24px}
-    .ft-bot div{flex-direction:column;gap:16px}
+    .ft-bot div{flex-direction:column;gap:12px}
   }
   .post-meta{margin-top:14px;font-size:14px;color:var(--f-muted)}
   .post{margin-top:28px;max-width:760px;font-size:16px;line-height:1.75;color:var(--f-primary)}
@@ -266,7 +266,7 @@ export function footerBlock({ depth, homeHref = '/', uslugiHref: uslugiOverride 
   const prefix = assetPrefix(depth);
   const uslugiHref = uslugiOverride ?? (depth === 1 ? './' : `${prefix}uslugi/`);
   const privacyHref = `${prefix}privacy.html`;
-  return `<footer class="ft" style="background-image:url('${prefix}assets/figma/bg-footer.webp')">
+  return `<footer class="ft" style="--ft-bg:url('${prefix}assets/figma/bg-footer.webp');--ft-bg-m:url('${prefix}assets/figma/bg-footer-mobile.webp')">
   <div class="ft-inner">
     <div class="ft-top">
       <div class="ft-brand">
