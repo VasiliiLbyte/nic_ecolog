@@ -49,6 +49,9 @@ const BG_EXPORTS = [
   { path: ['данные', 'data-background'], file: 'bg-data' },
   { path: ['данные', 'data-background'], frame: FRAME_MOBILE, file: 'bg-data-mobile' },
   { path: ['hero-section'], frame: FRAME_MOBILE, file: 'bg-hero-mobile', skip: ['Hero'] },
+  // Подвал: заливка #0B5C60 + размытые пятна (footer-background-art), без контента.
+  // Текущий bg-footer.webp (1440×440) снят с SVG-экспорта Figma MCP узла 220:547, по .fig не прогонялся.
+  { path: ['Подвал'], file: 'bg-footer', skip: ['footer-content'] },
 ];
 
 // 3D-диаграмма ESG режется на три слоя (охват 3 / 2 / 1), чтобы на сайте анимировать сегменты
