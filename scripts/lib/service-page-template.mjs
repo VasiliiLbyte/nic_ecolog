@@ -111,7 +111,8 @@ export function pageStyles() {
   .ft-col h4{margin:0 0 8px;font-size:10px;line-height:18px;font-weight:400;text-transform:uppercase;color:var(--f-teal)}
   .ft-col a,.ft-col p{font-size:12px;line-height:18px;color:#FFFFFF;text-decoration:none}
   .ft-col a:hover{color:var(--f-green-l)}
-  .ft-bot{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:24px;margin-top:32px;padding-top:32px;border-top:1px solid var(--f-teal);font-size:12px;line-height:18px;color:var(--f-teal)}
+  .ft-col a,.ft-bot a{padding:8px 0;margin:-8px 0}
+  .ft-bot{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:24px;margin-top:16px;padding-top:32px;border-top:1px solid var(--f-teal);font-size:12px;line-height:18px;color:var(--f-teal)}
   .ft-bot div{display:flex;gap:48px}
   .ft-bot a{color:inherit;text-decoration:none}
   .ft-bot a:hover{color:#FFFFFF}
@@ -132,6 +133,9 @@ export function pageStyles() {
     .cta-btn{width:100%;height:44px}
     .chips{gap:12px}
     .ft{padding:32px 20px}
+    .ft-top{gap:32px}
+    .ft-brand{flex-basis:auto}
+    .ft-col h4{font-size:12px}
     .ft-nav{flex-direction:column;gap:24px}
     .ft-bot{flex-direction:column;align-items:flex-start;gap:16px;margin-top:24px;padding-top:24px}
     .ft-bot div{flex-direction:column;gap:16px}

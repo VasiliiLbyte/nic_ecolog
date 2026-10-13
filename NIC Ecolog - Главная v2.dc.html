@@ -208,8 +208,9 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
 @media (max-width:480px){
   #kontakty [data-cols4]{grid-template-columns:1fr !important}
 }
+/* Сенсорные экраны: карточка услуги как в макете (заголовок + 2 строки); подробности — по тапу, в оверлее или на странице услуги */
 @media (hover:none){
-  [data-svc] [data-desc]{max-height:200px;opacity:1}
+  [data-svc] [data-desc],[data-svc]:focus-within [data-desc]{display:none}
 }
 @media (prefers-reduced-motion: reduce){
   *{animation-duration:0.01ms !important;animation-iteration-count:1 !important;transition-duration:0.01ms !important}
@@ -498,6 +499,8 @@ a.f-doc:hover .f-doc__preview{border-color:var(--f-teal)}
 .f-foot__bottom p,.f-foot__bottom a,.f-foot__bottom span{margin:0;font-size:12px;line-height:18px;color:var(--f-teal);text-decoration:none}
 .f-foot__bottom div{display:flex;gap:48px}
 .f-foot__bottom a:hover{color:#FFFFFF}
+/* Зона нажатия ссылок подвала — на половину зазора вверх и вниз, раскладка не меняется */
+.f-foot__col a,.f-foot__bottom a{padding:8px 0;margin:-8px 0}
 
 /* ==== Планшет ==== */
 @media (max-width:1180px){
@@ -661,6 +664,11 @@ a.f-doc:hover .f-doc__preview{border-color:var(--f-teal)}
   .f-consent{font-family:'Onest',sans-serif;font-weight:400;font-size:12px}
   .f-foot__bottom{flex-direction:column;align-items:flex-start;gap:16px;margin-top:24px;padding-top:24px}
   .f-foot__bottom div{flex-direction:column;gap:16px}
+}
+/* Уже 390 (макет): колонки легенды 113/113/92 со значком слева не помещаются — значок над текстом */
+@media (max-width:389px){
+  .f-legend{grid-template-columns:repeat(3,auto);justify-content:space-between;gap:12px}
+  .f-legend__row{flex-direction:column}
 }
 
 /* ==== Движение: медленно и тонко; без JS и при prefers-reduced-motion страница остаётся как в макете ====

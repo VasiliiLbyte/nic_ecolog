@@ -62,7 +62,14 @@ function patchHome(html) {
     '\n      <a href="#kontakty">Контакты</a>',
     '      <a href="blog/">Блог</a>'
   );
-  return addBlogLink(withHeader, '\n            <a href="#litsenzii">Лицензии</a>', '            <a href="blog/">Блог</a>');
+  const withFooter = addBlogLink(withHeader, '\n            <a href="#litsenzii">Лицензии</a>', '            <a href="blog/">Блог</a>');
+  // …и последним пунктом мобильного меню (там ссылки с крупным начертанием, стиль — как у соседних).
+  const menuItemStyle = 'font-size:30px;font-weight:300;color:#13282B;text-decoration:none;padding:10px 0;border-bottom:1px solid rgba(11,92,96,0.1)';
+  return addBlogLink(
+    withFooter,
+    `\n        <a href="#kontakty" onClick="{{ closeMenu }}" style="${menuItemStyle}">Контакты</a>`,
+    `        <a href="blog/" style="${menuItemStyle}">Блог</a>`
+  );
 }
 
 function patchLab(html) {
