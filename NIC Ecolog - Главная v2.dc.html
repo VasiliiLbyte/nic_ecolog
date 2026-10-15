@@ -401,7 +401,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
 .f-data__content{flex:0 1 456px;display:flex;flex-direction:column;align-items:flex-start;gap:96px}
 .f-data__title{margin:0;font-family:'Onest',sans-serif;font-weight:700;font-size:60px;line-height:68px;color:#FFFFFF}
 .f-data__content .f-lead{margin-top:24px;max-width:300px;font-size:16px;line-height:22px;color:#FFFFFF}
-.f-data__motto{margin:0;font-family:'Onest',sans-serif;font-weight:500;font-size:16px;line-height:20px;color:var(--f-green-l)}
+.f-data__motto{margin:0;white-space:nowrap;font-family:'Onest',sans-serif;font-weight:500;font-size:16px;line-height:20px;color:var(--f-green-l)}
 .f-data__motto span{color:#FFFFFF}
 .f-data__visual{flex:0 1 471px;display:flex;flex-direction:column;align-items:center;gap:32px;min-height:575px}
 /* Диаграмма охватов — компонент Chart/Scopes макета (471×444): картинка-бублик (три слоя для появления),
@@ -437,6 +437,9 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
 .f-donut[data-active="1"] .f-tip--1,.f-donut[data-active="2"] .f-tip--2,.f-donut[data-active="3"] .f-tip--3{opacity:0.9}
 [data-anim="on"] .f-donut:not(.is-in) .f-scope{opacity:0}
 .f-data__note{margin:0;max-width:385px;font-size:12px;line-height:16px;color:#FFFFFF}
+.f-data__caption{width:100%;max-width:420px}
+.f-data__claim{margin:24px 0 0;font-size:20px;line-height:28px;color:#FFFFFF}
+.f-data__claim b{font-weight:700}
 
 /* Клиенты и отзывы */
 .f-clients .f-h2{max-width:628px}
@@ -628,6 +631,8 @@ a.f-doc:hover .f-doc__preview{border-color:var(--f-teal)}
   .f-data__visual{gap:24px;align-items:stretch;min-height:0}
   .f-data__visual .f-donut{align-self:center}
   .f-data__note{max-width:none}
+  .f-data__caption{max-width:none}
+  .f-data__claim{margin-top:16px;font-size:16px;line-height:22px}
   .f-donut{max-width:318px}
   .f-br-d{display:none}
   .f-logos{gap:16px;margin-top:32px}
@@ -1068,7 +1073,10 @@ a.f-doc:hover .f-doc__preview{border-color:var(--f-teal)}
               <span class="f-tip f-tip--3" id="esg-tip-3"><span class="f-tip__val">≈70%</span><span class="f-tip__txt">Цепочка поставок и жизненный цикл</span></span>
             </div>
           </div>
+          <div class="f-data__caption">
           <p class="f-data__note">Типичная структура углеродного следа компании. Мы считаем все три охвата — по первичным данным.</p>
+          <p class="f-data__claim"><b>ОХВАТ 3</b> формирует более 70% углеродного следа компании</p>
+          </div>
         </div>
       </div>
     </section>
