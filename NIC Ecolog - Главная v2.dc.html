@@ -1806,9 +1806,9 @@ class Component extends DCLogic {
       const src = document.createElement('source');
       src.src = './assets/hero/hero-wave-' + v + '.' + ext; src.type = type; video.appendChild(src);
     }
-    // бесконечная петля на 30% медленнее (решение пользователя 2026-10-15); не останавливается при прокрутке
+    // бесконечная петля в исходной скорости; не останавливается при прокрутке
     video.muted = true; video.preload = 'auto'; video.loop = true;
-    const rate = () => { video.defaultPlaybackRate = 0.7; video.playbackRate = 0.7; };
+    const rate = () => { video.defaultPlaybackRate = 1; video.playbackRate = 1; };
     const play = () => { rate(); const p = video.play(); if (p && p.catch) p.catch(() => {}); };
     video.addEventListener('loadedmetadata', rate);
     video.addEventListener('ended', () => { video.currentTime = 0; play(); });
