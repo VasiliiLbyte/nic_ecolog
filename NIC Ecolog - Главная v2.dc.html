@@ -1751,8 +1751,7 @@ class Component extends DCLogic {
     });
   }
 
-  // Видео-волна героя (анимация заказчика): источник по ширине экрана (до 480 px — узкая обрезка), играет только
-  // пока герой на экране и вкладка видима; при prefers-reduced-motion и «экономии трафика» — только постер (первый кадр).
+  // Видео-волна героя (анимация заказчика): источник по ширине экрана (до 480 px — узкая обрезка), играет без остановки; при prefers-reduced-motion и «экономии трафика» — только постер (первый кадр).
   _initHeroVideo(reduced) {
     const wave = document.querySelector('.f-hero__wave');
     const video = wave ? wave.querySelector('video') : null;
@@ -1766,14 +1765,18 @@ class Component extends DCLogic {
       const src = document.createElement('source');
       src.src = './assets/hero/hero-wave-' + v + '.' + ext; src.type = type; video.appendChild(src);
     }
-    video.muted = true; video.preload = 'auto'; video.load();
-    let inView = true;
-    const sync = () => { if (inView && !document.hidden) { const p = video.play(); if (p && p.catch) p.catch(() => {}); } else video.pause(); };
-    const io = 'IntersectionObserver' in window ? new IntersectionObserver((es) => { inView = es[0].isIntersecting; sync(); }) : null;
-    if (io) io.observe(wave.parentElement);
+    // бесконечная петля на 30% медленнее (решение пользователя 2026-10-15); не останавливается при прокрутке
+    video.muted = true; video.preload = 'auto'; video.loop = true;
+    const rate = () => { video.defaultPlaybackRate = 0.7; video.playbackRate = 0.7; };
+    const play = () => { rate(); const p = video.play(); if (p && p.catch) p.catch(() => {}); };
+    video.addEventListener('loadedmetadata', rate);
+    video.addEventListener('ended', () => { video.currentTime = 0; play(); });
+    video.addEventListener('pause', () => { if (!document.hidden) play(); });
+    const sync = () => { if (!document.hidden) play(); };
     document.addEventListener('visibilitychange', sync);
-    sync();
-    this._stopHeroVideo = () => { if (io) io.disconnect(); document.removeEventListener('visibilitychange', sync); video.pause(); };
+    video.load();
+    play();
+    this._stopHeroVideo = () => { document.removeEventListener('visibilitychange', sync); };
   }
 
   // 6. Нить: тонкая волнистая линия в левом поле (≥1200 px) от «О центре» до заявки. Прорисована до «курсора чтения»
