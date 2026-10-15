@@ -1556,31 +1556,26 @@ class Component extends DCLogic {
       sec: document.getElementById(el.getAttribute('data-rail-target')),
       dark: el.getAttribute('data-rail-dark') === '1'
     }));
+    // Точка чтения r идёт от верха документа (в начале) до его низа (в конце прокрутки): r = scrollY + vh·(scrollY / maxScroll).
+    // Активна последняя секция, чей верх уже пройден; её метка заполняется от её верха до верха следующей —
+    // заполнение непрерывно, в начале всё пусто, в конце всё заполнено.
     this._updateRail = () => {
       if (!rail || !railData.length) return;
-      const scrollY = window.scrollY;
-      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-      const ref = scrollY + window.innerHeight * 0.4;
+      const doc = document.documentElement;
+      const maxScroll = Math.max(1, doc.scrollHeight - window.innerHeight);
+      const y = Math.max(0, Math.min(maxScroll, window.scrollY));
+      const r = y + window.innerHeight * (y / maxScroll);
       const tops = railData.map((d) => d.sec ? d.sec.getBoundingClientRect().top + window.scrollY : Infinity);
+      tops[0] = 0;
       let active = 0;
-      for (let i = 0; i < railData.length; i++) {
-        if (tops[i] !== Infinity && ref >= tops[i] - 1) active = i;
-      }
-      const atBottom = scrollY >= maxScroll - 1;
-      if (atBottom) active = railData.length - 1;
+      for (let i = 0; i < railData.length; i++) if (tops[i] !== Infinity && r >= tops[i]) active = i;
       railData.forEach((d, i) => {
         let p = 0;
         if (i < active) p = 1;
-        else if (i === active && tops[i] !== Infinity) {
-          if (atBottom && i === railData.length - 1) {
-            p = 1;
-          } else {
-            const start = tops[i];
-            const range = i < railData.length - 1
-              ? tops[i + 1] - start
-              : Math.max(1, maxScroll - start);
-            p = Math.max(0, Math.min(1, (scrollY - start) / range));
-          }
+        else if (i === active) {
+          let end = doc.scrollHeight;
+          for (let j = i + 1; j < railData.length; j++) if (tops[j] !== Infinity) { end = tops[j]; break; }
+          p = Math.max(0, Math.min(1, (r - tops[i]) / Math.max(1, end - tops[i])));
         }
         if (d.fill) d.fill.style.width = (p * 100).toFixed(1) + '%';
         d.el.classList.toggle('is-active', i === active);
