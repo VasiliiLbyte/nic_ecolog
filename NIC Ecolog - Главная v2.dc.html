@@ -382,10 +382,15 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
 .f-steps{display:grid;grid-template-columns:repeat(5,1fr);margin-top:64px}
 .f-step{--dot:var(--f-green-l);position:relative}
 .f-step--accent{--dot:var(--f-teal)}
+.f-step:nth-child(1){--dot:var(--f-green-l)}
+.f-step:nth-child(2){--dot:var(--f-green);--line:var(--f-green)}
+.f-step:nth-child(3){--dot:var(--f-teal);--line:var(--f-teal)}
+.f-step:nth-child(4){--dot:var(--f-blue);--line:var(--f-blue)}
+.f-step:nth-child(5){--dot:var(--f-heading);--line:var(--f-heading)}
 .f-step__marker{position:relative;height:20px}
 .f-step__marker::before{content:"";position:absolute;left:0;top:0;width:20px;height:20px;border-radius:50%;background:var(--dot);opacity:0.5}
 .f-step__marker::after{content:"";position:absolute;left:5px;top:5px;width:11px;height:11px;border-radius:50%;background:var(--dot)}
-.f-step__marker span{position:absolute;left:20px;right:0;top:10px;height:1px;background:var(--f-green-l)}
+.f-step__marker span{position:absolute;left:20px;right:0;top:10px;height:1px;background:var(--line,var(--f-green-l))}
 .f-step__num{margin:16px 0 0;font-size:14px;line-height:20px;font-weight:500;letter-spacing:0.02em;color:rgba(68,68,68,0.3)}
 .f-step h3{margin:16px 0 0;max-width:155px;font-family:'Onest',sans-serif;font-size:16px;line-height:20px;font-weight:700;letter-spacing:0.02em;color:var(--f-heading)}
 .f-step p:last-child{margin:16px 0 0;max-width:155px;font-size:12px;line-height:16px;color:var(--f-text)}
@@ -609,11 +614,6 @@ a.f-doc:hover .f-doc__preview{border-color:var(--f-teal)}
   .f-step{display:grid;grid-template-columns:20px 1fr;column-gap:16px}
   .f-step__marker{grid-row:1 / span 3}
   .f-step__marker span{left:9.5px;right:auto;top:20px;width:1px;height:calc(100% + 24px + 72px);background:var(--line,var(--f-green-l))}
-  .f-step:nth-child(1){--dot:var(--f-green-l)}
-  .f-step:nth-child(2){--dot:var(--f-green);--line:var(--f-green)}
-  .f-step:nth-child(3){--dot:var(--f-teal);--line:var(--f-teal)}
-  .f-step:nth-child(4){--dot:var(--f-blue);--line:var(--f-blue)}
-  .f-step:nth-child(5){--dot:var(--f-heading)}
   .f-step:last-child .f-step__marker span{display:none}
   .f-step__num{margin:0;font-size:14px;line-height:20px;font-weight:500;letter-spacing:0.02em}
   .f-step h3{margin-top:8px;max-width:none;font-weight:700;letter-spacing:0.02em}
