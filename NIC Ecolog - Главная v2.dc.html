@@ -402,7 +402,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
 /* Диаграмма охватов — компонент Chart/Scopes макета (471×444): картинка-бублик (три слоя для появления),
    подписи «ОХВАТ N» с точкой, подсказки «≈N% | описание», подсветка сегмента. Все размеры — в долях ширины
    диаграммы (cqw), поэтому мобильная версия (318 px) — точное уменьшение, как в макете.
-   В покое видны все подсказки (как в кадре страницы); наведение/тап на сегмент или подпись — подсветка
+   В покое подсказок нет (решение пользователя 2026-10-15); наведение/тап на сегмент или подпись — подсветка
    сегмента и только его подсказка (состояния Scope-1…3, растворение 0,2 с, ease-out cubic). */
 .f-donut{position:relative;width:100%;max-width:471px;aspect-ratio:471/444;container-type:inline-size}
 .f-donut__float{position:absolute;inset:0;animation:donutFloat 8s ease-in-out infinite}
@@ -422,18 +422,15 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
 .f-scope--1{left:6.582%;top:37.387%}
 .f-scope--2{left:23.142%;top:15.991%}
 .f-scope--3{left:23.142%;top:70.27%}
-.f-tip{position:absolute;display:flex;align-items:center;gap:2.548cqw;height:6.369cqw;padding:0 2.548cqw;border-radius:1.699cqw;background:#FFFFFF;color:var(--f-heading);white-space:nowrap;opacity:0.9;pointer-events:none;transition:opacity 0.2s cubic-bezier(0.215,0.61,0.355,1)}
+.f-tip{position:absolute;display:flex;align-items:center;gap:2.548cqw;height:6.369cqw;padding:0 2.548cqw;border-radius:1.699cqw;background:#FFFFFF;color:var(--f-heading);white-space:nowrap;opacity:0;pointer-events:none;transition:opacity 0.2s cubic-bezier(0.215,0.61,0.355,1)}
 .f-tip__val{font-size:2.972cqw;line-height:4.246cqw}
 .f-tip__val::after{content:"";display:inline-block;width:1px;height:4.246cqw;margin-left:2.548cqw;vertical-align:top;background:#E0E0E0}
 .f-tip__txt{font-size:2.548cqw;line-height:3.397cqw}
 .f-tip--1{left:12.739%;top:43.694%}
 .f-tip--2{left:29.087%;top:22.297%}
 .f-tip--3{left:29.087%;top:76.577%}
-.f-donut[data-active] .f-tip{opacity:0}
 .f-donut[data-active="1"] .f-tip--1,.f-donut[data-active="2"] .f-tip--2,.f-donut[data-active="3"] .f-tip--3{opacity:0.9}
-[data-anim="on"] .f-donut:not(.is-in) .f-scope,[data-anim="on"] .f-donut:not(.is-in) .f-tip{opacity:0}
-.f-donut.is-in .f-tip{transition:opacity 0.8s ease 1s}
-.f-donut.is-ready .f-tip{transition:opacity 0.2s cubic-bezier(0.215,0.61,0.355,1)}
+[data-anim="on"] .f-donut:not(.is-in) .f-scope{opacity:0}
 .f-data__note{margin:0;max-width:385px;font-size:12px;line-height:16px;color:#FFFFFF}
 
 /* Клиенты и отзывы */
