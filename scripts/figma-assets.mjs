@@ -38,7 +38,6 @@ const SVG_EXPORTS = [
 
 // width — ширина результата в px (≈ @2x от размера в макете).
 const IMAGE_EXPORTS = [
-  { path: ['hero-section', 'image 2'], file: 'hero-wave', width: 2400 },
   { path: ['Клиенты', 'clients-content', 'clients-logos', 'client-card#3', 'logo-slot', 'client-logo'], file: 'client-mariinsky', width: 160 },
 ];
 
@@ -47,8 +46,7 @@ const BG_EXPORTS = [
   { path: ['лаборатория', 'lab-background'], file: 'bg-lab' },
   { path: ['лаборатория', 'lab-background'], frame: FRAME_MOBILE, file: 'bg-lab-mobile' },
   { path: ['данные', 'data-background'], file: 'bg-data' },
-  { path: ['данные', 'data-background'], frame: FRAME_MOBILE, file: 'bg-data-mobile' },
-  { path: ['hero-section'], frame: FRAME_MOBILE, file: 'bg-hero-mobile', skip: ['Hero'] },
+  { path: ['Данные', 'data-background'], frame: FRAME_MOBILE, file: 'bg-data-mobile' },
   // Подвал: заливка #0B5C60 + размытые пятна (footer-background-art), без контента.
   { path: ['Подвал'], file: 'bg-footer', skip: ['footer-content'] },
   { path: ['Подвал'], frame: FRAME_MOBILE, file: 'bg-footer-mobile', skip: ['footer-content'] },
@@ -64,7 +62,7 @@ const BG_EXPORTS = [
 // иначе WebP раздувается впятеро без видимой разницы. Каждый размер размечается заново,
 // чтобы слои складывались без швов; окно сглаживания и заливка подобраны при ширине 960 и масштабируются.
 const DONUT = {
-  path: ['данные', 'data-layout', 'data-visual', 'data-chart'],
+  path: ['данные', 'data-layout', 'data-visual', 'data-chart-static'],
   sizes: [{ suffix: '', width: 1400 }, { suffix: '-sm', width: 800 }],
   mapWidth: 240,
 };

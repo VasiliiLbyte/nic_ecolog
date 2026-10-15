@@ -229,12 +229,9 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
 .f-sec{position:relative;padding:96px 48px;scroll-margin-top:80px}
 .f-sec--alt{background:var(--f-alt)}
 .f-wrap{position:relative;max-width:1064px;margin:0 auto}
-.f-eyebrow{margin:0;font-size:16px;line-height:20px;font-weight:400;letter-spacing:0.02em;text-transform:uppercase;color:var(--f-text)}
+.f-eyebrow{margin:0;font-size:14px;line-height:20px;font-weight:500;letter-spacing:0.02em;text-transform:uppercase;color:var(--f-text)}
 .f-h2{margin:0;font-family:'Onest',sans-serif;font-weight:600;font-size:50px;line-height:55px;color:var(--f-heading);text-wrap:balance}
-/* В макете (desktop) часть H2 набрана Regular, на мобильном все SemiBold */
-.f-h2--regular{font-weight:400}
-.f-h2--tight{letter-spacing:-0.01em}
-.f-lead{margin:0;font-size:16px;line-height:23px;color:var(--f-text)}
+.f-lead{margin:0;font-size:16px;line-height:22px;color:var(--f-text)}
 .f-intro{display:flex;flex-direction:column;gap:48px}
 .f-intro__row{display:grid;grid-template-columns:minmax(0,700px) minmax(0,1fr);align-items:start}
 .f-intro__row>.f-h2{max-width:611px}
@@ -244,11 +241,11 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
 /* Кнопки: по умолчанию / наведение (увеличение + контур #1C6BA2) / нажатие / отключено */
 /* Кнопки — по макету Figma (компоненты «Button / Primary», «Button/Primary», «Button / Secondary»
    и доска состояний «По умолчанию / При наведении / При нажатии / Отключено»): прямые углы, градиенты */
-.f-btn{display:inline-flex;align-items:center;justify-content:center;min-width:210px;height:42px;padding:0 24px;border:0;border-radius:0;background:linear-gradient(90deg,#139EA1 0%,#1C6BA2 100%);color:#444444;font-family:'Onest',sans-serif;font-size:12px;line-height:20px;font-weight:400;text-decoration:none;white-space:nowrap;cursor:pointer;transition:transform 0.2s ease,box-shadow 0.2s ease,background 0.2s ease}
+.f-btn{display:inline-flex;align-items:center;justify-content:center;min-width:210px;height:40px;padding:0 24px;border:0;border-radius:0;background:linear-gradient(90deg,#139EA1 0%,#1C6BA2 100%);color:#444444;font-family:'Onest',sans-serif;font-size:12px;line-height:16px;font-weight:400;text-decoration:none;white-space:nowrap;cursor:pointer;transition:transform 0.2s ease,box-shadow 0.2s ease,background 0.2s ease}
 .f-btn:hover{transform:scale(1.01);box-shadow:inset 0 0 0 1px #1C6BA2}
 .f-btn:active{transform:none;box-shadow:none}
 .f-btn:disabled,.f-btn[aria-disabled="true"]{background:#E0E0E0;color:#444444;transform:none;box-shadow:none;cursor:default}
-.f-btn--sm{height:35px}
+.f-btn--sm{height:40px}
 .f-btn--on-dark{color:#FFFFFF}
 .f-btn--green{background:linear-gradient(90deg,#ADCF7A 0%,#4CB272 100%);color:#FFFFFF}
 .f-btn--green:hover{transform:none;box-shadow:none;background:#4CB272}
@@ -263,45 +260,44 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
 .f-btn--ghost:active{box-shadow:inset 0 0 0 1px #1C6BA2}
 .f-btn--ghost-green{box-shadow:inset 0 0 0 1px #ADCF7A;color:#ADCF7A}
 .f-btn--ghost-green:hover,.f-btn--ghost-green:active{box-shadow:inset 0 0 0 1px #ADCF7A}
-/* Исключение для читаемости: контурная кнопка поверх синей картинки героя на десктопе */
-.f-btn--light{box-shadow:inset 0 0 0 1px #FFFFFF;color:#FFFFFF}
-.f-btn--light:hover,.f-btn--light:active{box-shadow:inset 0 0 0 1px #FFFFFF}
 .f-br-m{display:none}
 .f-dot{position:relative;flex:0 0 auto;width:9px;height:9px;border-radius:50%;background:var(--f-green);box-shadow:0 0 6px rgba(76,178,114,0.75)}
 
 /* Шапка */
-#eco-header{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:33px 32px;background:transparent;border-bottom:1px solid transparent;transition:background 0.35s ease,padding 0.35s ease,border-color 0.35s ease}
+#eco-header{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:31px 32px;background:#FFFFFF;border-bottom:1px solid transparent;transition:background 0.35s ease,padding 0.35s ease,border-color 0.35s ease}
 .f-logo img{display:block;width:104px;height:35px}
 .f-nav{display:flex;align-items:center;gap:32px;margin-left:clamp(0px,calc(128px - (1440px - 100vw)),128px);margin-right:auto}
-.f-nav a{font-size:12px;line-height:20px;color:var(--f-heading);text-decoration:none;transition:color 0.2s}
+.f-nav a{font-size:12px;line-height:16px;color:var(--f-heading);text-decoration:none;transition:color 0.2s}
 .f-nav a:hover{color:var(--f-teal)}
 .f-head-actions{display:flex;align-items:center;gap:24px;flex:0 0 auto}
-.f-head-phone{font-size:14px;line-height:20px;color:var(--f-heading);text-decoration:none;font-variant-numeric:tabular-nums}
+.f-head-phone{font-size:14px;line-height:20px;font-weight:500;letter-spacing:0.02em;color:var(--f-heading);text-decoration:none;font-variant-numeric:tabular-nums}
 .f-burger{display:none;align-items:center;justify-content:center;width:44px;height:44px;border:0;background:transparent;color:var(--f-heading);cursor:pointer;flex:0 0 auto}
-/* Над героем шапка светлая (в макете она лежит поверх фоновой картинки), после прокрутки — на белой подложке */
-.f-logo__dark{display:none !important}
-#eco-header.is-scrolled .f-logo__light{display:none !important}
-#eco-header.is-scrolled .f-logo__dark{display:block !important}
-#eco-header:not(.is-scrolled) .f-nav a,#eco-header:not(.is-scrolled) .f-head-phone,#eco-header:not(.is-scrolled) .f-burger{color:#FFFFFF}
-#eco-header:not(.is-scrolled) .f-nav a:hover{color:var(--f-green-l)}
+/* Шапка белая и над героем (герой в макете белый); после прокрутки уплотняется на полупрозрачной подложке */
+.f-logo__light{display:none !important}
 
 /* Герой */
-#top{padding:166px 48px 60px;background:#1C6BA2 url('./assets/figma/hero-wave.webp') center/cover no-repeat;overflow:hidden;color:#FFFFFF}
-.f-hero__eyebrow{margin:0;font-size:16px;line-height:20px;letter-spacing:0.02em;text-transform:uppercase;color:var(--f-green-l);animation:fadeIn 1s ease 0.1s both}
-.f-hero__title{margin:64px 0 0;max-width:890px;font-family:'Onest',sans-serif;font-weight:700;font-size:60px;line-height:68px;color:#FFFFFF}
+/* Под шапкой (102) — отступ 48; волна: слой hero-wave макета 1346×537 в (28; 41) от верха героя — видео заказчика
+   (бесшовная петля 7 с, без звука; assets/hero/), обрезка видео шире волны: смещения в долях рамки волны */
+#top{padding:150px 48px 60px;background:#FFFFFF;overflow:hidden;color:var(--f-heading)}
+#top>.f-wrap{z-index:1}
+.f-hero__wave{position:absolute;left:calc(50% - 692px);top:143px;width:1346px;height:537px;pointer-events:none}
+.f-hero__video{position:absolute;left:-1.0983%;top:-2.7663%;display:block;width:102.1417%;height:auto;aspect-ratio:1860/764;object-fit:fill;background:transparent}
+.f-hero__wave.is-m .f-hero__video{left:14.827%;width:32.9489%;aspect-ratio:600/764}
+.f-hero__eyebrow{margin:0;font-size:14px;line-height:20px;font-weight:500;letter-spacing:0.02em;text-transform:uppercase;color:var(--f-heading);animation:fadeIn 1s ease 0.1s both}
+.f-hero__title{margin:80px 0 0;max-width:890px;font-family:'Onest',sans-serif;font-weight:700;font-size:60px;line-height:68px;color:#FFFFFF}
 .f-hero__title>span{display:block;overflow:hidden;padding-bottom:0.06em;margin-bottom:-0.06em}
 .f-hero__title>span>span{display:inline-block;animation:wordUp 0.9s cubic-bezier(0.22,1,0.36,1) both}
-.f-hero__lead{margin:48px 0 0;max-width:548px;font-size:16px;line-height:23px;color:rgba(255,255,255,0.9);animation:fadeIn 1s ease 0.7s both}
-.f-hero__actions{display:flex;align-items:center;gap:24px;margin-top:48px;flex-wrap:wrap;animation:fadeIn 1s ease 0.85s both}
+.f-hero__lead{margin:24px 0 0;max-width:548px;font-size:16px;line-height:22px;color:#FFFFFF;animation:fadeIn 1s ease 0.7s both}
+.f-hero__actions{display:flex;align-items:center;gap:24px;margin-top:94px;flex-wrap:wrap;animation:fadeIn 1s ease 0.85s both}
 .f-hero__actions .f-btn--ghost{min-width:89px}
 .f-svc-intro__copy .f-btn--ghost{min-width:124px;margin-bottom:-59px}
-.f-hero__proof{margin:64px 0 0;font-size:12px;line-height:20px;color:var(--f-green-l);animation:fadeIn 1s ease 1s both}
+.f-hero__proof{margin:43px 0 0;font-size:14px;line-height:20px;font-weight:500;letter-spacing:0.02em;color:var(--f-heading);animation:fadeIn 1s ease 1s both}
 
 /* Бегущая строка */
 .f-ticker{overflow:hidden;height:40px;display:flex;align-items:center;border-top:1px solid var(--f-border);border-bottom:1px solid var(--f-border);background:#FFFFFF}
 .f-ticker__track{display:inline-flex;white-space:nowrap;animation:marquee 38s linear infinite;will-change:transform}
 .f-ticker__seq{display:inline-flex;gap:96px;padding-right:96px}
-.f-ticker__seq span{font-size:20px;line-height:28px;font-weight:600;color:var(--f-heading)}
+.f-ticker__seq span{font-size:12px;line-height:16px;font-weight:400;color:var(--f-heading)}
 .f-ticker__seq span:nth-child(odd){color:var(--f-teal)}
 
 /* О центре — цифры */
@@ -309,7 +305,8 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
 .f-stat{position:relative;padding-top:24px}
 .f-stat::before{content:"";position:absolute;top:0;left:0;width:min(220px,100%);height:1px;background:var(--f-border)}
 .f-stat__num{font-weight:200;font-size:64px;line-height:72px;color:var(--f-heading);font-variant-numeric:tabular-nums;white-space:nowrap}
-.f-stat__label{margin:8px 0 0;font-size:12px;line-height:18px;color:var(--f-text)}
+.f-stat__suf{color:var(--f-green-l)}
+.f-stat__label{margin:8px 0 0;font-size:12px;line-height:16px;color:var(--f-text)}
 
 /* Почему выбирают нас */
 .f-why{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:64px}
@@ -319,7 +316,8 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
 .f-why__card p{margin:8px 0 0;font-size:14px;line-height:20px;color:var(--f-text)}
 
 /* Лаборатория */
-#laboratoriya{background:#0B5C60 url('./assets/figma/bg-lab.webp') center/cover no-repeat;color:#FFFFFF}
+/* Зерно (эффект Noise макета: чёрный 25%) — верхний слой фонов лаборатории, ESG, заявки и подвала */
+#laboratoriya{background:url('./assets/figma/grain.webp') 0 0/256px 256px repeat,#0B5C60 url('./assets/figma/bg-lab.webp') center/cover no-repeat;color:#FFFFFF}
 .f-lab{display:flex;align-items:flex-start;justify-content:space-between;gap:48px}
 .f-lab__content{flex:0 1 557px;display:flex;flex-direction:column;align-items:flex-start;gap:40px}
 .f-lab__intro{max-width:456px}
@@ -327,18 +325,18 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
 .f-lab__intro .f-h2{margin-top:64px;color:#FFFFFF}
 .f-lab__intro .f-lead{margin-top:40px;max-width:418px;color:#FFFFFF}
 .f-flow{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
-.f-flow__step{display:inline-flex;align-items:center;height:35px;padding:0 12px;border-radius:5px;background:rgba(255,255,255,0.1);font-size:10px;line-height:20px;text-transform:uppercase;white-space:nowrap;color:#FFFFFF}
+.f-flow__step{display:inline-flex;align-items:center;height:35px;padding:0 12px;border-radius:5px;background:rgba(255,255,255,0.1);font-size:12px;line-height:16px;white-space:nowrap;color:#FFFFFF}
 .f-flow__step--final{background:rgba(173,207,122,0.2)}
 .f-flow__arrow{display:block;flex:0 0 auto;width:10px;height:10px}
-.f-lab__meta{margin:0;font-size:12px;line-height:20px;color:var(--f-green-l);white-space:pre-wrap}
-.f-lab__grid{flex:0 0 416px;display:grid;grid-template-columns:repeat(2,200px);gap:16px;margin-top:93px}
+.f-lab__meta{margin:0;font-size:12px;line-height:16px;color:var(--f-green-l);white-space:pre-wrap}
+.f-lab__grid{flex:0 0 416px;display:grid;grid-template-columns:repeat(2,200px);gap:16px;margin-top:87px}
 .f-lab__card{height:199px;padding:20px;border-radius:5px;background:rgba(255,255,255,0.1)}
 .f-lab__head{display:flex;flex-direction:column;align-items:flex-start;gap:8px}
 .f-lab__icon{position:relative;display:flex;align-items:center;justify-content:center;flex:0 0 auto;width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,var(--f-teal),var(--f-blue));box-shadow:0 0 16px rgba(19,158,161,0.45)}
 .f-lab__icon--green{background:linear-gradient(135deg,var(--f-green-l),var(--f-teal));box-shadow:0 0 16px rgba(173,207,122,0.45)}
 .f-lab__icon img{display:block;width:26px;height:26px;object-fit:contain}
-.f-lab__card h3{margin:0;font-family:'Onest',sans-serif;font-size:16px;line-height:28px;font-weight:500;color:#FFFFFF}
-.f-lab__card p{margin:8px 0 0;font-size:12px;line-height:18px;color:#FFFFFF}
+.f-lab__card h3{margin:0;font-family:'Onest',sans-serif;font-size:20px;line-height:28px;font-weight:600;color:#FFFFFF}
+.f-lab__card p{margin:8px 0 0;font-size:12px;line-height:16px;color:#FFFFFF}
 
 /* Услуги */
 #uslugi{padding-top:0;background:#FFFFFF;overflow:hidden}
@@ -352,8 +350,8 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
 .f-svc-content{display:flex;flex-direction:column;gap:48px;margin-top:24px}
 .f-cat__head{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-bottom:8px;border-bottom:1px solid var(--f-border);margin-bottom:24px}
 .f-cat__title{display:flex;align-items:baseline;gap:16px;margin:0;font-family:'Onest',sans-serif;font-size:16px;line-height:20px;font-weight:700;letter-spacing:0.02em;color:var(--f-primary)}
-.f-cat__num{font-size:14px;color:var(--f-green)}
-.f-cat__desc{font-size:12px;line-height:20px;color:var(--f-green);text-align:right}
+.f-cat__num{font-size:16px;color:var(--f-green)}
+.f-cat__desc{font-size:12px;line-height:16px;color:var(--f-green);text-align:right}
 .f-svc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;align-items:start}
 .f-svc{padding:16px;border-radius:8px;background:var(--f-alt);cursor:pointer;outline-offset:2px;transition:background 0.25s ease}
 .f-svc:hover,.f-svc:focus-within{background:rgba(11,92,96,0.09)}
@@ -376,9 +374,9 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
 .f-proj__img img{display:block;width:100%;height:100%;object-fit:cover;transition:scale 0.9s cubic-bezier(0.22,1,0.36,1)}
 .f-proj:hover .f-proj__img img{scale:1.04}
 .f-proj__copy{display:flex;flex-direction:column;gap:8px;padding:16px}
-.f-proj__eyebrow{margin:0;font-size:10px;line-height:18px;letter-spacing:0.02em;text-transform:uppercase;color:var(--f-muted)}
-.f-proj__copy h3{margin:0;font-family:'Onest',sans-serif;font-size:16px;line-height:28px;font-weight:500;color:var(--f-heading)}
-.f-proj__copy p:last-child{margin:0;font-size:12px;line-height:18px;color:var(--f-primary)}
+.f-proj__eyebrow{margin:0;font-size:12px;line-height:16px;color:var(--f-muted)}
+.f-proj__copy h3{margin:0;font-family:'Onest',sans-serif;font-size:20px;line-height:28px;font-weight:600;color:var(--f-heading)}
+.f-proj__copy p:last-child{margin:0;font-size:12px;line-height:16px;color:var(--f-primary)}
 
 /* Как мы работаем */
 .f-steps{display:grid;grid-template-columns:repeat(5,1fr);margin-top:64px}
@@ -388,116 +386,118 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
 .f-step__marker::before{content:"";position:absolute;left:0;top:0;width:20px;height:20px;border-radius:50%;background:var(--dot);opacity:0.5}
 .f-step__marker::after{content:"";position:absolute;left:5px;top:5px;width:11px;height:11px;border-radius:50%;background:var(--dot)}
 .f-step__marker span{position:absolute;left:20px;right:0;top:10px;height:1px;background:var(--f-green-l)}
-.f-step__num{margin:16px 0 0;font-size:12px;line-height:23px;color:rgba(68,68,68,0.3)}
+.f-step__num{margin:16px 0 0;font-size:14px;line-height:20px;font-weight:500;letter-spacing:0.02em;color:rgba(68,68,68,0.3)}
 .f-step h3{margin:16px 0 0;max-width:155px;font-family:'Onest',sans-serif;font-size:16px;line-height:20px;font-weight:700;letter-spacing:0.02em;color:var(--f-heading)}
 .f-step p:last-child{margin:16px 0 0;max-width:155px;font-size:12px;line-height:16px;color:var(--f-text)}
 
 /* Экология — это данные (ESG) */
-#esg{padding:56px 48px 120px;background:#1C6BA2 url('./assets/figma/bg-data.webp') center/cover no-repeat;color:#FFFFFF}
-.f-data{display:flex;align-items:flex-start;gap:90px}
-.f-data__content{flex:0 1 456px;display:flex;flex-direction:column;align-items:flex-start;gap:96px;padding-top:25px}
+#esg{padding:96px 48px 129px;background:url('./assets/figma/grain.webp') 0 0/256px 256px repeat,#1C6BA2 url('./assets/figma/bg-data.webp') center/cover no-repeat;color:#FFFFFF}
+.f-data{display:flex;align-items:center;gap:90px}
+.f-data__content{flex:0 1 456px;display:flex;flex-direction:column;align-items:flex-start;gap:96px}
 .f-data__title{margin:0;font-family:'Onest',sans-serif;font-weight:700;font-size:60px;line-height:68px;color:#FFFFFF}
-.f-data__content .f-lead{margin-top:24px;max-width:300px;font-size:16px;line-height:24px;color:#FFFFFF}
-.f-data__motto{margin:0;font-family:'Stolzl','Onest',sans-serif;font-weight:500;font-size:16px;line-height:20px;color:var(--f-green-l)}
-.f-data__visual{flex:0 1 471px;display:flex;flex-direction:column;gap:32px}
-.f-donut{position:relative;width:100%;max-width:471px;aspect-ratio:471/444}
-/* Интерактивная 3D-диаграмма: картинка из макета разрезана на три слоя-сегмента (assets/figma/esg-donut-scope*.webp,
-   1400 px для 2x/3x и -sm 800 px для 1x — с запасом на наклон и выдвижение).
-   Появление — сегменты собираются по очереди; бублик «дышит» и наклоняется за курсором;
-   наведение/тап на сегмент или строку легенды выдвигает сегмент и меняет подпись в отверстии бублика.
-   Без will-change: иначе браузер один раз растрирует слой (в т.ч. в масштабе 0.94 до появления) и потом мылит. */
+.f-data__content .f-lead{margin-top:24px;max-width:300px;font-size:16px;line-height:22px;color:#FFFFFF}
+.f-data__motto{margin:0;font-family:'Onest',sans-serif;font-weight:500;font-size:16px;line-height:20px;color:var(--f-green-l)}
+.f-data__motto span{color:#FFFFFF}
+.f-data__visual{flex:0 1 471px;display:flex;flex-direction:column;align-items:center;gap:32px;min-height:575px}
+/* Диаграмма охватов — компонент Chart/Scopes макета (471×444): картинка-бублик (три слоя для появления),
+   подписи «ОХВАТ N» с точкой, подсказки «≈N% | описание», подсветка сегмента. Все размеры — в долях ширины
+   диаграммы (cqw), поэтому мобильная версия (318 px) — точное уменьшение, как в макете.
+   В покое видны все подсказки (как в кадре страницы); наведение/тап на сегмент или подпись — подсветка
+   сегмента и только его подсказка (состояния Scope-1…3, растворение 0,2 с, ease-out cubic). */
+.f-donut{position:relative;width:100%;max-width:471px;aspect-ratio:471/444;container-type:inline-size}
 .f-donut__float{position:absolute;inset:0;animation:donutFloat 8s ease-in-out infinite}
 @keyframes donutFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
-.f-donut__stage{position:absolute;inset:0;transform:perspective(1100px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transition:transform 0.6s cubic-bezier(0.22,1,0.36,1);cursor:pointer}
-.f-donut__seg{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:contain;transition:transform 0.55s cubic-bezier(0.22,1,0.36,1),opacity 0.4s ease,filter 0.4s ease}
+.f-donut__stage{position:absolute;inset:0;cursor:pointer}
+.f-donut__seg{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:contain;transition:transform 1.1s cubic-bezier(0.22,1,0.36,1) var(--d),opacity 0.8s ease var(--d)}
 [data-anim="on"] .f-donut:not(.is-in) .f-donut__seg{opacity:0;transform:translate(calc(var(--dx) * 14%),calc(var(--dy) * 14% - 12%)) scale(0.94)}
-.f-donut.is-in:not(.is-ready) .f-donut__seg{transition:transform 1.1s cubic-bezier(0.22,1,0.36,1) var(--d),opacity 0.8s ease var(--d)}
-.f-data__visual.has-active .f-donut__seg{opacity:0.62;filter:saturate(0.65)}
-.f-data__visual.has-active .f-donut__seg.is-active{z-index:2;opacity:1;filter:saturate(1.1) brightness(1.06) drop-shadow(0 16px 20px rgba(6,30,60,0.35));transform:translate(calc(var(--dx) * var(--lift)),calc(var(--dy) * var(--lift) - 2.4%))}
-/* Подпись — в центре отверстия (49.6% / 49.6% картинки, отверстие ≈30% × 26%): разрядка «ОХВАТ 3», тонкая цифра */
-.f-donut__label{position:absolute;left:49.6%;top:49.6%;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;color:#FFFFFF;text-shadow:0 1px 14px rgba(6,30,60,0.35);pointer-events:none;z-index:3;transition:opacity 0.25s ease}
-.f-donut__label.is-swap,[data-anim="on"] .f-donut:not(.is-in) .f-donut__label{opacity:0}
-.f-donut__name{margin-right:-0.2em;font-family:'Stolzl','Onest',sans-serif;font-size:10px;line-height:12px;font-weight:500;letter-spacing:0.2em;color:rgba(255,255,255,0.75)}
-.f-donut__val{display:flex;align-items:baseline;margin-top:4px;font-family:'Onest',sans-serif;font-weight:300;line-height:1;font-variant-numeric:tabular-nums}
-.f-donut__pre{margin-right:4px;font-size:13px;font-weight:400;color:rgba(255,255,255,0.8)}
-.f-donut__num{font-size:40px;letter-spacing:-0.03em}
-.f-donut__pct{margin-left:1px;font-size:18px;color:rgba(255,255,255,0.85)}
-.f-legend__row{appearance:none;margin:0;padding:0;border:0;background:none;font:inherit;color:inherit;text-align:left;cursor:pointer;transition:opacity 0.3s ease}
-.f-legend__row:focus-visible{outline:2px solid #ADCF7A;outline-offset:4px;border-radius:2px}
-.f-legend__sw{transition:transform 0.3s ease}
-.f-data__visual.has-active .f-legend__row:not(.is-active){opacity:0.5}
-.f-legend__row.is-active .f-legend__sw{transform:scale(1.25)}
-.f-legend{display:grid;grid-template-columns:153px 129px 141px;gap:24px}
-.f-legend__row{display:flex;align-items:flex-start;gap:16px}
-.f-legend__sw{flex:0 0 auto;width:16px;height:16px}
-/* В макете (desktop) подписи 14px капсом не помещаются в колонки 109–91px и вылезают за блок; берём вариант «Охват 2» (Regular 12), он помещается */
-.f-legend__name{display:block;font-size:12px;line-height:18px;font-weight:400}
-.f-legend__scope{display:block;font-size:14px;line-height:20px;font-weight:500;letter-spacing:0.02em;text-transform:uppercase}
-.f-legend__pct{display:block;margin-top:4px;font-size:12px;line-height:18px}
-.f-data__note{margin:0;font-size:14px;line-height:20px;font-weight:500;letter-spacing:0.02em;text-transform:uppercase;color:#FFFFFF}
+.f-donut__hl{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none}
+.f-donut__hl path{opacity:0;transition:opacity 0.2s cubic-bezier(0.215,0.61,0.355,1)}
+.f-donut[data-active="1"] .f-donut__hl [data-hl="1"],.f-donut[data-active="2"] .f-donut__hl [data-hl="2"]{opacity:0.5}
+.f-donut[data-active="3"] .f-donut__hl [data-hl="3"]{opacity:0.2}
+.f-scope{position:absolute;display:flex;align-items:center;gap:1.699cqw;margin:0;padding:0;border:0;background:none;font:inherit;font-family:'Onest',sans-serif;font-weight:700;font-size:3.397cqw;line-height:4.246cqw;letter-spacing:0.02em;color:#FFFFFF;white-space:nowrap;cursor:pointer;transition:opacity 0.8s ease 0.9s}
+.f-scope__dot{position:relative;flex:0 0 auto;width:4.246cqw;height:4.246cqw;border-radius:50%;background:rgba(255,255,255,0.3)}
+.f-scope__dot::after{content:"";position:absolute;left:22.7%;top:22.7%;width:54.6%;height:54.6%;border-radius:50%;background:#FFFFFF}
+.f-scope:focus-visible{outline:2px solid #ADCF7A;outline-offset:3px;border-radius:2px}
+.f-scope::before{content:"";position:absolute;inset:-12px -10px}
+.f-scope--1{left:6.582%;top:37.387%}
+.f-scope--2{left:23.142%;top:15.991%}
+.f-scope--3{left:23.142%;top:70.27%}
+.f-tip{position:absolute;display:flex;align-items:center;gap:2.548cqw;height:6.369cqw;padding:0 2.548cqw;border-radius:1.699cqw;background:#FFFFFF;color:var(--f-heading);white-space:nowrap;opacity:0.9;pointer-events:none;transition:opacity 0.2s cubic-bezier(0.215,0.61,0.355,1)}
+.f-tip__val{font-size:2.972cqw;line-height:4.246cqw}
+.f-tip__val::after{content:"";display:inline-block;width:1px;height:4.246cqw;margin-left:2.548cqw;vertical-align:top;background:#E0E0E0}
+.f-tip__txt{font-size:2.548cqw;line-height:3.397cqw}
+.f-tip--1{left:12.739%;top:43.694%}
+.f-tip--2{left:29.087%;top:22.297%}
+.f-tip--3{left:29.087%;top:76.577%}
+.f-donut[data-active] .f-tip{opacity:0}
+.f-donut[data-active="1"] .f-tip--1,.f-donut[data-active="2"] .f-tip--2,.f-donut[data-active="3"] .f-tip--3{opacity:0.9}
+[data-anim="on"] .f-donut:not(.is-in) .f-scope,[data-anim="on"] .f-donut:not(.is-in) .f-tip{opacity:0}
+.f-donut.is-in .f-tip{transition:opacity 0.8s ease 1s}
+.f-donut.is-ready .f-tip{transition:opacity 0.2s cubic-bezier(0.215,0.61,0.355,1)}
+.f-data__note{margin:0;max-width:385px;font-size:12px;line-height:16px;color:#FFFFFF}
 
 /* Клиенты и отзывы */
 .f-clients .f-h2{max-width:628px}
 .f-logos{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:48px}
 .f-logo-card{margin:0;display:flex;flex-direction:column;align-items:center;gap:8px;padding:16px;border:1px solid var(--f-border);border-radius:8px;background:#FFFFFF}
-.f-logo-card>div{height:88px;display:flex;align-items:center;justify-content:center}
+.f-logo-card>div{height:90px;display:flex;align-items:center;justify-content:center}
 .f-logo-card img{display:block;max-width:100%;height:auto}
-.f-logo-card figcaption{font-size:12px;line-height:18px;color:var(--f-text);text-align:center}
+.f-logo-card figcaption{font-size:12px;line-height:16px;color:var(--f-text);text-align:center}
 .f-quotes{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:48px}
 .f-quote{position:relative;margin:0;padding:0 0 29px}
 .f-quote__body{display:flex;flex-direction:column;gap:24px;min-height:165px;padding:24px 24px 19px;border-radius:5px 5px 0 5px;background:var(--f-alt)}
 .f-quote::after{content:"";position:absolute;right:0;bottom:0;width:34px;height:29px;background:var(--f-alt);clip-path:polygon(0 0,100% 0,100% 100%)}
-.f-quote blockquote{margin:0;font-size:12px;line-height:18px;color:var(--f-text)}
+.f-quote blockquote{margin:0;font-size:12px;line-height:16px;color:var(--f-text)}
 .f-quote figcaption{display:flex;flex-direction:column;gap:8px}
-.f-quote figcaption span:first-child{font-size:12px;line-height:18px;color:var(--f-text)}
-.f-quote figcaption span:last-child{font-size:12px;line-height:18px;text-transform:uppercase;color:var(--f-text)}
+.f-quote figcaption span:first-child{font-size:12px;line-height:16px;color:var(--f-text)}
+.f-quote figcaption span:last-child{font-size:12px;line-height:16px;text-transform:uppercase;color:var(--f-text)}
 
 /* Лицензии и документы */
 .f-docs .f-intro__row{grid-template-columns:minmax(0,644px) minmax(0,1fr)}
 .f-docs .f-intro__row>.f-h2{max-width:644px}
-.f-docs .f-intro__row>.f-lead{max-width:360px}
+.f-docs .f-intro__row>.f-lead{max-width:360px;padding-top:11px}
 .f-docs-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:58px}
 .f-doc{display:flex;flex-direction:column;background:#FFFFFF;text-decoration:none;color:inherit}
 .f-doc__preview{height:128px;border:1px solid var(--f-border);background:#FFFFFF}
 .f-doc__copy{display:flex;flex-direction:column;gap:13px;flex:1;padding:16px}
-.f-doc__meta{font-size:12px;line-height:18px;text-transform:uppercase;color:var(--f-heading)}
-.f-doc__title{font-size:12px;line-height:18px;font-weight:400;color:var(--f-primary)}
-.f-doc__action{margin-top:auto;font-size:12px;line-height:18px;color:var(--f-heading)}
+.f-doc__meta{font-size:12px;line-height:16px;text-transform:uppercase;color:var(--f-heading)}
+.f-doc__title{font-size:12px;line-height:16px;font-weight:400;color:var(--f-primary)}
+.f-doc__action{margin-top:auto;font-size:12px;line-height:16px;color:var(--f-heading)}
 a.f-doc:hover .f-doc__preview{border-color:var(--f-teal)}
-.f-docs-note{margin:24px 0 0;font-size:12px;line-height:18px;color:var(--f-text)}
+.f-docs-note{margin:24px 0 0;font-size:12px;line-height:16px;color:var(--f-text)}
 
 /* Заявка */
 .f-request{display:grid;grid-template-columns:1fr 1fr;border-radius:8px;overflow:hidden}
-.f-request__panel{padding:32px 32px 112px;background:linear-gradient(135deg,var(--f-teal),var(--f-blue));color:#FFFFFF}
+.f-request__panel{padding:32px 32px 112px;background:url('./assets/figma/grain.webp') 0 0/256px 256px repeat,linear-gradient(135deg,var(--f-teal),var(--f-blue));color:#FFFFFF}
 .f-request__panel .f-h2{color:#FFFFFF}
 .f-request__panel .f-lead{margin-top:48px;max-width:420px;color:#FFFFFF}
 #eco-form{display:flex;flex-direction:column;gap:24px;padding:32px;background:var(--f-alt)}
 #eco-form-fields{display:flex;flex-direction:column;gap:16px}
 .f-field{display:flex;flex-direction:column;gap:8px}
-.f-field label{font-size:12px;line-height:18px;color:var(--f-text)}
+.f-field label{font-size:12px;line-height:16px;color:var(--f-text)}
 .f-field input,.f-field textarea{width:100%;height:40px;padding:10px 12px;border:1px solid transparent;border-radius:0;background:#FFFFFF;font-family:'Onest',sans-serif;font-size:14px;line-height:20px;color:var(--f-primary);outline:none;transition:border-color 0.2s ease,box-shadow 0.2s ease}
 .f-field textarea{height:80px;resize:vertical}
 .f-field input:focus,.f-field textarea:focus{border-color:var(--f-teal);box-shadow:0 0 0 3px rgba(19,158,161,0.15)}
 .f-field input::placeholder,.f-field textarea::placeholder{color:var(--f-muted)}
 .f-form-actions{display:flex;flex-direction:column;align-items:flex-start;gap:12px;margin-top:8px}
-.f-consent{margin:0;font-family:'Stolzl','Onest',sans-serif;font-weight:300;font-size:10px;line-height:18px;color:var(--f-teal)}
+.f-consent{margin:0;font-family:'Onest',sans-serif;font-weight:400;font-size:12px;line-height:16px;color:var(--f-teal)}
 .f-consent a{color:inherit}
 
 /* Подвал — по макету: #0B5C60 + размытые пятна (слой footer-background-art), раскладка и типографика по макету */
-#kontakty{padding:64px 48px 85px;background:#0B5C60 url('./assets/figma/bg-footer.webp') center top/cover no-repeat;color:#FFFFFF;scroll-margin-top:80px}
+#kontakty{padding:64px 48px 85px;background:url('./assets/figma/grain.webp') 0 0/256px 256px repeat,#0B5C60 url('./assets/figma/bg-footer.webp') center top/cover no-repeat;color:#FFFFFF;scroll-margin-top:80px}
 .f-foot__top{display:flex;justify-content:space-between;gap:16px}
 .f-foot__brand{flex:0 0 254px;display:flex;flex-direction:column;gap:32px}
 .f-foot__brand img{display:block;width:104px;height:35px}
-.f-foot__brand p{margin:0;font-size:12px;line-height:18px}
+.f-foot__brand p{margin:0;font-size:12px;line-height:16px}
 .f-foot__brand p+p{margin-top:16px}
 .f-foot__nav{display:flex;gap:96px}
 .f-foot__col{display:flex;flex-direction:column;gap:16px}
 .f-foot__col:nth-child(1){width:196px}.f-foot__col:nth-child(2){width:173px}.f-foot__col:nth-child(3){width:110px}
-.f-foot__col p{margin:0 0 8px;font-size:10px;line-height:18px;text-transform:uppercase;color:var(--f-teal)}
-.f-foot__col a,.f-foot__col span{font-size:12px;line-height:18px;color:#FFFFFF;text-decoration:none;transition:color 0.2s}
+.f-foot__col p{margin:0 0 8px;font-size:12px;line-height:16px;text-transform:uppercase;color:var(--f-teal)}
+.f-foot__col a,.f-foot__col span{font-size:12px;line-height:16px;color:#FFFFFF;text-decoration:none;transition:color 0.2s}
 .f-foot__col a:hover{color:var(--f-green-l)}
 .f-foot__bottom{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;margin-top:16px;padding-top:32px;border-top:1px solid var(--f-teal)}
-.f-foot__bottom p,.f-foot__bottom a,.f-foot__bottom span{margin:0;font-size:12px;line-height:18px;color:var(--f-teal);text-decoration:none}
+.f-foot__bottom p,.f-foot__bottom a,.f-foot__bottom span{margin:0;font-size:12px;line-height:16px;color:var(--f-teal);text-decoration:none}
 .f-foot__bottom div{display:flex;gap:48px}
 .f-foot__bottom a:hover{color:#FFFFFF}
 /* Зона нажатия ссылок подвала — на половину зазора вверх и вниз, раскладка не меняется */
@@ -521,7 +521,6 @@ a.f-doc:hover .f-doc__preview{border-color:var(--f-teal)}
   .f-lab__card{height:auto;min-height:199px}
   .f-svc-intro__copy .f-btn--ghost{margin-bottom:0}
   .f-data{gap:64px}
-  .f-legend{grid-template-columns:repeat(3,minmax(0,1fr))}
   .f-foot__col:nth-child(n){width:auto}
   .f-svc-island-wrap{display:none}
   .f-svc-intro{min-height:0;padding-top:96px}
@@ -537,6 +536,11 @@ a.f-doc:hover .f-doc__preview{border-color:var(--f-teal)}
   .f-foot__nav{gap:48px;flex-wrap:wrap}
 }
 
+/* Узкий планшет (в макете нет): заголовок героя в три строки не помещается — 48/56 и свободный перенос, текст остаётся на волне */
+@media (min-width:721px) and (max-width:960px){
+  .f-hero__title{font-size:48px;line-height:56px;animation:fadeIn 1s ease 0.15s both}
+  .f-hero__title>span,.f-hero__title>span>span{display:inline;margin:0;padding:0;animation:none}
+}
 /* ==== Мобильный (макет 390) ==== */
 @media (max-width:720px){
   .f-sec{padding:32px 20px}
@@ -547,41 +551,38 @@ a.f-doc:hover .f-doc__preview{border-color:var(--f-teal)}
   .f-head-actions .f-btn{display:none}
   .f-eyebrow{font-size:14px;line-height:20px;font-weight:500}
   .f-h2{font-size:30px;line-height:36px}
-  .f-h2--regular{font-weight:600}
-  .f-h2--tight{letter-spacing:0}
-  .f-lead{line-height:24px}
+  .f-lead{line-height:22px}
   .f-lead--narrow{max-width:none !important}
   .f-lead--why{max-width:226px !important}
   .f-intro{gap:24px}
   .f-intro__row,.f-docs .f-intro__row{gap:20px}
-  #top{padding:104px 20px 32px;background:#FFFFFF url('./assets/figma/bg-hero-mobile.webp') 0 72px / 100% auto no-repeat;color:var(--f-heading)}
-  #top .f-hero__eyebrow,#top .f-hero__lead{color:var(--f-heading)}
-  #top .f-hero__proof{color:var(--f-teal)}
-  #top .f-btn--light{box-shadow:inset 0 0 0 1px #1C6BA2;color:#1C6BA2}
+  #top{padding:104px 20px 22px}
+  .f-hero__wave{left:calc(50% - 523px);top:68px;width:1681px;height:670px}
   .f-hero__eyebrow{font-size:14px;line-height:20px;font-weight:500}
   .f-sep{display:none}
   .f-br-m{display:inline}
-  .f-hero__title{margin-top:32px;font-size:38px;line-height:44px}
-  .f-hero__lead{margin-top:24px;line-height:24px}
-  .f-hero__actions{margin-top:48px;gap:16px;flex-wrap:nowrap}
+  .f-hero__title{margin-top:48px;max-width:291px;font-size:38px;line-height:44px;animation:fadeIn 1s ease 0.15s both}
+  .f-hero__title>span,.f-hero__title>span>span{display:inline;margin:0;padding:0;animation:none}
+  .f-hero__lead{margin-top:16px;max-width:343px}
+  .f-hero__actions{margin-top:64px;gap:16px;flex-wrap:nowrap}
   .f-hero__actions .f-btn{height:44px}
   .f-hero__actions .f-btn:first-child{flex:0 1 210px;min-width:0}
   .f-hero__actions .f-btn--ghost{flex:1 1 auto}
-  .f-hero__proof{margin-top:32px;font-size:12px;line-height:16px}
-  .f-ticker__seq span{font-size:12px;line-height:18px;font-weight:400}
+  .f-hero__proof{margin-top:32px;font-size:12px;line-height:16px;font-weight:400;letter-spacing:0;color:var(--f-teal)}
+  .f-ticker__seq span{font-size:12px;line-height:16px;font-weight:400}
   .f-stats{grid-template-columns:repeat(2,1fr);row-gap:24px;margin-top:32px}
   .f-stat{padding-top:0}
   .f-stat__num{font-size:48px;line-height:72px;letter-spacing:-0.03em}
-  .f-stat__label{margin-top:0;font-size:12px;line-height:18px}
+  .f-stat__label{margin-top:0;font-size:12px;line-height:16px}
   .f-why{grid-template-columns:1fr;gap:16px;margin-top:32px}
   .f-lab__content{gap:24px}
-  .f-lab__meta{white-space:normal;font-size:11.5px;line-height:18px}
+  .f-lab__meta{white-space:normal;font-size:11.5px;line-height:16px}
   .f-lab__intro .f-h2{margin-top:24px}
   .f-lab__intro .f-lead{margin-top:20px}
-  #laboratoriya{background-image:url('./assets/figma/bg-lab-mobile.webp')}
+  #laboratoriya{background-image:url('./assets/figma/grain.webp'),url('./assets/figma/bg-lab-mobile.webp')}
   .f-lab{gap:32px}
   .f-flow{flex-direction:column;align-items:stretch;gap:8px;width:100%}
-  .f-flow__step{justify-content:center;height:42px;font-size:12px;line-height:18px;text-transform:none}
+  .f-flow__step{justify-content:center;height:40px}
   .f-flow__arrow{align-self:center;transform:rotate(90deg)}
   .f-lab__content .f-btn{width:100%}
   .f-lab__grid{grid-template-columns:1fr;gap:16px}
@@ -601,12 +602,11 @@ a.f-doc:hover .f-doc__preview{border-color:var(--f-teal)}
   .f-cat__head{flex-direction:column;align-items:flex-start;gap:8px}
   .f-cat__title{gap:8px}
   .f-cat__num{font-size:16px}
-  .f-cat__desc{text-align:left;padding-left:26px;font-size:12px;line-height:18px}
+  .f-cat__desc{text-align:left;padding-left:26px}
   .f-svc-grid{grid-template-columns:1fr}
   .f-proj-grid{margin-top:32px}
   .f-proj__img{height:190px}
   .f-proj__copy{padding-bottom:16px}
-  .f-proj__eyebrow{font-size:12px;line-height:18px;letter-spacing:0;text-transform:none}
   .f-proj__copy h3{font-size:20px;line-height:28px;font-weight:600}
   .f-steps{grid-template-columns:1fr;row-gap:24px;margin-top:32px}
   .f-step{display:grid;grid-template-columns:20px 1fr;column-gap:16px}
@@ -620,26 +620,19 @@ a.f-doc:hover .f-doc__preview{border-color:var(--f-teal)}
   .f-step:last-child .f-step__marker span{display:none}
   .f-step__num{margin:0;font-size:14px;line-height:20px;font-weight:500;letter-spacing:0.02em}
   .f-step h3{margin-top:8px;max-width:none;font-weight:700;letter-spacing:0.02em}
-  .f-step p:last-child{margin-top:8px;max-width:none;line-height:18px}
+  .f-step p:last-child{margin-top:8px;max-width:none}
   .f-step h3 br{display:none}
-  #esg{padding:32px 20px 20px;background-image:url('./assets/figma/bg-data-mobile.webp')}
+  #esg{padding:32px 20px;background-image:url('./assets/figma/grain.webp'),url('./assets/figma/bg-data-mobile.webp')}
   .f-data{gap:32px}
-  .f-data__content{gap:32px;padding-top:0}
+  .f-data__content{gap:32px}
   .f-data__title{font-size:38px;line-height:44px}
   .f-data__content .f-lead{margin-top:20px}
   .f-data__content .f-btn{width:100%}
-  .f-data__visual{gap:24px}
-  .f-donut{max-width:350px}
-  .f-donut__name{font-size:9px;line-height:11px}
-  .f-donut__val{margin-top:3px}
-  .f-donut__pre{margin-right:3px;font-size:11px}
-  .f-donut__num{font-size:28px}
-  .f-donut__pct{font-size:14px}
-  .f-legend{grid-template-columns:113px 113px 92px;gap:16px}
-  .f-legend__pct{font-size:14px;line-height:20px;font-weight:500;letter-spacing:0.02em;text-transform:uppercase}
+  .f-data__visual{gap:24px;align-items:stretch;min-height:0}
+  .f-data__visual .f-donut{align-self:center}
+  .f-data__note{max-width:none}
+  .f-donut{max-width:318px}
   .f-br-d{display:none}
-  .f-legend__row{gap:8px}
-  .f-data__note{font-size:12px;line-height:18px;font-weight:400;letter-spacing:0;text-transform:none}
   .f-logos{gap:16px;margin-top:32px}
   .f-logo-card>div{height:88px}
   .f-logo-card img{max-width:100%;height:auto}
@@ -649,7 +642,6 @@ a.f-doc:hover .f-doc__preview{border-color:var(--f-teal)}
   .f-quote blockquote{color:var(--f-primary)}
   .f-docs-grid{grid-template-columns:1fr;margin-top:42px;padding-bottom:10px}
   .f-doc__copy{gap:8px}
-  .f-doc__meta,.f-doc__action{font-size:12px;line-height:18px}
   .f-doc__title{font-weight:400}
   .f-request__panel{padding:24px}
   .f-request__panel .f-lead{margin-top:20px}
@@ -657,18 +649,13 @@ a.f-doc:hover .f-doc__preview{border-color:var(--f-teal)}
   .f-field input{height:44px;font-size:16px}
   .f-field textarea{height:96px;font-size:16px}
   .f-form-actions .f-btn{width:100%;height:44px}
-  #kontakty{padding:32px 20px;background-image:url('./assets/figma/bg-footer-mobile.webp')}
+  #kontakty{padding:32px 20px;background-image:url('./assets/figma/grain.webp'),url('./assets/figma/bg-footer-mobile.webp')}
   .f-foot__top{gap:32px}
   .f-foot__brand{flex-basis:auto}
   .f-foot__nav{flex-direction:column;gap:24px}
   .f-foot__col p{font-size:12px;margin-bottom:8px}
-  .f-consent{font-family:'Onest',sans-serif;font-weight:400;font-size:12px}
   .f-foot__bottom{flex-direction:column;align-items:flex-start;gap:16px;margin-top:24px;padding-top:24px}
   .f-foot__bottom div{flex-direction:column;gap:12px}
-}
-/* Уже 390 (макет): колонки легенды 113/113/92 сжимаются пропорционально */
-@media (max-width:389px){
-  .f-legend{grid-template-columns:113fr 113fr 92fr}
 }
 
 /* ==== Движение: медленно и тонко; без JS и при prefers-reduced-motion страница остаётся как в макете ====
@@ -676,9 +663,6 @@ a.f-doc:hover .f-doc__preview{border-color:var(--f-teal)}
    5 — проекты (параллакс + блик), 6 — нить через страницу, 7 — магнитные кнопки и успех формы.
    Состояния «до анимации» — только под [data-anim="on"] (его ставит скрипт). */
 
-/* 1. Герой: WebGL-canvas с той же картинкой поверх CSS-фона, проявляется после первого кадра (только десктоп) */
-.f-hero__fx{position:absolute;inset:0;display:block;width:100%;height:100%;opacity:0;transition:opacity 1.4s ease;pointer-events:none}
-.f-hero__fx.is-on{opacity:1}
 
 /* 2. Как мы работаем: линия заполняется по прокрутке, точки шагов загораются по очереди */
 .f-step__marker span::after{content:"";position:absolute;inset:0;background:var(--line,var(--f-green-l));transform-origin:0 50%;transform:scaleX(var(--fill,1))}
@@ -753,7 +737,6 @@ a.f-doc:hover .f-doc__preview{border-color:var(--f-teal)}
 @keyframes okText{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
 
 @media (max-width:720px){
-  .f-hero__fx{display:none}
   .f-step__marker span::after{transform-origin:50% 0;transform:scaleY(var(--fill,1))}
   .f-lab__svg{width:22px;height:22px}
 }
@@ -791,7 +774,9 @@ a.f-doc:hover .f-doc__preview{border-color:var(--f-teal)}
   <main>
     <!-- ГЕРОЙ -->
     <section id="top" class="f-sec" data-screen-label="Герой" data-sec="true">
-      <canvas class="f-hero__fx" aria-hidden="true"></canvas>
+      <div class="f-hero__wave" aria-hidden="true">
+        <video class="f-hero__video" muted playsinline loop disablepictureinpicture preload="none" poster="./assets/hero/hero-wave-d.webp" width="1860" height="764"></video>
+      </div>
       <div class="f-wrap">
         <p class="f-hero__eyebrow">Независимый исследовательский центр<span class="f-sep">&nbsp;&nbsp;|&nbsp;&nbsp;</span><br class="f-br-m">Санкт-Петербург</p>
         <h1 class="f-hero__title">
@@ -799,10 +784,10 @@ a.f-doc:hover .f-doc__preview{border-color:var(--f-teal)}
           <span><span style="animation-delay:0.3s">и исследования в понятные</span></span>
           <span><span style="animation-delay:0.45s">эффективные решения</span></span>
         </h1>
-        <p class="f-hero__lead">Экологический инжиниринг и консалтинг: изыскания, собственная аккредитованная лаборатория, разрешительная документация и ESG. Научно обоснованно. Без бюрократии.</p>
+        <p class="f-hero__lead">Экологический инжиниринг и консалтинг: изыскания, собственная аккредитованная лаборатория, разрешительная документация и ESG.<br class="f-br-m"> Научно обоснованно. Без бюрократии.</p>
         <div class="f-hero__actions">
           <a class="f-btn f-btn--sm f-btn--on-dark" href="#zayavka">Заказать исследование</a>
-          <a class="f-btn f-btn--sm f-btn--ghost f-btn--light" href="#uslugi">Услуги</a>
+          <a class="f-btn f-btn--sm f-btn--ghost" href="#uslugi">Услуги</a>
         </div>
         <p class="f-hero__proof">14 ЛЕТ В ЭКОЛОГИЧЕСКОМ ИНЖИНИРИНГЕ<span class="f-sep">&nbsp;&nbsp;|&nbsp;&nbsp;</span><br class="f-br-m">АККРЕДИТОВАННАЯ ЛАБОРАТОРИЯ «АНАЛИТИК ЛАБ»</p>
       </div>
@@ -828,9 +813,9 @@ a.f-doc:hover .f-doc__preview{border-color:var(--f-teal)}
         </div>
         <div class="f-stats">
           <div class="f-stat" data-rv="true"><div class="f-stat__num"><span data-count="14">0</span></div><p class="f-stat__label">лет в экологическом<br>инжиниринге</p></div>
-          <div class="f-stat" data-rv="true"><div class="f-stat__num"><span data-count="500">0</span>+</div><p class="f-stat__label">реализованных проектов</p></div>
-          <div class="f-stat" data-rv="true"><div class="f-stat__num"><span data-count="1200">0</span>+</div><p class="f-stat__label">обследованных объектов</p></div>
-          <div class="f-stat" data-rv="true"><div class="f-stat__num"><span data-count="98">0</span>%</div><p class="f-stat__label">документации согласовано<br>без замечаний</p></div>
+          <div class="f-stat" data-rv="true"><div class="f-stat__num"><span data-count="500">0</span><span class="f-stat__suf">+</span></div><p class="f-stat__label">реализованных проектов</p></div>
+          <div class="f-stat" data-rv="true"><div class="f-stat__num"><span data-count="1200">0</span><span class="f-stat__suf">+</span></div><p class="f-stat__label">обследованных объектов</p></div>
+          <div class="f-stat" data-rv="true"><div class="f-stat__num"><span data-count="98">0</span><span class="f-stat__suf">%</span></div><p class="f-stat__label">документации согласовано<br>без замечаний</p></div>
         </div>
       </div>
     </section>
@@ -862,7 +847,7 @@ a.f-doc:hover .f-doc__preview{border-color:var(--f-teal)}
         <div class="f-lab__content">
           <div class="f-lab__intro">
             <p class="f-eyebrow" data-rv="true">Собственная аккредитованная лаборатория</p>
-            <h2 class="f-h2 f-h2--regular" data-rv="true">«Аналитик Лаб»&nbsp;— лаборатория в составе центра</h2>
+            <h2 class="f-h2" data-rv="true">«Аналитик Лаб»&nbsp;— лаборатория в составе центра</h2>
             <p class="f-lead" data-rv="true">Редкость для рынка: отбор и анализ проб, изыскания, документация и согласование — в одной команде и по одному адресу. Без субподряда, без потери качества данных и сроков.</p>
           </div>
           <div class="f-flow" data-rv="true">
@@ -893,7 +878,7 @@ a.f-doc:hover .f-doc__preview{border-color:var(--f-teal)}
           <div class="f-svc-intro__text">
             <p class="f-eyebrow" data-rv="true">Услуги</p>
             <div class="f-svc-intro__copy">
-              <h2 class="f-h2 f-h2--regular" data-rv="true">Экологический инжиниринг полного цикла</h2>
+              <h2 class="f-h2" data-rv="true">Экологический инжиниринг полного цикла</h2>
               <p class="f-lead" data-rv="true">От разового проекта до полного экологического сопровождения предприятия.</p>
               <a class="f-btn f-btn--sm f-btn--ghost f-btn--ghost-green" href="uslugi/" data-rv="true">Все услуги →</a>
             </div>
@@ -1016,7 +1001,7 @@ a.f-doc:hover .f-doc__preview{border-color:var(--f-teal)}
         <div class="f-intro">
           <p class="f-eyebrow" data-rv="true">Проекты</p>
           <div class="f-intro__row">
-            <h2 class="f-h2 f-h2--regular" data-rv="true">Объекты, которым нужна точность</h2>
+            <h2 class="f-h2" data-rv="true">Объекты, которым нужна точность</h2>
             <p class="f-lead f-lead--narrow" data-rv="true">Работаем с объектами федерального масштаба — от небоскрёбов до портовых акваторий и театров.</p>
           </div>
         </div>
@@ -1046,7 +1031,7 @@ a.f-doc:hover .f-doc__preview{border-color:var(--f-teal)}
       <div class="f-wrap">
         <div class="f-intro">
           <p class="f-eyebrow" data-rv="true">Процесс</p>
-          <h2 class="f-h2 f-h2--regular" data-rv="true">Как мы работаем</h2>
+          <h2 class="f-h2" data-rv="true">Как мы работаем</h2>
         </div>
         <div class="f-steps">
           <div class="f-step" data-rv="true"><div class="f-step__marker" aria-hidden="true"><span></span></div><p class="f-step__num">01</p><h3>Заявка и оценка задачи</h3><p>Отвечаем в течение рабочего дня, фиксируем объём, сроки и стоимость.</p></div>
@@ -1066,24 +1051,25 @@ a.f-doc:hover .f-doc__preview{border-color:var(--f-teal)}
             <h2 class="f-data__title" data-rv="true">Экология —<br>это данные</h2>
             <p class="f-lead" data-rv="true">Экология — это измеримые величины, а не декларации. Каждое наше решение опирается на фактические данные, лабораторный анализ и воспроизводимые расчёты.</p>
           </div>
-          <p class="f-data__motto" data-rv="true">НЕТ ДАННЫХ — НЕТ РЕШЕНИЯ<br><br class="f-br-d">НАУКА ДЛЯ ПРИРОДЫ</p>
+          <p class="f-data__motto" data-rv="true">НЕТ ДАННЫХ — НЕТ РЕШЕНИЯ<br><br class="f-br-d"><span>НАУКА ДЛЯ ПРИРОДЫ</span></p>
           <a class="f-btn f-btn--esg" href="#uslugi" data-rv="true">Услуги ESG</a>
         </div>
         <div class="f-data__visual" data-rv="true">
           <div class="f-donut" data-donut="true">
             <div class="f-donut__float">
-              <div class="f-donut__stage" role="img" aria-label="Структура углеродного следа: охват 3 — до 70%, охват 2 — около 18%, охват 1 — около 12%">
+              <div class="f-donut__stage" role="img" aria-label="Структура углеродного следа: охват 3 — около 70%, охват 2 — около 18%, охват 1 — около 12%">
                 <img class="f-donut__seg" data-seg="3" src="./assets/figma/esg-donut-scope3-sm.webp" srcset="./assets/figma/esg-donut-scope3-sm.webp 1x, ./assets/figma/esg-donut-scope3.webp 2x" alt="" width="471" height="444" loading="lazy" decoding="async" style="--dx:0.64;--dy:0.77;--lift:1.6%;--d:0s">
                 <img class="f-donut__seg" data-seg="2" src="./assets/figma/esg-donut-scope2-sm.webp" srcset="./assets/figma/esg-donut-scope2-sm.webp 1x, ./assets/figma/esg-donut-scope2.webp 2x" alt="" width="471" height="444" loading="lazy" decoding="async" style="--dx:-0.51;--dy:-0.86;--lift:3.4%;--d:0.16s">
                 <img class="f-donut__seg" data-seg="1" src="./assets/figma/esg-donut-scope1-sm.webp" srcset="./assets/figma/esg-donut-scope1-sm.webp 1x, ./assets/figma/esg-donut-scope1.webp 2x" alt="" width="471" height="444" loading="lazy" decoding="async" style="--dx:-0.98;--dy:-0.21;--lift:3.4%;--d:0.32s">
+                <svg class="f-donut__hl" viewBox="0 0 471 444" aria-hidden="true"><defs><filter id="esg-glow-1" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="0" stdDeviation="6" flood-color="#ADCF7A"/></filter><filter id="esg-glow-2" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="0" stdDeviation="6" flood-color="#139EA1"/></filter><filter id="esg-glow-3" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="0" stdDeviation="6" flood-color="#1C6BA2"/></filter></defs><path data-hl="1" transform="translate(4 97)" d="M0 95.5C8 54 21 28.5 44 0L147 58L149.5 60.5L174.5 103.5C168.2 113.1 165.7 119.9 162.5 133.5L136 91L134 91L0 95.5Z" fill="#ADCF7A" filter="url(#esg-glow-1)"/><path data-hl="2" transform="translate(47 1)" d="M181.5 118L200 0C113.2 5.5 59.3 32.3 0 97.5L105 156L106.5 157.5L130.5 199L131.5 199.5C146.6 176.3 174.7 160.7 207.5 163L181.5 118Z" fill="#139EA1" filter="url(#esg-glow-2)"/><path data-hl="3" transform="translate(0 1)" d="M138.1 187L3.6 191.5C-7.6 240.1 9.1 290 28.1 319C47.1 348 63.6 375 63.6 375C103.5 418.7 147.1 440.6 211.1 442.5C275.1 444.4 340.9 428.5 400.1 371C459.3 313.5 485.4 232.3 461.6 162C461.6 162 449.2 140 432.1 109C415 78 378.6 0 247.1 0L229.1 118.5L255.1 162.5C279.5 167.9 291 173.7 306.1 191C306.1 223 282.4 249.7 263.6 261.3C242.2 274.7 201.1 285 169.1 264C166.2 250.2 165.5 242.8 166.6 230L140.1 188L139.1 187.5L138.1 187Z" fill="#1C6BA2" filter="url(#esg-glow-3)"/></svg>
               </div>
-              <span class="f-donut__label" aria-hidden="true"><span class="f-donut__name" data-donut-name>ОХВАТ 3</span><span class="f-donut__val"><span class="f-donut__pre" data-donut-pre>до</span><span class="f-donut__num" data-donut-num>70</span><span class="f-donut__pct">%</span></span></span>
+              <button type="button" class="f-scope f-scope--1" data-seg="1" aria-pressed="false" aria-describedby="esg-tip-1"><span class="f-scope__dot" aria-hidden="true"></span>ОХВАТ 1</button>
+              <span class="f-tip f-tip--1" id="esg-tip-1"><span class="f-tip__val">≈12%</span><span class="f-tip__txt">Прямые выбросы</span></span>
+              <button type="button" class="f-scope f-scope--2" data-seg="2" aria-pressed="false" aria-describedby="esg-tip-2"><span class="f-scope__dot" aria-hidden="true"></span>ОХВАТ 2</button>
+              <span class="f-tip f-tip--2" id="esg-tip-2"><span class="f-tip__val">≈18%</span><span class="f-tip__txt">Косвенные выбросы от энергии</span></span>
+              <button type="button" class="f-scope f-scope--3" data-seg="3" aria-pressed="false" aria-describedby="esg-tip-3"><span class="f-scope__dot" aria-hidden="true"></span>ОХВАТ 3</button>
+              <span class="f-tip f-tip--3" id="esg-tip-3"><span class="f-tip__val">≈70%</span><span class="f-tip__txt">Цепочка поставок и жизненный цикл</span></span>
             </div>
-          </div>
-          <div class="f-legend">
-            <button type="button" class="f-legend__row" data-seg="3" aria-pressed="false"><span class="f-legend__sw" style="background:#2081C4" aria-hidden="true"></span><span><span class="f-legend__name"><span class="f-legend__scope">Охват 3</span>цепочка поставок<br class="f-br-d"> и жизненный цикл</span><span class="f-legend__pct">≈70%</span></span></button>
-            <button type="button" class="f-legend__row" data-seg="2" aria-pressed="false"><span class="f-legend__sw" style="background:#139EA1" aria-hidden="true"></span><span><span class="f-legend__name"><span class="f-legend__scope">Охват 2</span>закупаемая энергия</span><span class="f-legend__pct">≈18%</span></span></button>
-            <button type="button" class="f-legend__row" data-seg="1" aria-pressed="false"><span class="f-legend__sw" style="background:#ADCF7A" aria-hidden="true"></span><span><span class="f-legend__name"><span class="f-legend__scope">Охват 1</span>прямые<br class="f-br-d"> выбросы</span><span class="f-legend__pct">≈12%</span></span></button>
           </div>
           <p class="f-data__note">Типичная структура углеродного следа компании. Мы считаем все три охвата — по первичным данным.</p>
         </div>
@@ -1095,7 +1081,7 @@ a.f-doc:hover .f-doc__preview{border-color:var(--f-teal)}
       <div class="f-wrap">
         <div class="f-intro">
           <p class="f-eyebrow" data-rv="true">Клиенты</p>
-          <h2 class="f-h2 f-h2--regular" data-rv="true">Нам доверяют объекты, где цена ошибки высока</h2>
+          <h2 class="f-h2" data-rv="true">Нам доверяют объекты, где цена ошибки высока</h2>
         </div>
         <div class="f-logos" data-rv="true">
           <figure class="f-logo-card"><div><img src="./assets/figma/client-lahta.svg" alt="Лахта Центр" width="165" height="32" loading="lazy" decoding="async"></div><figcaption>Лахта Центр</figcaption></figure>
@@ -1126,7 +1112,7 @@ a.f-doc:hover .f-doc__preview{border-color:var(--f-teal)}
         <div class="f-intro">
           <p class="f-eyebrow" data-rv="true">Лицензии и документы</p>
           <div class="f-intro__row">
-            <h2 class="f-h2 f-h2--regular f-h2--tight" data-rv="true">Аккредитация и разрешения — открыто</h2>
+            <h2 class="f-h2" data-rv="true">Аккредитация и разрешения — открыто</h2>
             <p class="f-lead" data-rv="true">Работаем в реестре аккредитованных лиц.<br><br>Аттестаты, выписки и сертификаты доступны для скачивания.</p>
           </div>
         </div>
@@ -1157,7 +1143,7 @@ a.f-doc:hover .f-doc__preview{border-color:var(--f-teal)}
       <div class="f-wrap">
         <div class="f-request" data-rv="true">
           <div class="f-request__panel">
-            <h2 class="f-h2 f-h2--regular f-h2--tight">Обсудим вашу задачу</h2>
+            <h2 class="f-h2">Обсудим вашу задачу</h2>
             <p class="f-lead">Опишите задачу — вернёмся с планом работ и оценкой в течение рабочего дня.</p>
           </div>
           <form id="eco-form">
@@ -1515,6 +1501,7 @@ class Component extends DCLogic {
 
     // --- Движение: живая волна, линия процесса, проекты, нить, магнитные кнопки ---
     this._initMotion(reduced);
+    this._initHeroVideo(reduced);
 
     // --- Рельс-навигация по секциям ---
     const rail = document.querySelector('[data-rail]');
@@ -1564,12 +1551,12 @@ class Component extends DCLogic {
     this._onScroll = () => {
       if (header) {
         const s = window.scrollY > 40;
-        header.style.background = s ? 'rgba(255,255,255,0.88)' : 'transparent';
+        header.style.background = s ? 'rgba(255,255,255,0.88)' : '#FFFFFF';
         header.style.backdropFilter = s ? 'blur(16px)' : 'none';
         header.style.webkitBackdropFilter = s ? 'blur(16px)' : 'none';
         header.style.borderBottomColor = s ? 'rgba(11,92,96,0.12)' : 'transparent';
-        header.style.paddingTop = s ? '14px' : '33px';
-        header.style.paddingBottom = s ? '14px' : '33px';
+        header.style.paddingTop = s ? '14px' : '31px';
+        header.style.paddingBottom = s ? '14px' : '31px';
         header.classList.toggle('is-scrolled', s);
       }
       if (this._updateRail) this._updateRail();
@@ -1700,7 +1687,6 @@ class Component extends DCLogic {
     const root = document.getElementById('eco-root');
     if (reduced || !root || root.getAttribute('data-anim') !== 'on') return;
     const fine = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
-    this._initHeroFx();
 
     const stepsBox = document.querySelector('.f-steps');
     const steps = stepsBox ? Array.from(stepsBox.querySelectorAll('.f-step')) : [];
@@ -1768,132 +1754,29 @@ class Component extends DCLogic {
     });
   }
 
-  // 1. Живая волна: картинка героя медленно течёт (деформация шумом), под курсором — мягкий свет и лёгкая линза.
-  // Рендер в CSS-пикселях (картинка мягкая, retina не нужна), только пока герой на экране и вкладка видима.
-  _initHeroFx() {
-    const hero = document.getElementById('top');
-    const cv = hero ? hero.querySelector('.f-hero__fx') : null;
-    if (!cv || !window.matchMedia('(min-width: 721px)').matches) return;
-    const gl = cv.getContext('webgl', { alpha: false, antialias: false, depth: false, stencil: false, powerPreference: 'low-power' });
-    if (!gl) return;
-    const VS = 'attribute vec2 p;varying vec2 uv;void main(){uv=p*.5+.5;gl_Position=vec4(p,0.,1.);}';
-    const FS = [
-      'precision highp float;',
-      'varying vec2 uv;uniform sampler2D tex;uniform vec2 res,img,mouse;uniform float time,hover;',
-      'float h(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}',
-      'float n(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);',
-      '  return mix(mix(h(i),h(i+vec2(1.,0.)),f.x),mix(h(i+vec2(0.,1.)),h(i+vec2(1.,1.)),f.x),f.y);}',
-      'float fbm(vec2 p){return n(p)*.6+n(p*2.03+3.1)*.3+n(p*4.01+7.7)*.1;}',
-      'void main(){',
-      '  float ar=res.x/res.y,ia=img.x/img.y;',
-      '  vec2 q=vec2(uv.x*ar,uv.y),m=vec2(mouse.x*ar,mouse.y);',
-      '  float t=time*.05,near=smoothstep(.7,0.,distance(q,m));',
-      '  vec2 w=vec2(fbm(q*1.2+vec2(t,-t*.6)),fbm(q*1.2+vec2(-t*.7,t)+5.2))-.5;',
-      '  vec2 st=uv+w*.028+(uv-mouse)*near*hover*.02;',
-      // background-size:cover; background-position:center
-      '  vec2 s=ar>ia?vec2(1.,ia/ar):vec2(ar/ia,1.);',
-      '  vec2 tc=(st-.5)*s+.5;',
-      // за краем картинки — зеркально, иначе CLAMP тянет крайние пиксели полосами
-      '  tc=1.-abs(1.-abs(tc));',
-      '  vec3 c=texture2D(tex,vec2(tc.x,1.-tc.y)).rgb;',
-      '  c+=hover*.06*near*near*vec3(.75,1.,.9);',
-      '  gl_FragColor=vec4(c,1.);',
-      '}'
-    ].join('\n');
-    const compile = (type, src) => {
-      const sh = gl.createShader(type);
-      gl.shaderSource(sh, src);
-      gl.compileShader(sh);
-      return gl.getShaderParameter(sh, gl.COMPILE_STATUS) ? sh : null;
-    };
-    const vs = compile(gl.VERTEX_SHADER, VS);
-    const fs = compile(gl.FRAGMENT_SHADER, FS);
-    if (!vs || !fs) return;
-    const prog = gl.createProgram();
-    gl.attachShader(prog, vs);
-    gl.attachShader(prog, fs);
-    gl.linkProgram(prog);
-    if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) return;
-    gl.useProgram(prog);
-    gl.bindBuffer(gl.ARRAY_BUFFER, gl.createBuffer());
-    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]), gl.STATIC_DRAW);
-    const loc = gl.getAttribLocation(prog, 'p');
-    gl.enableVertexAttribArray(loc);
-    gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
-    const U = {};
-    ['res', 'img', 'mouse', 'time', 'hover'].forEach((k) => { U[k] = gl.getUniformLocation(prog, k); });
-
-    const m = { x: 0.5, y: 0.5, tx: 0.5, ty: 0.5, h: 0, th: 0 };
-    let raf = 0, ready = false, onScreen = true, lost = false;
-    const t0 = performance.now();
-    const size = () => {
-      const r = hero.getBoundingClientRect();
-      const k = Math.min(1, 1600 / Math.max(1, r.width));
-      const w = Math.max(1, Math.round(r.width * k));
-      const h = Math.max(1, Math.round(r.height * k));
-      if (cv.width !== w || cv.height !== h) { cv.width = w; cv.height = h; }
-      gl.viewport(0, 0, w, h);
-      gl.uniform2f(U.res, w, h);
-    };
-    const draw = (t) => {
-      raf = 0;
-      if (lost) return;
-      m.x += (m.tx - m.x) * 0.05;
-      m.y += (m.ty - m.y) * 0.05;
-      m.h += (m.th - m.h) * 0.04;
-      gl.uniform1f(U.time, (t - t0) / 1000);
-      gl.uniform2f(U.mouse, m.x, m.y);
-      gl.uniform1f(U.hover, m.h);
-      gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
-      cv.classList.add('is-on');
-      if (onScreen && !document.hidden) raf = requestAnimationFrame(draw);
-    };
-    const run = () => { if (ready && !raf && !lost && onScreen && !document.hidden) raf = requestAnimationFrame(draw); };
-    const img = new Image();
-    img.onload = () => {
-      if (lost) return;
-      gl.bindTexture(gl.TEXTURE_2D, gl.createTexture());
-      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
-      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
-      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
-      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
-      gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB, gl.RGB, gl.UNSIGNED_BYTE, img);
-      gl.uniform2f(U.img, img.naturalWidth, img.naturalHeight);
-      size();
-      ready = true;
-      run();
-    };
-    img.src = './assets/figma/hero-wave.webp';
-
-    const onMove = (e) => {
-      if (e.pointerType !== 'mouse') return;
-      const r = hero.getBoundingClientRect();
-      m.tx = (e.clientX - r.left) / r.width;
-      m.ty = 1 - (e.clientY - r.top) / r.height;
-      m.th = 1;
-    };
-    const onLeave = () => { m.th = 0; };
-    hero.addEventListener('pointermove', onMove);
-    hero.addEventListener('pointerleave', onLeave);
-    const io = 'IntersectionObserver' in window
-      ? new IntersectionObserver((es) => { onScreen = es[es.length - 1].isIntersecting; run(); })
-      : null;
-    if (io) io.observe(cv);
-    const ro = 'ResizeObserver' in window
-      ? new ResizeObserver(() => { if (ready && !lost) { size(); if (!raf) draw(performance.now()); } })
-      : null;
-    if (ro) ro.observe(hero);
-    document.addEventListener('visibilitychange', run);
-    cv.addEventListener('webglcontextlost', (e) => { e.preventDefault(); lost = true; cv.classList.remove('is-on'); });
-    this._stopHeroFx = () => {
-      lost = true;
-      if (raf) cancelAnimationFrame(raf);
-      if (io) io.disconnect();
-      if (ro) ro.disconnect();
-      document.removeEventListener('visibilitychange', run);
-      hero.removeEventListener('pointermove', onMove);
-      hero.removeEventListener('pointerleave', onLeave);
-    };
+  // Видео-волна героя (анимация заказчика): источник по ширине экрана (до 480 px — узкая обрезка), играет только
+  // пока герой на экране и вкладка видима; при prefers-reduced-motion и «экономии трафика» — только постер (первый кадр).
+  _initHeroVideo(reduced) {
+    const wave = document.querySelector('.f-hero__wave');
+    const video = wave ? wave.querySelector('video') : null;
+    if (!video) return;
+    const narrow = window.matchMedia('(max-width: 480px)').matches;
+    const v = narrow ? 'm' : 'd';
+    if (narrow) { wave.classList.add('is-m'); video.poster = './assets/hero/hero-wave-m.webp'; }
+    const saveData = navigator.connection && navigator.connection.saveData;
+    if (reduced || saveData) return;
+    for (const [ext, type] of [['webm', 'video/webm'], ['mp4', 'video/mp4']]) {
+      const src = document.createElement('source');
+      src.src = './assets/hero/hero-wave-' + v + '.' + ext; src.type = type; video.appendChild(src);
+    }
+    video.muted = true; video.preload = 'auto'; video.load();
+    let inView = true;
+    const sync = () => { if (inView && !document.hidden) { const p = video.play(); if (p && p.catch) p.catch(() => {}); } else video.pause(); };
+    const io = 'IntersectionObserver' in window ? new IntersectionObserver((es) => { inView = es[0].isIntersecting; sync(); }) : null;
+    if (io) io.observe(wave.parentElement);
+    document.addEventListener('visibilitychange', sync);
+    sync();
+    this._stopHeroVideo = () => { if (io) io.disconnect(); document.removeEventListener('visibilitychange', sync); video.pause(); };
   }
 
   // 6. Нить: тонкая волнистая линия в левом поле (≥1200 px) от «О центре» до заявки. Прорисована до «курсора чтения»
@@ -2005,40 +1888,17 @@ class Component extends DCLogic {
 
   _initDonut(reduced) {
     const donut = document.querySelector('[data-donut]');
-    const visual = donut && donut.closest('.f-data__visual');
-    if (!donut || !visual) return;
+    if (!donut) return;
     const stage = donut.querySelector('.f-donut__stage');
-    const segs = Array.from(donut.querySelectorAll('.f-donut__seg'));
-    const rows = Array.from(visual.querySelectorAll('.f-legend__row'));
-    const label = donut.querySelector('.f-donut__label');
-    const nameEl = donut.querySelector('[data-donut-name]');
-    const preEl = donut.querySelector('[data-donut-pre]');
-    const numEl = donut.querySelector('[data-donut-num]');
-    const TEXT = { 0: ['ОХВАТ 3', 'до', '70'], 3: ['ОХВАТ 3', 'до', '70'], 2: ['ОХВАТ 2', '≈', '18'], 1: ['ОХВАТ 1', '≈', '12'] };
+    const scopes = Array.from(donut.querySelectorAll('.f-scope'));
     let active = 0;
     let pinned = 0;
-    let swapTimer = 0;
-
+    // состояние Chart/Scopes: 0 — все подсказки (покой), N — подсветка сегмента N и только его подсказка
     const setActive = (seg) => {
       if (seg === active) return;
       active = seg;
-      visual.classList.toggle('has-active', !!seg);
-      donut.dataset.active = seg ? String(seg) : '';
-      segs.forEach((el) => el.classList.toggle('is-active', +el.dataset.seg === seg));
-      rows.forEach((el) => {
-        const on = +el.dataset.seg === seg;
-        el.classList.toggle('is-active', on);
-        el.setAttribute('aria-pressed', String(on && pinned === seg));
-      });
-      // подпись: короткое затухание и смена текста
-      clearTimeout(swapTimer);
-      label.classList.add('is-swap');
-      swapTimer = setTimeout(() => {
-        nameEl.textContent = TEXT[seg][0];
-        preEl.textContent = TEXT[seg][1];
-        numEl.textContent = TEXT[seg][2];
-        label.classList.remove('is-swap');
-      }, reduced ? 0 : 160);
+      if (seg) donut.dataset.active = String(seg); else delete donut.dataset.active;
+      scopes.forEach((el) => el.setAttribute('aria-pressed', String(+el.dataset.seg === pinned && pinned === seg && !!seg)));
     };
     const release = () => setActive(pinned);
 
@@ -2060,75 +1920,43 @@ class Component extends DCLogic {
     };
     const hit = (e) => {
       if (!map || !map.data) return 0;
-      const r = donut.getBoundingClientRect();
+      const r = stage.getBoundingClientRect();
       const x = Math.floor(((e.clientX - r.left) / r.width) * map.w);
       const y = Math.floor(((e.clientY - r.top) / r.height) * map.h);
       if (x < 0 || y < 0 || x >= map.w || y >= map.h) return 0;
       return [0, 3, 2, 1][Math.round(map.data[(y * map.w + x) * 4] / 80)] || 0;
     };
+    const toggle = (seg) => {
+      pinned = seg && seg !== pinned ? seg : 0;
+      active = -1;
+      setActive(pinned);
+    };
 
-    const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
-    visual.addEventListener('pointerenter', loadMap);
-    visual.addEventListener('touchstart', loadMap, { passive: true });
+    donut.addEventListener('pointerenter', loadMap);
+    donut.addEventListener('touchstart', loadMap, { passive: true });
     stage.addEventListener('pointermove', (e) => {
       if (e.pointerType !== 'mouse') return;
       const seg = hit(e);
       if (seg) setActive(seg); else release();
     });
-    stage.addEventListener('pointerleave', release);
-    stage.addEventListener('click', (e) => {
-      loadMap();
-      const seg = hit(e);
-      pinned = seg && seg !== pinned ? seg : 0;
-      active = -1; // принудительно обновить подпись и aria-pressed
-      setActive(pinned || (finePointer ? seg : 0));
+    stage.addEventListener('pointerleave', (e) => { if (e.pointerType === 'mouse') release(); });
+    stage.addEventListener('click', (e) => { loadMap(); toggle(hit(e)); });
+    scopes.forEach((btn) => {
+      const seg = +btn.dataset.seg;
+      btn.addEventListener('pointerenter', (e) => { if (e.pointerType === 'mouse') setActive(seg); });
+      btn.addEventListener('pointerleave', (e) => { if (e.pointerType === 'mouse') release(); });
+      btn.addEventListener('focus', () => setActive(seg));
+      btn.addEventListener('blur', release);
+      btn.addEventListener('click', () => toggle(seg));
     });
-    rows.forEach((row) => {
-      const seg = +row.dataset.seg;
-      row.addEventListener('pointerenter', (e) => { if (e.pointerType === 'mouse') setActive(seg); });
-      row.addEventListener('pointerleave', (e) => { if (e.pointerType === 'mouse') release(); });
-      row.addEventListener('focus', () => setActive(seg));
-      row.addEventListener('blur', release);
-      row.addEventListener('click', () => {
-        pinned = pinned === seg ? 0 : seg;
-        active = -1;
-        setActive(pinned || (finePointer ? seg : 0));
-      });
-    });
+    // тап мимо диаграммы снимает закреплённый сегмент
+    document.addEventListener('pointerdown', (e) => { if (pinned && !donut.contains(e.target)) toggle(0); });
 
-    // наклон за курсором (только мышь, без prefers-reduced-motion)
-    if (!reduced && finePointer) {
-      let raf = 0;
-      visual.addEventListener('pointermove', (e) => {
-        if (e.pointerType !== 'mouse') return;
-        const r = donut.getBoundingClientRect();
-        const px = Math.max(-1, Math.min(1, ((e.clientX - r.left) / r.width - 0.5) * 2));
-        const py = Math.max(-1, Math.min(1, ((e.clientY - r.top) / r.height - 0.5) * 2));
-        cancelAnimationFrame(raf);
-        raf = requestAnimationFrame(() => {
-          stage.style.setProperty('--ry', (px * 7).toFixed(2) + 'deg');
-          stage.style.setProperty('--rx', (-py * 6).toFixed(2) + 'deg');
-        });
-      });
-      visual.addEventListener('pointerleave', () => {
-        stage.style.setProperty('--ry', '0deg');
-        stage.style.setProperty('--rx', '0deg');
-      });
-    }
-
-    // появление: сегменты собираются по очереди, «до 70%» досчитывает
+    // появление: сегменты собираются по очереди, затем подписи и подсказки
     const reveal = () => {
       loadMap();
       donut.classList.add('is-in');
-      setTimeout(() => donut.classList.add('is-ready'), 1500);
-      if (reduced) return;
-      const t0 = performance.now();
-      const step = (t) => {
-        const p = Math.min(1, (t - t0) / 1400);
-        if (!active) numEl.textContent = String(Math.round(70 * (1 - Math.pow(1 - p, 3))));
-        if (p < 1) requestAnimationFrame(step);
-      };
-      requestAnimationFrame(step);
+      setTimeout(() => donut.classList.add('is-ready'), 1900);
     };
     if (reduced || !('IntersectionObserver' in window)) {
       loadMap();
@@ -2157,7 +1985,7 @@ class Component extends DCLogic {
       window.removeEventListener('resize', this._onMotion);
       window.removeEventListener('load', this._onMotion);
     }
-    if (this._stopHeroFx) this._stopHeroFx();
+    if (this._stopHeroVideo) this._stopHeroVideo();
     document.body.style.overflow = '';
   }
 

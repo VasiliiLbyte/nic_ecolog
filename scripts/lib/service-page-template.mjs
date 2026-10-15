@@ -28,24 +28,24 @@ export function pageStyles() {
   body.menu-open{overflow:hidden}
   h1,h2,h3,p{margin:0}
   a{color:inherit}
-  .bar{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:33px 32px;background:#FFFFFF;border-bottom:1px solid var(--f-border)}
+  .bar{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:31px 32px;background:#FFFFFF;border-bottom:1px solid var(--f-border)}
   .bar-left{display:flex;align-items:center;flex:0 0 auto}
   .bar-left img{display:block;width:104px;height:35px}
   .bar-nav{display:flex;align-items:center;gap:32px}
-  .bar-nav a{font-size:12px;line-height:20px;color:var(--f-heading);text-decoration:none;transition:color .2s}
+  .bar-nav a{font-size:12px;line-height:16px;color:var(--f-heading);text-decoration:none;transition:color .2s}
   .bar-nav a:hover{color:var(--f-teal)}
   .bar-actions{display:flex;align-items:center;gap:24px;flex:0 0 auto}
-  .bar-phone{font-size:14px;line-height:20px;color:var(--f-heading);text-decoration:none;font-variant-numeric:tabular-nums;white-space:nowrap}
+  .bar-phone{font-size:14px;line-height:20px;font-weight:500;letter-spacing:.02em;color:var(--f-heading);text-decoration:none;font-variant-numeric:tabular-nums;white-space:nowrap}
   /* Кнопки по макету Figma «Button / Primary»: градиент, прямые углы, текст #444, наведение — увеличение + контур */
-  .btn-cta{display:inline-flex;align-items:center;justify-content:center;min-width:210px;height:35px;padding:0 24px;border:0;border-radius:0;background:linear-gradient(90deg,#139EA1 0%,#1C6BA2 100%);color:#444444;font-size:12px;line-height:20px;text-decoration:none;white-space:nowrap;transition:transform .2s ease,box-shadow .2s ease}
+  .btn-cta{display:inline-flex;align-items:center;justify-content:center;min-width:210px;height:40px;padding:0 24px;border:0;border-radius:0;background:linear-gradient(90deg,#139EA1 0%,#1C6BA2 100%);color:#444444;font-size:12px;line-height:16px;text-decoration:none;white-space:nowrap;transition:transform .2s ease,box-shadow .2s ease}
   .btn-cta:hover{transform:scale(1.01);box-shadow:inset 0 0 0 1px #1C6BA2}
   .btn-cta:active{transform:none;box-shadow:none}
   .burger{display:none;align-items:center;justify-content:center;width:44px;height:44px;border:0;background:transparent;cursor:pointer;padding:0;flex:0 0 auto}
-  .crumbs-row{max-width:1160px;margin:0 auto;padding:24px 48px 0}
-  .crumbs{font-size:12px;line-height:18px;color:var(--f-text)}
+  .crumbs-row{max-width:1160px;margin:0 auto;padding:32px 48px 0}
+  .crumbs{font-size:12px;line-height:16px;color:var(--f-muted)}
   .crumbs a{color:inherit;text-decoration:none}
   .crumbs a:hover{color:var(--f-teal)}
-  .crumbs b{font-weight:400;color:var(--f-heading)}
+  .crumbs b{font-weight:400;color:inherit}
   .mmenu{position:fixed;inset:0;z-index:180;background:rgba(255,255,255,.98);display:flex;flex-direction:column;padding:18px 20px 36px;opacity:0;visibility:hidden;transition:opacity .25s ease;outline:none;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
   .mmenu.open{opacity:1;visibility:visible}
   .mm-top{display:flex;align-items:center;justify-content:space-between}
@@ -58,36 +58,36 @@ export function pageStyles() {
   .mm-foot .btn-cta{height:44px}
   @media(min-width:1061px){.burger{display:none !important}}
   @media(max-width:1060px){.bar-nav,.bar-phone,.bar-actions .btn-cta{display:none}.burger{display:flex}}
-  .wrap{max-width:1160px;margin:0 auto;padding:40px 48px 96px}
-  .eye{font-size:12px;line-height:25px;letter-spacing:.02em;color:var(--f-text);text-transform:uppercase}
-  h1{margin-top:24px;max-width:640px;font-weight:400;font-size:50px;line-height:55px;color:var(--f-heading);text-wrap:balance}
-  .lead{margin-top:24px;max-width:540px;font-size:16px;line-height:23px;color:var(--f-text)}
+  .wrap{max-width:1160px;margin:0 auto;padding:40px 48px 64px}
+  .eye{font-size:14px;line-height:20px;font-weight:500;letter-spacing:.02em;color:var(--f-text);text-transform:uppercase}
+  h1{margin-top:24px;max-width:600px;font-weight:600;font-size:50px;line-height:55px;color:var(--f-heading);text-wrap:balance}
+  .lead{margin-top:24px;max-width:600px;font-size:16px;line-height:22px;color:var(--f-text)}
   .lead p+p{margin-top:12px}
   .facts{display:flex;flex-wrap:wrap;gap:30px;margin-top:40px}
   .fact{display:flex;align-items:flex-start;gap:16px;padding:4px 16px;border-radius:5px;background:#FFFFFF;font-size:10px;line-height:25px;letter-spacing:.02em}
   .fact b{font-weight:400;color:var(--f-heading);text-transform:uppercase}
   .fact span{padding-left:16px;border-left:1px solid var(--f-border);color:var(--f-muted)}
-  h2{margin:48px 0 20px;font-weight:400;font-size:30px;line-height:36px;color:var(--f-text)}
+  h2{margin:48px 0 24px;font-weight:400;font-size:30px;line-height:36px;color:var(--f-text)}
   .svc-cols{display:grid;grid-template-columns:minmax(0,522px) minmax(0,520px);justify-content:space-between;gap:22px;align-items:start}
   .svc-cols--single{grid-template-columns:minmax(0,760px)}
   .steps{display:flex;flex-direction:column;border-top:1px solid var(--f-border)}
-  .step{display:flex;gap:18px;padding:20px 10px 20px 38px;border-bottom:1px solid var(--f-border)}
-  .step .n{flex:0 0 auto;min-width:13px;font-size:12px;line-height:23px;color:var(--f-muted)}
-  .step p{font-size:12px;line-height:20px;padding-top:2px;color:var(--f-text)}
+  .step{display:flex;gap:16px;padding:24px 0;border-bottom:1px solid var(--f-border)}
+  .step .n{flex:0 0 24px;font-size:12px;line-height:16px;color:var(--f-teal)}
+  .step p{font-size:12px;line-height:16px;color:var(--f-text)}
   .aside{display:flex;flex-direction:column;gap:20px}
   .aside-card{padding:23px 33px 28px;border-radius:5px;background:#FFFFFF}
   .aside-card h3{font-size:16px;line-height:18px;font-weight:400;color:var(--f-green);text-transform:uppercase}
   .aside-card p{margin-top:12px;font-size:12px;line-height:20px;color:var(--f-text)}
   .aside-card--accent{background:linear-gradient(105deg,#4CB272 0%,#139EA1 33%,#0072BB 100%)}
   .aside-card--accent h3,.aside-card--accent p{color:#FFFFFF}
-  .chips{display:flex;flex-wrap:wrap;gap:20px;margin-top:8px}
-  .chip{display:inline-flex;align-items:center;gap:6px;min-height:32px;padding:4px 22px;border-radius:5px;background:#FFFFFF;color:var(--f-heading);font-size:12px;line-height:25px;letter-spacing:.02em;text-decoration:none;transition:box-shadow .2s ease}
+  .chips{display:flex;flex-wrap:wrap;gap:16px}
+  .chip{display:inline-flex;align-items:center;gap:6px;min-height:40px;padding:12px 20px;border-radius:8px;background:#FFFFFF;color:var(--f-heading);font-size:12px;line-height:16px;text-decoration:none;transition:box-shadow .2s ease}
   .chip:hover{box-shadow:0 0 0 1px var(--f-teal)}
-  .chip-static{display:inline-flex;align-items:center;min-height:32px;padding:4px 22px;border-radius:5px;background:rgba(255,255,255,.6);color:var(--f-muted);font-size:12px;line-height:25px;letter-spacing:.02em}
-  .cta{margin-top:64px;min-height:127px;padding:20px 36px;border-radius:5px;background:linear-gradient(90deg,#1C6BA2,#139EA1);color:#FFFFFF;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}
-  .cta h3{font-size:32px;line-height:55px;font-weight:400;letter-spacing:-.01em}
-  .cta p{font-size:12px;line-height:23px;color:#FFFFFF}
-  .cta-btn{display:inline-flex;align-items:center;justify-content:center;min-width:210px;height:35px;padding:0 24px;border:0;border-radius:0;background:#FFFFFF;color:#444444;font-size:12px;line-height:20px;text-decoration:none;margin-right:200px;transition:transform .2s ease,box-shadow .2s ease}
+  .chip-static{display:inline-flex;align-items:center;min-height:40px;padding:12px 20px;border-radius:8px;background:rgba(255,255,255,.6);color:var(--f-muted);font-size:12px;line-height:16px}
+  .cta{margin-top:48px;min-height:100px;padding:24px 48px;border-radius:8px;background-color:#139EA1;background-image:var(--grain),linear-gradient(90deg,#1C6BA2,#139EA1);background-size:256px 256px,auto;color:#FFFFFF;display:flex;align-items:center;justify-content:space-between;gap:32px;flex-wrap:wrap}
+  .cta h3{font-size:20px;line-height:28px;font-weight:600}
+  .cta p{margin-top:8px;font-size:12px;line-height:16px;color:#FFFFFF}
+  .cta-btn{display:inline-flex;align-items:center;justify-content:center;min-width:210px;height:44px;padding:0 24px;border:0;border-radius:0;background:#FFFFFF;color:var(--f-teal);font-size:12px;line-height:16px;text-decoration:none;transition:transform .2s ease,box-shadow .2s ease}
   .cta-btn:hover{transform:scale(1.01);box-shadow:inset 0 0 0 1px #1C6BA2}
   .cta-btn:active{transform:none;box-shadow:none}
   .hub-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;margin-top:24px}
@@ -99,20 +99,20 @@ export function pageStyles() {
   .hub-group h2{margin:0 0 16px;padding-bottom:8px;border-bottom:1px solid var(--f-border);font-size:16px;line-height:20px;font-weight:700;letter-spacing:.02em;color:var(--f-primary)}
   .lab-block{margin-top:48px;padding:24px;border-radius:8px;background:#FFFFFF}
   .soon{font-size:12px;color:var(--f-muted);font-style:italic}
-  .ft{background:#0B5C60 var(--ft-bg) center top/cover no-repeat;color:#FFFFFF;padding:64px 48px 85px}
+  .ft{background-color:#0B5C60;background-image:var(--ft-bg);background-position:0 0,center top;background-size:256px 256px,cover;background-repeat:repeat,no-repeat;color:#FFFFFF;padding:64px 48px 85px}
   .ft-inner{max-width:1064px;margin:0 auto}
   .ft-top{display:flex;justify-content:space-between;gap:16px}
   .ft-brand{flex:0 0 254px;display:flex;flex-direction:column;gap:32px}
   .ft-brand img{display:block;width:104px;height:35px}
-  .ft-brand p{font-size:12px;line-height:18px}
+  .ft-brand p{font-size:12px;line-height:16px}
   .ft-brand p+p{margin-top:16px}
   .ft-nav{display:flex;gap:96px}
   .ft-col{display:flex;flex-direction:column;gap:16px}
-  .ft-col h4{margin:0 0 8px;font-size:10px;line-height:18px;font-weight:400;text-transform:uppercase;color:var(--f-teal)}
-  .ft-col a,.ft-col p{font-size:12px;line-height:18px;color:#FFFFFF;text-decoration:none}
+  .ft-col h4{margin:0 0 8px;font-size:12px;line-height:16px;font-weight:400;text-transform:uppercase;color:var(--f-teal)}
+  .ft-col a,.ft-col p{font-size:12px;line-height:16px;color:#FFFFFF;text-decoration:none}
   .ft-col a:hover{color:var(--f-green-l)}
   .ft-col a,.ft-bot a{padding:8px 0;margin:-8px 0}
-  .ft-bot{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:24px;margin-top:16px;padding-top:32px;border-top:1px solid var(--f-teal);font-size:12px;line-height:18px;color:var(--f-teal)}
+  .ft-bot{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:24px;margin-top:16px;padding-top:32px;border-top:1px solid var(--f-teal);font-size:12px;line-height:16px;color:var(--f-teal)}
   .ft-bot div{display:flex;gap:48px}
   .ft-bot a{color:inherit;text-decoration:none}
   .ft-bot a:hover{color:#FFFFFF}
@@ -129,13 +129,11 @@ export function pageStyles() {
     .step{padding:16px 0 16px 8px}
     .aside-card{padding:20px}
     .cta{padding:24px 20px}
-    .cta h3{font-size:24px;line-height:32px}
     .cta-btn{width:100%;height:44px}
     .chips{gap:12px}
     .ft{padding:32px 20px;background-image:var(--ft-bg-m)}
     .ft-top{gap:32px}
     .ft-brand{flex-basis:auto}
-    .ft-col h4{font-size:12px}
     .ft-nav{flex-direction:column;gap:24px}
     .ft-bot{flex-direction:column;align-items:flex-start;gap:16px;margin-top:24px;padding-top:24px}
     .ft-bot div{flex-direction:column;gap:12px}
@@ -266,7 +264,8 @@ export function footerBlock({ depth, homeHref = '/', uslugiHref: uslugiOverride 
   const prefix = assetPrefix(depth);
   const uslugiHref = uslugiOverride ?? (depth === 1 ? './' : `${prefix}uslugi/`);
   const privacyHref = `${prefix}privacy.html`;
-  return `<footer class="ft" style="--ft-bg:url('${prefix}assets/figma/bg-footer.webp');--ft-bg-m:url('${prefix}assets/figma/bg-footer-mobile.webp')">
+  const grain = `url('${prefix}assets/figma/grain.webp')`;
+  return `<footer class="ft" style="--ft-bg:${grain},url('${prefix}assets/figma/bg-footer.webp');--ft-bg-m:${grain},url('${prefix}assets/figma/bg-footer-mobile.webp')">
   <div class="ft-inner">
     <div class="ft-top">
       <div class="ft-brand">
@@ -310,7 +309,8 @@ export function footerBlock({ depth, homeHref = '/', uslugiHref: uslugiOverride 
 }
 
 export function ctaBlock(homeHref = '/') {
-  return `<div class="cta">
+  const base = homeHref.replace(/index\.html$/, '');
+  return `<div class="cta" style="--grain:url('${base}assets/figma/grain.webp')">
   <div><h3>Обсудим вашу задачу</h3><p>Вернёмся с планом работ и оценкой в течение рабочего дня.</p></div>
   <a class="cta-btn" href="${homeHref}#zayavka">Оставить заявку</a>
 </div>`;
