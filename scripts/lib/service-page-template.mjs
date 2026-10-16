@@ -35,6 +35,7 @@ export function pageStyles() {
   .bar-nav a{font-size:12px;line-height:16px;color:var(--f-heading);text-decoration:none;transition:color .2s}
   .bar-nav a:hover{color:var(--f-teal)}
   .bar-actions{display:flex;align-items:center;gap:24px;flex:0 0 auto}
+  .bar-actions .btn-cta{color:#FFFFFF}
   .bar-phone{font-size:14px;line-height:20px;font-weight:500;letter-spacing:.02em;color:var(--f-heading);text-decoration:none;font-variant-numeric:tabular-nums;white-space:nowrap}
   /* Кнопки по макету Figma «Button / Primary»: градиент, прямые углы, текст #444, наведение — увеличение + контур */
   .btn-cta{display:inline-flex;align-items:center;justify-content:center;min-width:210px;height:40px;padding:0 24px;border:0;border-radius:0;background:linear-gradient(90deg,#139EA1 0%,#1C6BA2 100%);color:#444444;font-size:12px;line-height:16px;text-decoration:none;white-space:nowrap;transition:transform .2s ease,box-shadow .2s ease}
