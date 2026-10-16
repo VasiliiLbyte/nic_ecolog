@@ -140,13 +140,12 @@ input::placeholder,textarea::placeholder{color:#6E8385}
 [data-rail]{position:fixed;top:50%;right:12px;transform:translateY(-50%);z-index:90;pointer-events:none}
 [data-rail-shell]{position:relative;display:flex;flex-direction:column;gap:14px;align-items:flex-end;padding:0;background:transparent;border:none;box-shadow:none}
 [data-rail-track]{position:absolute;top:8px;bottom:8px;right:0;width:1px;background:rgba(11,92,96,0.14);pointer-events:none}
-[data-rail].on-dark [data-rail-track]{background:rgba(255,255,255,0.16)}
 [data-rail-item]{display:flex;align-items:center;justify-content:flex-end;gap:0;text-decoration:none;cursor:pointer;padding:2px 0;position:relative;z-index:1;pointer-events:auto}
 [data-rail-label]{position:absolute;right:calc(100% + 8px);font-family:'Stolzl','Onest',sans-serif;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--teal-deep);white-space:nowrap;line-height:1;opacity:0;transform:translateX(6px);transition:opacity 0.3s ease,transform 0.3s ease;pointer-events:none}
 [data-rail-item].is-active [data-rail-label]{opacity:0.46;transform:translateX(0);font-size:9px;letter-spacing:0.12em}
 [data-rail]:hover [data-rail-label],[data-rail]:focus-within [data-rail-label]{opacity:0.72;transform:translateX(0);pointer-events:auto}
-[data-rail].on-dark [data-rail-label]{color:#EAF3F2}
-[data-rail].on-dark [data-rail-item].is-active [data-rail-label]{opacity:0.52;text-shadow:0 0 8px rgba(0,0,0,0.35)}
+[data-rail-item].on-dark [data-rail-label]{color:#EAF3F2}
+[data-rail-item].on-dark.is-active [data-rail-label]{opacity:0.52;text-shadow:0 0 8px rgba(0,0,0,0.35)}
 [data-rail-tick]{position:relative;display:block;width:var(--rail-tick-w);height:var(--rail-tick-h);border-radius:2px;background:rgba(11,92,96,0.32);overflow:hidden;flex:0 0 auto;transition:width 0.35s var(--ease-out),background 0.3s ease}
 [data-rail-fill]{position:absolute;left:0;top:0;height:100%;width:0%;border-radius:2px;background:var(--grad-rail-fill);transition:width 0.18s linear}
 [data-rail-item].is-active [data-rail-tick]{width:var(--rail-tick-w-active);background:rgba(11,92,96,0.22)}
@@ -154,16 +153,16 @@ input::placeholder,textarea::placeholder{color:#6E8385}
 [data-rail-item].is-past [data-rail-fill]{width:100%;opacity:1;background:rgba(11,92,96,0.50)}
 [data-rail-item]:hover [data-rail-tick]{background:rgba(11,92,96,0.44)}
 [data-rail-item].is-past:hover [data-rail-tick]{background:rgba(11,92,96,0.58)}
-[data-rail].on-dark [data-rail-tick]{background:rgba(255,255,255,0.38);filter:drop-shadow(0 0 1px rgba(0,0,0,0.15))}
-[data-rail].on-dark [data-rail-fill]{background:var(--grad-rail-fill-dark)}
-[data-rail].on-dark [data-rail-item].is-active [data-rail-tick]{background:rgba(255,255,255,0.25)}
-[data-rail].on-dark [data-rail-item].is-past [data-rail-tick]{background:rgba(255,255,255,0.55)}
-[data-rail].on-dark [data-rail-item].is-past [data-rail-fill]{background:rgba(255,255,255,0.55)}
-[data-rail].on-dark [data-rail-item]:hover [data-rail-tick]{background:rgba(255,255,255,0.48)}
-[data-rail].on-dark [data-rail-item].is-past:hover [data-rail-tick]{background:rgba(255,255,255,0.65)}
+[data-rail-item].on-dark [data-rail-tick]{background:rgba(255,255,255,0.38);filter:drop-shadow(0 0 1px rgba(0,0,0,0.15))}
+[data-rail-item].on-dark [data-rail-fill]{background:var(--grad-rail-fill-dark)}
+[data-rail-item].on-dark.is-active [data-rail-tick]{background:rgba(255,255,255,0.25)}
+[data-rail-item].on-dark.is-past [data-rail-tick]{background:rgba(255,255,255,0.55)}
+[data-rail-item].on-dark.is-past [data-rail-fill]{background:rgba(255,255,255,0.55)}
+[data-rail-item].on-dark:hover [data-rail-tick]{background:rgba(255,255,255,0.48)}
+[data-rail-item].on-dark.is-past:hover [data-rail-tick]{background:rgba(255,255,255,0.65)}
 /* Видимый фокус для клавиатурной навигации */
 a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible,[data-svc]:focus-visible,[data-rail-item]:focus-visible,[tabindex]:focus-visible{outline:2px solid #139EA1;outline-offset:2px;border-radius:8px}
-[data-rail].on-dark [data-rail-item]:focus-visible,.on-dark a:focus-visible,.on-dark button:focus-visible{outline-color:#ADCF7A}
+[data-rail-item].on-dark:focus-visible,.on-dark a:focus-visible,.on-dark button:focus-visible{outline-color:#ADCF7A}
 :focus:not(:focus-visible){outline:none}
 #eco-menu{overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
 #eco-menu nav a{padding:14px 0;min-height:44px;display:flex;align-items:center}
@@ -254,14 +253,13 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
 .f-btn--esg{background:linear-gradient(90deg,#ADCF7A 0%,#139EA1 100%)}
 .f-btn[data-head-cta]{color:#FFFFFF}
 .f-btn--esg,.f-form-actions .f-btn{font-size:13px}
+.f-form-actions .f-btn{color:#FFFFFF}
 .f-btn--esg:hover{box-shadow:inset 0 0 0 1px #139EA1}
 .f-btn--white{background:#FFFFFF}
 .f-btn--white:hover{box-shadow:inset 0 0 0 1px #1C6BA2}
 .f-btn--ghost{min-width:0;background:transparent;box-shadow:inset 0 0 0 1px #1C6BA2;color:#1C6BA2}
 .f-btn--ghost:hover{box-shadow:inset 0 0 0 1px #1C6BA2}
 .f-btn--ghost:active{box-shadow:inset 0 0 0 1px #1C6BA2}
-.f-btn--ghost-green{box-shadow:inset 0 0 0 1px #ADCF7A;color:#ADCF7A}
-.f-btn--ghost-green:hover,.f-btn--ghost-green:active{box-shadow:inset 0 0 0 1px #ADCF7A}
 .f-br-m{display:none}
 .f-dot{position:relative;flex:0 0 auto;width:9px;height:9px;border-radius:50%;background:var(--f-green);box-shadow:0 0 6px rgba(76,178,114,0.75)}
 
@@ -292,7 +290,6 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
 .f-hero__lead{margin:24px 0 0;max-width:548px;font-size:16px;line-height:22px;color:#FFFFFF;animation:fadeIn 1s ease 0.7s both}
 .f-hero__actions{display:flex;align-items:center;gap:24px;margin-top:94px;flex-wrap:wrap;animation:fadeIn 1s ease 0.85s both}
 .f-hero__actions .f-btn--ghost{min-width:89px}
-.f-svc-intro__copy .f-btn--ghost{min-width:124px;margin-bottom:-59px}
 .f-hero__proof{margin:43px 0 0;font-size:14px;line-height:20px;font-weight:500;letter-spacing:0.02em;color:var(--f-heading);animation:fadeIn 1s ease 1s both}
 
 /* Бегущая строка */
@@ -526,7 +523,6 @@ a.f-doc:hover .f-doc__preview{border-color:var(--f-teal)}
   .f-lab__content{flex-basis:auto}
   .f-lab__grid{flex-basis:auto;width:100%;grid-template-columns:repeat(2,1fr)}
   .f-lab__card{height:auto;min-height:199px}
-  .f-svc-intro__copy .f-btn--ghost{margin-bottom:0}
   .f-data{gap:64px}
   .f-foot__col:nth-child(n){width:auto}
   .f-svc-island-wrap{display:none}
@@ -604,7 +600,6 @@ a.f-doc:hover .f-doc__preview{border-color:var(--f-teal)}
   .f-cat:first-child .f-svc,.f-cat:nth-child(2) .f-svc{min-height:0}
   .f-svc-intro__text{gap:24px}
   .f-svc-intro__copy .f-lead{max-width:none}
-  .f-svc-intro__copy .f-btn{width:100%;height:35px}
   .f-svc-content{gap:32px;margin-top:32px}
   .f-cat__head{flex-direction:column;align-items:flex-start;gap:8px}
   .f-cat__title{gap:8px}
@@ -662,33 +657,6 @@ a.f-doc:hover .f-doc__preview{border-color:var(--f-teal)}
   .f-foot__bottom div{flex-direction:column;gap:12px}
 }
 
-/* Рельс-навигация по секциям — ghost rail */
-[data-rail]{position:fixed;top:50%;right:12px;transform:translateY(-50%);z-index:90;pointer-events:none}
-[data-rail-shell]{position:relative;display:flex;flex-direction:column;gap:14px;align-items:flex-end;padding:0;background:transparent;border:none;box-shadow:none}
-[data-rail-track]{position:absolute;top:8px;bottom:8px;right:0;width:1px;background:rgba(11,92,96,0.14);pointer-events:none}
-[data-rail].on-dark [data-rail-track]{background:rgba(255,255,255,0.16)}
-[data-rail-item]{display:flex;align-items:center;justify-content:flex-end;gap:0;text-decoration:none;cursor:pointer;padding:2px 0;position:relative;z-index:1;pointer-events:auto}
-[data-rail-label]{position:absolute;right:calc(100% + 8px);font-family:'Onest',sans-serif;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:#0B5C60;white-space:nowrap;line-height:1;opacity:0;transform:translateX(6px);transition:opacity 0.3s ease,transform 0.3s ease;pointer-events:none}
-[data-rail-item].is-active [data-rail-label]{opacity:0.46;transform:translateX(0);font-size:9px;letter-spacing:0.12em}
-[data-rail]:hover [data-rail-label],[data-rail]:focus-within [data-rail-label]{opacity:0.72;transform:translateX(0);pointer-events:auto}
-[data-rail].on-dark [data-rail-label]{color:#EAF3F2}
-[data-rail].on-dark [data-rail-item].is-active [data-rail-label]{opacity:0.52;text-shadow:0 0 8px rgba(0,0,0,0.35)}
-[data-rail-tick]{position:relative;display:block;width:var(--rail-tick-w);height:var(--rail-tick-h);border-radius:2px;background:rgba(11,92,96,0.32);overflow:hidden;flex:0 0 auto;transition:width 0.35s var(--ease-out),background 0.3s ease}
-[data-rail-fill]{position:absolute;left:0;top:0;height:100%;width:0%;border-radius:2px;background:var(--grad-rail-fill);transition:width 0.18s linear}
-[data-rail-item].is-active [data-rail-tick]{width:var(--rail-tick-w-active);background:rgba(11,92,96,0.22)}
-[data-rail-item].is-past [data-rail-tick]{background:rgba(11,92,96,0.50)}
-[data-rail-item].is-past [data-rail-fill]{width:100%;opacity:1;background:rgba(11,92,96,0.50)}
-[data-rail-item]:hover [data-rail-tick]{background:rgba(11,92,96,0.44)}
-[data-rail-item].is-past:hover [data-rail-tick]{background:rgba(11,92,96,0.58)}
-[data-rail].on-dark [data-rail-tick]{background:rgba(255,255,255,0.38);filter:drop-shadow(0 0 1px rgba(0,0,0,0.15))}
-[data-rail].on-dark [data-rail-fill]{background:var(--grad-rail-fill-dark)}
-[data-rail].on-dark [data-rail-item].is-active [data-rail-tick]{background:rgba(255,255,255,0.25)}
-[data-rail].on-dark [data-rail-item].is-past [data-rail-tick]{background:rgba(255,255,255,0.55)}
-[data-rail].on-dark [data-rail-item].is-past [data-rail-fill]{background:rgba(255,255,255,0.55)}
-[data-rail].on-dark [data-rail-item]:hover [data-rail-tick]{background:rgba(255,255,255,0.48)}
-[data-rail].on-dark [data-rail-item].is-past:hover [data-rail-tick]{background:rgba(255,255,255,0.65)}
-@media (max-width:1060px){[data-rail]{display:none !important}}
-@media (prefers-reduced-motion: reduce){[data-rail-tick],[data-rail-fill],[data-rail-label],[data-rail-shell]{transition:none !important}}
 
 /* ==== Движение: медленно и тонко; без JS и при prefers-reduced-motion страница остаётся как в макете ====
    1 — живая волна в герое, 2 — линия процесса, 3 — линии под цифрами, 4 — иконки лаборатории,
@@ -907,7 +875,6 @@ a.f-doc:hover .f-doc__preview{border-color:var(--f-teal)}
             <div class="f-svc-intro__copy">
               <h2 class="f-h2" data-rv="true">Экологический инжиниринг полного цикла</h2>
               <p class="f-lead" data-rv="true">От разового проекта до полного экологического сопровождения предприятия.</p>
-              <a class="f-btn f-btn--sm f-btn--ghost f-btn--ghost-green" href="uslugi/" data-rv="true">Все услуги →</a>
             </div>
           </div>
           <div class="f-svc-island-wrap" data-svc-illustration="true" aria-hidden="true"><img class="f-svc-island" src="./assets/services-illustration.webp" alt="" width="395" height="537"><span class="f-svc-island-shadow"></span></div>
@@ -1207,7 +1174,7 @@ a.f-doc:hover .f-doc__preview{border-color:var(--f-teal)}
     </section>
   </main>
 
-  <!-- Рельс-навигация по секциям справа (обновляет _initRail) -->
+  <!-- Рельс-навигация по секциям справа (обновляет _updateRail) -->
   <nav data-rail="true" aria-label="Навигация по разделам">
     <div data-rail-shell="true">
       <div data-rail-track="true" aria-hidden="true"></div>
@@ -1548,7 +1515,6 @@ class Component extends DCLogic {
     // --- Движение: живая волна, линия процесса, проекты, нить, магнитные кнопки ---
     this._initMotion(reduced);
     this._initHeroVideo(reduced);
-    this._initRail();
 
     // --- Рельс-навигация по секциям ---
     const rail = document.querySelector('[data-rail]');
@@ -1585,7 +1551,9 @@ class Component extends DCLogic {
         if (i === active) d.el.setAttribute('aria-current', 'true');
         else d.el.removeAttribute('aria-current');
       });
-      rail.classList.toggle('on-dark', !!(railData[active] && railData[active].dark));
+      // светлыми становятся только те метки, под которыми действительно тёмная секция
+      const darkBoxes = railData.filter((d) => d.dark && d.sec).map((d) => d.sec.getBoundingClientRect());
+      railData.forEach((d) => { const r = d.el.getBoundingClientRect(), y = r.top + r.height / 2; d.el.classList.toggle('on-dark', darkBoxes.some((bx) => bx.top <= y && bx.bottom >= y)); });
     };
 
     // --- Шапка уплотняется при скролле ---
@@ -1822,57 +1790,6 @@ class Component extends DCLogic {
     this._stopHeroVideo = () => { document.removeEventListener('visibilitychange', sync); };
   }
 
-  // Рельс-навигация справа (≥1061 px): метка активной секции заполняется по мере прокрутки; на тёмных секциях — светлая
-  _initRail() {
-    const rail = document.querySelector('[data-rail]');
-    const railData = Array.from(document.querySelectorAll('[data-rail-item]')).map((el) => ({
-      el,
-      fill: el.querySelector('[data-rail-fill]'),
-      sec: document.getElementById(el.getAttribute('data-rail-target')),
-      dark: el.getAttribute('data-rail-dark') === '1'
-    }));
-    this._updateRail = () => {
-      if (!rail || !railData.length) return;
-      const scrollY = window.scrollY;
-      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-      const ref = scrollY + window.innerHeight * 0.4;
-      const tops = railData.map((d) => d.sec ? d.sec.getBoundingClientRect().top + window.scrollY : Infinity);
-      let active = 0;
-      for (let i = 0; i < railData.length; i++) {
-        if (tops[i] !== Infinity && ref >= tops[i] - 1) active = i;
-      }
-      const atBottom = scrollY >= maxScroll - 1;
-      if (atBottom) active = railData.length - 1;
-      railData.forEach((d, i) => {
-        let p = 0;
-        if (i < active) p = 1;
-        else if (i === active && tops[i] !== Infinity) {
-          if (atBottom && i === railData.length - 1) {
-            p = 1;
-          } else {
-            const start = tops[i];
-            const range = i < railData.length - 1
-              ? tops[i + 1] - start
-              : Math.max(1, maxScroll - start);
-            p = Math.max(0, Math.min(1, (scrollY - start) / range));
-          }
-        }
-        if (d.fill) d.fill.style.width = (p * 100).toFixed(1) + '%';
-        d.el.classList.toggle('is-active', i === active);
-        d.el.classList.toggle('is-past', i < active);
-        if (i === active) d.el.setAttribute('aria-current', 'true');
-        else d.el.removeAttribute('aria-current');
-      });
-      rail.classList.toggle('on-dark', !!(railData[active] && railData[active].dark));
-    };
-    let raf = 0;
-    const on = () => { if (!raf) raf = requestAnimationFrame(() => { raf = 0; this._updateRail(); }); };
-    window.addEventListener('scroll', on, { passive: true });
-    window.addEventListener('resize', on, { passive: true });
-    this._updateRail();
-    this._stopRail = () => { window.removeEventListener('scroll', on); window.removeEventListener('resize', on); if (raf) cancelAnimationFrame(raf); };
-  }
-
   _initDonut(reduced) {
     const donut = document.querySelector('[data-donut]');
     if (!donut) return;
@@ -1973,7 +1890,6 @@ class Component extends DCLogic {
       window.removeEventListener('load', this._onMotion);
     }
     if (this._stopHeroVideo) this._stopHeroVideo();
-    if (this._stopRail) this._stopRail();
     document.body.style.overflow = '';
   }
 
