@@ -250,7 +250,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
 .f-btn--green:hover{transform:none;box-shadow:none;background:#4CB272}
 .f-btn--green:active{background:linear-gradient(90deg,#ADCF7A 0%,#4CB272 100%)}
 .f-btn--green:disabled{background:#E0E0E0;color:#FFFFFF}
-.f-btn--esg{background:linear-gradient(90deg,#ADCF7A 0%,#139EA1 100%)}
+.f-btn--esg{background:linear-gradient(90deg,#ADCF7A 0%,#139EA1 100%);color:#FFFFFF}
 .f-btn[data-head-cta]{color:#FFFFFF}
 .f-btn--esg,.f-form-actions .f-btn{font-size:13px}
 .f-form-actions .f-btn{color:#FFFFFF}
@@ -303,7 +303,8 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
 .f-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:48px}
 .f-stat{position:relative;padding-top:24px}
 .f-stat::before{content:"";position:absolute;top:0;left:0;width:min(220px,100%);height:1px;background:var(--f-border)}
-.f-stat__num{font-weight:200;font-size:64px;line-height:72px;color:var(--f-heading);font-variant-numeric:tabular-nums;white-space:nowrap}
+/* Цифры пропорциональные, как в макете (Data/Stat): с tabular-nums «1» шириной с «0» — дыры в «14» и «1 200» */
+.f-stat__num{font-weight:200;font-size:64px;line-height:72px;color:var(--f-heading);white-space:nowrap}
 .f-stat__suf{color:var(--f-green-l)}
 .f-stat__label{margin:8px 0 0;font-size:12px;line-height:16px;color:var(--f-text)}
 
@@ -315,8 +316,9 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
 .f-why__card p{margin:8px 0 0;font-size:14px;line-height:20px;color:var(--f-text)}
 
 /* Лаборатория */
-/* Зерно (эффект Noise макета: чёрный 25%) — верхний слой фонов лаборатории, ESG, заявки и подвала */
-#laboratoriya{background:url('./assets/figma/grain.webp') 0 0/256px 256px repeat,#0B5C60 url('./assets/figma/bg-lab.webp') center/cover no-repeat;color:#FFFFFF}
+/* Зерно — эффект Noise макета: плитки assets/figma/grain-a<альфа>-d<плотность>.webp (npm run figma:assets -- <.fig> --grain),
+   верхний слой фонов лаборатории, ESG, заявки и подвала; на десктопе в макете режим Overlay, на мобильном (кроме лаборатории) — Normal */
+#laboratoriya{background:url('./assets/figma/grain-a25-d90.webp') 0 0/256px 256px repeat,#0B5C60 url('./assets/figma/bg-lab.webp') center/cover no-repeat;background-blend-mode:overlay,normal;color:#FFFFFF}
 .f-lab{display:flex;align-items:flex-start;justify-content:space-between;gap:48px}
 .f-lab__content{flex:0 1 557px;display:flex;flex-direction:column;align-items:flex-start;gap:40px}
 .f-lab__intro{max-width:456px}
@@ -351,7 +353,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
 .f-cat__title{display:flex;align-items:baseline;gap:16px;margin:0;font-family:'Onest',sans-serif;font-size:16px;line-height:20px;font-weight:700;letter-spacing:0.02em;color:var(--f-primary)}
 .f-cat__num{font-size:16px;color:var(--f-green)}
 .f-cat__desc{font-size:12px;line-height:16px;color:var(--f-green);text-align:right}
-.f-svc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;align-items:start}
+.f-svc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;align-items:stretch}
 .f-svc{padding:16px;border-radius:8px;background:var(--f-alt);cursor:pointer;outline-offset:2px;transition:background 0.25s ease}
 .f-svc:hover,.f-svc:focus-within{background:rgba(11,92,96,0.09)}
 .f-svc__title{display:flex;align-items:flex-start;gap:12px;margin:0;font-family:'Onest',sans-serif;font-size:16px;line-height:20px;font-weight:700;letter-spacing:0.02em;color:var(--f-heading)}
@@ -381,21 +383,22 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
 .f-steps{display:grid;grid-template-columns:repeat(5,1fr);margin-top:64px}
 .f-step{--dot:var(--f-green-l);position:relative}
 .f-step--accent{--dot:var(--f-teal)}
-.f-step:nth-child(1){--dot:var(--f-green-l)}
+/* --line задаём и первому шагу: иначе подхватывается глобальный токен --line (серый) */
+.f-step:nth-child(1){--dot:var(--f-green-l);--line:var(--f-green-l)}
 .f-step:nth-child(2){--dot:var(--f-green);--line:var(--f-green)}
 .f-step:nth-child(3){--dot:var(--f-teal);--line:var(--f-teal)}
 .f-step:nth-child(4){--dot:var(--f-blue);--line:var(--f-blue)}
 .f-step:nth-child(5){--dot:var(--f-heading);--line:var(--f-heading)}
 .f-step__marker{position:relative;height:20px}
 .f-step__marker::before{content:"";position:absolute;left:0;top:0;width:20px;height:20px;border-radius:50%;background:var(--dot);opacity:0.5}
-.f-step__marker::after{content:"";position:absolute;left:5px;top:5px;width:11px;height:11px;border-radius:50%;background:var(--dot)}
+.f-step__marker::after{content:"";position:absolute;left:4.5px;top:4.5px;width:11px;height:11px;border-radius:50%;background:var(--dot)}
 .f-step__marker span{position:absolute;left:20px;right:0;top:10px;height:1px;background:var(--line,var(--f-green-l))}
 .f-step__num{margin:16px 0 0;font-size:14px;line-height:20px;font-weight:500;letter-spacing:0.02em;color:rgba(68,68,68,0.3)}
-.f-step h3{margin:16px 0 0;max-width:155px;font-family:'Onest',sans-serif;font-size:16px;line-height:20px;font-weight:700;letter-spacing:0.02em;color:var(--f-heading)}
+.f-step h3{margin:16px 0 0;max-width:155px;font-family:'Onest',sans-serif;font-size:16px;line-height:20px;font-weight:700;letter-spacing:0.02em;color:var(--f-heading);text-wrap:wrap}
 .f-step p:last-child{margin:16px 0 0;max-width:155px;font-size:12px;line-height:16px;color:var(--f-text)}
 
 /* Экология — это данные (ESG) */
-#esg{padding:96px 48px 129px;background:url('./assets/figma/grain.webp') 0 0/256px 256px repeat,#1C6BA2 url('./assets/figma/bg-data.webp') center/cover no-repeat;color:#FFFFFF}
+#esg{padding:96px 48px 129px;background:url('./assets/figma/grain-a25-d90.webp') 0 0/256px 256px repeat,#1C6BA2 url('./assets/figma/bg-data.webp') center/cover no-repeat;background-blend-mode:overlay,normal;color:#FFFFFF}
 .f-data{display:flex;align-items:center;gap:90px}
 .f-data__content{flex:0 1 456px;display:flex;flex-direction:column;align-items:flex-start;gap:96px}
 .f-data__title{margin:0;font-family:'Onest',sans-serif;font-weight:700;font-size:60px;line-height:68px;color:#FFFFFF}
@@ -411,9 +414,11 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
 .f-donut{position:relative;width:100%;max-width:471px;aspect-ratio:471/444;container-type:inline-size}
 .f-donut__float{position:absolute;inset:0;animation:donutFloat 8s ease-in-out infinite}
 @keyframes donutFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
-.f-donut__stage{position:absolute;inset:0;cursor:pointer}
-.f-donut__seg{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:contain;transition:transform 1.1s cubic-bezier(0.22,1,0.36,1) var(--d),opacity 0.8s ease var(--d)}
-[data-anim="on"] .f-donut:not(.is-in) .f-donut__seg{opacity:0;transform:translate(calc(var(--dx) * 14%),calc(var(--dy) * 14% - 12%)) scale(0.94)}
+/* Появление — бублик целиком (без разлёта сегментов, замечание дизайнера 2026-10-18): скрипт ставит .is-in,
+   когда все три слоя декодированы, — слои проявляются одновременно и не смещаются друг относительно друга */
+.f-donut__stage{position:absolute;inset:0;cursor:pointer;transition:transform 0.9s cubic-bezier(0.22,1,0.36,1),opacity 0.9s ease}
+.f-donut__seg{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:contain}
+[data-anim="on"] .f-donut:not(.is-in) .f-donut__stage{opacity:0;transform:translateY(16px)}
 .f-donut__hl{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none}
 .f-donut__hl path{opacity:0;transition:opacity 0.2s cubic-bezier(0.215,0.61,0.355,1)}
 .f-donut[data-active="1"] .f-donut__hl [data-hl="1"],.f-donut[data-active="2"] .f-donut__hl [data-hl="2"]{opacity:0.5}
@@ -472,7 +477,7 @@ a.f-doc:hover .f-doc__preview{border-color:var(--f-teal)}
 
 /* Заявка */
 .f-request{display:grid;grid-template-columns:1fr 1fr;border-radius:8px;overflow:hidden}
-.f-request__panel{padding:32px 32px 112px;background:url('./assets/figma/grain.webp') 0 0/256px 256px repeat,linear-gradient(135deg,var(--f-teal),var(--f-blue));color:#FFFFFF}
+.f-request__panel{padding:32px 32px 112px;background:url('./assets/figma/grain-a25-d90.webp') 0 0/256px 256px repeat,linear-gradient(135deg,var(--f-teal),var(--f-blue));background-blend-mode:overlay,normal;color:#FFFFFF}
 .f-request__panel .f-h2{color:#FFFFFF}
 .f-request__panel .f-lead{margin-top:48px;max-width:420px;color:#FFFFFF}
 #eco-form{display:flex;flex-direction:column;gap:24px;padding:32px;background:var(--f-alt)}
@@ -488,7 +493,7 @@ a.f-doc:hover .f-doc__preview{border-color:var(--f-teal)}
 .f-consent a{color:inherit}
 
 /* Подвал — по макету: #0B5C60 + размытые пятна (слой footer-background-art), раскладка и типографика по макету */
-#kontakty{padding:64px 48px 85px;background:url('./assets/figma/grain.webp') 0 0/256px 256px repeat,#0B5C60 url('./assets/figma/bg-footer.webp') center top/cover no-repeat;color:#FFFFFF;scroll-margin-top:80px}
+#kontakty{padding:64px 48px 85px;background:url('./assets/figma/grain-a25-d80.webp') 0 0/256px 256px repeat,#0B5C60 url('./assets/figma/bg-footer.webp') center top/cover no-repeat;background-blend-mode:overlay,normal;color:#FFFFFF;scroll-margin-top:80px}
 .f-foot__top{display:flex;justify-content:space-between;gap:16px}
 .f-foot__brand{flex:0 0 254px;display:flex;flex-direction:column;gap:32px}
 .f-foot__brand img{display:block;width:104px;height:35px}
@@ -500,7 +505,8 @@ a.f-doc:hover .f-doc__preview{border-color:var(--f-teal)}
 .f-foot__col p{margin:0 0 8px;font-size:12px;line-height:16px;text-transform:uppercase;color:var(--f-teal)}
 .f-foot__col a,.f-foot__col span{font-size:12px;line-height:16px;color:#FFFFFF;text-decoration:none;transition:color 0.2s}
 .f-foot__col a:hover{color:var(--f-green-l)}
-.f-foot__bottom{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;margin-top:16px;padding-top:32px;border-top:1px solid var(--f-teal)}
+/* Линия — в 28 px от последней ссылки колонки (в макете «Лицензии» → footer-divider); на сайте последняя — «Блог» */
+.f-foot__bottom{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;margin-top:28px;padding-top:32px;border-top:1px solid var(--f-teal)}
 .f-foot__bottom p,.f-foot__bottom a,.f-foot__bottom span{margin:0;font-size:12px;line-height:16px;color:var(--f-teal);text-decoration:none}
 .f-foot__bottom div{display:flex;gap:48px}
 .f-foot__bottom a:hover{color:#FFFFFF}
@@ -582,7 +588,7 @@ a.f-doc:hover .f-doc__preview{border-color:var(--f-teal)}
   .f-lab__meta{white-space:normal;font-size:11.5px;line-height:16px}
   .f-lab__intro .f-h2{margin-top:24px}
   .f-lab__intro .f-lead{margin-top:20px}
-  #laboratoriya{background-image:url('./assets/figma/grain.webp'),url('./assets/figma/bg-lab-mobile.webp')}
+  #laboratoriya{background-image:url('./assets/figma/grain-a25-d90.webp'),url('./assets/figma/bg-lab-mobile.webp')}
   .f-lab{gap:32px}
   .f-flow{flex-direction:column;align-items:stretch;gap:8px;width:100%}
   .f-flow__step{justify-content:center;height:40px}
@@ -619,7 +625,7 @@ a.f-doc:hover .f-doc__preview{border-color:var(--f-teal)}
   .f-step h3{margin-top:8px;max-width:none;font-weight:700;letter-spacing:0.02em}
   .f-step p:last-child{margin-top:8px;max-width:none}
   .f-step h3 br{display:none}
-  #esg{padding:32px 20px;background-image:url('./assets/figma/grain.webp'),url('./assets/figma/bg-data-mobile.webp')}
+  #esg{padding:32px 20px;background-image:url('./assets/figma/grain-a15-d100.webp'),url('./assets/figma/bg-data-mobile.webp');background-blend-mode:normal}
   .f-data{gap:32px}
   .f-data__content{gap:32px}
   .f-data__title{font-size:38px;line-height:44px}
@@ -642,13 +648,13 @@ a.f-doc:hover .f-doc__preview{border-color:var(--f-teal)}
   .f-docs-grid{grid-template-columns:1fr;margin-top:42px;padding-bottom:10px}
   .f-doc__copy{gap:8px}
   .f-doc__title{font-weight:400}
-  .f-request__panel{padding:24px}
+  .f-request__panel{padding:24px;background-image:url('./assets/figma/grain-a10-d100.webp'),linear-gradient(135deg,var(--f-teal),var(--f-blue));background-blend-mode:normal}
   .f-request__panel .f-lead{margin-top:20px}
   #eco-form{padding:24px}
   .f-field input{height:44px;font-size:16px}
   .f-field textarea{height:96px;font-size:16px}
   .f-form-actions .f-btn{width:100%;height:44px}
-  #kontakty{padding:32px 20px;background-image:url('./assets/figma/grain.webp'),url('./assets/figma/bg-footer-mobile.webp')}
+  #kontakty{padding:32px 20px;background-image:url('./assets/figma/grain-a15-d80.webp'),url('./assets/figma/bg-footer-mobile.webp');background-blend-mode:normal}
   .f-foot__top{gap:32px}
   .f-foot__brand{flex-basis:auto}
   .f-foot__nav{flex-direction:column;gap:24px}
@@ -659,25 +665,14 @@ a.f-doc:hover .f-doc__preview{border-color:var(--f-teal)}
 
 
 /* ==== Движение: медленно и тонко; без JS и при prefers-reduced-motion страница остаётся как в макете ====
-   1 — живая волна в герое, 2 — линия процесса, 3 — линии под цифрами, 4 — иконки лаборатории,
+   1 — живая волна в герое, 2 — линия процесса, 3 — (линии под цифрами — убраны 2026-10-18), 4 — иконки лаборатории,
    5 — проекты (параллакс + блик), 6 — нить через страницу, 7 — магнитные кнопки и успех формы.
    Состояния «до анимации» — только под [data-anim="on"] (его ставит скрипт). */
 
 
-/* 2. Как мы работаем: линия заполняется по прокрутке, точки шагов загораются по очереди */
+/* 2. Как мы работаем: линия заполняется по прокрутке; точки и номера всегда как в макете (замечание дизайнера 2026-10-18) */
 .f-step__marker span::after{content:"";position:absolute;inset:0;background:var(--line,var(--f-green-l));transform-origin:0 50%;transform:scaleX(var(--fill,1))}
 [data-anim="on"] .f-step__marker span{background:color-mix(in srgb,var(--line,var(--f-green-l)) 30%,transparent)}
-[data-anim="on"] .f-step__marker::before,[data-anim="on"] .f-step__marker::after{transition:transform 0.6s cubic-bezier(0.22,1,0.36,1),opacity 0.6s ease}
-[data-anim="on"] .f-step:not(.is-lit) .f-step__marker::before{opacity:0;transform:scale(0.4)}
-[data-anim="on"] .f-step:not(.is-lit) .f-step__marker::after{opacity:0.4;transform:scale(0.6)}
-[data-anim="on"] .f-step.is-lit .f-step__marker::after{animation:stepPing 1.2s ease-out}
-@keyframes stepPing{from{box-shadow:0 0 0 0 color-mix(in srgb,var(--dot) 70%,transparent)}to{box-shadow:0 0 0 14px color-mix(in srgb,var(--dot) 0%,transparent)}}
-[data-anim="on"] .f-step__num{transition:color 0.6s ease}
-[data-anim="on"] .f-step.is-lit .f-step__num{color:var(--f-teal)}
-
-/* 3. О центре: под цифрой прорисовывается линия в такт счётчику */
-.f-stat::after{content:"";position:absolute;top:0;left:0;width:min(220px,100%);height:1px;background:linear-gradient(90deg,var(--f-teal),var(--f-green-l));transform:scaleX(0);transform-origin:0 50%;transition:transform 1.5s cubic-bezier(0.33,1,0.68,1)}
-.f-stat.is-counted::after{transform:scaleX(1)}
 
 /* 4. Лаборатория: контур иконки прорисовывается, затем проявляется заливка; при наведении — свой микроцикл */
 .f-lab__card{position:relative;isolation:isolate}
@@ -1052,9 +1047,9 @@ a.f-doc:hover .f-doc__preview{border-color:var(--f-teal)}
           <div class="f-donut" data-donut="true">
             <div class="f-donut__float">
               <div class="f-donut__stage" role="img" aria-label="Структура углеродного следа: охват 3 — около 70%, охват 2 — около 18%, охват 1 — около 12%">
-                <img class="f-donut__seg" data-seg="3" src="./assets/figma/esg-donut-scope3-sm.webp" srcset="./assets/figma/esg-donut-scope3-sm.webp 1x, ./assets/figma/esg-donut-scope3.webp 2x" alt="" width="471" height="444" loading="lazy" decoding="async" style="--dx:0.64;--dy:0.77;--lift:1.6%;--d:0s">
-                <img class="f-donut__seg" data-seg="2" src="./assets/figma/esg-donut-scope2-sm.webp" srcset="./assets/figma/esg-donut-scope2-sm.webp 1x, ./assets/figma/esg-donut-scope2.webp 2x" alt="" width="471" height="444" loading="lazy" decoding="async" style="--dx:-0.51;--dy:-0.86;--lift:3.4%;--d:0.16s">
-                <img class="f-donut__seg" data-seg="1" src="./assets/figma/esg-donut-scope1-sm.webp" srcset="./assets/figma/esg-donut-scope1-sm.webp 1x, ./assets/figma/esg-donut-scope1.webp 2x" alt="" width="471" height="444" loading="lazy" decoding="async" style="--dx:-0.98;--dy:-0.21;--lift:3.4%;--d:0.32s">
+                <img class="f-donut__seg" data-seg="3" src="./assets/figma/esg-donut-scope3-sm.webp" srcset="./assets/figma/esg-donut-scope3-sm.webp 1x, ./assets/figma/esg-donut-scope3.webp 2x" alt="" width="471" height="444" loading="lazy" decoding="async">
+                <img class="f-donut__seg" data-seg="2" src="./assets/figma/esg-donut-scope2-sm.webp" srcset="./assets/figma/esg-donut-scope2-sm.webp 1x, ./assets/figma/esg-donut-scope2.webp 2x" alt="" width="471" height="444" loading="lazy" decoding="async">
+                <img class="f-donut__seg" data-seg="1" src="./assets/figma/esg-donut-scope1-sm.webp" srcset="./assets/figma/esg-donut-scope1-sm.webp 1x, ./assets/figma/esg-donut-scope1.webp 2x" alt="" width="471" height="444" loading="lazy" decoding="async">
                 <svg class="f-donut__hl" viewBox="0 0 471 444" aria-hidden="true"><defs><filter id="esg-glow-1" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="0" stdDeviation="6" flood-color="#ADCF7A"/></filter><filter id="esg-glow-2" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="0" stdDeviation="6" flood-color="#139EA1"/></filter><filter id="esg-glow-3" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="0" stdDeviation="6" flood-color="#1C6BA2"/></filter></defs><path data-hl="1" transform="translate(4 97)" d="M0 95.5C8 54 21 28.5 44 0L147 58L149.5 60.5L174.5 103.5C168.2 113.1 165.7 119.9 162.5 133.5L136 91L134 91L0 95.5Z" fill="#ADCF7A" filter="url(#esg-glow-1)"/><path data-hl="2" transform="translate(47 1)" d="M181.5 118L200 0C113.2 5.5 59.3 32.3 0 97.5L105 156L106.5 157.5L130.5 199L131.5 199.5C146.6 176.3 174.7 160.7 207.5 163L181.5 118Z" fill="#139EA1" filter="url(#esg-glow-2)"/><path data-hl="3" transform="translate(0 1)" d="M138.1 187L3.6 191.5C-7.6 240.1 9.1 290 28.1 319C47.1 348 63.6 375 63.6 375C103.5 418.7 147.1 440.6 211.1 442.5C275.1 444.4 340.9 428.5 400.1 371C459.3 313.5 485.4 232.3 461.6 162C461.6 162 449.2 140 432.1 109C415 78 378.6 0 247.1 0L229.1 118.5L255.1 162.5C279.5 167.9 291 173.7 306.1 191C306.1 223 282.4 249.7 263.6 261.3C242.2 274.7 201.1 285 169.1 264C166.2 250.2 165.5 242.8 166.6 230L140.1 188L139.1 187.5L138.1 187Z" fill="#1C6BA2" filter="url(#esg-glow-3)"/></svg>
               </div>
               <button type="button" class="f-scope f-scope--1" data-seg="1" aria-pressed="false" aria-describedby="esg-tip-1"><span class="f-scope__dot" aria-hidden="true"></span>ОХВАТ 1</button>
@@ -1478,12 +1473,7 @@ class Component extends DCLogic {
     // --- Счётчики ---
     const counters = Array.from(document.querySelectorAll('[data-count]'));
     const fmt = (n) => n.toLocaleString('ru-RU');
-    const markCounted = (el) => {
-      const stat = el.closest('.f-stat');
-      if (stat) stat.classList.add('is-counted');
-    };
     const runCounter = (el) => {
-      markCounted(el);
       const target = parseFloat(el.getAttribute('data-count'));
       const t0 = performance.now();
       const dur = 1500;
@@ -1496,7 +1486,7 @@ class Component extends DCLogic {
       requestAnimationFrame(step);
     };
     if (reduced || !('IntersectionObserver' in window)) {
-      counters.forEach((el) => { el.textContent = fmt(parseFloat(el.getAttribute('data-count'))); markCounted(el); });
+      counters.forEach((el) => { el.textContent = fmt(parseFloat(el.getAttribute('data-count'))); });
     } else {
       this._ioCnt = new IntersectionObserver((entries) => {
         entries.forEach((e) => {
@@ -1707,14 +1697,13 @@ class Component extends DCLogic {
       const vh = window.innerHeight;
       const writes = [];
       // 2. Линия процесса: 0 — блок появился снизу (верх на 85% окна), 1 — низ блока поднялся до 70% окна.
-      // У каждого шага своя линия вправо (на мобильном — вниз); точка загорается, когда до неё дошла линия
+      // У каждого шага своя линия вправо (на мобильном — вниз)
       if (stepsBox && steps.length) {
         const r = stepsBox.getBoundingClientRect();
         const p = Math.max(0, Math.min(1, (vh * 0.85 - r.top) / (r.height + vh * 0.15)));
         const k = p * steps.length;
         writes.push(() => steps.forEach((el, i) => {
           el.style.setProperty('--fill', Math.max(0, Math.min(1, k - i)).toFixed(3));
-          el.classList.toggle('is-lit', p > 0.005 && k >= i);
         }));
       }
       // 5. Проекты: фото смещается до ±14px относительно карточки
@@ -1856,15 +1845,16 @@ class Component extends DCLogic {
     // тап мимо диаграммы снимает закреплённый сегмент
     document.addEventListener('pointerdown', (e) => { if (pinned && !donut.contains(e.target)) toggle(0); });
 
-    // появление: сегменты собираются по очереди, затем подписи и подсказки
+    // появление: бублик целиком, когда декодированы все три слоя (иначе слои проявляются вразнобой), затем подписи
+    const segs = Array.from(donut.querySelectorAll('.f-donut__seg'));
     const reveal = () => {
       loadMap();
-      donut.classList.add('is-in');
-      setTimeout(() => donut.classList.add('is-ready'), 1900);
+      Promise.all(segs.map((img) => (img.decode ? img.decode().catch(() => {}) : null)))
+        .then(() => donut.classList.add('is-in'));
     };
     if (reduced || !('IntersectionObserver' in window)) {
       loadMap();
-      donut.classList.add('is-in', 'is-ready');
+      donut.classList.add('is-in');
     } else {
       this._ioDonut = new IntersectionObserver((entries) => {
         if (entries.some((e) => e.isIntersecting)) {

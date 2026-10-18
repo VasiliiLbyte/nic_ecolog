@@ -100,7 +100,7 @@ export function pageStyles() {
   .hub-group h2{margin:0 0 16px;padding-bottom:8px;border-bottom:1px solid var(--f-border);font-size:16px;line-height:20px;font-weight:700;letter-spacing:.02em;color:var(--f-primary)}
   .lab-block{margin-top:48px;padding:24px;border-radius:8px;background:#FFFFFF}
   .soon{font-size:12px;color:var(--f-muted);font-style:italic}
-  .ft{background-color:#0B5C60;background-image:var(--ft-bg);background-position:0 0,center top;background-size:256px 256px,cover;background-repeat:repeat,no-repeat;color:#FFFFFF;padding:64px 48px 85px}
+  .ft{background-color:#0B5C60;background-image:var(--ft-bg);background-position:0 0,center top;background-size:256px 256px,cover;background-repeat:repeat,no-repeat;background-blend-mode:overlay,normal;color:#FFFFFF;padding:64px 48px 85px}
   .ft-inner{max-width:1064px;margin:0 auto}
   .ft-top{display:flex;justify-content:space-between;gap:16px}
   .ft-brand{flex:0 0 254px;display:flex;flex-direction:column;gap:32px}
@@ -113,7 +113,7 @@ export function pageStyles() {
   .ft-col a,.ft-col p{font-size:12px;line-height:16px;color:#FFFFFF;text-decoration:none}
   .ft-col a:hover{color:var(--f-green-l)}
   .ft-col a,.ft-bot a{padding:8px 0;margin:-8px 0}
-  .ft-bot{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:24px;margin-top:16px;padding-top:32px;border-top:1px solid var(--f-teal);font-size:12px;line-height:16px;color:var(--f-teal)}
+  .ft-bot{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:24px;margin-top:28px;padding-top:32px;border-top:1px solid var(--f-teal);font-size:12px;line-height:16px;color:var(--f-teal)}
   .ft-bot div{display:flex;gap:48px}
   .ft-bot a{color:inherit;text-decoration:none}
   .ft-bot a:hover{color:#FFFFFF}
@@ -132,7 +132,7 @@ export function pageStyles() {
     .cta{padding:24px 20px}
     .cta-btn{width:100%;height:44px}
     .chips{gap:12px}
-    .ft{padding:32px 20px;background-image:var(--ft-bg-m)}
+    .ft{padding:32px 20px;background-image:var(--ft-bg-m);background-blend-mode:normal}
     .ft-top{gap:32px}
     .ft-brand{flex-basis:auto}
     .ft-nav{flex-direction:column;gap:24px}
@@ -265,8 +265,10 @@ export function footerBlock({ depth, homeHref = '/', uslugiHref: uslugiOverride 
   const prefix = assetPrefix(depth);
   const uslugiHref = uslugiOverride ?? (depth === 1 ? './' : `${prefix}uslugi/`);
   const privacyHref = `${prefix}privacy.html`;
-  const grain = `url('${prefix}assets/figma/grain.webp')`;
-  return `<footer class="ft" style="--ft-bg:${grain},url('${prefix}assets/figma/bg-footer.webp');--ft-bg-m:${grain},url('${prefix}assets/figma/bg-footer-mobile.webp')">
+  // Зерно — как в макете: desktop Overlay 25 %/80 %, mobile Normal 15 %/80 % (режим — в .ft)
+  const grain = `url('${prefix}assets/figma/grain-a25-d80.webp')`;
+  const grainM = `url('${prefix}assets/figma/grain-a15-d80.webp')`;
+  return `<footer class="ft" style="--ft-bg:${grain},url('${prefix}assets/figma/bg-footer.webp');--ft-bg-m:${grainM},url('${prefix}assets/figma/bg-footer-mobile.webp')">
   <div class="ft-inner">
     <div class="ft-top">
       <div class="ft-brand">
@@ -311,7 +313,7 @@ export function footerBlock({ depth, homeHref = '/', uslugiHref: uslugiOverride 
 
 export function ctaBlock(homeHref = '/') {
   const base = homeHref.replace(/index\.html$/, '');
-  return `<div class="cta" style="--grain:url('${base}assets/figma/grain.webp')">
+  return `<div class="cta" style="--grain:url('${base}assets/figma/grain-a10-d100.webp')">
   <div><h3>Обсудим вашу задачу</h3><p>Вернёмся с планом работ и оценкой в течение рабочего дня.</p></div>
   <a class="cta-btn" href="${homeHref}#zayavka">Оставить заявку</a>
 </div>`;

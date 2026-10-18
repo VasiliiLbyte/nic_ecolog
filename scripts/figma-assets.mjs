@@ -1,6 +1,7 @@
 // Выгрузка ассетов из локальной копии макета Figma (.fig) в assets/figma/.
 //
 //   npm run figma:assets -- <путь к файлу .fig>
+//   npm run figma:assets -- <путь к файлу .fig> --grain   — только плитки зерна (эффект Noise)
 //
 // .fig — zip: canvas.fig (kiwi-бинарник с деревом слоёв) + images/ (оригиналы картинок по sha1).
 // Векторы собираются в SVG из геометрии слоёв и прогоняются через svgo.config.mjs,
@@ -68,7 +69,26 @@ const DONUT = {
 };
 const DONUT_GREEN_POLY = [[102, 218], [148, 290], [318, 385], [392, 440], [380, 470], [370, 514], [58, 524], [6, 436], [0, 400], [0, 330], [40, 290], [70, 255]];
 
+// Зерно — эффект Noise макета на фонах секций (размер 0.5, «Mono»). Плитка 512 px показывается как 256 css-px,
+// т. е. частица 0.5 css-px = 1 пиксель плитки на экранах 2x (на 1x браузер усредняет по 4 частицы, как Figma при 100 %).
+// Модель: каждая частица закрашена цветом эффекта (чёрный, альфа — % из панели) с вероятностью «Density»,
+// иначе прозрачна; сид — из эффекта. Режим наложения (Normal / Overlay) задаётся в CSS через background-blend-mode —
+// скрипт его только печатает. Одинаковые параметры дают один файл: grain-a<альфа %>-d<плотность %>.webp.
+const GRAIN_EXPORTS = [
+  { path: ['лаборатория', 'lab-background'] },
+  { path: ['данные', 'data-background'] },
+  { path: ['Заявка', 'request-layout', 'request-panel', 'request-background'] },
+  { path: ['Подвал', 'footer-background', 'footer-background-art'] },
+  { path: ['лаборатория', 'lab-background'], frame: FRAME_MOBILE },
+  { path: ['Данные', 'data-background'], frame: FRAME_MOBILE },
+  { path: ['Заявка', 'request-layout', 'request-panel', 'request-background'], frame: FRAME_MOBILE },
+  { path: ['Подвал', 'footer-background', 'footer-background-art'], frame: FRAME_MOBILE },
+  { path: ['service-body', 'service-content', 'service-request', 'request-background'], frame: 'Услуга — СЗЗ — Desktop' },
+];
+const GRAIN_TILE = 512;
+
 const figPath = process.argv[2];
+const GRAIN_ONLY = process.argv.includes('--grain');
 if (!figPath || !existsSync(figPath)) {
   console.error('Usage: npm run figma:assets -- <file.fig>');
   process.exit(1);
@@ -217,6 +237,40 @@ function imageOf(node) {
 }
 
 mkdirSync(OUT, { recursive: true });
+const grainDone = new Set();
+for (const { path, frame = FRAME } of GRAIN_EXPORTS) {
+  const noise = (find(path, frame).effects || []).find((e) => e.type === 'NOISE' && e.visible !== false);
+  if (!noise) throw new Error(`Нет эффекта Noise: ${frame} / ${path.join(' / ')}`);
+  if (noise.noiseType !== 'MONOTONE') throw new Error(`Поддержан только Mono: ${path.join(' / ')} — ${noise.noiseType}`);
+  const alpha = Math.round(noise.color.a * 100);
+  const density = Math.round(noise.density * 100);
+  const file = `grain-a${alpha}-d${density}.webp`;
+  console.log(`grain ${file}  ${frame} / ${path.at(-1)}  ${noise.blendMode === 'OVERLAY' ? 'overlay' : 'normal'}`);
+  if (grainDone.has(file)) continue;
+  grainDone.add(file);
+  let seed = (noise.seed || 1) >>> 0; // mulberry32
+  const rnd = () => {
+    seed = (seed + 0x6d2b79f5) >>> 0;
+    let t = seed;
+    t = Math.imul(t ^ (t >>> 15), t | 1);
+    t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+  const px = Buffer.alloc(GRAIN_TILE * GRAIN_TILE * 4);
+  const [r, g, b] = [noise.color.r, noise.color.g, noise.color.b].map((v) => Math.round(v * 255));
+  const a = Math.round(noise.color.a * 255);
+  for (let i = 0; i < GRAIN_TILE * GRAIN_TILE; i++) {
+    if (rnd() >= noise.density) continue;
+    px[i * 4] = r; px[i * 4 + 1] = g; px[i * 4 + 2] = b; px[i * 4 + 3] = a;
+  }
+  const raw = join(tmp, 'grain.rgba');
+  writeFileSync(raw, px);
+  execFileSync(IM, ['-size', `${GRAIN_TILE}x${GRAIN_TILE}`, '-depth', '8', `rgba:${raw}`, '-define', 'webp:lossless=true', join(OUT, file)]);
+}
+if (GRAIN_ONLY) {
+  rmSync(tmp, { recursive: true, force: true });
+  process.exit(0);
+}
 for (const { path, file } of SVG_EXPORTS) {
   const svg = optimize(toSvg(find(path)), { ...svgoConfig, path: file }).data;
   writeFileSync(join(OUT, file), svg + '\n');
