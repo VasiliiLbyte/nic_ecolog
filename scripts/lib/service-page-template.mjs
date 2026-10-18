@@ -85,7 +85,7 @@ export function pageStyles() {
   .chip{display:inline-flex;align-items:center;gap:6px;min-height:40px;padding:12px 20px;border-radius:8px;background:#FFFFFF;color:var(--f-heading);font-size:12px;line-height:16px;text-decoration:none;transition:box-shadow .2s ease}
   .chip:hover{box-shadow:0 0 0 1px var(--f-teal)}
   .chip-static{display:inline-flex;align-items:center;min-height:40px;padding:12px 20px;border-radius:8px;background:rgba(255,255,255,.6);color:var(--f-muted);font-size:12px;line-height:16px}
-  .cta{margin-top:48px;min-height:100px;padding:24px 48px;border-radius:8px;background-color:#139EA1;background-image:var(--grain),linear-gradient(90deg,#1C6BA2,#139EA1);background-size:256px 256px,auto;color:#FFFFFF;display:flex;align-items:center;justify-content:space-between;gap:32px;flex-wrap:wrap}
+  .cta{margin-top:48px;min-height:100px;padding:24px 48px;border-radius:8px;background-color:#139EA1;background-image:var(--grain),linear-gradient(90deg,#1C6BA2,#139EA1);background-size:128px 128px,auto;color:#FFFFFF;display:flex;align-items:center;justify-content:space-between;gap:32px;flex-wrap:wrap}
   .cta h3{font-size:20px;line-height:28px;font-weight:600}
   .cta p{margin-top:8px;font-size:12px;line-height:16px;color:#FFFFFF}
   .cta-btn{display:inline-flex;align-items:center;justify-content:center;min-width:210px;height:44px;padding:0 24px;border:0;border-radius:0;background:#FFFFFF;color:var(--f-teal);font-size:12px;line-height:16px;text-decoration:none;transition:transform .2s ease,box-shadow .2s ease}
@@ -100,7 +100,7 @@ export function pageStyles() {
   .hub-group h2{margin:0 0 16px;padding-bottom:8px;border-bottom:1px solid var(--f-border);font-size:16px;line-height:20px;font-weight:700;letter-spacing:.02em;color:var(--f-primary)}
   .lab-block{margin-top:48px;padding:24px;border-radius:8px;background:#FFFFFF}
   .soon{font-size:12px;color:var(--f-muted);font-style:italic}
-  .ft{background-color:#0B5C60;background-image:var(--ft-bg);background-position:0 0,center top;background-size:256px 256px,cover;background-repeat:repeat,no-repeat;background-blend-mode:overlay,normal;color:#FFFFFF;padding:64px 48px 85px}
+  .ft{background-color:#0B5C60;background-image:var(--ft-bg);background-position:0 0,center top;background-size:128px 128px,cover;background-repeat:repeat,no-repeat;background-blend-mode:overlay,normal;color:#FFFFFF;padding:64px 48px 85px}
   .ft-inner{max-width:1064px;margin:0 auto}
   .ft-top{display:flex;justify-content:space-between;gap:16px}
   .ft-brand{flex:0 0 254px;display:flex;flex-direction:column;gap:32px}
