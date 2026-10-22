@@ -5,6 +5,7 @@ import { fileURLToPath } from 'node:url';
 import { loadWave1Briefs, WAVE1_SLUGS } from './lib/parse-brief.mjs';
 import { renderHubPage, renderServicePage, setSiteOptions, WAVE1_SITEMAP_URLS } from './lib/service-page-template.mjs';
 import { articlesByService, loadArticles, renderArticlePage, renderBlogHub } from './lib/blog-template.mjs';
+import { renderLabPage } from './lib/lab-template.mjs';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const out = join(root, 'docs');
@@ -18,7 +19,7 @@ const BLOG_SRC = join(root, 'content', 'blog');
 const articles = loadArticles(BLOG_SRC, { includeDrafts: process.env.BLOG_DRAFTS === '1' });
 const hasBlog = articles.length > 0;
 setSiteOptions({ hasBlog });
-const LAB_SRC = 'Ecolog-Lab.html';
+const LAB_SRC = 'scripts/lib/lab-template.mjs';
 const METRIKA_ID = '112117233';
 
 const METRIKA_SNIPPET = `<!-- Yandex.Metrika counter -->
@@ -72,18 +73,19 @@ function patchHome(html) {
   );
 }
 
-function patchLab(html) {
-  const patched = html
-    .replaceAll('НИЦ Эколог - Сайт (вау).html', 'index.html')
-    .replaceAll('#services', '#uslugi')
-    .replaceAll('#about', '#o-centre')
-    .replaceAll('#portfolio', '#proekty');
-  // Footer column «Центр»: the last of three identical «Лицензии» links (header, mobile menu, footer).
-  if (!hasBlog) return patched;
-  const anchor = '<a href="index.html#litsenzii">Лицензии</a>';
-  const at = patched.lastIndexOf(anchor);
-  if (at < 0) throw new Error('lab footer anchor not found');
-  return `${patched.slice(0, at + anchor.length)}\n<a href="blog/">Блог</a>${patched.slice(at + anchor.length)}`;
+// Страница лаборатории — шаблон lab-template.mjs в дизайн-системе главной: стили компонентов (блок
+// «Вёрстка по макету Figma» и правила появления) и карточки «Вода / Воздух / Почвы / Отходы» берутся из главной.
+function renderLab(homeHtml) {
+  const cssStart = homeHtml.indexOf('/* ==== Вёрстка по макету Figma');
+  const cssEnd = homeHtml.indexOf('</style>', cssStart);
+  if (cssStart < 0 || cssEnd < 0) throw new Error('home Figma styles not found');
+  const reveal = homeHtml.match(/^\[data-anim="on"\] \[data-rv\].*$/gm) || [];
+  if (reveal.length < 2) throw new Error('home reveal rules not found');
+  const labStart = homeHtml.indexOf('<section id="laboratoriya"');
+  const labEnd = homeHtml.indexOf('</section>', labStart);
+  const labCards = homeHtml.slice(labStart, labEnd).match(/^\s*<div class="f-lab__card".*$/gm)?.map((l) => l.trim()) || [];
+  if (labCards.length !== 4) throw new Error(`home lab cards: expected 4, got ${labCards.length}`);
+  return renderLabPage({ homeCss: `${reveal.join('\n')}\n${homeHtml.slice(cssStart, cssEnd)}`, labCards });
 }
 
 const privacyHtml = `<!DOCTYPE html>
@@ -120,7 +122,7 @@ rmSync(out, { recursive: true, force: true });
 mkdirSync(out, { recursive: true });
 
 writeFileSync(join(out, 'index.html'), injectMetrika(patchHome(readFileSync(join(root, HOME_SRC), 'utf8'))));
-writeFileSync(join(out, 'lab.html'), injectMetrika(patchLab(readFileSync(join(root, LAB_SRC), 'utf8'))));
+writeFileSync(join(out, 'lab.html'), injectMetrika(renderLab(readFileSync(join(root, HOME_SRC), 'utf8'))));
 
 for (const file of ['support.js', 'image-slot.js']) {
   cpSync(join(root, file), join(out, file));

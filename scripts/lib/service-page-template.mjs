@@ -16,6 +16,7 @@ export function esc(s) {
 }
 
 function assetPrefix(depth) {
+  if (depth === 0) return ''; // страницы в корне сайта (lab.html)
   return depth === 1 ? '../' : '../../';
 }
 
@@ -159,7 +160,7 @@ export function pageStyles() {
   `;
 }
 
-export function headBlock({ title, description, canonical, depth, schema, ogType = 'website', ogImage: ogImageOverride }) {
+export function headBlock({ title, description, canonical, depth, schema, ogType = 'website', ogImage: ogImageOverride, extraHead = '' }) {
   const prefix = assetPrefix(depth);
   const schemaScript = schema
     ? `<script type="application/ld+json">${JSON.stringify(schema)}</script>`
@@ -196,7 +197,7 @@ export function headBlock({ title, description, canonical, depth, schema, ogType
 <link rel="stylesheet" href="${prefix}tokens/effects.css">
 <link rel="stylesheet" href="${prefix}tokens/responsive.css">
 <style>${pageStyles()}</style>
-${schemaScript}
+${schemaScript}${extraHead ? `\n${extraHead}` : ''}
 </head>`;
 }
 
@@ -233,7 +234,7 @@ export function chromeBar({ depth, crumbCurrent, homeHref = '/', uslugiHref: usl
     </button>
   </div>
 </header>
-<nav class="crumbs-row" aria-label="Хлебные крошки"><p class="crumbs">${crumbs}</p></nav>
+${crumbs ? `<nav class="crumbs-row" aria-label="Хлебные крошки"><p class="crumbs">${crumbs}</p></nav>` : ''}
 <div class="mmenu" id="mmenu" role="dialog" aria-modal="true" aria-label="Меню навигации" tabindex="-1">
   <div class="mm-top">
     <img src="${prefix}assets/figma/logo-ecolog.svg" alt="НИЦ Эколог" width="104" height="35">
