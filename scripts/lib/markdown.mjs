@@ -21,7 +21,16 @@ function inline(text) {
     }
     last = m.index + m[0].length;
   }
-  return out + esc(text.slice(last));
+  // Номера законов («7-ФЗ», «342-ФЗ») не рвём по дефису
+  return (out + esc(text.slice(last))).replace(/(\d+-ФЗ)/g, '<span class="nw">$1</span>');
+}
+
+// Ячейка таблицы: «да» — с фирменной точкой, «нет» / «—» — приглушённо; колонка «Норма …» — ссылки на статьи закона.
+function cell(text, { ref } = {}) {
+  const t = text.trim();
+  if (/^да$/i.test(t)) return '<td><span class="tbl-yes">да</span></td>';
+  if (/^(нет|—|-)$/i.test(t)) return `<td><span class="tbl-no">${esc(t)}</span></td>`;
+  return `<td${ref ? ' class="tbl-ref"' : ''}>${inline(t)}</td>`;
 }
 
 const cellsOf = (line) => line.trim().replace(/^\||\|$/g, '').split('|').map((c) => c.trim());
@@ -59,7 +68,7 @@ export function renderMarkdown(md) {
       }
       html.push(
         `<div class="tbl"><table><thead><tr>${head.map((c) => `<th>${inline(c)}</th>`).join('')}</tr></thead><tbody>` +
-          rows.map((r) => `<tr>${r.map((c) => `<td>${inline(c)}</td>`).join('')}</tr>`).join('') +
+          rows.map((r) => `<tr>${r.map((c, j) => cell(c, { ref: /^норма(\s|$)/i.test(head[j] || '') })).join('')}</tr>`).join('') +
           '</tbody></table></div>'
       );
       continue;

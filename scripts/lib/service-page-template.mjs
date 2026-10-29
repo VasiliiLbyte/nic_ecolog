@@ -122,6 +122,9 @@ export function pageStyles() {
   .ft-bot a:hover{color:#FFFFFF}
   @media(max-width:1060px){.svc-cols{grid-template-columns:1fr}.ft-top{flex-direction:column;gap:40px}.ft-nav{gap:48px;flex-wrap:wrap}.cta-btn{margin-right:0}}
   @media(max-width:720px){
+    .post .tbl{margin-left:-20px;margin-right:-20px;border-radius:0;box-shadow:0 0 0 1px var(--f-border)}
+    .post table{font-size:13px}
+    .post th,.post td{padding:12px}
     .bar{padding:18px 10px 19px 20px}
     .crumbs-row{padding:16px 20px 0}
     .wrap{padding:24px 20px 48px}
@@ -151,10 +154,23 @@ export function pageStyles() {
   .post li{margin:6px 0}
   .post a{color:var(--f-heading);text-underline-offset:3px}
   .post strong{color:var(--f-primary);font-weight:600}
-  .post .tbl{overflow-x:auto;margin:0 0 20px;-webkit-overflow-scrolling:touch}
-  .post table{border-collapse:collapse;width:100%;min-width:560px;font-size:14px;line-height:1.5;background:#fff}
-  .post th,.post td{border:1px solid var(--f-border);padding:10px 12px;text-align:left;vertical-align:top}
-  .post th{background:var(--f-alt);color:var(--f-primary);font-weight:500}
+  /* Таблицы статей — в фирменной палитре: шапка #0B5C60 с лаймовой чертой, строки через одну на #F3F7F7,
+     первая колонка цветом заголовков, «да» — с точкой как в карточках сайта, ссылки на нормы — бирюзовым */
+  .post .tbl{overflow-x:auto;margin:8px 0 28px;border-radius:8px;background:#FFFFFF;box-shadow:0 0 0 1px var(--f-border),0 12px 32px -20px rgba(11,92,96,.35);-webkit-overflow-scrolling:touch}
+  .post table{border-collapse:separate;border-spacing:0;width:100%;min-width:560px;font-size:14px;line-height:20px;color:var(--f-primary)}
+  .post th,.post td{padding:14px 12px;text-align:left;vertical-align:top}
+  .post th{background:#0B5C60;color:#FFFFFF;font-size:12px;line-height:16px;font-weight:500;letter-spacing:.02em;text-transform:uppercase;box-shadow:inset 0 -3px 0 #ADCF7A;padding-bottom:17px}
+  .post td{border-top:1px solid var(--f-border)}
+  .post tbody tr:first-child td{border-top:0}
+  .post tbody tr:nth-child(even) td{background:var(--f-alt)}
+  .post tbody tr{transition:background .2s}
+  .post tbody tr:hover td{background:rgba(19,158,161,.07)}
+  .post td:first-child{color:var(--f-heading);font-weight:500}
+  .post .tbl-yes{display:inline-flex;align-items:center;gap:8px;color:var(--f-heading);font-weight:500}
+  .post .tbl-yes::before{content:"";flex:0 0 auto;width:8px;height:8px;border-radius:50%;background:radial-gradient(circle,#ADCF7A,#4CB272);box-shadow:0 0 6px rgba(76,178,114,.6)}
+  .post .tbl-no{color:var(--f-muted)}
+  .post .nw{white-space:nowrap}
+  .post td.tbl-ref{font-size:12px;line-height:20px;color:var(--f-teal);white-space:nowrap}
   .post-date{font-size:12px;color:var(--f-muted);margin-top:10px}
   .post-cover{margin:28px 0 0;max-width:960px}
   .post-cover img{display:block;width:100%;height:auto;border-radius:8px}
