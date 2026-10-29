@@ -3,9 +3,9 @@ title: СЗЗ предприятия в 2026 году: кому нужна и к
 description: С 1 января 2026 года ориентировочные СЗЗ прекратили существование. Кому теперь нужен проект СЗЗ, как его согласовать и что изменили новые рекомендации.
 h1: Санитарно-защитная зона в 2026 году: кому нужна и как её установить
 slug: sanitarno-zashchitnaya-zona-2026
-status: draft
-date: 2026-10-01
-updated: 2026-10-06
+status: published
+date: 2026-10-29
+updated: 2026-10-29
 services: [proekt-szz, iei]
 source: seo_geo/nic-ecolog/stati/statya_2_szz_2026.md
 ---
