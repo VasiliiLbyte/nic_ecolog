@@ -16,7 +16,7 @@ from docx.shared import Cm, Pt, RGBColor
 
 ROOT = Path(__file__).resolve().parent.parent
 HOME = ROOT / "NIC Ecolog - Главная v2.dc.html"
-LAB = ROOT / "Ecolog-Lab.html"
+LAB = ROOT / "docs" / "lab.html"  # собирается из scripts/lib/lab-template.mjs — сначала npm run pages:build
 OUT_DIR = ROOT / "exports"
 OUT_FILE = OUT_DIR / "НИЦ Эколог — контент сайта для вычитки.docx"
 

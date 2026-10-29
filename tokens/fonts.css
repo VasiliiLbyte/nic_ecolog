@@ -1,8 +1,8 @@
 /* Webfonts — НИЦ «Эколог»
    Display: Stölzl (brandbook face, full Cyrillic) — active below; Onest is the fallback.
    Body: Onest (geometric grotesque, full Cyrillic).
-   Labels / eyebrows / data: JetBrains Mono. */
-@import url("https://fonts.googleapis.com/css2?family=Onest:wght@200;300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap");
+   Labels / eyebrows / data: Stölzl (uppercase, wide tracking). */
+@import url("https://fonts.googleapis.com/css2?family=Onest:wght@200;300;400;500;600&display=swap");
 
 /* --- Stölzl (brandbook display face) --- */
 @font-face{font-family:'Stolzl';src:url('../assets/Stolzl-Book.woff2') format('woff2');font-weight:300;font-style:normal;font-display:swap;}

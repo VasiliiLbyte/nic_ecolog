@@ -6,11 +6,16 @@
     "icons:optimize": "svgo -f assets/icons/lab -o assets/icons/lab --config svgo.config.mjs",
     "pages:build": "node scripts/build-pages.mjs",
     "pages:preview": "npx --yes serve docs -p 8766",
+    "pages:qa-wave1": "node scripts/qa-wave1.mjs",
     "mobile:audit": "node scripts/mobile-audit.mjs",
     "content:export": "python3 scripts/export-site-copy-docx.py",
-    "content:export:xlsx": "python3 scripts/export-site-copy-xlsx.py"
+    "content:export:xlsx": "python3 scripts/export-site-copy-xlsx.py",
+    "pages:qa-blog": "node scripts/qa-blog.mjs",
+    "figma:assets": "node scripts/figma-assets.mjs"
   },
   "devDependencies": {
+    "fzstd": "^0.1.1",
+    "kiwi-schema": "^0.5.0",
     "playwright": "^1.49.1",
     "svgo": "^3.3.2"
   }
