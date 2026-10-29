@@ -1,3 +1,5 @@
+import { renderMarkdown } from './markdown.mjs';
+
 const SITE = 'https://nic-ecolog.ru';
 
 // Site-wide switches set by build-pages.mjs. hasBlog adds «Блог» to nav and footer,
@@ -383,6 +385,45 @@ function asideBlock(brief) {
   return cards.length ? `<div class="aside">${cards.join('\n      ')}</div>` : '';
 }
 
+// Текст страницы услуги из брифа (NIC-008). В брифе подзаголовки пишутся «###»,
+// чтобы не обрывать раздел «##»; на странице они становятся h2.
+function copyBlock(md) {
+  if (!md) return '';
+  const html = renderMarkdown(md.replace(/^### /gm, '## ').replace(/^#### /gm, '### '));
+  return `<div class="post svc-copy">${html}</div>`;
+}
+
+function faqBlock(faq) {
+  if (!faq?.length) return '';
+  const items = faq
+    .map((f) => `<h3>${esc(f.q)}</h3>\n${renderMarkdown(f.a)}`)
+    .join('\n');
+  return `<h2>Вопросы и ответы</h2>
+  <div class="post svc-copy svc-faq">${items}</div>`;
+}
+
+const plainText = (md) =>
+  md
+    .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
+    .replace(/\*\*([^*]+)\*\*/g, '$1')
+    .replace(/\s*\n\s*/g, ' ')
+    .trim();
+
+/** FAQPage добавляется в разметку только вместе с видимым на странице FAQ. */
+function serviceSchema(brief) {
+  if (!brief.schema || !brief.faq?.length) return brief.schema;
+  const graph = brief.schema['@graph'] ? [...brief.schema['@graph']] : [brief.schema];
+  graph.push({
+    '@type': 'FAQPage',
+    mainEntity: brief.faq.map((f) => ({
+      '@type': 'Question',
+      name: f.q,
+      acceptedAnswer: { '@type': 'Answer', text: plainText(f.a) },
+    })),
+  });
+  return { '@context': 'https://schema.org', '@graph': graph };
+}
+
 export function renderServicePage(brief, { depth = 2, articles = [] } = {}) {
   const homeHref = depth === 1 ? '../index.html' : '../../index.html';
   const introHtml = brief.intro.map((p) => `<p>${esc(p)}</p>`).join('\n      ');
@@ -399,7 +440,7 @@ export function renderServicePage(brief, { depth = 2, articles = [] } = {}) {
     description: brief.description,
     canonical: brief.canonical,
     depth,
-    schema: brief.schema,
+    schema: serviceSchema(brief),
   })}
 <body>
 ${chromeBar({ depth, crumbCurrent: brief.h1, homeHref })}
@@ -408,11 +449,14 @@ ${chromeBar({ depth, crumbCurrent: brief.h1, homeHref })}
   <h1>${esc(brief.h1)}</h1>
   <div class="lead">${introHtml}</div>
   ${factsBlock(brief)}
+  ${copyBlock(brief.copyBefore)}
   <h2>Что входит в работу</h2>
   <div class="svc-cols${aside ? '' : ' svc-cols--single'}">
     <div class="steps">${steps}</div>
     ${aside}
   </div>
+  ${copyBlock(brief.copyAfter)}
+  ${faqBlock(brief.faq)}
   ${relatedBlock(brief.related)}${articles.length ? `
   ${articlesBlock(articles)}` : ''}
   ${ctaBlock(homeHref)}
