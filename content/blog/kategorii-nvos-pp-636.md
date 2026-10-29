@@ -3,9 +3,9 @@ title: Категории НВОС по ПП № 636: что сделать до
 description: С 1 сентября 2026 года действуют новые критерии категорий НВОС. Разбираем, что изменилось и как скорректировать сведения в реестре до 1 декабря.
 h1: Новые категории объектов НВОС: что сделать предприятию до 1 декабря 2026 года
 slug: kategorii-nvos-pp-636
-status: draft
-date: 2026-10-01
-updated: 2026-10-06
+status: published
+date: 2026-10-29
+updated: 2026-10-29
 services: [plata-nvos, autsorsing-ekologa, pek]
 source: seo_geo/nic-ecolog/stati/statya_1_kategorii_nvos_pp_636.md
 ---
