@@ -7,6 +7,8 @@ status: published
 date: 2026-10-29
 updated: 2026-10-29
 services: [proekt-szz, iei]
+cover: sanitarno-zashchitnaya-zona-2026.webp
+cover_alt: Иллюстрация: парящий остров с предприятием в центре и прозрачными кольцами вокруг него — образ санитарно-защитной зоны
 source: seo_geo/nic-ecolog/stati/statya_2_szz_2026.md
 ---
 

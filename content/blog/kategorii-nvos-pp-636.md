@@ -7,6 +7,8 @@ status: published
 date: 2026-10-29
 updated: 2026-10-29
 services: [plata-nvos, autsorsing-ekologa, pek]
+cover: kategorii-nvos-pp-636.webp
+cover_alt: Иллюстрация: четыре стеклянные ступени — от широкой бирюзовой до узкой лаймовой — с небольшим предприятием наверху, как образ четырёх категорий объектов НВОС
 source: seo_geo/nic-ecolog/stati/statya_1_kategorii_nvos_pp_636.md
 ---
 
