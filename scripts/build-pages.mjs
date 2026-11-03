@@ -15,6 +15,7 @@ import {
 } from './lib/service-page-template.mjs';
 import { articlesByService, loadArticles, renderArticlePage, renderBlogHub } from './lib/blog-template.mjs';
 import { renderLabPage } from './lib/lab-template.mjs';
+import { renderMarkdown } from './lib/markdown.mjs';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const out = join(root, 'docs');
@@ -98,7 +99,22 @@ function renderLab(homeHtml) {
 }
 
 // Политика — в оболочке страниц услуг (шапка, меню, подвал), noindex и вне sitemap, как раньше.
-// Текст — прежняя заглушка, пока заказчик не пришлёт текст политики.
+// Текст — content/privacy.md. Пока в нём есть незаполненные поля [[…]], на сайт идёт прежняя заглушка;
+// PRIVACY_DRAFT=1 собирает черновик — только для локального превью, не для прода.
+const PRIVACY_SRC = join(root, 'content', 'privacy.md');
+const privacyMd = existsSync(PRIVACY_SRC) ? readFileSync(PRIVACY_SRC, 'utf8') : '';
+const privacyGaps = privacyMd.match(/\[\[[^\]]*\]\]/g) ?? [];
+const privacyDraft = process.env.PRIVACY_DRAFT === '1';
+if (privacyGaps.length) {
+  console.warn(`privacy.html: в content/privacy.md незаполненных полей [[…]]: ${privacyGaps.length} — ${privacyDraft ? 'собран черновик (PRIVACY_DRAFT=1)' : 'на сайте остаётся заглушка'}`);
+}
+const privacyMain = privacyMd && (!privacyGaps.length || privacyDraft)
+  ? `<p class="eye">НИЦ «Эколог»</p>
+  <h1>Политика конфиденциальности</h1>
+  <article class="post">${renderMarkdown(privacyMd)}</article>`
+  : `<p class="eye">Демо-версия</p>
+  <h1>Политика конфиденциальности</h1>
+  <div class="lead"><p>Это демонстрационная страница для превью сайта. Полный текст политики будет опубликован на production-домене.</p></div>`;
 const privacyHtml = `${headBlock({
   title: 'Политика конфиденциальности — НИЦ «Эколог»',
   description: 'Политика конфиденциальности НИЦ «Эколог».',
@@ -109,9 +125,7 @@ const privacyHtml = `${headBlock({
 <body>
 ${chromeBar({ depth: 0, homeHref: 'index.html', crumbsHtml: '<a href="index.html">Главная</a> | <b>Политика конфиденциальности</b>' })}
 <main class="wrap">
-  <p class="eye">Демо-версия</p>
-  <h1>Политика конфиденциальности</h1>
-  <div class="lead"><p>Это демонстрационная страница для превью сайта. Полный текст политики будет опубликован на production-домене.</p></div>
+  ${privacyMain}
 </main>
 ${footerBlock({ depth: 0, homeHref: 'index.html' })}
 ${menuScript()}
