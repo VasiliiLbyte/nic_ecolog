@@ -40,10 +40,10 @@ export function pageStyles() {
   .bar-nav a{font-size:12px;line-height:16px;color:var(--f-heading);text-decoration:none;transition:color .2s}
   .bar-nav a:hover{color:var(--f-teal)}
   .bar-actions{display:flex;align-items:center;gap:24px;flex:0 0 auto}
-  .bar-actions .btn-cta{color:#FFFFFF}
   .bar-phone{font-size:14px;line-height:20px;font-weight:500;letter-spacing:.02em;color:var(--f-heading);text-decoration:none;font-variant-numeric:tabular-nums;white-space:nowrap}
-  /* Кнопки по макету Figma «Button / Primary»: градиент, прямые углы, текст #444, наведение — увеличение + контур */
-  .btn-cta{display:inline-flex;align-items:center;justify-content:center;min-width:210px;height:40px;padding:0 24px;border:0;border-radius:0;background:linear-gradient(90deg,#139EA1 0%,#1C6BA2 100%);color:#444444;font-size:12px;line-height:16px;text-decoration:none;white-space:nowrap;transition:transform .2s ease,box-shadow .2s ease}
+  /* Кнопки по макету Figma «Button / Primary»: градиент, прямые углы, наведение — увеличение + контур.
+     Текст белый во всех местах (шапка, меню) — по замечаниям дизайнера 2026-10-18…22 */
+  .btn-cta{display:inline-flex;align-items:center;justify-content:center;min-width:210px;height:40px;padding:0 24px;border:0;border-radius:0;background:linear-gradient(90deg,#139EA1 0%,#1C6BA2 100%);color:#FFFFFF;font-size:12px;line-height:16px;text-decoration:none;white-space:nowrap;transition:transform .2s ease,box-shadow .2s ease}
   .btn-cta:hover{transform:scale(1.01);box-shadow:inset 0 0 0 1px #1C6BA2}
   .btn-cta:active{transform:none;box-shadow:none}
   .burger{display:none;align-items:center;justify-content:center;width:44px;height:44px;border:0;background:transparent;cursor:pointer;padding:0;flex:0 0 auto}
@@ -63,7 +63,7 @@ export function pageStyles() {
   .mm-foot .bar-phone{font-size:18px}
   .mm-foot .btn-cta{height:44px}
   @media(min-width:1061px){.burger{display:none !important}}
-  @media(max-width:1060px){.bar-nav,.bar-phone,.bar-actions .btn-cta{display:none}.burger{display:flex}}
+  @media(max-width:1060px){.bar-nav,.bar-actions .bar-phone,.bar-actions .btn-cta{display:none}.burger{display:flex}}
   .wrap{max-width:1160px;margin:0 auto;padding:40px 48px 64px}
   .eye{font-size:14px;line-height:20px;font-weight:500;letter-spacing:.02em;color:var(--f-text);text-transform:uppercase}
   h1{margin-top:24px;max-width:600px;font-weight:600;font-size:50px;line-height:55px;color:var(--f-heading);text-wrap:balance}
@@ -104,7 +104,7 @@ export function pageStyles() {
   .hub-group{margin-top:48px}
   .hub-group h2{margin:0 0 16px;padding-bottom:8px;border-bottom:1px solid var(--f-border);font-size:16px;line-height:20px;font-weight:700;letter-spacing:.02em;color:var(--f-primary)}
   .lab-block{margin-top:48px;padding:24px;border-radius:8px;background:#FFFFFF}
-  .soon{font-size:12px;color:var(--f-muted);font-style:italic}
+  .soon{font-size:12px;color:var(--f-muted)}
   .ft{background-color:#0B5C60;background-image:var(--ft-bg);background-position:0 0,center top;background-size:128px 128px,cover;background-repeat:repeat,no-repeat;background-blend-mode:overlay,normal;color:#FFFFFF;padding:64px 48px 85px}
   .ft-inner{max-width:1064px;margin:0 auto}
   .ft-top{display:flex;justify-content:space-between;gap:16px}
@@ -127,7 +127,9 @@ export function pageStyles() {
     .post .tbl{margin-left:-20px;margin-right:-20px;border-radius:0;box-shadow:0 0 0 1px var(--f-border)}
     .post table{font-size:13px}
     .post th,.post td{padding:12px}
-    .bar{padding:18px 10px 19px 20px}
+    /* шапка и верх меню — как #eco-header главной на мобильном (73 px) */
+    .bar{padding:14px 10px 14px 20px}
+    .mmenu{padding-top:14px}
     .crumbs-row{padding:16px 20px 0}
     .wrap{padding:24px 20px 48px}
     h1{font-size:30px;line-height:36px;margin-top:16px;font-weight:600}
@@ -151,7 +153,7 @@ export function pageStyles() {
   .post{margin-top:28px;max-width:760px;font-size:16px;line-height:1.75;color:var(--f-primary)}
   .post p{margin:0 0 16px}
   .post h2{margin:40px 0 16px}
-  .post h3{font-size:18px;font-weight:600;color:var(--f-heading);margin:28px 0 12px}
+  .post h3{font-size:18px;line-height:24px;font-weight:600;color:var(--f-heading);margin:28px 0 12px}
   .post ul,.post ol{margin:0 0 18px;padding-left:22px}
   .post li{margin:6px 0}
   .post a{color:var(--f-heading);text-underline-offset:3px}
@@ -176,11 +178,11 @@ export function pageStyles() {
   .post-date{font-size:12px;color:var(--f-muted);margin-top:10px}
   .post-cover{margin:28px 0 0;max-width:960px}
   .post-cover img{display:block;width:100%;height:auto;border-radius:8px}
-  .hub-card .cover{display:block;width:calc(100% + 32px);margin:-16px -16px 16px;height:auto;border-radius:8px 8px 0 0}
+  .hub-card .cover{display:block;width:calc(100% + 32px);max-width:none;margin:-16px -16px 16px;height:auto;border-radius:8px 8px 0 0}
   `;
 }
 
-export function headBlock({ title, description, canonical, depth, schema, ogType = 'website', ogImage: ogImageOverride, extraHead = '' }) {
+export function headBlock({ title, description, canonical, depth, schema, ogType = 'website', ogImage: ogImageOverride, extraHead = '', robots = 'index, follow' }) {
   const prefix = assetPrefix(depth);
   const schemaScript = schema
     ? `<script type="application/ld+json">${JSON.stringify(schema)}</script>`
@@ -194,7 +196,7 @@ export function headBlock({ title, description, canonical, depth, schema, ogType
 <title>${esc(title)}</title>
 <meta name="description" content="${esc(description)}">
 <link rel="canonical" href="${esc(canonical)}">
-<meta name="robots" content="index, follow">
+<meta name="robots" content="${robots}">
 <meta property="og:type" content="${ogType}">
 <meta property="og:locale" content="ru_RU">
 <meta property="og:site_name" content="НИЦ «Эколог»">
@@ -208,6 +210,7 @@ export function headBlock({ title, description, canonical, depth, schema, ogType
 <meta name="twitter:image" content="${ogImage}">
 <link rel="icon" type="image/png" href="${prefix}assets/favicon-512.png">
 <link rel="apple-touch-icon" href="${prefix}assets/apple-touch-icon.png">
+<link rel="preload" href="${prefix}assets/fonts/onest/onest-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="${prefix}tokens/reset.css">
 <link rel="stylesheet" href="${prefix}tokens/fonts.css">
 <link rel="stylesheet" href="${prefix}tokens/colors.css">
@@ -319,7 +322,7 @@ export function footerBlock({ depth, homeHref = '/', uslugiHref: uslugiOverride 
         </nav>
         <div class="ft-col">
           <h4>Контакты</h4>
-          <a href="tel:+78124499348">+7&nbsp;812&nbsp;449&nbsp;93&nbsp;48</a>
+          <a href="tel:+78124499348">+7&nbsp;(812)&nbsp;449&nbsp;93&nbsp;48</a>
           <a href="mailto:info@nic-ecolog.ru">info@nic-ecolog.ru</a>
           <p>Санкт-Петербург</p>
         </div>
@@ -523,16 +526,25 @@ function hubSchema() {
   };
 }
 
+// Описание для карточки хаба: не длиннее max знаков, обрезка по границе слова и с многоточием;
+// предлог или союз («на», «и») в конце тоже отбрасывается.
+function clipTeaser(text, max = 120) {
+  if (text.length <= max) return text;
+  const cut = text.slice(0, max - 1);
+  const space = cut.lastIndexOf(' ');
+  const words = (space > 0 ? cut.slice(0, space) : cut).replace(/\s+\S{1,2}$/, '');
+  return `${words.replace(/[\s,.:;(—–-]+$/, '')}…`;
+}
+
 export function renderHubPage(briefs) {
   const bySlug = Object.fromEntries(briefs.map((b) => [b.slug, b]));
   const homeHref = '../index.html';
 
   const wave1Cards = briefs
     .map((b) => {
-      const teaser = b.intro[0] ?? '';
       return `<a class="hub-card" href="./${b.slug}/">
       <h3>${esc(b.h1)}</h3>
-      <p>${esc(teaser.length > 120 ? `${teaser.slice(0, 117)}…` : teaser)}</p>
+      <p>${esc(clipTeaser(b.intro[0] ?? ''))}</p>
     </a>`;
     })
     .join('\n    ');
@@ -542,11 +554,12 @@ export function renderHubPage(briefs) {
       .filter((s) => bySlug[s])
       .map((s) => {
         const b = bySlug[s];
-        return `<a class="hub-card" href="./${s}/"><h3>${esc(b.h1)}</h3><p>${esc((b.intro[0] ?? '').slice(0, 100))}</p></a>`;
+        return `<a class="hub-card" href="./${s}/"><h3>${esc(b.h1)}</h3><p>${esc(clipTeaser(b.intro[0] ?? ''))}</p></a>`;
       })
       .join('\n      ');
     const soon = g.soon
-      .map((s) => `<span class="chip-static">${esc(SOON_LABELS[s] ?? s)} <span class="soon">— скоро</span></span>`)
+      // неразрывный пробел — внутри пометки: обычный пробел между элементами inline-flex схлопывается
+      .map((s) => `<span class="chip-static">${esc(SOON_LABELS[s] ?? s)}<span class="soon">&nbsp;— скоро</span></span>`)
       .join('\n      ');
     return `<section class="hub-group">
     <h2>${esc(g.title)}</h2>

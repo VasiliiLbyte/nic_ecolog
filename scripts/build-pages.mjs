@@ -3,9 +3,19 @@ import { execFileSync } from 'node:child_process';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { loadWave1Briefs, WAVE1_SLUGS } from './lib/parse-brief.mjs';
-import { renderHubPage, renderServicePage, setSiteOptions, WAVE1_SITEMAP_URLS } from './lib/service-page-template.mjs';
+import {
+  chromeBar,
+  footerBlock,
+  headBlock,
+  menuScript,
+  renderHubPage,
+  renderServicePage,
+  setSiteOptions,
+  WAVE1_SITEMAP_URLS,
+} from './lib/service-page-template.mjs';
 import { articlesByService, loadArticles, renderArticlePage, renderBlogHub } from './lib/blog-template.mjs';
 import { renderLabPage } from './lib/lab-template.mjs';
+import { renderMarkdown } from './lib/markdown.mjs';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const out = join(root, 'docs');
@@ -36,7 +46,33 @@ const METRIKA_SNIPPET = `<!-- Yandex.Metrika counter -->
 <noscript><div><img src="https://mc.yandex.ru/watch/${METRIKA_ID}" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
 <!-- /Yandex.Metrika counter -->`;
 
-function injectMetrika(html) {
+// Уведомление о cookie Метрики (2026-11-03, по политике конфиденциальности): плашка внизу слева, на телефоне — во всю ширину.
+// Скрыта до проверки localStorage, чтобы не мелькала у тех, кто уже нажал «Понятно»; без JS не показывается.
+const COOKIE_NOTE = `<div class="ck-note" id="ck-note" role="region" aria-label="Уведомление о cookie" hidden>
+  <p>Сайт использует cookie Яндекс Метрики для статистики посещаемости. Продолжая пользоваться сайтом, вы соглашаетесь с этим. Подробнее — в <a href="/privacy.html">политике конфиденциальности</a>.</p>
+  <button type="button" data-ck-ok>Понятно</button>
+</div>
+<style>
+.ck-note{position:fixed;left:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:150;display:flex;align-items:center;gap:20px;max-width:560px;padding:16px 20px;border-radius:8px;background:#FFFFFF;box-shadow:0 0 0 1px #E0E0E0,0 12px 32px -12px rgba(11,92,96,.35);font-family:'Onest',-apple-system,'Segoe UI',sans-serif;font-size:12px;line-height:16px;color:#444444}
+.ck-note[hidden]{display:none}
+.ck-note p{margin:0}
+.ck-note a{color:#0B5C60;text-underline-offset:2px}
+.ck-note button{flex:0 0 auto;min-width:120px;height:40px;padding:0 24px;border:0;border-radius:0;background:linear-gradient(90deg,#139EA1 0%,#1C6BA2 100%);color:#FFFFFF;font:inherit;cursor:pointer;transition:transform .2s ease,box-shadow .2s ease}
+.ck-note button:hover{transform:scale(1.01);box-shadow:inset 0 0 0 1px #1C6BA2}
+.ck-note button:focus-visible{outline:2px solid #139EA1;outline-offset:2px}
+@media(max-width:720px){.ck-note{left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom,0px));max-width:none;flex-direction:column;align-items:stretch;gap:12px;padding:16px}.ck-note button{height:44px}}
+</style>
+<script>(function(){var k='nic-cookie-ok',n=document.getElementById('ck-note');if(!n)return;try{if(localStorage.getItem(k))return;}catch(e){}n.hidden=false;n.querySelector('[data-ck-ok]').addEventListener('click',function(){n.hidden=true;try{localStorage.setItem(k,'1');}catch(e){}});})();</script>`;
+
+function injectCookieNote(html) {
+  if (html.includes('id="ck-note"')) return html;
+  const at = html.lastIndexOf('</body>');
+  return at < 0 ? html : `${html.slice(0, at)}${COOKIE_NOTE}\n${html.slice(at)}`;
+}
+
+// Метрика и уведомление о её cookie — на каждой странице сборки.
+function injectMetrika(page) {
+  const html = injectCookieNote(page);
   if (html.includes(`metrika/tag.js?id=${METRIKA_ID}`)) return html;
   if (html.includes('</head>')) {
     return html.replace('</head>', `${METRIKA_SNIPPET}\n</head>`);
@@ -59,7 +95,7 @@ function patchHome(html) {
   // «Блог» — последним пунктом меню шапки (как в макете Figma) и в колонке «Центр» подвала.
   // Якоря различаются отступом: в шапке 6 пробелов, в подвале 12.
   const withHeader = addBlogLink(
-    html.replaceAll('href="/privacy"', 'href="privacy.html"'),
+    html.replaceAll('href="/privacy"', 'href="privacy.html"').replaceAll('href="/soglasie"', 'href="soglasie.html"'),
     '\n      <a href="#kontakty">Контакты</a>',
     '      <a href="blog/">Блог</a>'
   );
@@ -88,35 +124,55 @@ function renderLab(homeHtml) {
   return renderLabPage({ homeCss: `${reveal.join('\n')}\n${homeHtml.slice(cssStart, cssEnd)}`, labCards });
 }
 
-const privacyHtml = `<!DOCTYPE html>
-<html lang="ru">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Политика конфиденциальности — НИЦ «Эколог»</title>
-  <meta name="description" content="Политика конфиденциальности НИЦ «Эколог».">
-  <link rel="canonical" href="https://nic-ecolog.ru/privacy.html">
-  <meta name="robots" content="noindex, follow">
-  <link rel="icon" type="image/png" href="assets/favicon-512.png">
-  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
-  <style>
-    body{margin:0;font-family:var(--font-body, 'Onest', sans-serif);background:#F7FBF9;color:#13282B;padding:48px 24px}
-    .wrap{max-width:720px;margin:0 auto}
-    h1{font-weight:300;font-size:clamp(28px,4vw,40px);margin:0 0 16px}
-    p{line-height:1.7;color:#51696B;margin:0 0 16px}
-    a{color:#139EA1}
-  </style>
-</head>
+// Юридические страницы — политика и согласие на обработку ПДн: оболочка страниц услуг (шапка, меню, подвал),
+// noindex и вне sitemap. Текст — content/<файл>.md. Пока в нём есть незаполненные поля [[…]]: у политики на сайт идёт
+// прежняя заглушка, у согласия сборка падает (формы ссылаются на него). PRIVACY_DRAFT=1 собирает черновики для превью.
+const legalDraft = process.env.PRIVACY_DRAFT === '1';
+function legalPage({ file, page, h1, description, stub }) {
+  const src = join(root, 'content', file);
+  const md = existsSync(src) ? readFileSync(src, 'utf8') : '';
+  const gaps = md.match(/\[\[[^\]]*\]\]/g) ?? [];
+  const ready = md && (!gaps.length || legalDraft);
+  if (gaps.length) console.warn(`${page}: в content/${file} незаполненных полей [[…]]: ${gaps.length} — ${legalDraft ? 'собран черновик (PRIVACY_DRAFT=1)' : 'на сайте заглушка'}`);
+  if (!ready && !stub) throw new Error(`${page}: нет готового текста в content/${file}`);
+  const main = ready
+    ? `<p class="eye">НИЦ «Эколог»</p>
+  <h1>${h1}</h1>
+  <article class="post">${renderMarkdown(md)}</article>`
+    : stub;
+  return `${headBlock({
+    title: `${h1} — НИЦ «Эколог»`,
+    description,
+    canonical: `https://nic-ecolog.ru/${page}`,
+    depth: 0,
+    robots: 'noindex, follow',
+  })}
 <body>
-  <div class="wrap">
-    <p style="font-family:'Stolzl','Onest',sans-serif;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#139EA1;margin-bottom:24px">Демо-версия</p>
-    <h1>Политика конфиденциальности</h1>
-    <p>Это демонстрационная страница для превью сайта. Полный текст политики будет опубликован на production-домене.</p>
-    <p><a href="index.html">← На главную</a></p>
-  </div>
+${chromeBar({ depth: 0, homeHref: 'index.html', crumbsHtml: `<a href="index.html">Главная</a> | <b>${h1}</b>` })}
+<main class="wrap">
+  ${main}
+</main>
+${footerBlock({ depth: 0, homeHref: 'index.html' })}
+${menuScript()}
 </body>
 </html>
 `;
+}
+const privacyHtml = legalPage({
+  file: 'privacy.md',
+  page: 'privacy.html',
+  h1: 'Политика конфиденциальности',
+  description: 'Политика конфиденциальности НИЦ «Эколог».',
+  stub: `<p class="eye">Демо-версия</p>
+  <h1>Политика конфиденциальности</h1>
+  <div class="lead"><p>Это демонстрационная страница для превью сайта. Полный текст политики будет опубликован на production-домене.</p></div>`,
+});
+const consentHtml = legalPage({
+  file: 'soglasie.md',
+  page: 'soglasie.html',
+  h1: 'Согласие на обработку персональных данных',
+  description: 'Согласие на обработку персональных данных при отправке заявки на сайте НИЦ «Эколог».',
+});
 
 rmSync(out, { recursive: true, force: true });
 mkdirSync(out, { recursive: true });
@@ -138,6 +194,7 @@ if (existsSync(join(root, 'api'))) {
 
 writeFileSync(join(out, '.nojekyll'), '');
 writeFileSync(join(out, 'privacy.html'), injectMetrika(privacyHtml));
+writeFileSync(join(out, 'soglasie.html'), injectMetrika(consentHtml));
 cpSync(join(root, 'yandex_23287c8f5d0b434c.html'), join(out, 'yandex_23287c8f5d0b434c.html'));
 
 // --- Wave-1 service pages (NIC-004 Phase A) ---
@@ -196,7 +253,7 @@ const uslugiSources = (path) => {
   return slug ? [TEMPLATE_SRC, briefSrc(slug)] : [TEMPLATE_SRC, ...WAVE1_SLUGS.map(briefSrc)];
 };
 
-// privacy.html is noindex, so it stays out of the sitemap.
+// privacy.html and soglasie.html are noindex, so they stay out of the sitemap.
 const sitemapPages = [
   { loc: `${SITE}/`, priority: '1.0', lastmod: lastmodFor([join(root, HOME_SRC)]) },
   { loc: `${SITE}/lab.html`, priority: '0.8', lastmod: lastmodFor([join(root, LAB_SRC)]) },

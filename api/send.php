@@ -44,8 +44,14 @@ $phone = trim((string)($data['phone'] ?? ''));
 $contact = trim((string)($data['contact'] ?? ''));
 $task = trim((string)($data['task'] ?? ''));
 $source = trim((string)($data['source'] ?? 'site'));
+// Отдельное согласие на обработку ПДн (флажок в форме, текст — /soglasie.html). Меняется текст согласия — поменять редакцию.
+$consent = ($data['consent'] ?? false) === true || ($data['consent'] ?? '') === 'on' || ($data['consent'] ?? '') === '1';
+const CONSENT_VERSION = '03.11.2026';
 
 $errors = [];
+if (!$consent) {
+  $errors[] = 'consent';
+}
 if (mb_strlen($name) < 2) {
   $errors[] = 'name';
 }
@@ -91,6 +97,7 @@ if ($task !== '') {
   $bodyLines[] = 'Задача: ' . $task;
 }
 $bodyLines[] = 'Источник: ' . $source;
+$bodyLines[] = 'Согласие на обработку ПДн: дано (флажок в форме), редакция от ' . CONSENT_VERSION . ', https://nic-ecolog.ru/soglasie.html';
 $bodyLines[] = 'IP: ' . $ip;
 $bodyLines[] = 'Время: ' . gmdate('Y-m-d H:i:s') . ' UTC';
 $body = implode("\n", $bodyLines);
