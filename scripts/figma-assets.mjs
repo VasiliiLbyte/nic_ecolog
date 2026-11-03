@@ -90,7 +90,10 @@ const GRAIN_EXPORTS = [
   { path: ['service-body', 'service-content', 'service-request', 'request-background'], frame: 'Услуга — СЗЗ — Desktop' },
 ];
 const GRAIN_TILE = 256; // показ 128 css-px
-const GRAIN_STEP = 8; // ступень альфы (0…255): шум с плавной альфой почти не сжимается, так плитка ≈ в 4 раза легче
+const GRAIN_STEP = 2; // ступень альфы (0…255): шум с плавной альфой почти не сжимается, ступенька уменьшает плитку
+// Сила зерна (2026-11-03, по скриншотам дизайнера «шум слишком сильный», выбор пользователя — 40 %): разброс альфы
+// вокруг средней ×GRAIN_CONTRAST, средняя (а значит тон фона, сверенный с Figma) не меняется: alpha' = m + k·(alpha − m).
+const GRAIN_CONTRAST = 0.4;
 
 const figPath = process.argv[2];
 const GRAIN_ONLY = process.argv.includes('--grain');
@@ -263,10 +266,13 @@ for (const { path, frame = FRAME } of GRAIN_EXPORTS) {
   };
   const px = Buffer.alloc(GRAIN_TILE * GRAIN_TILE * 4);
   const [r, g, b] = [noise.color.r, noise.color.g, noise.color.b].map((v) => Math.round(v * 255));
+  // средняя альфа модели: частица с n < density даёт a·n, иначе 0 → m = a·255·density²/2
+  const mean = noise.color.a * 255 * noise.density * noise.density / 2;
   for (let i = 0; i < GRAIN_TILE * GRAIN_TILE; i++) {
     const n = rnd();
-    if (n >= noise.density) continue;
-    px[i * 4] = r; px[i * 4 + 1] = g; px[i * 4 + 2] = b; px[i * 4 + 3] = Math.round((noise.color.a * n * 255) / GRAIN_STEP) * GRAIN_STEP;
+    const base = n < noise.density ? noise.color.a * n * 255 : 0;
+    const alpha = mean + GRAIN_CONTRAST * (base - mean);
+    px[i * 4] = r; px[i * 4 + 1] = g; px[i * 4 + 2] = b; px[i * 4 + 3] = Math.max(0, Math.min(255, Math.round(alpha / GRAIN_STEP) * GRAIN_STEP));
   }
   const raw = join(tmp, 'grain.rgba');
   writeFileSync(raw, px);

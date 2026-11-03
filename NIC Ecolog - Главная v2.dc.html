@@ -146,7 +146,11 @@ input::placeholder,textarea::placeholder{color:#6E8385}
 [data-rail-item].on-dark [data-rail-label]{color:#EAF3F2}
 [data-rail-item].on-dark.is-active [data-rail-label]{opacity:0.52;text-shadow:0 0 8px rgba(0,0,0,0.35)}
 [data-rail-tick]{position:relative;display:block;width:var(--rail-tick-w);height:var(--rail-tick-h);border-radius:2px;background:rgba(11,92,96,0.32);overflow:hidden;flex:0 0 auto;transition:width 0.35s var(--ease-out),background 0.3s ease}
-[data-rail-fill]{position:absolute;left:0;top:0;height:100%;width:0%;border-radius:2px;background:var(--grad-rail-fill);transition:width 0.18s linear}
+[data-rail-fill]{position:absolute;left:0;top:0;height:100%;width:0%;border-radius:2px;background:var(--grad-rail-fill);transition:width 0.35s var(--ease-out)}
+/* Полоса прогресса по треку: от метки к метке, доходит до следующей ровно когда начинается её раздел (высоту ведёт _updateRail через rAF) */
+[data-rail-progress]{position:absolute;right:-0.5px;top:0;width:2px;height:0;border-radius:1px;background:linear-gradient(180deg,#139EA1,#1C6BA2);pointer-events:none;transition:background 0.3s ease}
+[data-rail-progress].on-dark{background:linear-gradient(180deg,#ADCF7A,#139EA1)}
+[data-rail-item].is-active [data-rail-fill]{width:100%}
 [data-rail-item].is-active [data-rail-tick]{width:var(--rail-tick-w-active);background:rgba(11,92,96,0.22)}
 [data-rail-item].is-past [data-rail-tick]{background:rgba(11,92,96,0.50)}
 [data-rail-item].is-past [data-rail-fill]{width:100%;opacity:1;background:rgba(11,92,96,0.50)}
@@ -1127,6 +1131,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
   <nav data-rail="true" aria-label="Навигация по разделам">
     <div data-rail-shell="true">
       <div data-rail-track="true" aria-hidden="true"></div>
+      <div data-rail-progress="true" aria-hidden="true"></div>
       <a data-rail-item="true" data-rail-target="top" href="#top" aria-label="Перейти к разделу: Главная"><span data-rail-label="true">Главная</span><span data-rail-tick="true"><span data-rail-fill="true"></span></span></a>
       <a data-rail-item="true" data-rail-target="o-centre" href="#o-centre" aria-label="Перейти к разделу: О центре"><span data-rail-label="true">О центре</span><span data-rail-tick="true"><span data-rail-fill="true"></span></span></a>
       <a data-rail-item="true" data-rail-target="pochemu" href="#pochemu" aria-label="Перейти к разделу: Почему мы"><span data-rail-label="true">Почему мы</span><span data-rail-tick="true"><span data-rail-fill="true"></span></span></a>
@@ -1465,37 +1470,81 @@ class Component extends DCLogic {
       sec: document.getElementById(el.getAttribute('data-rail-target')),
       dark: el.getAttribute('data-rail-dark') === '1'
     }));
-    // Точка чтения r идёт от верха документа (в начале) до его низа (в конце прокрутки): r = scrollY + vh·(scrollY / maxScroll).
-    // Активна последняя секция, чей верх уже пройден; её метка заполняется от её верха до верха следующей —
-    // заполнение непрерывно, в начале всё пусто, в конце всё заполнено.
-    this._updateRail = () => {
-      if (!rail || !railData.length) return;
+    // Точка чтения r — линия на 35 % высоты окна; в первом экране она плавно выезжает от верха документа (шкала стартует пустой),
+    // в последнем — доезжает до его низа (последние короткие разделы тоже становятся активными, в конце шкала заполнена).
+    // Позиция на шкале T = i + p: i — последний раздел, чей верх пройден, p — доля пути от его верха до верха следующего.
+    // Полоса прогресса по треку идёт от метки i к метке i+1 пропорционально p — одинаковый путь между любыми соседними
+    // разделами, к следующей метке приходит ровно в начале её раздела. Показ сглажен по кадрам (rAF, τ ≈ 120 мс),
+    // без CSS-переходов на каждое событие прокрутки — отсюда были рывки.
+    const progress = document.querySelector('[data-rail-progress]');
+    const railReduced = reduced;
+    let tickY = [];
+    let shown = -1;
+    let target = 0;
+    let raf = 0;
+    let lastT = 0;
+    const measureTicks = () => {
+      tickY = railData.map((d) => {
+        const t = d.el.querySelector('[data-rail-tick]') || d.el;
+        return d.el.offsetTop + t.offsetTop + t.offsetHeight / 2;
+      });
+    };
+    const computeTarget = () => {
       const doc = document.documentElement;
       const maxScroll = Math.max(1, doc.scrollHeight - window.innerHeight);
       const y = Math.max(0, Math.min(maxScroll, window.scrollY));
-      const r = y + window.innerHeight * (y / maxScroll);
+      const vh = window.innerHeight;
+      const head = Math.min(1, y / vh);
+      const tail = Math.max(0, Math.min(1, (y - (maxScroll - vh)) / vh));
+      const r = y + vh * (0.35 * head + 0.65 * tail);
       const tops = railData.map((d) => d.sec ? d.sec.getBoundingClientRect().top + window.scrollY : Infinity);
       tops[0] = 0;
-      let active = 0;
-      for (let i = 0; i < railData.length; i++) if (tops[i] !== Infinity && r >= tops[i]) active = i;
+      let i = 0;
+      for (let k = 0; k < railData.length; k++) if (tops[k] !== Infinity && r >= tops[k]) i = k;
+      if (i >= railData.length - 1) return railData.length - 1;
+      let end = doc.scrollHeight;
+      for (let j = i + 1; j < railData.length; j++) if (tops[j] !== Infinity) { end = tops[j]; break; }
+      return i + Math.max(0, Math.min(1, (r - tops[i]) / Math.max(1, end - tops[i])));
+    };
+    const render = (v) => {
+      const n = railData.length;
+      const active = Math.min(n - 1, Math.floor(v + 1e-4));
+      if (progress && tickY.length) {
+        const f = v - active;
+        const yEnd = active < n - 1 ? tickY[active] + (tickY[active + 1] - tickY[active]) * f : tickY[n - 1];
+        progress.style.top = tickY[0].toFixed(1) + 'px';
+        progress.style.height = Math.max(0, yEnd - tickY[0]).toFixed(1) + 'px';
+      }
       railData.forEach((d, i) => {
-        let p = 0;
-        if (i < active) p = 1;
-        else if (i === active) {
-          let end = doc.scrollHeight;
-          for (let j = i + 1; j < railData.length; j++) if (tops[j] !== Infinity) { end = tops[j]; break; }
-          p = Math.max(0, Math.min(1, (r - tops[i]) / Math.max(1, end - tops[i])));
-        }
-        if (d.fill) d.fill.style.width = (p * 100).toFixed(1) + '%';
+        if (d.fill) d.fill.style.width = '';
         d.el.classList.toggle('is-active', i === active);
         d.el.classList.toggle('is-past', i < active);
         if (i === active) d.el.setAttribute('aria-current', 'true');
         else d.el.removeAttribute('aria-current');
       });
-      // светлыми становятся только те метки, под которыми действительно тёмная секция
+      // светлыми становятся только те метки, под которыми действительно тёмная секция; полоса — по её концу
       const darkBoxes = railData.filter((d) => d.dark && d.sec).map((d) => d.sec.getBoundingClientRect());
-      railData.forEach((d) => { const r = d.el.getBoundingClientRect(), y = r.top + r.height / 2; d.el.classList.toggle('on-dark', darkBoxes.some((bx) => bx.top <= y && bx.bottom >= y)); });
+      const isDark = (yy) => darkBoxes.some((bx) => bx.top <= yy && bx.bottom >= yy);
+      railData.forEach((d) => { const rr = d.el.getBoundingClientRect(); d.el.classList.toggle('on-dark', isDark(rr.top + rr.height / 2)); });
+      if (progress) { const pr = progress.getBoundingClientRect(); progress.classList.toggle('on-dark', isDark(pr.bottom)); }
     };
+    const step = (t) => {
+      const dt = lastT ? Math.min(64, t - lastT) : 16;
+      lastT = t;
+      shown += (target - shown) * (1 - Math.exp(-dt / 120));
+      if (Math.abs(target - shown) < 0.0005) shown = target;
+      render(shown);
+      raf = shown === target ? 0 : requestAnimationFrame(step);
+      if (!raf) lastT = 0;
+    };
+    this._updateRail = (opts) => {
+      if (!rail || !railData.length) return;
+      if (!tickY.length || (opts && opts.remeasure)) measureTicks();
+      target = computeTarget();
+      if (railReduced || shown < 0) { shown = target; render(shown); return; }
+      if (!raf) raf = requestAnimationFrame(step);
+    };
+    this._stopRail = () => { if (raf) cancelAnimationFrame(raf); raf = 0; };
 
     // --- Шапка уплотняется при скролле ---
     const header = document.getElementById('eco-header');
@@ -1514,7 +1563,7 @@ class Component extends DCLogic {
       if (this._updateChroma) this._updateChroma();
     };
     window.addEventListener('scroll', this._onScroll, { passive: true });
-    this._onResize = () => { if (this._updateRail) this._updateRail(); };
+    this._onResize = () => { if (this._updateRail) this._updateRail({ remeasure: true }); };
     window.addEventListener('resize', this._onResize, { passive: true });
     this._onScroll();
 
@@ -1831,6 +1880,7 @@ class Component extends DCLogic {
       window.removeEventListener('load', this._onMotion);
     }
     if (this._stopHeroVideo) this._stopHeroVideo();
+    if (this._stopRail) this._stopRail();
     document.body.style.overflow = '';
   }
 
