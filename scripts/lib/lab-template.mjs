@@ -142,8 +142,10 @@ if(form)form.addEventListener('submit',function(e){
  var v=function(id){var el=document.getElementById(id);return (el&&el.value||'').trim();};
  var name=v('lab-name'),contact=v('lab-contact-field'),task=v('lab-task');
  if(name.length<2||!contact){alert('Заполните имя и контакт для ответа.');return;}
+ var consent=document.getElementById('lab-consent');
+ if(!consent||!consent.checked){if(consent){consent.setAttribute('aria-invalid','true');consent.focus();consent.addEventListener('change',function(){consent.removeAttribute('aria-invalid');},{once:true});}alert('Отметьте согласие на обработку персональных данных.');return;}
  var btn=form.querySelector('button[type="submit"]');if(btn){btn.disabled=true;}
- fetch('/api/send.php',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:name,contact:contact,task:task,source:'lab',website:''})})
+ fetch('/api/send.php',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:name,contact:contact,task:task,source:'lab',consent:true,website:''})})
  .then(function(r){return r.json().then(function(j){return r.ok&&j&&j.ok;});})
  .then(function(ok){
   if(!ok)throw new Error('fail');
@@ -257,8 +259,8 @@ ${chromeBar({ depth: 0, homeHref: 'index.html', crumbsHtml: '' })}
               <div class="f-field"><label for="lab-task">Что нужно исследовать</label><textarea id="lab-task" name="task" placeholder="Например: анализ сточной воды по 12 показателям, выезд на объект в Колпино" required></textarea></div>
             </div>
             <div class="f-form-actions">
+              <label class="f-check" for="lab-consent"><input id="lab-consent" name="consent" type="checkbox" required aria-required="true"><span>Я даю <a href="soglasie.html">согласие на обработку персональных данных</a> и принимаю <a href="privacy.html">политику конфиденциальности</a></span></label>
               <button type="submit" class="f-btn f-btn--sm">Получить предложение</button>
-              <p class="f-consent">Нажимая кнопку, вы соглашаетесь с <a href="privacy.html">политикой конфиденциальности</a>.</p>
             </div>
           </form>
         </div>

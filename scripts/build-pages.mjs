@@ -95,7 +95,7 @@ function patchHome(html) {
   // «Блог» — последним пунктом меню шапки (как в макете Figma) и в колонке «Центр» подвала.
   // Якоря различаются отступом: в шапке 6 пробелов, в подвале 12.
   const withHeader = addBlogLink(
-    html.replaceAll('href="/privacy"', 'href="privacy.html"'),
+    html.replaceAll('href="/privacy"', 'href="privacy.html"').replaceAll('href="/soglasie"', 'href="soglasie.html"'),
     '\n      <a href="#kontakty">Контакты</a>',
     '      <a href="blog/">Блог</a>'
   );
@@ -124,40 +124,55 @@ function renderLab(homeHtml) {
   return renderLabPage({ homeCss: `${reveal.join('\n')}\n${homeHtml.slice(cssStart, cssEnd)}`, labCards });
 }
 
-// Политика — в оболочке страниц услуг (шапка, меню, подвал), noindex и вне sitemap, как раньше.
-// Текст — content/privacy.md. Пока в нём есть незаполненные поля [[…]], на сайт идёт прежняя заглушка;
-// PRIVACY_DRAFT=1 собирает черновик — только для локального превью, не для прода.
-const PRIVACY_SRC = join(root, 'content', 'privacy.md');
-const privacyMd = existsSync(PRIVACY_SRC) ? readFileSync(PRIVACY_SRC, 'utf8') : '';
-const privacyGaps = privacyMd.match(/\[\[[^\]]*\]\]/g) ?? [];
-const privacyDraft = process.env.PRIVACY_DRAFT === '1';
-if (privacyGaps.length) {
-  console.warn(`privacy.html: в content/privacy.md незаполненных полей [[…]]: ${privacyGaps.length} — ${privacyDraft ? 'собран черновик (PRIVACY_DRAFT=1)' : 'на сайте остаётся заглушка'}`);
-}
-const privacyMain = privacyMd && (!privacyGaps.length || privacyDraft)
-  ? `<p class="eye">НИЦ «Эколог»</p>
-  <h1>Политика конфиденциальности</h1>
-  <article class="post">${renderMarkdown(privacyMd)}</article>`
-  : `<p class="eye">Демо-версия</p>
-  <h1>Политика конфиденциальности</h1>
-  <div class="lead"><p>Это демонстрационная страница для превью сайта. Полный текст политики будет опубликован на production-домене.</p></div>`;
-const privacyHtml = `${headBlock({
-  title: 'Политика конфиденциальности — НИЦ «Эколог»',
-  description: 'Политика конфиденциальности НИЦ «Эколог».',
-  canonical: 'https://nic-ecolog.ru/privacy.html',
-  depth: 0,
-  robots: 'noindex, follow',
-})}
+// Юридические страницы — политика и согласие на обработку ПДн: оболочка страниц услуг (шапка, меню, подвал),
+// noindex и вне sitemap. Текст — content/<файл>.md. Пока в нём есть незаполненные поля [[…]]: у политики на сайт идёт
+// прежняя заглушка, у согласия сборка падает (формы ссылаются на него). PRIVACY_DRAFT=1 собирает черновики для превью.
+const legalDraft = process.env.PRIVACY_DRAFT === '1';
+function legalPage({ file, page, h1, description, stub }) {
+  const src = join(root, 'content', file);
+  const md = existsSync(src) ? readFileSync(src, 'utf8') : '';
+  const gaps = md.match(/\[\[[^\]]*\]\]/g) ?? [];
+  const ready = md && (!gaps.length || legalDraft);
+  if (gaps.length) console.warn(`${page}: в content/${file} незаполненных полей [[…]]: ${gaps.length} — ${legalDraft ? 'собран черновик (PRIVACY_DRAFT=1)' : 'на сайте заглушка'}`);
+  if (!ready && !stub) throw new Error(`${page}: нет готового текста в content/${file}`);
+  const main = ready
+    ? `<p class="eye">НИЦ «Эколог»</p>
+  <h1>${h1}</h1>
+  <article class="post">${renderMarkdown(md)}</article>`
+    : stub;
+  return `${headBlock({
+    title: `${h1} — НИЦ «Эколог»`,
+    description,
+    canonical: `https://nic-ecolog.ru/${page}`,
+    depth: 0,
+    robots: 'noindex, follow',
+  })}
 <body>
-${chromeBar({ depth: 0, homeHref: 'index.html', crumbsHtml: '<a href="index.html">Главная</a> | <b>Политика конфиденциальности</b>' })}
+${chromeBar({ depth: 0, homeHref: 'index.html', crumbsHtml: `<a href="index.html">Главная</a> | <b>${h1}</b>` })}
 <main class="wrap">
-  ${privacyMain}
+  ${main}
 </main>
 ${footerBlock({ depth: 0, homeHref: 'index.html' })}
 ${menuScript()}
 </body>
 </html>
 `;
+}
+const privacyHtml = legalPage({
+  file: 'privacy.md',
+  page: 'privacy.html',
+  h1: 'Политика конфиденциальности',
+  description: 'Политика конфиденциальности НИЦ «Эколог».',
+  stub: `<p class="eye">Демо-версия</p>
+  <h1>Политика конфиденциальности</h1>
+  <div class="lead"><p>Это демонстрационная страница для превью сайта. Полный текст политики будет опубликован на production-домене.</p></div>`,
+});
+const consentHtml = legalPage({
+  file: 'soglasie.md',
+  page: 'soglasie.html',
+  h1: 'Согласие на обработку персональных данных',
+  description: 'Согласие на обработку персональных данных при отправке заявки на сайте НИЦ «Эколог».',
+});
 
 rmSync(out, { recursive: true, force: true });
 mkdirSync(out, { recursive: true });
@@ -179,6 +194,7 @@ if (existsSync(join(root, 'api'))) {
 
 writeFileSync(join(out, '.nojekyll'), '');
 writeFileSync(join(out, 'privacy.html'), injectMetrika(privacyHtml));
+writeFileSync(join(out, 'soglasie.html'), injectMetrika(consentHtml));
 cpSync(join(root, 'yandex_23287c8f5d0b434c.html'), join(out, 'yandex_23287c8f5d0b434c.html'));
 
 // --- Wave-1 service pages (NIC-004 Phase A) ---
@@ -237,7 +253,7 @@ const uslugiSources = (path) => {
   return slug ? [TEMPLATE_SRC, briefSrc(slug)] : [TEMPLATE_SRC, ...WAVE1_SLUGS.map(briefSrc)];
 };
 
-// privacy.html is noindex, so it stays out of the sitemap.
+// privacy.html and soglasie.html are noindex, so they stay out of the sitemap.
 const sitemapPages = [
   { loc: `${SITE}/`, priority: '1.0', lastmod: lastmodFor([join(root, HOME_SRC)]) },
   { loc: `${SITE}/lab.html`, priority: '0.8', lastmod: lastmodFor([join(root, LAB_SRC)]) },

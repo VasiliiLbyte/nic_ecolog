@@ -488,8 +488,12 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
 .f-field input:focus,.f-field textarea:focus{border-color:var(--f-teal);box-shadow:0 0 0 3px rgba(19,158,161,0.15)}
 .f-field input::placeholder,.f-field textarea::placeholder{color:var(--f-muted)}
 .f-form-actions{display:flex;flex-direction:column;align-items:flex-start;gap:12px;margin-top:8px}
-.f-consent{margin:0;font-family:'Onest',sans-serif;font-weight:400;font-size:12px;line-height:16px;color:var(--f-teal)}
-.f-consent a{color:inherit}
+/* Согласие на обработку ПДн — отдельный флажок (152-ФЗ с 01.09.2025), по умолчанию не отмечен; общий и для формы lab.html */
+.f-check{display:flex;align-items:flex-start;gap:10px;margin:0;font-family:'Onest',sans-serif;font-weight:400;font-size:12px;line-height:16px;color:var(--f-text);cursor:pointer}
+.f-check input{flex:0 0 auto;width:16px;height:16px;margin:0;-webkit-appearance:none;appearance:none;border:1px solid var(--f-blue);border-radius:0;background:#FFFFFF center/12px 12px no-repeat;cursor:pointer;transition:background-color 0.2s ease,border-color 0.2s ease}
+.f-check input:checked{border-color:var(--f-teal);background-color:var(--f-teal);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2.5 6.2l2.3 2.3 4.7-4.9' fill='none' stroke='%23fff' stroke-width='1.6'/%3E%3C/svg%3E")}
+.f-check input[aria-invalid="true"]{border-color:#B23B3B}
+.f-check a{color:var(--f-heading);text-underline-offset:2px}
 
 /* Подвал — по макету: #0B5C60 + размытые пятна (слой footer-background-art), раскладка и типографика по макету */
 #kontakty{padding:64px 48px 85px;background:url('./assets/figma/grain-a25-d80.webp') 0 0/128px 128px repeat,#0B5C60 url('./assets/figma/bg-footer.webp') center top/cover no-repeat;background-blend-mode:overlay,normal;color:#FFFFFF;scroll-margin-top:80px}
@@ -651,6 +655,8 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
   .f-field input{height:44px;font-size:16px}
   .f-field textarea{height:96px;font-size:16px}
   .f-form-actions .f-btn{width:100%;height:44px}
+  .f-check{gap:12px}
+  .f-check input{width:20px;height:20px;background-size:14px 14px}
   #kontakty{padding:32px 20px;background-image:url('./assets/figma/grain-a15-d80.webp'),url('./assets/figma/bg-footer-mobile.webp');background-blend-mode:normal}
   .f-foot__top{gap:32px}
   .f-foot__brand{flex-basis:auto}
@@ -1119,8 +1125,8 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
               </div>
               <p id="eco-form-error" role="alert" aria-live="assertive" style="display:none;margin:0;font-size:13px;line-height:1.5;color:#B23B3B;background:rgba(178,59,59,0.08);border:1px solid rgba(178,59,59,0.28);border-radius:4px;padding:12px 14px"></p>
               <div class="f-form-actions">
+                <label class="f-check" for="f-consent"><input id="f-consent" name="consent" type="checkbox" required="required" aria-required="true"><span>Я даю <a href="/soglasie">согласие на обработку персональных данных</a> и принимаю <a href="/privacy">политику конфиденциальности</a></span></label>
                 <button type="submit" class="f-btn f-btn--sm">Отправить заявку</button>
-                <p class="f-consent">Нажимая кнопку, вы соглашаетесь с <a href="/privacy">политикой конфиденциальности</a>.</p>
               </div>
             </div>
             <div id="eco-form-ok" style="display:none;flex-direction:column;justify-content:center;gap:14px;min-height:300px">
@@ -1625,6 +1631,7 @@ class Component extends DCLogic {
       const errBox = document.getElementById('eco-form-error');
       const nameEl = document.getElementById('f-name');
       const phoneEl = document.getElementById('f-phone');
+      const consentEl = document.getElementById('f-consent');
       const markInvalid = (el, on) => {
         if (!el) return;
         if (on) { el.setAttribute('aria-invalid', 'true'); el.style.borderColor = '#B23B3B'; }
@@ -1633,6 +1640,7 @@ class Component extends DCLogic {
       [nameEl, phoneEl].forEach((el) => {
         if (el) el.addEventListener('input', () => { if (el.value.trim()) markInvalid(el, false); });
       });
+      if (consentEl) consentEl.addEventListener('change', () => { if (consentEl.checked) consentEl.removeAttribute('aria-invalid'); });
       form.addEventListener('submit', async (e) => {
         e.preventDefault();
         const errors = [];
@@ -1643,12 +1651,15 @@ class Component extends DCLogic {
         markInvalid(phoneEl, !phoneOk);
         if (!nameOk) errors.push('укажите имя');
         if (!phoneOk) errors.push('укажите корректный телефон');
+        const consentOk = !!(consentEl && consentEl.checked);
+        if (consentEl) { if (consentOk) consentEl.removeAttribute('aria-invalid'); else consentEl.setAttribute('aria-invalid', 'true'); }
+        if (!consentOk) errors.push('отметьте согласие на обработку персональных данных');
         if (errors.length) {
           if (errBox) {
             errBox.textContent = 'Проверьте поля: ' + errors.join(', ') + '.';
             errBox.style.display = 'block';
           }
-          const firstBad = !nameOk ? nameEl : phoneEl;
+          const firstBad = !nameOk ? nameEl : !phoneOk ? phoneEl : consentEl;
           if (firstBad && firstBad.focus) firstBad.focus();
           return;
         }
@@ -1665,6 +1676,7 @@ class Component extends DCLogic {
               phone: phoneEl.value.trim(),
               task: taskEl ? taskEl.value.trim() : '',
               source: 'home',
+              consent: consentEl.checked,
               website: ''
             })
           });
