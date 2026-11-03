@@ -226,7 +226,6 @@ function navLinks({ uslugiHref, prefix, homeHref }) {
     { href: `${homeHref}#proekty`, label: 'Проекты' },
     { href: `${homeHref}#o-centre`, label: 'О центре' },
     { href: `${homeHref}#esg`, label: 'ESG' },
-    { href: `${homeHref}#litsenzii`, label: 'Лицензии' },
     { href: `${homeHref}#kontakty`, label: 'Контакты' },
     ...(siteOptions.hasBlog ? [{ href: `${prefix}blog/`, label: 'Блог' }] : []),
   ];
@@ -313,8 +312,7 @@ export function footerBlock({ depth, homeHref = '/', uslugiHref: uslugiOverride 
           <a href="${homeHref}#o-centre">О центре</a>
           <a href="${prefix}lab.html">Лаборатория «Аналитик Лаб»</a>
           <a href="${homeHref}#proekty">Проекты</a>
-          <a href="${homeHref}#esg">ESG</a>
-          <a href="${homeHref}#litsenzii">Лицензии</a>${siteOptions.hasBlog ? `
+          <a href="${homeHref}#esg">ESG</a>${siteOptions.hasBlog ? `
           <a href="${prefix}blog/">Блог</a>` : ''}
         </nav>
         <div class="ft-col">

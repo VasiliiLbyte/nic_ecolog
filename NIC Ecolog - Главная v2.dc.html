@@ -328,6 +328,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
 .f-flow__step{display:inline-flex;align-items:center;height:35px;padding:0 12px;border-radius:5px;background:rgba(255,255,255,0.1);font-size:12px;line-height:16px;white-space:nowrap;color:#FFFFFF}
 .f-flow__step--final{background:rgba(173,207,122,0.2)}
 .f-flow__arrow{display:block;flex:0 0 auto;width:10px;height:10px}
+.f-lab__meta a{color:inherit;text-decoration:underline;text-underline-offset:3px}
 .f-lab__meta{margin:0;font-size:12px;line-height:16px;color:var(--f-green-l);white-space:pre-wrap}
 .f-lab__grid{flex:0 0 416px;display:grid;grid-template-columns:repeat(2,200px);gap:16px;margin-top:87px}
 .f-lab__card{height:199px;padding:20px;border-radius:5px;background:rgba(255,255,255,0.1)}
@@ -459,21 +460,10 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
 .f-quote figcaption span:first-child{font-size:12px;line-height:16px;color:var(--f-text)}
 .f-quote figcaption span:last-child{font-size:12px;line-height:16px;text-transform:uppercase;color:var(--f-text)}
 
-/* Лицензии и документы */
-.f-docs .f-intro__row{grid-template-columns:minmax(0,644px) minmax(0,1fr)}
-.f-docs .f-intro__row>.f-h2{max-width:644px}
-.f-docs .f-intro__row>.f-lead{max-width:360px;padding-top:11px}
-.f-docs-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:58px}
-.f-doc{display:flex;flex-direction:column;background:#FFFFFF;text-decoration:none;color:inherit}
-.f-doc__preview{height:128px;border:1px solid var(--f-border);background:#FFFFFF}
-.f-doc__copy{display:flex;flex-direction:column;gap:13px;flex:1;padding:16px}
-.f-doc__meta{font-size:12px;line-height:16px;text-transform:uppercase;color:var(--f-heading)}
-.f-doc__title{font-size:12px;line-height:16px;font-weight:400;color:var(--f-primary)}
-.f-doc__action{margin-top:auto;font-size:12px;line-height:16px;color:var(--f-heading)}
-a.f-doc:hover .f-doc__preview{border-color:var(--f-teal)}
-.f-docs-note{margin:24px 0 0;font-size:12px;line-height:16px;color:var(--f-text)}
 
 /* Заявка */
+/* «Клиенты» и «Заявка» — обе на белом и идут подряд (раздел «Лицензии и документы» между ними убран 2026-11-03): без двойного отступа */
+#klienty + #zayavka{padding-top:0}
 .f-request{display:grid;grid-template-columns:1fr 1fr;border-radius:8px;overflow:hidden}
 .f-request__panel{padding:32px 32px 112px;background:url('./assets/figma/grain-a25-d90.webp') 0 0/128px 128px repeat,linear-gradient(135deg,var(--f-teal),var(--f-blue));background-blend-mode:overlay,normal;color:#FFFFFF}
 .f-request__panel .f-h2{color:#FFFFFF}
@@ -519,7 +509,7 @@ a.f-doc:hover .f-doc__preview{border-color:var(--f-teal)}
 @media (max-width:1060px){
   .f-nav,.f-head-phone{display:none !important}
   .f-burger{display:flex !important}
-  .f-intro__row,.f-docs .f-intro__row{grid-template-columns:1fr;gap:20px}
+  .f-intro__row{grid-template-columns:1fr;gap:20px}
   .f-intro__row>.f-lead{padding-top:0;max-width:520px}
   .f-why{grid-template-columns:repeat(2,1fr)}
   .f-stats{grid-template-columns:repeat(2,1fr);row-gap:32px}
@@ -536,7 +526,7 @@ a.f-doc:hover .f-doc__preview{border-color:var(--f-teal)}
   .f-steps{grid-template-columns:repeat(3,1fr);row-gap:40px}
   .f-data{flex-direction:column;gap:64px}
   .f-data__content,.f-data__visual{flex-basis:auto;width:100%}
-  .f-logos,.f-docs-grid{grid-template-columns:repeat(2,1fr)}
+  .f-logos{grid-template-columns:repeat(2,1fr)}
   .f-quotes{grid-template-columns:1fr}
   .f-request{grid-template-columns:1fr}
   .f-foot__top{flex-direction:column;gap:40px}
@@ -562,8 +552,7 @@ a.f-doc:hover .f-doc__preview{border-color:var(--f-teal)}
   .f-lead--narrow{max-width:none !important}
   .f-lead--why{max-width:226px !important}
   .f-intro{gap:24px}
-  .f-intro__row,.f-docs .f-intro__row{gap:20px}
-  .f-docs .f-intro__row>.f-lead{padding-top:0}
+  .f-intro__row{gap:20px}
   #top{padding:104px 20px 22px}
   .f-hero__wave{left:calc(50% - 523px);top:68px;width:1681px;height:670px}
   .f-hero__eyebrow{font-size:14px;line-height:20px;font-weight:500}
@@ -645,9 +634,6 @@ a.f-doc:hover .f-doc__preview{border-color:var(--f-teal)}
   .f-quote__body{padding:16px;gap:20px;min-height:0}
   .f-quote{padding-bottom:24px}
   .f-quote blockquote{color:var(--f-primary)}
-  .f-docs-grid{grid-template-columns:1fr;margin-top:42px;padding-bottom:10px}
-  .f-doc__copy{gap:8px}
-  .f-doc__title{font-weight:400}
   .f-request__panel{padding:24px;background-image:url('./assets/figma/grain-a10-d100.webp'),linear-gradient(135deg,var(--f-teal),var(--f-blue));background-blend-mode:normal}
   .f-request__panel .f-lead{margin-top:20px}
   #eco-form{padding:24px}
@@ -749,7 +735,6 @@ a.f-doc:hover .f-doc__preview{border-color:var(--f-teal)}
       <a href="#proekty">Проекты</a>
       <a href="#o-centre">О центре</a>
       <a href="#esg">ESG</a>
-      <a href="#litsenzii">Лицензии</a>
       <a href="#kontakty">Контакты</a>
     </nav>
     <div class="f-head-actions">
@@ -849,7 +834,7 @@ a.f-doc:hover .f-doc__preview{border-color:var(--f-teal)}
             <svg class="f-flow__arrow" viewBox="0 0 10 10" aria-hidden="true"><path d="M0 5H9M5.5 1.5L9 5L5.5 8.5" fill="none" stroke="#ADCF7A" stroke-width="1"/></svg>
             <span class="f-flow__step f-flow__step--final">Согласование</span>
           </div>
-          <p class="f-lab__meta" data-rv="true">АТТЕСТАТ RA.RU.516478    |    РЕЕСТР АККРЕДИТОВАННЫХ ЛИЦ</p>
+          <p class="f-lab__meta" data-rv="true"><a href="assets/docs/attestat-akkreditacii.pdf" download>АТТЕСТАТ RA.RU.516478</a>    |    РЕЕСТР АККРЕДИТОВАННЫХ ЛИЦ</p>
           <a class="f-btn f-btn--green" href="lab.html" data-rv="true">Страница лаборатории</a>
         </div>
         <div class="f-lab__grid">
@@ -1098,37 +1083,6 @@ a.f-doc:hover .f-doc__preview{border-color:var(--f-teal)}
       </div>
     </section>
 
-    <!-- ЛИЦЕНЗИИ И ДОКУМЕНТЫ -->
-    <section id="litsenzii" class="f-sec f-sec--alt f-docs" data-screen-label="Лицензии и документы" data-sec="true">
-      <div class="f-wrap">
-        <div class="f-intro">
-          <p class="f-eyebrow" data-rv="true">Лицензии и документы</p>
-          <div class="f-intro__row">
-            <h2 class="f-h2" data-rv="true">Аккредитация и разрешения — открыто</h2>
-            <p class="f-lead" data-rv="true">Работаем в реестре аккредитованных лиц.<br><br>Аттестаты, выписки и сертификаты доступны для скачивания.</p>
-          </div>
-        </div>
-        <div class="f-docs-grid">
-          <a class="f-doc" href="assets/docs/attestat-akkreditacii.pdf" download data-rv="true">
-            <span class="f-doc__preview" aria-hidden="true"></span>
-            <span class="f-doc__copy"><span class="f-doc__meta">RA.RU.516478&nbsp;|&nbsp;25.12.2025</span><span class="f-doc__title">Аттестат аккредитации лаборатории «Аналитик Лаб»</span><span class="f-doc__action">СКАЧАТЬ PDF ↓</span></span>
-          </a>
-          <div class="f-doc" data-rv="true">
-            <span class="f-doc__preview" aria-hidden="true"></span>
-            <span class="f-doc__copy"><span class="f-doc__meta">Реестр</span><span class="f-doc__title">Выписка из реестра аккредитованных лиц</span><span class="f-doc__action">ПО ЗАПРОСУ</span></span>
-          </div>
-          <div class="f-doc" data-rv="true">
-            <span class="f-doc__preview" aria-hidden="true"></span>
-            <span class="f-doc__copy"><span class="f-doc__meta">Лицензия</span><span class="f-doc__title">Лицензия на обращение с отходами I–IV классов</span><span class="f-doc__action">ПО ЗАПРОСУ</span></span>
-          </div>
-          <div class="f-doc" data-rv="true">
-            <span class="f-doc__preview" aria-hidden="true"></span>
-            <span class="f-doc__copy"><span class="f-doc__meta">Сертификаты</span><span class="f-doc__title">Сертификаты системы менеджмента (ISO 9001, 14001)</span><span class="f-doc__action">ПО ЗАПРОСУ</span></span>
-          </div>
-        </div>
-        <p class="f-docs-note" data-rv="true">Актуальные версии документов публикуются по мере обновления аккредитаций.</p>
-      </div>
-    </section>
 
     <!-- ЗАЯВКА -->
     <section id="zayavka" class="f-sec" data-screen-label="Форма заявки" data-sec="true">
@@ -1182,7 +1136,6 @@ a.f-doc:hover .f-doc__preview{border-color:var(--f-teal)}
       <a data-rail-item="true" data-rail-target="protsess" href="#protsess" aria-label="Перейти к разделу: Процесс"><span data-rail-label="true">Процесс</span><span data-rail-tick="true"><span data-rail-fill="true"></span></span></a>
       <a data-rail-item="true" data-rail-target="esg" data-rail-dark="1" href="#esg" aria-label="Перейти к разделу: ESG"><span data-rail-label="true">ESG</span><span data-rail-tick="true"><span data-rail-fill="true"></span></span></a>
       <a data-rail-item="true" data-rail-target="klienty" href="#klienty" aria-label="Перейти к разделу: Клиенты"><span data-rail-label="true">Клиенты</span><span data-rail-tick="true"><span data-rail-fill="true"></span></span></a>
-      <a data-rail-item="true" data-rail-target="litsenzii" href="#litsenzii" aria-label="Перейти к разделу: Лицензии"><span data-rail-label="true">Лицензии</span><span data-rail-tick="true"><span data-rail-fill="true"></span></span></a>
       <a data-rail-item="true" data-rail-target="zayavka" href="#zayavka" aria-label="Перейти к разделу: Заявка"><span data-rail-label="true">Заявка</span><span data-rail-tick="true"><span data-rail-fill="true"></span></span></a>
       <a data-rail-item="true" data-rail-target="kontakty" data-rail-dark="1" href="#kontakty" aria-label="Перейти к разделу: Контакты"><span data-rail-label="true">Контакты</span><span data-rail-tick="true"><span data-rail-fill="true"></span></span></a>
     </div>
@@ -1213,7 +1166,6 @@ a.f-doc:hover .f-doc__preview{border-color:var(--f-teal)}
             <a href="lab.html">Лаборатория «Аналитик Лаб»</a>
             <a href="#proekty">Проекты</a>
             <a href="#esg">ESG</a>
-            <a href="#litsenzii">Лицензии</a>
           </nav>
           <div class="f-foot__col">
             <p>Контакты</p>
@@ -1312,7 +1264,6 @@ a.f-doc:hover .f-doc__preview{border-color:var(--f-teal)}
         <a href="#o-centre" onClick="{{ closeMenu }}" style="font-size:30px;font-weight:300;color:#13282B;text-decoration:none;padding:10px 0;border-bottom:1px solid rgba(11,92,96,0.1)">О центре</a>
         <a href="#pochemu" onClick="{{ closeMenu }}" style="font-size:30px;font-weight:300;color:#13282B;text-decoration:none;padding:10px 0;border-bottom:1px solid rgba(11,92,96,0.1)">Почему мы</a>
         <a href="#esg" onClick="{{ closeMenu }}" style="font-size:30px;font-weight:300;color:#13282B;text-decoration:none;padding:10px 0;border-bottom:1px solid rgba(11,92,96,0.1)">ESG</a>
-        <a href="#litsenzii" onClick="{{ closeMenu }}" style="font-size:30px;font-weight:300;color:#13282B;text-decoration:none;padding:10px 0;border-bottom:1px solid rgba(11,92,96,0.1)">Лицензии</a>
         <a href="#kontakty" onClick="{{ closeMenu }}" style="font-size:30px;font-weight:300;color:#13282B;text-decoration:none;padding:10px 0;border-bottom:1px solid rgba(11,92,96,0.1)">Контакты</a>
       </nav>
       <div style="margin-top:auto;display:flex;flex-direction:column;gap:16px">

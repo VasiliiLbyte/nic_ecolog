@@ -60,7 +60,6 @@ const LAB_CSS = `
 .lab-actions{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
 /* Контурная кнопка на тёмном фоне — лаймовая, как текст «АТТЕСТАТ…» */
 .f-btn--ghost.lab-btn-outline{min-width:210px;box-shadow:inset 0 0 0 1px #ADCF7A;color:#ADCF7A}
-.f-lab__meta a{color:inherit;text-decoration:underline;text-underline-offset:3px}
 .f-stat__num--text{font-size:32px;font-weight:300;letter-spacing:0}
 .f-stat__label a{color:var(--f-teal)}
 .f-step p.f-step__badge{margin:12px 0 0;max-width:155px;font-size:12px;line-height:16px;color:var(--f-teal)}

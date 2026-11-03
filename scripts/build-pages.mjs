@@ -48,7 +48,7 @@ function copyDir(src, dest) {
   cpSync(join(root, src), join(out, src), { recursive: true });
 }
 
-// Adds a «Блог» link right after the given «Лицензии» link (footer), only when the blog is built.
+// Adds a «Блог» link right after the given anchor link (header nav, footer «Центр», mobile menu), only when the blog is built.
 function addBlogLink(html, anchor, link) {
   if (!hasBlog) return html;
   if (!html.includes(anchor)) throw new Error(`blog link anchor not found: ${anchor.slice(0, 60)}`);
@@ -63,7 +63,7 @@ function patchHome(html) {
     '\n      <a href="#kontakty">Контакты</a>',
     '      <a href="blog/">Блог</a>'
   );
-  const withFooter = addBlogLink(withHeader, '\n            <a href="#litsenzii">Лицензии</a>', '            <a href="blog/">Блог</a>');
+  const withFooter = addBlogLink(withHeader, '\n            <a href="#esg">ESG</a>', '            <a href="blog/">Блог</a>');
   // …и последним пунктом мобильного меню (там ссылки с крупным начертанием, стиль — как у соседних).
   const menuItemStyle = 'font-size:30px;font-weight:300;color:#13282B;text-decoration:none;padding:10px 0;border-bottom:1px solid rgba(11,92,96,0.1)';
   return addBlogLink(
