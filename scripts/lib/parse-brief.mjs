@@ -75,6 +75,36 @@ function sectionBody(markdown, heading) {
   return m ? m[1].trim() : '';
 }
 
+// Разделы с текстом страницы (NIC-008). Раздел с меткой TODO(evidence не публикуется целиком.
+function gatedSection(markdown, heading, slug) {
+  // Разделитель «---» между разделами брифа в текст страницы не попадает.
+  const body = sectionBody(markdown, heading).replace(/\n*[-_—]{3,}\s*$/, '').trim();
+  if (!body) return '';
+  if (body.includes('TODO(evidence')) {
+    console.warn(`[build] «${slug}»: раздел «${heading}» содержит TODO(evidence — пропущен`);
+    return '';
+  }
+  return body;
+}
+
+function parseLead(raw) {
+  return raw
+    .split('\n\n')
+    .map((p) => p.trim())
+    .filter((p) => p && !p.startsWith('>') && !/^[-_—]{3,}$/.test(p));
+}
+
+/** FAQ: «### Вопрос?» и абзац ответа под ним. */
+function parseFaq(raw) {
+  const items = [];
+  for (const block of raw.split(/\n(?=### )/)) {
+    const m = block.trim().match(/^### (.+)\n([\s\S]+)$/);
+    if (!m) continue;
+    items.push({ q: m[1].trim(), a: m[2].trim() });
+  }
+  return items;
+}
+
 function parseIntro(raw, slug) {
   if (NEUTRAL_INTRO[slug]) {
     return [NEUTRAL_INTRO[slug]];
@@ -184,7 +214,11 @@ export function parseBrief(slug, seoGeoRoot) {
   const path = join(seoGeoRoot, 'docs', 'briefs', 'nic', `uslugi-${slug}.md`);
   const markdown = readFileSync(path, 'utf8');
   const meta = parseMetaTable(sectionBody(markdown, 'Meta'));
-  const intro = parseIntro(sectionBody(markdown, 'Интро'), slug);
+  const lead = gatedSection(markdown, 'Лид', slug);
+  const intro = lead ? parseLead(lead) : parseIntro(sectionBody(markdown, 'Интро'), slug);
+  const copyBefore = gatedSection(markdown, 'Текст до работ', slug);
+  const copyAfter = gatedSection(markdown, 'Текст после работ', slug);
+  const faq = parseFaq(gatedSection(markdown, 'FAQ', slug));
   const includes = parseIncludes(sectionBody(markdown, 'Что входит в работу'));
   const related = parseRelated(sectionBody(markdown, 'Смежные услуги'));
   const schema = parseSchema(sectionBody(markdown, 'Schema-stub'));
@@ -193,6 +227,9 @@ export function parseBrief(slug, seoGeoRoot) {
     slug,
     ...meta,
     intro,
+    copyBefore,
+    copyAfter,
+    faq,
     includes,
     related,
     schema,
