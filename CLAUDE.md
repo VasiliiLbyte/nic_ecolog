@@ -4,7 +4,7 @@
 
 ## Окружения и деплой
 - **devpreview.nic-ecolog.ru** — `.github/workflows/deploy-devpreview.yml`: при push в `feat/nic-004-build` или `feat/nic-010-blog` (или вручную: `gh workflow run deploy-devpreview.yml --ref <ветка>`) собирает noindex-бандл без Метрики и заливает по FTPS. Черновики блога (`BLOG_DRAFTS=1`) видны только тут.
-- **Прод nic-ecolog.ru** — reg.ru shared hosting, `u3337857@server40.hosting.reg.ru`, докрут `~/www/nic-ecolog.ru/`. Деплой — `.github/workflows/deploy-prod.yml` (только ручной запуск, `gh workflow run deploy-prod.yml --ref <ветка>`), локально — тем же rsync с ключом `~/.ssh/nic_ecolog_regru`.
+- **Прод nic-ecolog.ru** — reg.ru shared hosting, `u3337857@server40.hosting.reg.ru`, докрут `~/www/nic-ecolog.ru/`. Деплой — `.github/workflows/deploy-prod.yml` (только ручной запуск, `gh workflow run deploy-prod.yml --ref <ветка> -f confirm=DEPLOY`; брифы услуг он берёт из `seo_geo/main` — ветка выкатки должна содержать всё, что уже на проде, иначе откатит: 03.11 выкатки от `main` без NIC-008 на 2,5 часа убрали тексты услуг), локально — тем же rsync с ключом `~/.ssh/nic_ecolog_regru`.
   - Каждый деплой прода — **только после явного «да» пользователя**.
   - rsync **без `--delete`**; исключать `api/config.php` (SMTP-секреты есть только на сервере), `CNAME`, `.nojekyll`.
   - Перед деплоем — tar-бэкап докрута в `~/backups/` на сервере.
