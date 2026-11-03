@@ -2,7 +2,7 @@ import { cpSync, existsSync, mkdirSync, readFileSync, rmSync, unlinkSync, writeF
 import { execFileSync } from 'node:child_process';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { loadWave1Briefs, WAVE1_SLUGS } from './lib/parse-brief.mjs';
+import { loadHubBrief, loadWave1Briefs, WAVE1_SLUGS } from './lib/parse-brief.mjs';
 import {
   chromeBar,
   footerBlock,
@@ -213,7 +213,7 @@ for (const brief of wave1Briefs) {
 
 writeFileSync(
   join(out, 'uslugi', 'index.html'),
-  injectMetrika(renderHubPage(wave1Briefs))
+  injectMetrika(renderHubPage(wave1Briefs, loadHubBrief(seoGeoRoot)))
 );
 
 // --- Blog (NIC-010) ---
