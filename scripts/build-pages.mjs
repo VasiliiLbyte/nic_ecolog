@@ -3,7 +3,16 @@ import { execFileSync } from 'node:child_process';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { loadWave1Briefs, WAVE1_SLUGS } from './lib/parse-brief.mjs';
-import { renderHubPage, renderServicePage, setSiteOptions, WAVE1_SITEMAP_URLS } from './lib/service-page-template.mjs';
+import {
+  chromeBar,
+  footerBlock,
+  headBlock,
+  menuScript,
+  renderHubPage,
+  renderServicePage,
+  setSiteOptions,
+  WAVE1_SITEMAP_URLS,
+} from './lib/service-page-template.mjs';
 import { articlesByService, loadArticles, renderArticlePage, renderBlogHub } from './lib/blog-template.mjs';
 import { renderLabPage } from './lib/lab-template.mjs';
 
@@ -88,32 +97,24 @@ function renderLab(homeHtml) {
   return renderLabPage({ homeCss: `${reveal.join('\n')}\n${homeHtml.slice(cssStart, cssEnd)}`, labCards });
 }
 
-const privacyHtml = `<!DOCTYPE html>
-<html lang="ru">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Политика конфиденциальности — НИЦ «Эколог»</title>
-  <meta name="description" content="Политика конфиденциальности НИЦ «Эколог».">
-  <link rel="canonical" href="https://nic-ecolog.ru/privacy.html">
-  <meta name="robots" content="noindex, follow">
-  <link rel="icon" type="image/png" href="assets/favicon-512.png">
-  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
-  <style>
-    body{margin:0;font-family:var(--font-body, 'Onest', sans-serif);background:#F7FBF9;color:#13282B;padding:48px 24px}
-    .wrap{max-width:720px;margin:0 auto}
-    h1{font-weight:300;font-size:clamp(28px,4vw,40px);margin:0 0 16px}
-    p{line-height:1.7;color:#51696B;margin:0 0 16px}
-    a{color:#139EA1}
-  </style>
-</head>
+// Политика — в оболочке страниц услуг (шапка, меню, подвал), noindex и вне sitemap, как раньше.
+// Текст — прежняя заглушка, пока заказчик не пришлёт текст политики.
+const privacyHtml = `${headBlock({
+  title: 'Политика конфиденциальности — НИЦ «Эколог»',
+  description: 'Политика конфиденциальности НИЦ «Эколог».',
+  canonical: 'https://nic-ecolog.ru/privacy.html',
+  depth: 0,
+  robots: 'noindex, follow',
+})}
 <body>
-  <div class="wrap">
-    <p style="font-family:'Stolzl','Onest',sans-serif;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#139EA1;margin-bottom:24px">Демо-версия</p>
-    <h1>Политика конфиденциальности</h1>
-    <p>Это демонстрационная страница для превью сайта. Полный текст политики будет опубликован на production-домене.</p>
-    <p><a href="index.html">← На главную</a></p>
-  </div>
+${chromeBar({ depth: 0, homeHref: 'index.html', crumbsHtml: '<a href="index.html">Главная</a> | <b>Политика конфиденциальности</b>' })}
+<main class="wrap">
+  <p class="eye">Демо-версия</p>
+  <h1>Политика конфиденциальности</h1>
+  <div class="lead"><p>Это демонстрационная страница для превью сайта. Полный текст политики будет опубликован на production-домене.</p></div>
+</main>
+${footerBlock({ depth: 0, homeHref: 'index.html' })}
+${menuScript()}
 </body>
 </html>
 `;

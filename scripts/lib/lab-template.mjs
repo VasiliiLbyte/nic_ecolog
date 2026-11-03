@@ -150,7 +150,7 @@ if(form)form.addEventListener('submit',function(e){
   if(typeof ym==='function')ym(112117233,'reachGoal','form_sent');
   form.innerHTML='<p class="lab-form__ok">Заявка отправлена</p><p>Свяжемся с вами в течение рабочего дня.</p>';
  }).catch(function(){
-  alert('Не удалось отправить. Позвоните +7 (812) 449-93-48 или напишите на sale@nic-ecolog.ru.');
+  alert('Не удалось отправить. Позвоните +7 (812) 449 93 48 или напишите на sale@nic-ecolog.ru.');
   if(btn){btn.disabled=false;}
  });
 });
@@ -244,7 +244,7 @@ ${chromeBar({ depth: 0, homeHref: 'index.html', crumbsHtml: '' })}
             <h2 class="f-h2">Коммерческое предложение за 1 рабочий день</h2>
             <p class="f-lead">Опишите задачу — рассчитаем объём анализов, сроки и стоимость, при необходимости организуем срочный выезд для отбора проб.</p>
             <dl class="lab-contacts">
-              <div><dt>Телефон</dt><dd><a href="tel:+78124499348">+7 (812) 449-93-48</a></dd></div>
+              <div><dt>Телефон</dt><dd><a href="tel:+78124499348">+7&nbsp;(812)&nbsp;449&nbsp;93&nbsp;48</a></dd></div>
               <div><dt>Почта</dt><dd><a href="mailto:info@analitik-lab.ru">info@analitik-lab.ru</a></dd></div>
               <div><dt>Адрес</dt><dd>192102, Санкт-Петербург, ул. Дубровская, д. 13, литера А, пом. 27</dd></div>
               <div><dt>Часы работы</dt><dd>Пн – Пт · 9:00 – 18:00</dd></div>
@@ -258,7 +258,7 @@ ${chromeBar({ depth: 0, homeHref: 'index.html', crumbsHtml: '' })}
             </div>
             <div class="f-form-actions">
               <button type="submit" class="f-btn f-btn--sm">Получить предложение</button>
-              <p class="f-consent">Нажимая кнопку, вы соглашаетесь с политикой обработки персональных данных.</p>
+              <p class="f-consent">Нажимая кнопку, вы соглашаетесь с <a href="privacy.html">политикой конфиденциальности</a>.</p>
             </div>
           </form>
         </div>
