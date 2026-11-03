@@ -46,7 +46,33 @@ const METRIKA_SNIPPET = `<!-- Yandex.Metrika counter -->
 <noscript><div><img src="https://mc.yandex.ru/watch/${METRIKA_ID}" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
 <!-- /Yandex.Metrika counter -->`;
 
-function injectMetrika(html) {
+// Уведомление о cookie Метрики (2026-11-03, по политике конфиденциальности): плашка внизу слева, на телефоне — во всю ширину.
+// Скрыта до проверки localStorage, чтобы не мелькала у тех, кто уже нажал «Понятно»; без JS не показывается.
+const COOKIE_NOTE = `<div class="ck-note" id="ck-note" role="region" aria-label="Уведомление о cookie" hidden>
+  <p>Сайт использует cookie Яндекс Метрики для статистики посещаемости. Продолжая пользоваться сайтом, вы соглашаетесь с этим. Подробнее — в <a href="/privacy.html">политике конфиденциальности</a>.</p>
+  <button type="button" data-ck-ok>Понятно</button>
+</div>
+<style>
+.ck-note{position:fixed;left:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:150;display:flex;align-items:center;gap:20px;max-width:560px;padding:16px 20px;border-radius:8px;background:#FFFFFF;box-shadow:0 0 0 1px #E0E0E0,0 12px 32px -12px rgba(11,92,96,.35);font-family:'Onest',-apple-system,'Segoe UI',sans-serif;font-size:12px;line-height:16px;color:#444444}
+.ck-note[hidden]{display:none}
+.ck-note p{margin:0}
+.ck-note a{color:#0B5C60;text-underline-offset:2px}
+.ck-note button{flex:0 0 auto;min-width:120px;height:40px;padding:0 24px;border:0;border-radius:0;background:linear-gradient(90deg,#139EA1 0%,#1C6BA2 100%);color:#FFFFFF;font:inherit;cursor:pointer;transition:transform .2s ease,box-shadow .2s ease}
+.ck-note button:hover{transform:scale(1.01);box-shadow:inset 0 0 0 1px #1C6BA2}
+.ck-note button:focus-visible{outline:2px solid #139EA1;outline-offset:2px}
+@media(max-width:720px){.ck-note{left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom,0px));max-width:none;flex-direction:column;align-items:stretch;gap:12px;padding:16px}.ck-note button{height:44px}}
+</style>
+<script>(function(){var k='nic-cookie-ok',n=document.getElementById('ck-note');if(!n)return;try{if(localStorage.getItem(k))return;}catch(e){}n.hidden=false;n.querySelector('[data-ck-ok]').addEventListener('click',function(){n.hidden=true;try{localStorage.setItem(k,'1');}catch(e){}});})();</script>`;
+
+function injectCookieNote(html) {
+  if (html.includes('id="ck-note"')) return html;
+  const at = html.lastIndexOf('</body>');
+  return at < 0 ? html : `${html.slice(0, at)}${COOKIE_NOTE}\n${html.slice(at)}`;
+}
+
+// Метрика и уведомление о её cookie — на каждой странице сборки.
+function injectMetrika(page) {
+  const html = injectCookieNote(page);
   if (html.includes(`metrika/tag.js?id=${METRIKA_ID}`)) return html;
   if (html.includes('</head>')) {
     return html.replace('</head>', `${METRIKA_SNIPPET}\n</head>`);

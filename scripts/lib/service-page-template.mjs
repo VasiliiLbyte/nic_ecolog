@@ -208,6 +208,7 @@ export function headBlock({ title, description, canonical, depth, schema, ogType
 <meta name="twitter:image" content="${ogImage}">
 <link rel="icon" type="image/png" href="${prefix}assets/favicon-512.png">
 <link rel="apple-touch-icon" href="${prefix}assets/apple-touch-icon.png">
+<link rel="preload" href="${prefix}assets/fonts/onest/onest-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="${prefix}tokens/reset.css">
 <link rel="stylesheet" href="${prefix}tokens/fonts.css">
 <link rel="stylesheet" href="${prefix}tokens/colors.css">
