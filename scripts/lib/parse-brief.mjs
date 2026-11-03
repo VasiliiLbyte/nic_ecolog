@@ -240,6 +240,27 @@ export function parseBrief(slug, seoGeoRoot) {
   };
 }
 
+/**
+ * Необязательный бриф раздела /uslugi/ (NIC-013): «Лид», «Текст до групп», «Текст после групп», «FAQ».
+ * Нет файла — раздел собирается как раньше.
+ */
+export function loadHubBrief(seoGeoRoot) {
+  const path = join(seoGeoRoot, 'docs', 'briefs', 'nic', 'uslugi-hub.md');
+  let markdown;
+  try {
+    markdown = readFileSync(path, 'utf8');
+  } catch {
+    return null;
+  }
+  const lead = gatedSection(markdown, 'Лид', 'uslugi');
+  return {
+    intro: lead ? parseLead(lead) : [],
+    copyBefore: gatedSection(markdown, 'Текст до групп', 'uslugi'),
+    copyAfter: gatedSection(markdown, 'Текст после групп', 'uslugi'),
+    faq: parseFaq(gatedSection(markdown, 'FAQ', 'uslugi')),
+  };
+}
+
 export function loadWave1Briefs(seoGeoRoot) {
   // Брифы услуг лежат в соседнем репозитории seo_geo. Если его нет (например, в
   // CI без токена доступа) — не падаем, а пропускаем услуги с предупреждением:

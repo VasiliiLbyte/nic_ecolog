@@ -505,8 +505,8 @@ const SOON_LABELS = {
   'klimaticheskie-riski': 'Климатические риски',
 };
 
-function hubSchema() {
-  return {
+function hubSchema(hub) {
+  const schema = {
     '@context': 'https://schema.org',
     '@graph': [
       {
@@ -524,6 +524,8 @@ function hubSchema() {
       },
     ],
   };
+  // FAQPage — только вместе с видимым на странице FAQ (как на страницах услуг).
+  return hub?.faq?.length ? serviceSchema({ schema, faq: hub.faq }) : schema;
 }
 
 // Описание для карточки хаба: не длиннее max знаков, обрезка по границе слова и с многоточием;
@@ -536,7 +538,7 @@ function clipTeaser(text, max = 120) {
   return `${words.replace(/[\s,.:;(—–-]+$/, '')}…`;
 }
 
-export function renderHubPage(briefs) {
+export function renderHubPage(briefs, hub = null) {
   const bySlug = Object.fromEntries(briefs.map((b) => [b.slug, b]));
   const homeHref = '../index.html';
 
@@ -574,17 +576,22 @@ export function renderHubPage(briefs) {
       'Проектирование экологической документации, сопровождение предприятий, инженерные изыскания и ESG-услуги в Санкт-Петербурге.',
     canonical: `${SITE}/uslugi/`,
     depth: 1,
-    schema: hubSchema(),
+    schema: hubSchema(hub),
   })}
 <body>
 ${chromeBar({ depth: 1, crumbCurrent: null, homeHref })}
 <main class="wrap">
   <p class="eye">НИЦ «Эколог» · Санкт-Петербург</p>
   <h1>Услуги НИЦ «Эколог»</h1>
-  <p class="lead">Проектирование экологической документации, сопровождение предприятий, инженерные изыскания и ESG-услуги.</p>
+  ${hub?.intro?.length
+    ? `<div class="lead">${hub.intro.map((p) => `<p>${esc(p)}</p>`).join('\n      ')}</div>`
+    : '<p class="lead">Проектирование экологической документации, сопровождение предприятий, инженерные изыскания и ESG-услуги.</p>'}
+  ${copyBlock(hub?.copyBefore)}
   <h2>Ключевые услуги</h2>
   <div class="hub-grid">${wave1Cards}</div>
   ${groupsHtml}
+  ${copyBlock(hub?.copyAfter)}
+  ${faqBlock(hub?.faq)}
   <div class="lab-block">
     <h2 style="margin-top:0;font-size:18px">Лабораторные исследования</h2>
     <p style="font-size:15px;color:var(--slate-2,#3D5557);margin:8px 0 16px">Анализы воды, воздуха, почв и отходов — в лаборатории «Аналитик Лаб».</p>
