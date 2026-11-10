@@ -91,7 +91,24 @@ function addBlogLink(html, anchor, link) {
   return html.replace(anchor, `${anchor}\n${link}`);
 }
 
+// Скорость первого экрана (NIC-016): @import токенов в стилях главной — это 4 блокирующих запроса, один из них
+// вложенный (responsive → spacing), и начинаются они только после запуска рантайма. Сборка подставляет содержимое файлов.
+// В исходнике главной @import остаются: с ними работает превью макета.
+function inlineTokenImports(html) {
+  const read = (name, seen = []) => {
+    if (seen.includes(name)) throw new Error(`tokens: circular @import ${name}`);
+    const css = readFileSync(join(root, 'tokens', name), 'utf8');
+    if (/url\((?!['"]?\.\/[a-z-]+\.css)/.test(css)) throw new Error(`tokens/${name}: url() с относительным путём — встраивать нельзя`);
+    return css.replace(/@import url\('\.\/([a-z-]+\.css)'\);\n?/g, (_, dep) => read(dep, [...seen, name]));
+  };
+  let n = 0;
+  const out = html.replace(/@import url\('\.\/tokens\/([a-z-]+\.css)'\);\n?/g, (_, name) => { n += 1; return `${read(name).trim()}\n`; });
+  if (n !== 3) throw new Error(`home: ожидалось 3 @import токенов, найдено ${n}`);
+  return out;
+}
+
 function patchHome(html) {
+  html = inlineTokenImports(html);
   // «Блог» — последним пунктом меню шапки (как в макете Figma) и в колонке «Центр» подвала.
   // Якоря различаются отступом: в шапке 6 пробелов, в подвале 12.
   const withHeader = addBlogLink(

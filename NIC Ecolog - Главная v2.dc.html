@@ -28,6 +28,10 @@
 {"@type":"WebSite","@id":"https://nic-ecolog.ru/#website","url":"https://nic-ecolog.ru/","name":"НИЦ «Эколог»","inLanguage":"ru-RU","publisher":{"@id":"https://nic-ecolog.ru/#org"}}
 ]}
 </script>
+<!-- Скорость первого экрана (NIC-016): постер волны героя — крупнейший элемент первого экрана, а узнаёт о нём браузер только после запуска рантайма.
+     Здесь он объявлен заранее. Скрипты React так же объявлять не надо: замер показал, что LCP это не ускоряет, а первую отрисовку задерживает. -->
+<link rel="preload" as="image" href="./assets/hero/hero-wave-m.webp" media="(max-width: 480px)" fetchpriority="high">
+<link rel="preload" as="image" href="./assets/hero/hero-wave-d.webp" media="(min-width: 481px)" fetchpriority="high">
 <script src="./support.js" defer></script>
 </head>
 <body>
@@ -767,7 +771,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
     <!-- ГЕРОЙ -->
     <section id="top" class="f-sec" data-screen-label="Герой" data-sec="true">
       <div class="f-hero__wave" aria-hidden="true">
-        <video class="f-hero__video" muted playsinline loop disablepictureinpicture preload="none" poster="./assets/hero/hero-wave-d.webp" width="1860" height="764"></video>
+        <video class="f-hero__video" muted playsinline loop disablepictureinpicture preload="none" width="1860" height="764"></video>
       </div>
       <div class="f-wrap">
         <p class="f-hero__eyebrow">Независимый исследовательский центр<span class="f-sep">&nbsp;&nbsp;|&nbsp;&nbsp;</span><br class="f-br-m">Санкт-Петербург</p>
@@ -874,7 +878,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
               <p class="f-lead" data-rv="true">От разового проекта до полного экологического сопровождения предприятия.</p>
             </div>
           </div>
-          <div class="f-svc-island-wrap" data-svc-illustration="true" aria-hidden="true"><img class="f-svc-island" src="./assets/services-illustration.webp" alt="" width="395" height="537"></div>
+          <div class="f-svc-island-wrap" data-svc-illustration="true" aria-hidden="true"><img class="f-svc-island" src="./assets/services-illustration.webp" alt="" width="395" height="537" loading="lazy" decoding="async"></div>
         </div>
         <div class="f-svc-content">
           <div class="f-cat" data-rv="true">
@@ -1280,8 +1284,8 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
   <!-- ПРЕЛОАДЕР -->
   <div id="eco-preloader" aria-hidden="true" style="position:fixed;inset:0;z-index:200;background:#FBFDFC;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:30px;transition:opacity 0.5s ease">
     <div style="position:relative;width:104px;height:142px">
-      <img src="./assets/fingerprint-color.png" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;opacity:0.14;filter:grayscale(1)">
-      <img id="eco-pre-fill" src="./assets/fingerprint-color.png" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;clip-path:inset(100% 0 0 0)">
+      <img src="./assets/fingerprint-color.webp" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;opacity:0.14;filter:grayscale(1)">
+      <img id="eco-pre-fill" src="./assets/fingerprint-color.webp" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;clip-path:inset(100% 0 0 0)">
       <div id="eco-pre-scan" aria-hidden="true" style="position:absolute;left:-18%;right:-18%;top:100%;height:2px;background:linear-gradient(90deg,rgba(19,158,161,0),#139EA1,rgba(19,158,161,0));box-shadow:0 0 16px rgba(19,158,161,0.85)"></div>
     </div>
     <span id="eco-pre-pct" style="font-family:'Stolzl','Onest',sans-serif;font-size:13px;letter-spacing:0.3em;color:#0B5C60">00%</span>
@@ -1763,7 +1767,8 @@ class Component extends DCLogic {
     if (!video) return;
     const narrow = window.matchMedia('(max-width: 480px)').matches;
     const v = narrow ? 'm' : 'd';
-    if (narrow) { wave.classList.add('is-m'); video.poster = './assets/hero/hero-wave-m.webp'; }
+    if (narrow) wave.classList.add('is-m');
+    video.poster = './assets/hero/hero-wave-' + v + '.webp'; // оба постера объявлены в <head> через preload по ширине экрана
     const saveData = navigator.connection && navigator.connection.saveData;
     if (reduced || saveData) return;
     for (const [ext, type] of [['webm', 'video/webm'], ['mp4', 'video/mp4']]) {
